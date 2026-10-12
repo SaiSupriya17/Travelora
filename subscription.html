@@ -1,0 +1,944 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Subscription | Travelora</title>
+
+<link rel="stylesheet" href="style.css">
+
+<style>
+/* =========================================
+   TRAVELORA SUBSCRIPTION PAGE
+========================================= */
+
+* {
+    box-sizing: border-box;
+}
+
+.subscription-page {
+    max-width: 1100px;
+    margin: 35px auto;
+    padding: 24px;
+    color: #243447;
+}
+
+.subscription-heading {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.subscription-heading h1 {
+    color: #126782;
+    margin-bottom: 12px;
+    font-size: 32px;
+}
+
+.subscription-heading p {
+    color: #596579;
+    line-height: 1.7;
+    max-width: 700px;
+    margin: auto;
+}
+
+.subscription-layout {
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr;
+    gap: 25px;
+    align-items: start;
+}
+
+.plan-card,
+.benefits-card,
+.checkout-card {
+    background: #fff;
+    border-radius: 14px;
+    padding: 25px;
+    border: 1px solid #dce8ed;
+    box-shadow: 0 5px 18px rgba(0, 0, 0, 0.07);
+}
+
+.plan-card {
+    border-top: 5px solid #126782;
+}
+
+.plan-label {
+    display: inline-block;
+    background: #e8f5f8;
+    color: #126782;
+    padding: 7px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: bold;
+    margin-bottom: 12px;
+}
+
+.plan-card h2,
+.benefits-card h2,
+.checkout-card h2 {
+    color: #126782;
+    margin-top: 8px;
+}
+
+.plan-description {
+    color: #596579;
+    line-height: 1.7;
+}
+
+.plan-price {
+    font-size: 36px;
+    font-weight: bold;
+    color: #126782;
+    margin: 22px 0;
+}
+
+.plan-price small {
+    font-size: 14px;
+    font-weight: normal;
+    color: #687789;
+}
+
+.plan-divider {
+    border: 0;
+    border-top: 1px solid #e4eaee;
+    margin: 20px 0;
+}
+
+.plan-features {
+    list-style: none;
+    padding: 0;
+    margin: 20px 0;
+}
+
+.plan-features li {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    line-height: 1.6;
+    margin: 15px 0;
+}
+
+.feature-check {
+    color: #23834a;
+    font-weight: bold;
+    flex-shrink: 0;
+}
+
+.primary-button,
+.secondary-button {
+    width: 100%;
+    padding: 13px 16px;
+    border: none;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.primary-button {
+    background: #126782;
+    color: white;
+}
+
+.primary-button:hover {
+    background: #0c536a;
+}
+
+.secondary-button {
+    background: #eaf0f4;
+    color: #243447;
+    margin-top: 10px;
+}
+
+.secondary-button:hover {
+    background: #dce6ec;
+}
+
+.benefits-card {
+    margin-bottom: 20px;
+}
+
+.benefit-item {
+    padding: 13px 0;
+    border-bottom: 1px solid #edf0f2;
+}
+
+.benefit-item:last-child {
+    border-bottom: none;
+}
+
+.benefit-item strong {
+    display: block;
+    color: #243447;
+    margin-bottom: 5px;
+}
+
+.benefit-item p {
+    color: #647184;
+    margin: 0;
+    line-height: 1.6;
+    font-size: 14px;
+}
+
+.demo-note {
+    background: #f2f7f9;
+    border-radius: 10px;
+    padding: 15px;
+    color: #526476;
+    font-size: 13px;
+    line-height: 1.7;
+    margin-top: 20px;
+}
+
+/* =========================================
+   CHECKOUT INTERFACE
+========================================= */
+
+.checkout-card {
+    display: none;
+    margin-top: 25px;
+}
+
+.checkout-card.active {
+    display: block;
+}
+
+.checkout-intro {
+    color: #647184;
+    line-height: 1.6;
+}
+
+.checkout-summary {
+    background: #f2f7f9;
+    border-radius: 10px;
+    padding: 18px;
+    margin: 20px 0;
+}
+
+.summary-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+    margin: 12px 0;
+    line-height: 1.5;
+}
+
+.summary-total {
+    border-top: 1px solid #d9e4e9;
+    padding-top: 15px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #126782;
+}
+
+.checkout-form label {
+    display: block;
+    font-weight: bold;
+    margin: 16px 0 7px;
+}
+
+.checkout-form input,
+.checkout-form select {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccd8df;
+    border-radius: 7px;
+    font-size: 15px;
+    background: #fff;
+}
+
+.checkout-form input:focus,
+.checkout-form select:focus {
+    outline: 2px solid #b9e2ed;
+    border-color: #126782;
+}
+
+.checkout-message {
+    display: none;
+    margin-top: 18px;
+    padding: 15px;
+    border-radius: 8px;
+    background: #e9f7ed;
+    color: #216638;
+    line-height: 1.6;
+}
+
+.checkout-message.error {
+    background: #fff0f0;
+    color: #a32929;
+}
+
+.subscription-status {
+    display: none;
+    margin-top: 20px;
+    padding: 16px;
+    background: #eaf6fa;
+    color: #126782;
+    border-radius: 10px;
+    line-height: 1.6;
+}
+
+.subscription-status button {
+    margin-top: 10px;
+}
+
+.back-link {
+    display: inline-block;
+    margin-top: 25px;
+    color: #126782;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.back-link:hover {
+    text-decoration: underline;
+}
+
+@media (max-width: 760px) {
+    .subscription-page {
+        margin: 15px auto;
+        padding: 15px;
+    }
+
+    .subscription-heading h1 {
+        font-size: 26px;
+    }
+
+    .subscription-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .plan-card,
+    .benefits-card,
+    .checkout-card {
+        padding: 20px;
+    }
+
+    .plan-price {
+        font-size: 31px;
+    }
+}
+
+@media (max-width: 400px) {
+    .subscription-heading h1 {
+        font-size: 23px;
+    }
+
+    .summary-row {
+        font-size: 14px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- =========================================
+     HEADER / EXISTING NAVIGATION
+========================================= -->
+
+<header class="travelora-header">
+    <div class="logo">Travelora ✈</div>
+
+    <nav class="travelora-main-navigation"
+         style="position:static;transform:none;margin-left:auto">
+
+        <a href="index.html">Home</a>
+        <a href="destinations.html">Destinations</a>
+        <a href="offers.html">Offers</a>
+        <a href="packages.html">Packages</a>
+        <a href="reviews.html">Reviews</a>
+        <a href="subscription.html">Subscription</a>
+
+    </nav>
+</header>
+
+<!-- =========================================
+     MAIN SUBSCRIPTION PAGE
+========================================= -->
+
+<main class="subscription-page">
+
+    <section class="subscription-heading">
+        <h1>Travelora Journey+</h1>
+
+        <p>
+            Make every journey more memorable with personalised
+            travel assistance, photography services and exclusive
+            travel content benefits.
+        </p>
+    </section>
+
+    <div class="subscription-layout">
+
+        <!-- SUBSCRIPTION PLAN -->
+
+        <section class="plan-card">
+
+            <span class="plan-label">PREMIUM MEMBERSHIP</span>
+
+            <h2>Journey+ Monthly Plan</h2>
+
+            <p class="plan-description">
+                A convenient monthly plan for travellers who want
+                additional support and help capturing their trips.
+            </p>
+
+            <div class="plan-price">
+                ₹1,500 <small>/ month</small>
+            </div>
+
+            <p class="plan-description">
+                One monthly subscription selection for the Travelora
+                website.
+            </p>
+
+            <hr class="plan-divider">
+
+            <h3>What's included?</h3>
+
+            <ul class="plan-features">
+
+                <li>
+                    <span class="feature-check">✓</span>
+                    <span>
+                        <strong>Personal Travel Assistance</strong><br>
+                        Help with itinerary planning and travel questions.
+                    </span>
+                </li>
+
+                <li>
+                    <span class="feature-check">✓</span>
+                    <span>
+                        <strong>Travel Photography</strong><br>
+                        Photography service benefits, subject to availability.
+                    </span>
+                </li>
+
+                <li>
+                    <span class="feature-check">✓</span>
+                    <span>
+                        <strong>Cinematic Travel Reels</strong><br>
+                        Short-form video concepts and travel highlights.
+                    </span>
+                </li>
+
+                <li>
+                    <span class="feature-check">✓</span>
+                    <span>
+                        <strong>YouTube Shorts Content</strong><br>
+                        Ideas for sharing travel memories in short videos.
+                    </span>
+                </li>
+
+                <li>
+                    <span class="feature-check">✓</span>
+                    <span>
+                        <strong>Personalised Travel Tips</strong><br>
+                        Suggestions based on your selected destination.
+                    </span>
+                </li>
+
+                <li>
+                    <span class="feature-check">✓</span>
+                    <span>
+                        <strong>Trip Memory Collection</strong><br>
+                        Organise memorable highlights from your journey.
+                    </span>
+                </li>
+
+                <li>
+                    <span class="feature-check">✓</span>
+                    <span>
+                        <strong>Subscriber Support</strong><br>
+                        Additional assistance for subscription-related questions.
+                    </span>
+                </li>
+
+            </ul>
+
+            <button type="button"
+                    class="primary-button"
+                    id="subscribeButton">
+                Continue to Checkout
+            </button>
+
+
+        </section>
+
+        <!-- BENEFITS SUMMARY -->
+
+        <aside>
+
+            <section class="benefits-card">
+
+                <h2>Why Journey+?</h2>
+
+                <div class="benefit-item">
+                    <strong>✈ Easier Trip Planning</strong>
+                    <p>
+                        Keep travel planning and helpful suggestions
+                        organised in one place.
+                    </p>
+                </div>
+
+                <div class="benefit-item">
+                    <strong>📸 Capture Your Memories</strong>
+                    <p>
+                        Explore photography and video-content options
+                        for your travel experiences.
+                    </p>
+                </div>
+
+                <div class="benefit-item">
+                    <strong>🗺 Personalised Suggestions</strong>
+                    <p>
+                        Find ideas for activities, places and trip
+                        highlights at your destination.
+                    </p>
+                </div>
+
+                <div class="benefit-item">
+                    <strong>💬 Extra Assistance</strong>
+                    <p>
+                        Access subscription-related assistance and
+                        planning support.
+                    </p>
+                </div>
+
+            </section>
+
+            <section class="benefits-card">
+
+                <h2>Subscription Details</h2>
+
+                <div class="benefit-item">
+                    <strong>Plan</strong>
+                    <p>Journey+ Monthly</p>
+                </div>
+
+                <div class="benefit-item">
+                    <strong>Monthly price</strong>
+                    <p>₹1,500</p>
+                </div>
+
+
+            </section>
+
+        </aside>
+
+    </div>
+
+    <!-- =========================================
+         CHECKOUT DEMO
+    ========================================= -->
+
+    <section class="checkout-card" id="checkoutCard">
+
+        <h2>Journey+ Checkout</h2>
+
+        <p class="checkout-intro">
+            Review your subscription details and enter your name
+            and email to save your selection in this browser.
+            No payment will be taken.
+        </p>
+
+        <div class="checkout-summary">
+
+            <div class="summary-row">
+                <span>Subscription plan</span>
+                <strong>Journey+ Monthly</strong>
+            </div>
+
+            <div class="summary-row">
+                <span>Subscription period</span>
+                <span>1 month</span>
+            </div>
+
+            <div class="summary-row summary-total">
+                <span>Total amount</span>
+                <span>₹1,500</span>
+            </div>
+
+        </div>
+
+        <form class="checkout-form" id="checkoutForm">
+
+            <label for="customerName">Full name</label>
+            <input
+                type="text"
+                id="customerName"
+                name="customerName"
+                placeholder="Enter your name"
+                maxlength="100"
+                autocomplete="name"
+                required
+            >
+
+            <label for="customerEmail">Email address</label>
+            <input
+                type="email"
+                id="customerEmail"
+                name="customerEmail"
+                placeholder="Enter your email address"
+                maxlength="150"
+                autocomplete="email"
+                required
+            >
+
+            <label for="planPeriod">Subscription plan</label>
+            <select id="planPeriod" name="planPeriod" required>
+                <option value="monthly">Journey+ — ₹1,500/month</option>
+            </select>
+
+            <button type="submit" class="primary-button">
+                Confirm Subscription
+            </button>
+
+            <button type="button"
+                    class="secondary-button"
+                    id="cancelCheckout">
+                Cancel
+            </button>
+
+        </form>
+
+        <div id="checkoutMessage"
+             class="checkout-message"
+             role="status"
+             aria-live="polite"></div>
+
+    </section>
+
+    <!-- CURRENT SUBSCRIPTION STATUS -->
+
+    <section class="subscription-status"
+             id="subscriptionStatus"
+             role="status"
+             aria-live="polite">
+
+        <div id="subscriptionStatusText"></div>
+
+        <button type="button"
+                class="secondary-button"
+                id="cancelSubscription">
+            Cancel Subscription
+        </button>
+
+    </section>
+
+    <a class="back-link" href="index.html">← Back to Home</a>
+
+</main>
+
+<!-- =========================================
+     SUBSCRIPTION JAVASCRIPT
+========================================= -->
+
+<script>
+(function () {
+    "use strict";
+
+    const PRICE = 1500;
+
+    const subscribeButton =
+        document.getElementById("subscribeButton");
+
+    const checkoutCard =
+        document.getElementById("checkoutCard");
+
+    const checkoutForm =
+        document.getElementById("checkoutForm");
+
+    const checkoutMessage =
+        document.getElementById("checkoutMessage");
+
+    const statusBox =
+        document.getElementById("subscriptionStatus");
+
+    const statusText =
+        document.getElementById("subscriptionStatusText");
+
+    const cancelCheckout =
+        document.getElementById("cancelCheckout");
+
+    const cancelSubscription =
+        document.getElementById("cancelSubscription");
+
+    function readLocalStorage(key, fallback) {
+        try {
+            const value = JSON.parse(
+                localStorage.getItem(key) || "null"
+            );
+
+            return value === null ? fallback : value;
+        } catch (error) {
+            return fallback;
+        }
+    }
+
+    function showMessage(message, isError) {
+        checkoutMessage.textContent = message;
+        checkoutMessage.classList.toggle("error", !!isError);
+        checkoutMessage.style.display = "block";
+    }
+
+    function saveSubscriptionNotification(subscription) {
+        let notifications = readLocalStorage(
+            "traveloraNotifications",
+            []
+        );
+
+        if (!Array.isArray(notifications)) {
+            notifications = [];
+        }
+
+        const notification = {
+            id: "subscription-" + subscription.id,
+            title: "Journey+ Subscription Selected",
+            message:
+                "Your Travelora Journey+ demo subscription has been " +
+                "saved at ₹1,500/month. No payment was taken.",
+            type: "subscription",
+            category: "subscription",
+            service: "Journey+",
+            amount: PRICE,
+            subscriptionId: subscription.id,
+            time: Date.now(),
+            date: new Date().toISOString(),
+            read: false,
+            isRead: false
+        };
+
+        notifications.unshift(notification);
+
+        // Keep the most recent 100 notifications.
+        notifications = notifications.slice(0, 100);
+
+        localStorage.setItem(
+            "traveloraNotifications",
+            JSON.stringify(notifications)
+        );
+    }
+
+    function showSubscriptionStatus(subscription) {
+        if (!subscription || subscription.status !== "Selected") {
+            statusBox.style.display = "none";
+            subscribeButton.textContent = "Continue to Checkout";
+            subscribeButton.classList.remove("selected");
+            return;
+        }
+
+        statusText.textContent =
+            "Journey+ is selected at ₹1,500/month for " +
+            subscription.customerName;
+
+        statusBox.style.display = "block";
+
+        subscribeButton.textContent = "Subscription Selected";
+        subscribeButton.classList.add("selected");
+    }
+
+    function getSavedSubscription() {
+        return readLocalStorage("traveloraSubscriptionDetails", null);
+    }
+
+    subscribeButton.addEventListener("click", function () {
+        checkoutCard.classList.add("active");
+        checkoutMessage.style.display = "none";
+
+        checkoutCard.scrollIntoView({
+            behavior: "smooth",
+            block: "start"
+        });
+
+        const existing = getSavedSubscription();
+
+        if (existing && existing.status === "Selected") {
+            document.getElementById("customerName").value =
+                existing.customerName || "";
+
+            document.getElementById("customerEmail").value =
+                existing.customerEmail || "";
+        }
+    });
+
+    cancelCheckout.addEventListener("click", function () {
+        checkoutCard.classList.remove("active");
+        checkoutMessage.style.display = "none";
+
+        subscribeButton.scrollIntoView({
+            behavior: "smooth",
+            block: "center"
+        });
+    });
+
+    checkoutForm.addEventListener("submit", function (event) {
+        event.preventDefault();
+
+        const customerName =
+            document.getElementById("customerName").value.trim();
+
+        const customerEmail =
+            document.getElementById("customerEmail").value.trim();
+
+        if (!customerName || !customerEmail) {
+            showMessage(
+                "Please enter your name and email address.",
+                true
+            );
+            return;
+        }
+
+        if (!checkoutForm.checkValidity()) {
+            checkoutForm.reportValidity();
+            return;
+        }
+
+        const subscription = {
+            id: "sub-" + Date.now(),
+            plan: "Journey+",
+            period: "monthly",
+            amount: PRICE,
+            customerName: customerName,
+            customerEmail: customerEmail,
+            status: "Selected",
+            createdAt: new Date().toISOString(),
+            demo: true,
+            paymentProcessed: false
+        };
+
+        try {
+            // Save the current subscription selection.
+            localStorage.setItem(
+                "traveloraSubscription",
+                "Journey+"
+            );
+
+            localStorage.setItem(
+                "traveloraSubscriptionDetails",
+                JSON.stringify(subscription)
+            );
+
+            // Add a notification to the existing notification list.
+            saveSubscriptionNotification(subscription);
+
+            showSubscriptionStatus(subscription);
+
+            showMessage(
+                "Your Journey+ demo subscription has been saved " +
+                "successfully at ₹1,500/month. No payment was taken. " +
+                "This does not activate real-world services.",
+                false
+            );
+
+            checkoutCard.classList.remove("active");
+
+            statusBox.scrollIntoView({
+                behavior: "smooth",
+                block: "center"
+            });
+
+        } catch (error) {
+            console.error(
+                "Unable to save the demo subscription:",
+                error
+            );
+
+            showMessage(
+                "Your selection could not be saved in this browser. " +
+                "Please check browser storage settings and try again.",
+                true
+            );
+        }
+    });
+
+    cancelSubscription.addEventListener("click", function () {
+        const existing = getSavedSubscription();
+
+        if (!existing || existing.status !== "Selected") {
+            return;
+        }
+
+        const cancelledSubscription = {
+            ...existing,
+            status: "Cancelled",
+            cancelledAt: new Date().toISOString()
+        };
+
+        try {
+            localStorage.setItem(
+                "traveloraSubscriptionDetails",
+                JSON.stringify(cancelledSubscription)
+            );
+
+            localStorage.removeItem("traveloraSubscription");
+
+            const notifications = readLocalStorage(
+                "traveloraNotifications",
+                []
+            );
+
+            if (Array.isArray(notifications)) {
+                notifications.unshift({
+                    id: "subscription-cancelled-" + Date.now(),
+                    title: "Journey+ Selection Cancelled",
+                    message:
+                        "Your Journey+ demo subscription selection " +
+                        "has been cancelled. No payment was taken.",
+                    type: "subscription",
+                    category: "subscription",
+                    service: "Journey+",
+                    time: Date.now(),
+                    date: new Date().toISOString(),
+                    read: false,
+                    isRead: false
+                });
+
+                localStorage.setItem(
+                    "traveloraNotifications",
+                    JSON.stringify(notifications.slice(0, 100))
+                );
+            }
+
+            showSubscriptionStatus(cancelledSubscription);
+
+            statusText.textContent =
+                "Your Journey+ demo selection has been cancelled.";
+
+            statusBox.style.display = "block";
+
+        } catch (error) {
+            console.error(
+                "Unable to cancel demo selection:",
+                error
+            );
+
+            statusText.textContent =
+                "Unable to update your selection. Please try again.";
+
+            statusBox.style.display = "block";
+        }
+    });
+
+    // Restore the saved subscription status on page load.
+    const savedSubscription = getSavedSubscription();
+
+    if (savedSubscription) {
+        showSubscriptionStatus(savedSubscription);
+
+        if (savedSubscription.status === "Cancelled") {
+            statusText.textContent =
+                "Your previous Journey+ demo selection was cancelled.";
+            statusBox.style.display = "block";
+        }
+    }
+})();
+</script>
+
+</body>
+</html>

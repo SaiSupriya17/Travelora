@@ -1,0 +1,1229 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Travelora - Wishlist</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f4f8fc;
+            color: #12304a;
+        }
+
+        /* =========================
+           NAVBAR
+        ========================= */
+
+        header {
+            height: 82px;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 6%;
+            box-shadow: 0 3px 15px rgba(0,0,0,0.08);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            font-size: 30px;
+            font-weight: 800;
+            color: #08466b;
+            text-decoration: none;
+        }
+
+        .logo span {
+            color: #0c9b96;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 34px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #162235;
+            font-weight: 600;
+            transition: 0.25s;
+        }
+
+        .nav-links a:hover {
+            color: #0c8f91;
+        }
+
+        .login-btn {
+            background: #08466b;
+            color: white !important;
+            padding: 12px 20px;
+            border-radius: 10px;
+        }
+
+        /* =========================
+           MAIN
+        ========================= */
+
+        main {
+            max-width: 1250px;
+            margin: auto;
+            padding: 55px 25px 80px;
+        }
+
+        .wishlist-header {
+            text-align: center;
+            margin-bottom: 45px;
+        }
+
+        .wishlist-icon {
+            width: 75px;
+            height: 75px;
+            margin: auto auto 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 37px;
+            background: linear-gradient(
+                135deg,
+                #fff0f0,
+                #fff7ed
+            );
+            color: #ff6547;
+            border-radius: 50%;
+            box-shadow:
+                0 10px 30px rgba(255, 100, 70, 0.15);
+        }
+
+        .wishlist-header h1 {
+            font-size: 42px;
+            color: #08466b;
+            margin-bottom: 10px;
+        }
+
+        .wishlist-header p {
+            color: #718096;
+            font-size: 17px;
+        }
+
+        /* =========================
+           SECTION
+        ========================= */
+
+        .wishlist-section {
+            margin-bottom: 50px;
+        }
+
+        .section-heading {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            margin-bottom: 22px;
+        }
+
+        .section-heading .flag {
+            width: 48px;
+            height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: white;
+            border-radius: 14px;
+            font-size: 25px;
+            box-shadow: 0 5px 18px rgba(0,0,0,0.08);
+        }
+
+        .section-heading h2 {
+            font-size: 27px;
+            color: #123c59;
+        }
+
+        .section-heading p {
+            color: #789;
+            font-size: 14px;
+            margin-top: 3px;
+        }
+
+        /* =========================
+           CARDS
+        ========================= */
+
+        .wishlist-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+        }
+
+        .wishlist-card {
+            background: white;
+            border-radius: 22px;
+            overflow: hidden;
+            box-shadow:
+                0 10px 30px rgba(22, 55, 80, 0.10);
+            border: 1px solid #e5edf3;
+            transition:
+                transform 0.3s ease,
+                box-shadow 0.3s ease;
+            position: relative;
+        }
+
+        .wishlist-card:hover {
+            transform: translateY(-8px);
+            box-shadow:
+                0 18px 40px rgba(22, 55, 80, 0.16);
+        }
+
+        /* colorful top area */
+
+        .card-top {
+            height: 135px;
+            padding: 22px;
+            position: relative;
+            background:
+                linear-gradient(
+                    135deg,
+                    #075985,
+                    #08a69b,
+                    #ff7356
+                );
+        }
+
+        .international .card-top {
+            background:
+                linear-gradient(
+                    135deg,
+                    #5146a8,
+                    #008fba,
+                    #ff6b6b
+                );
+        }
+
+        .card-top::after {
+            content: "";
+            position: absolute;
+            width: 130px;
+            height: 130px;
+            right: -30px;
+            top: -45px;
+            background: rgba(255,255,255,0.12);
+            border-radius: 50%;
+        }
+
+        .country-badge {
+            display: inline-block;
+            background: rgba(255,255,255,0.92);
+            color: #075985;
+            padding: 7px 13px;
+            border-radius: 30px;
+            font-size: 12px;
+            font-weight: 800;
+            position: relative;
+            z-index: 2;
+        }
+
+        .international .country-badge {
+            color: #5146a8;
+        }
+
+        .remove-heart {
+            position: absolute;
+            right: 18px;
+            top: 17px;
+            width: 40px;
+            height: 40px;
+            border: none;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.92);
+            color: #ff5f5f;
+            font-size: 21px;
+            cursor: pointer;
+            z-index: 5;
+            transition: 0.2s;
+        }
+
+        .remove-heart:hover {
+            transform: scale(1.1);
+            background: #fff;
+        }
+
+        /* =========================
+           CARD BODY
+        ========================= */
+
+        .card-body {
+            padding: 23px;
+        }
+
+        .card-body h3 {
+            font-size: 25px;
+            color: #123b58;
+            margin-bottom: 8px;
+        }
+
+        .duration {
+            color: #637c91;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .features {
+            color: #70869a;
+            font-size: 14px;
+            line-height: 1.6;
+            min-height: 45px;
+        }
+
+        .price {
+            margin-top: 17px;
+            font-size: 25px;
+            font-weight: 800;
+            color: #079c8e;
+        }
+
+        .price small {
+            display: block;
+            color: #8a9aaa;
+            font-size: 12px;
+            font-weight: 500;
+            margin-top: 3px;
+        }
+
+        .card-buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .view-btn {
+            flex: 1;
+            border: none;
+            padding: 12px 10px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 700;
+            text-align: center;
+            text-decoration: none;
+            transition: 0.25s;
+        }
+
+        .view-btn {
+            background: #e9f5f7;
+            color: #075477;
+        }
+
+        .view-btn:hover {
+            background: #d7eef2;
+        }
+
+        /* =========================
+           EMPTY SECTION
+        ========================= */
+
+        .empty-section {
+            background: white;
+            border: 2px dashed #d7e3eb;
+            border-radius: 18px;
+            padding: 35px 20px;
+            text-align: center;
+            color: #8394a2;
+        }
+
+        .empty-section .empty-icon {
+            font-size: 35px;
+            margin-bottom: 10px;
+        }
+
+        /* =========================
+           EMPTY WHOLE WISHLIST
+        ========================= */
+
+        .empty-wishlist {
+            background: white;
+            border-radius: 25px;
+            padding: 70px 25px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.07);
+        }
+
+        .empty-wishlist .big-heart {
+            font-size: 70px;
+            color: #ff765b;
+            margin-bottom: 20px;
+        }
+
+        .empty-wishlist h2 {
+            color: #12496a;
+            margin-bottom: 10px;
+        }
+
+        .empty-wishlist p {
+            color: #8292a0;
+            margin-bottom: 25px;
+        }
+
+        .explore-btn {
+            display: inline-block;
+            background: #08466b;
+            color: white;
+            padding: 13px 25px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 700;
+        }
+
+        /* =========================
+           RESPONSIVE
+        ========================= */
+
+        @media (max-width: 1000px) {
+
+            .wishlist-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .nav-links {
+                gap: 15px;
+            }
+        }
+
+        @media (max-width: 700px) {
+
+            header {
+                padding: 0 20px;
+            }
+
+            .nav-links a:not(.login-btn) {
+                display: none;
+            }
+
+            .wishlist-header h1 {
+                font-size: 32px;
+            }
+
+            .wishlist-grid {
+                grid-template-columns: 1fr;
+            }
+
+            main {
+                padding: 35px 18px 60px;
+            }
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<!-- =========================
+     NAVBAR
+========================= -->
+
+<header>
+
+    <a href="index.html" class="logo">
+
+        Travelora <span>✈️</span>
+
+    </a>
+
+    <nav class="nav-links">
+
+        <a href="index.html">
+            Home
+        </a>
+
+        <a href="destinations.html">
+            Destinations
+        </a>
+
+        <a href="offers.html">
+            Offers
+        </a>
+
+        <a href="packages.html">
+            Packages
+        </a>
+
+        <a href="activities.html">
+            Activities
+        </a>
+
+        <a href="wishlist.html">
+            ♡ Wishlist
+        </a>
+
+        <a href="trips.html">
+            My Trips
+        </a>
+
+        <a href="login.html" class="login-btn">
+
+            Login
+
+        </a>
+
+    </nav>
+
+</header>
+
+
+<!-- =========================
+     MAIN CONTENT
+========================= -->
+
+<main>
+
+    <div class="wishlist-header">
+
+        <div class="wishlist-icon">
+
+            ♡
+
+        </div>
+
+        <h1>
+            My Wishlist
+        </h1>
+
+        <p>
+
+            Your favorite destinations, saved for your next adventure ✈️
+
+        </p>
+
+    </div>
+
+
+    <!-- =========================
+         INDIAN DESTINATIONS
+    ========================= -->
+
+    <section class="wishlist-section">
+
+        <div class="section-heading">
+
+            <div>
+
+                <h2>
+                    Indian Destinations
+                </h2>
+
+                <p>
+
+                    Explore your saved destinations across India
+
+                </p>
+
+            </div>
+
+        </div>
+
+        <div
+            id="indianWishlist"
+            class="wishlist-grid">
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         INTERNATIONAL
+    ========================= -->
+
+    <section class="wishlist-section">
+
+        <div class="section-heading">
+
+            <div>
+
+                <h2>
+                    International Destinations
+                </h2>
+
+                <p>
+
+                    Your saved adventures around the world
+
+                </p>
+
+            </div>
+
+        </div>
+
+        <div
+            id="internationalWishlist"
+            class="wishlist-grid">
+        </div>
+
+    </section>
+
+</main>
+
+
+<script>
+
+/* =====================================================
+   PACKAGE DATA
+
+   Keep this data synchronized with packages.html
+===================================================== */
+
+const packages = {
+
+    "Goa": {
+
+        name: "Goa",
+
+        country: "India",
+
+        duration: "5 Days / 4 Nights",
+
+        features: "Beaches • Nightlife • Water Sports",
+
+        price: "₹14,999",
+
+        type: "indian"
+
+    },
+
+    "Mumbai": {
+
+        name: "Mumbai",
+
+        country: "India",
+
+        duration: "4 Days / 3 Nights",
+
+        features: "City Life • Bollywood • Heritage",
+
+        price: "₹15,999",
+
+        type: "indian"
+
+    },
+
+    "New Delhi": {
+
+        name: "New Delhi",
+
+        country: "India",
+
+        duration: "5 Days / 4 Nights",
+
+        features: "History • Monuments • Culture",
+
+        price: "₹16,999",
+
+        type: "indian"
+
+    },
+
+    "Paris": {
+
+        name: "Paris",
+
+        country: "France",
+
+        duration: "6 Days / 5 Nights",
+
+        features: "Eiffel Tower • Museums • Cuisine",
+
+        price: "₹89,999",
+
+        type: "international"
+
+    },
+
+    "Dubai": {
+
+        name: "Dubai",
+
+        country: "UAE",
+
+        duration: "5 Days / 4 Nights",
+
+        features: "Desert Safari • Shopping • Skyline",
+
+        price: "₹69,999",
+
+        type: "international"
+
+    },
+
+    "Bali": {
+
+        name: "Bali",
+
+        country: "Indonesia",
+
+        duration: "6 Days / 5 Nights",
+
+        features: "Beaches • Temples • Adventure",
+
+        price: "₹59,999",
+
+        type: "international"
+
+    },
+
+    "Singapore": {
+
+        name: "Singapore",
+
+        country: "Singapore",
+
+        duration: "5 Days / 4 Nights",
+
+        features: "City • Gardens • Entertainment",
+
+        price: "₹74,999",
+
+        type: "international"
+
+    }
+
+};
+
+
+/* =====================================================
+   GET WISHLIST
+===================================================== */
+
+function getWishlist() {
+
+    let savedWishlist =
+        localStorage.getItem("traveloraWishlist");
+
+    if (!savedWishlist) {
+
+        return [];
+
+    }
+
+    try {
+
+        return JSON.parse(savedWishlist);
+
+    } catch (error) {
+
+        console.error(
+            "Could not read wishlist:",
+            error
+        );
+
+        return [];
+
+    }
+
+}
+
+
+/* =====================================================
+   SAVE WISHLIST
+===================================================== */
+
+function saveWishlist(list) {
+
+    localStorage.setItem(
+        "traveloraWishlist",
+        JSON.stringify(list)
+    );
+
+}
+
+
+/* =====================================================
+   REMOVE FROM WISHLIST
+===================================================== */
+
+function removeFromWishlist(name) {
+
+    let wishlist = getWishlist();
+
+    wishlist = wishlist.filter(
+        item => {
+
+            /*
+              Handles both:
+
+              ["Goa", "Mumbai"]
+
+              and:
+
+              [{name:"Goa"}, {name:"Mumbai"}]
+            */
+
+            if (typeof item === "string") {
+
+                return item !== name;
+
+            }
+
+            if (item && item.name) {
+
+                return item.name !== name;
+
+            }
+
+            return true;
+
+        }
+    );
+
+    saveWishlist(wishlist);
+
+    renderWishlist();
+
+}
+
+
+/* =====================================================
+   GET PACKAGE DETAILS
+===================================================== */
+
+function getPackageDetails(item) {
+
+    /*
+       If localStorage contains only the name:
+
+       "Goa"
+
+       get details from packages object.
+    */
+
+    if (typeof item === "string") {
+
+        return packages[item] || {
+
+            name: item,
+
+            country: "International",
+
+            duration: "Travel Package",
+
+            features: "Explore • Discover • Experience",
+
+            price: "View Price",
+
+            type: "international"
+
+        };
+
+    }
+
+
+    /*
+       If localStorage contains an object,
+       use its existing information.
+    */
+
+    if (item && typeof item === "object") {
+
+        const name =
+            item.name ||
+            item.destination ||
+            item.title ||
+            "Destination";
+
+        const existing =
+            packages[name] || {};
+
+        return {
+
+            name: name,
+
+            country:
+                item.country ||
+                existing.country ||
+                (
+                    String(item.type || "").toLowerCase() === "india"
+                        ? "India"
+                        : "International"
+                ),
+
+            duration:
+                item.duration ||
+                existing.duration ||
+                "Travel Package",
+
+            features:
+                item.features ||
+                item.description ||
+                existing.features ||
+                "Explore • Discover • Experience",
+
+            price:
+                item.price ||
+                existing.price ||
+                "View Price",
+
+            type:
+                (
+                    String(
+                        item.type ||
+                        existing.type ||
+                        ""
+                    ).toLowerCase() === "india"
+                ) ||
+                (
+                    String(
+                        item.country ||
+                        existing.country ||
+                        ""
+                    ).toLowerCase() === "india"
+                )
+                    ? "indian"
+                    : "international"
+
+        };
+
+    }
+
+
+    return {
+
+        name: "Destination",
+
+        country: "International",
+
+        duration: "Travel Package",
+
+        features: "Explore • Discover • Experience",
+
+        price: "View Price",
+
+        type: "international"
+
+    };
+
+}
+
+
+/* =====================================================
+   CREATE CARD
+===================================================== */
+
+function createCard(item) {
+
+    const packageData =
+        getPackageDetails(item);
+
+    const isIndian =
+        packageData.type === "indian" ||
+        packageData.country.toLowerCase() === "india";
+
+    const card =
+        document.createElement("article");
+
+    card.className =
+        "wishlist-card " +
+        (isIndian
+            ? "indian"
+            : "international");
+
+
+    card.innerHTML = `
+
+        <div class="card-top">
+
+            <span class="country-badge">
+
+                ${isIndian
+                    ? "🇮🇳 INDIA"
+                    : "🌍 " + packageData.country.toUpperCase()}
+
+            </span>
+
+
+            <button
+                class="remove-heart"
+                title="Remove from wishlist"
+                aria-label="Remove ${escapeQuotes(packageData.name)} from wishlist"
+                type="button">
+
+                ♥️
+
+            </button>
+
+        </div>
+
+
+        <div class="card-body">
+
+            <h3>
+
+                ${packageData.name}
+
+            </h3>
+
+
+            <div class="duration">
+
+                ${packageData.duration}
+
+            </div>
+
+
+            <div class="features">
+
+                ${packageData.features}
+
+            </div>
+
+
+            <div class="price">
+
+                ${packageData.price}
+
+                <small>
+
+                    Starting price per person
+
+                </small>
+
+            </div>
+
+
+            <div class="card-buttons">
+
+                <a
+                    href="packages.html"
+                    class="view-btn">
+
+                    View Package
+
+                </a>
+
+            </div>
+
+        </div>
+
+    `;
+
+
+    const removeButton =
+        card.querySelector(".remove-heart");
+
+    removeButton.addEventListener(
+        "click",
+        function() {
+
+            removeFromWishlist(
+                packageData.name
+            );
+
+        }
+    );
+
+
+    return card;
+
+}
+
+
+/* =====================================================
+   ESCAPE QUOTES
+===================================================== */
+
+function escapeQuotes(value) {
+
+    return String(value)
+
+        .replace(/\\/g, "\\\\")
+
+        .replace(/'/g, "\\'");
+
+}
+
+
+/* =====================================================
+   EMPTY MESSAGE
+===================================================== */
+
+function showEmptyMessage(
+    container,
+    icon,
+    message
+) {
+
+    container.innerHTML = `
+
+        <div
+            class="empty-section"
+            style="grid-column: 1 / -1;">
+
+            <div class="empty-icon">
+
+                ${icon}
+
+            </div>
+
+            <p>
+
+                ${message}
+
+            </p>
+
+        </div>
+
+    `;
+
+}
+
+
+/* =====================================================
+   RENDER WISHLIST
+===================================================== */
+
+function renderWishlist() {
+
+    const indianContainer =
+        document.getElementById(
+            "indianWishlist"
+        );
+
+    const internationalContainer =
+        document.getElementById(
+            "internationalWishlist"
+        );
+
+
+    const wishlist =
+        getWishlist();
+
+
+    indianContainer.innerHTML = "";
+
+    internationalContainer.innerHTML = "";
+
+
+    if (wishlist.length === 0) {
+
+        showEmptyMessage(
+
+            indianContainer,
+
+            "♡",
+
+            "You haven't saved any Indian destinations yet."
+
+        );
+
+
+        showEmptyMessage(
+
+            internationalContainer,
+
+            "🌍",
+
+            "You haven't saved any international destinations yet."
+
+        );
+
+        return;
+
+    }
+
+
+    let indianCount = 0;
+
+    let internationalCount = 0;
+
+
+    wishlist.forEach(item => {
+
+        const packageData =
+            getPackageDetails(item);
+
+
+        const isIndian =
+            packageData.type === "indian" ||
+            packageData.country.toLowerCase() === "india";
+
+
+        const card =
+            createCard(item);
+
+
+        if (isIndian) {
+
+            indianContainer.appendChild(card);
+
+            indianCount++;
+
+        } else {
+
+            internationalContainer.appendChild(card);
+
+            internationalCount++;
+
+        }
+
+    });
+
+
+    if (indianCount === 0) {
+
+        showEmptyMessage(
+
+            indianContainer,
+
+            "🇮🇳",
+
+            "No Indian destinations saved yet."
+
+        );
+
+    }
+
+
+    if (internationalCount === 0) {
+
+        showEmptyMessage(
+
+            internationalContainer,
+
+            "🌍",
+
+            "No international destinations saved yet."
+
+        );
+
+    }
+
+}
+
+
+/* =====================================================
+   LOAD PAGE
+===================================================== */
+
+document.addEventListener(
+
+    "DOMContentLoaded",
+
+    renderWishlist
+
+);
+
+</script>
+
+</body>
+
+</html>

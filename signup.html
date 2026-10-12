@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Travelora - Sign Up</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+
+        /* =========================================
+           SIGN UP PAGE
+        ========================================= */
+
+        .signup-page {
+            min-height: 85vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 50px 20px;
+        }
+
+        .signup-box {
+            width: 450px;
+            max-width: 100%;
+            background: white;
+            padding: 40px;
+            border-radius: 18px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.10);
+        }
+
+        .signup-box h1 {
+            color: #073b5c;
+            margin-bottom: 10px;
+        }
+
+        .signup-box > p {
+            color: #667085;
+            margin-bottom: 25px;
+            line-height: 1.5;
+        }
+
+        .signup-box input,
+        .signup-box select {
+            margin-bottom: 15px;
+        }
+
+        .signup-box button {
+            width: 100%;
+            margin-top: 5px;
+        }
+
+        /* OTP STEP */
+
+        .otp-step {
+            display: none;
+        }
+
+        .otp-info {
+            background: #eef8f7;
+            color: #073b5c;
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        .demo-otp {
+            background: #fff4e8;
+            color: #9a4d00;
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        #signupOTP {
+            text-align: center;
+            font-size: 22px;
+            letter-spacing: 8px;
+        }
+
+        /* PROFILE DETAILS STEP */
+
+        .details-step {
+            display: none;
+        }
+
+        .details-step h2 {
+            color: #073b5c;
+            margin-bottom: 10px;
+        }
+
+        .details-step p {
+            color: #667085;
+            margin-bottom: 20px;
+        }
+
+        /* LOGIN LINK */
+
+        .login-link {
+            text-align: center;
+            margin-top: 20px;
+            color: #667085;
+        }
+
+        .login-link a {
+            color: #ff7200;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        /* BACK BUTTON */
+
+        .back-button {
+            background: #eef2f6 !important;
+            color: #073b5c !important;
+            margin-top: 10px !important;
+        }
+
+        .back-button:hover {
+            background: #dfe7ef !important;
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- =========================================
+     HEADER
+========================================= -->
+
+<header>
+
+    <div class="logo">
+        Travelora ✈️
+    </div>
+
+    <nav>
+
+        <a href="index.html">
+            Home
+        </a>
+
+        <a href="destinations.html">
+            Destinations
+        </a>
+
+        <a href="offers.html">
+            Offers
+        </a>
+
+        <a href="packages.html">
+            Packages
+        </a>
+
+        <a href="activities.html">
+            Activities
+        </a>
+
+        <a href="login.html">
+            Login
+        </a>
+
+    </nav>
+
+</header>
+
+
+
+<!-- =========================================
+     SIGN UP
+========================================= -->
+
+<section class="signup-page">
+
+
+    <div class="signup-box">
+
+
+        <!-- =====================================
+             STEP 1 — CONTACT
+        ====================================== -->
+
+        <div id="contactStep">
+
+            <h1>
+                Create Your Account ✨
+            </h1>
+
+            <p>
+                Sign up with your email address or phone number to start your Travelora journey.
+            </p>
+
+
+            <input
+                type="text"
+                id="signupContact"
+                placeholder="Email Address or Phone Number"
+            >
+
+
+            <button onclick="sendSignupOTP()">
+                Continue
+            </button>
+
+
+            <div class="login-link">
+
+                Already have an account?
+
+                <a href="login.html">
+                    Login
+                </a>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- =====================================
+             STEP 2 — OTP
+        ====================================== -->
+
+        <div
+            id="otpStep"
+            class="otp-step"
+        >
+
+            <h1>
+                Verify Your Contact
+            </h1>
+
+            <p>
+                Enter the OTP to continue creating your account.
+            </p>
+
+
+            <div class="otp-info">
+
+                This project uses a demo OTP.
+                No real SMS service or paid service is required.
+
+            </div>
+
+
+            <div
+                id="demoOtp"
+                class="demo-otp"
+            >
+            </div>
+
+
+            <input
+                type="text"
+                id="signupOTP"
+                maxlength="6"
+                inputmode="numeric"
+                autocomplete="one-time-code"
+                placeholder="Enter OTP"
+            >
+
+
+            <button onclick="verifySignupOTP()">
+                Verify OTP
+            </button>
+
+
+            <button
+                class="back-button"
+                onclick="backToContact()"
+            >
+                Back
+            </button>
+
+        </div>
+
+
+
+        <!-- =====================================
+             STEP 3 — PERSONAL DETAILS
+        ====================================== -->
+
+        <div
+            id="detailsStep"
+            class="details-step"
+        >
+
+            <h1>
+                Tell Us About You 👋
+            </h1>
+
+            <p>
+                Add your details to complete your Travelora account.
+            </p>
+
+
+            <input
+                type="text"
+                id="signupName"
+                placeholder="Full Name"
+            >
+
+
+            <select id="signupGender">
+
+                <option value="">
+                    Select Gender
+                </option>
+
+                <option value="Male">
+                    Male
+                </option>
+
+                <option value="Female">
+                    Female
+                </option>
+
+                <option value="Other">
+                    Other
+                </option>
+
+                <option value="Prefer not to say">
+                    Prefer not to say
+                </option>
+
+            </select>
+
+
+            <button onclick="createAccount()">
+                Create Account
+            </button>
+
+
+            <button
+                class="back-button"
+                onclick="backToOTP()"
+            >
+                Back
+            </button>
+
+        </div>
+
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================================
+     FOOTER
+========================================= -->
+
+<footer>
+
+    <div>
+
+        <h2>
+            Travelora ✈️
+        </h2>
+
+        <p>
+            Your trusted travel booking partner.
+        </p>
+
+    </div>
+
+
+    <div>
+
+        <h3>
+            Explore
+        </h3>
+
+        <a href="destinations.html">
+            Destinations
+        </a>
+
+        <a href="offers.html">
+            Offers
+        </a>
+
+        <a href="packages.html">
+            Packages
+        </a>
+
+        <a href="activities.html">
+            Activities
+        </a>
+
+    </div>
+
+
+    <div>
+
+        <h3>
+            Support
+        </h3>
+
+        <a href="contact.html">
+            Help & Contact
+        </a>
+
+        <a href="trips.html">
+            Manage Booking
+        </a>
+
+    </div>
+
+</footer>
+
+
+
+<script src="script.js"></script>
+
+
+<script>
+
+    /* =========================================
+       SEND SIGNUP DEMO OTP
+    ========================================= */
+
+    function sendSignupOTP() {
+
+        let contact =
+            document.getElementById(
+                "signupContact"
+            ).value.trim();
+
+
+        if (contact === "") {
+
+            alert(
+                "Please enter your email address or phone number."
+            );
+
+            return;
+        }
+
+
+        /*
+           DEMO OTP
+
+           This does not send an actual SMS.
+           No Truecaller or paid SMS service
+           is connected to this project.
+        */
+
+        let otp = "123456";
+
+
+        localStorage.setItem(
+            "signupOTP",
+            otp
+        );
+
+        localStorage.setItem(
+            "signupContact",
+            contact
+        );
+
+
+        document.getElementById(
+            "contactStep"
+        ).style.display = "none";
+
+
+        document.getElementById(
+            "otpStep"
+        ).style.display = "block";
+
+
+        document.getElementById(
+            "demoOtp"
+        ).innerText =
+            "Demo OTP: " + otp;
+
+
+        /*
+           Automatically fill the OTP box
+           for the demo experience.
+        */
+
+        document.getElementById(
+            "signupOTP"
+        ).value = otp;
+
+    }
+
+
+
+    /* =========================================
+       VERIFY SIGNUP OTP
+    ========================================= */
+
+    function verifySignupOTP() {
+
+        let enteredOTP =
+            document.getElementById(
+                "signupOTP"
+            ).value.trim();
+
+
+        let correctOTP =
+            localStorage.getItem(
+                "signupOTP"
+            );
+
+
+        if (enteredOTP === "") {
+
+            alert("Please enter the OTP.");
+
+            return;
+        }
+
+
+        if (enteredOTP !== correctOTP) {
+
+            alert(
+                "Incorrect OTP. Please try again."
+            );
+
+            return;
+        }
+
+
+        document.getElementById(
+            "otpStep"
+        ).style.display = "none";
+
+
+        document.getElementById(
+            "detailsStep"
+        ).style.display = "block";
+
+    }
+
+
+
+    /* =========================================
+       CREATE ACCOUNT
+    ========================================= */
+
+    function createAccount() {
+
+        let name =
+            document.getElementById(
+                "signupName"
+            ).value.trim();
+
+
+        let gender =
+            document.getElementById(
+                "signupGender"
+            ).value;
+
+
+        let contact =
+            localStorage.getItem(
+                "signupContact"
+            );
+
+
+        if (name === "") {
+
+            alert(
+                "Please enter your full name."
+            );
+
+            return;
+        }
+
+
+        if (gender === "") {
+
+            alert(
+                "Please select your gender."
+            );
+
+            return;
+        }
+
+
+        /*
+           Save account information.
+        */
+
+        localStorage.setItem(
+            "userName",
+            name
+        );
+
+        localStorage.setItem(
+            "userEmail",
+            contact
+        );
+
+        localStorage.setItem(
+            "userPhone",
+            contact
+        );
+
+        localStorage.setItem(
+            "userGender",
+            gender
+        );
+
+        localStorage.setItem(
+            "isLoggedIn",
+            "true"
+        );
+
+
+        /*
+           Remove temporary signup data.
+        */
+
+        localStorage.removeItem(
+            "signupOTP"
+        );
+
+        localStorage.removeItem(
+            "signupContact"
+        );
+
+
+        alert(
+            "Account created successfully! Welcome " +
+            name
+        );
+
+
+        window.location.href =
+            "index.html";
+
+    }
+
+
+
+    /* =========================================
+       BACK TO CONTACT
+    ========================================= */
+
+    function backToContact() {
+
+        document.getElementById(
+            "otpStep"
+        ).style.display = "none";
+
+
+        document.getElementById(
+            "contactStep"
+        ).style.display = "block";
+
+    }
+
+
+
+    /* =========================================
+       BACK TO OTP
+    ========================================= */
+
+    function backToOTP() {
+
+        document.getElementById(
+            "detailsStep"
+        ).style.display = "none";
+
+
+        document.getElementById(
+            "otpStep"
+        ).style.display = "block";
+
+    }
+
+</script>
+
+
+</body>
+
+</html>

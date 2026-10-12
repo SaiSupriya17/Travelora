@@ -1,0 +1,5435 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>Travelora - Booking</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+
+        /* ================================
+           BOOKING PAGE
+        ================================= */
+
+        .booking-page {
+            background: #f4f9fd;
+            padding: 40px 6%;
+            min-height: 100vh;
+        }
+
+
+        /* ================================
+           DESTINATION HEADER
+        ================================= */
+
+        .destination-header {
+            background: linear-gradient(135deg, #0b4568, #1688bb);
+            color: white;
+            padding: 45px;
+            border-radius: 25px;
+            text-align: center;
+            margin-bottom: 35px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.12);
+        }
+
+        .destination-header h1 {
+            font-size: 42px;
+            margin: 0 0 15px;
+        }
+
+        .destination-header p {
+            max-width: 850px;
+            margin: auto;
+            line-height: 1.7;
+            font-size: 17px;
+        }
+
+
+        /* ================================
+           DESTINATION IMAGE
+        ================================= */
+
+        .destination-image-box {
+            background: white;
+            padding: 12px;
+            border-radius: 22px;
+            margin-bottom: 35px;
+            box-shadow: 0 7px 25px rgba(0,0,0,0.08);
+        }
+
+        .destination-image-box img {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            border-radius: 17px;
+            display: block;
+        }
+
+
+        /* ================================
+           DETAILS
+        ================================= */
+
+        .details-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+
+        .detail-card {
+            background: white;
+            padding: 28px;
+            border-radius: 20px;
+            box-shadow: 0 6px 25px rgba(0,0,0,0.08);
+        }
+
+        .detail-card h2 {
+            color: #0b4568;
+            margin-top: 0;
+            margin-bottom: 15px;
+        }
+
+        .detail-card p {
+            color: #5e7282;
+            line-height: 1.8;
+        }
+
+        .detail-card ul {
+            color: #5e7282;
+            line-height: 2;
+            padding-left: 22px;
+        }
+
+
+        /* ================================
+           SECTION TITLES
+        ================================= */
+
+        .section-title {
+            text-align: center;
+            color: #0b4568;
+            font-size: 30px;
+            margin: 45px 0 25px;
+        }
+
+
+        /* ================================
+           PACKAGES
+        ================================= */
+
+        .packages-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 22px;
+        }
+
+        .package-card {
+            background: white;
+            padding: 25px;
+            border-radius: 18px;
+            box-shadow: 0 6px 22px rgba(0,0,0,0.08);
+            border-top: 5px solid #1688bb;
+        }
+
+        .package-card h3 {
+            color: #0b4568;
+            margin-top: 0;
+        }
+
+        .package-card p {
+            color: #627789;
+            line-height: 1.7;
+        }
+
+        .package-price {
+            color: #ed7100;
+            font-size: 21px;
+            font-weight: bold;
+            margin-top: 15px;
+        }
+
+
+        /* ================================
+           BOOKING BOX
+        ================================= */
+
+        .booking-box {
+            background: white;
+            padding: 35px;
+            border-radius: 25px;
+            margin-top: 50px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.10);
+        }
+
+        .booking-box h2 {
+            text-align: center;
+            color: #0b4568;
+            font-size: 32px;
+            margin-top: 0;
+        }
+
+        .booking-subtitle {
+            text-align: center;
+            color: #6b7e8e;
+            margin-bottom: 30px;
+        }
+
+
+        /* ================================
+           TRAVEL OPTIONS
+        ================================= */
+
+        .travel-options {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 12px;
+            margin-bottom: 35px;
+        }
+
+        .travel-option {
+            background: #f7fbfe;
+            border: 2px solid #dbe6ee;
+            border-radius: 15px;
+            padding: 18px 8px;
+            text-align: center;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .travel-option:hover {
+            border-color: #1688bb;
+            transform: translateY(-3px);
+        }
+
+        .travel-option.selected {
+            background: #0b4568;
+            border-color: #0b4568;
+            color: white;
+        }
+
+        .travel-icon {
+            display: block;
+            font-size: 30px;
+            margin-bottom: 8px;
+        }
+
+
+        /* ================================
+           PERSON DETAILS
+        ================================= */
+
+        .form-heading {
+            color: #0b4568;
+            font-size: 23px;
+            margin: 25px 0 20px;
+        }
+
+        .booking-form {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group.full {
+            grid-column: 1 / -1;
+        }
+
+        .form-group label {
+            font-weight: bold;
+            color: #30495d;
+            margin-bottom: 8px;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            padding: 14px;
+            border: 1px solid #d4e0e8;
+            border-radius: 10px;
+            font-size: 15px;
+            outline: none;
+            background: #fbfdff;
+        }
+
+        .form-group textarea {
+            min-height: 90px;
+            resize: vertical;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            border-color: #1688bb;
+        }
+
+
+        /* ================================
+           SERVICE SPECIFIC BOOKING
+        ================================= */
+
+        .service-heading {
+            grid-column: 1 / -1;
+            background: #eef8fd;
+            border-left: 5px solid #1688bb;
+            padding: 15px 18px;
+            border-radius: 10px;
+            color: #0b4568;
+            font-size: 21px;
+            margin-top: 5px;
+            margin-bottom: 0;
+        }
+
+        .service-heading span {
+            font-size: 14px;
+            color: #627789;
+            font-weight: normal;
+            display: block;
+            margin-top: 5px;
+        }
+
+        .service-specific {
+            grid-column: 1 / -1;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            padding: 22px;
+            background: #f8fcff;
+            border: 1px solid #dbe8f0;
+            border-radius: 15px;
+        }
+
+        .service-specific .form-group {
+            display: flex;
+        }
+
+        .service-specific .form-group.full {
+            grid-column: 1 / -1;
+        }
+
+
+        /* ================================
+           COUPON SECTION
+        ================================= */
+
+        .coupon-section {
+            grid-column: 1 / -1;
+            margin-top: 10px;
+            padding: 24px;
+            border-radius: 18px;
+            background: #f8fcff;
+            border: 1px solid #dbe8f0;
+        }
+
+        .coupon-section h3 {
+            color: #0b4568;
+            margin-top: 0;
+            margin-bottom: 8px;
+            font-size: 22px;
+        }
+
+        .coupon-section-description {
+            color: #627789;
+            margin-bottom: 18px;
+        }
+
+        .coupon-toggle {
+            background: white;
+            border: 2px solid #1688bb;
+            color: #0b4568;
+            padding: 12px 20px;
+            border-radius: 10px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .coupon-toggle:hover {
+            background: #eef8fd;
+        }
+
+        .coupon-list {
+            display: none;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .coupon-list.show {
+            display: grid;
+        }
+
+        .coupon-card {
+            background: white;
+            border: 1px solid #d8e5ed;
+            border-radius: 14px;
+            padding: 18px;
+        }
+
+        .coupon-card h4 {
+            color: #0b4568;
+            margin: 0 0 8px;
+            font-size: 18px;
+        }
+
+        .coupon-code {
+            display: inline-block;
+            padding: 7px 12px;
+            border: 1px dashed #1688bb;
+            border-radius: 7px;
+            color: #0b4568;
+            font-weight: bold;
+            margin: 7px 0 12px;
+        }
+
+        .coupon-card p {
+            margin: 6px 0;
+            color: #627789;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        .use-coupon-button {
+            margin-top: 10px;
+            padding: 9px 15px;
+            border: none;
+            border-radius: 8px;
+            background: #1688bb;
+            color: white;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .use-coupon-button:hover {
+            background: #0b4568;
+        }
+
+        .coupon-input-row {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .coupon-input-row input {
+            padding: 14px;
+            border: 1px solid #d4e0e8;
+            border-radius: 10px;
+            font-size: 15px;
+            outline: none;
+        }
+
+        .apply-coupon-button {
+            padding: 14px 22px;
+            border: none;
+            border-radius: 10px;
+            background: #ff7200;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .apply-coupon-button:hover {
+            background: #e86200;
+        }
+
+        .coupon-message {
+            display: none;
+            margin-top: 12px;
+            padding: 12px;
+            border-radius: 9px;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        .coupon-message.success {
+            display: block;
+            background: #e9f8ef;
+            color: #087443;
+        }
+
+        .coupon-message.error {
+            display: block;
+            background: #fff0f0;
+            color: #b42318;
+        }
+
+
+        /* ================================
+           PRICE SUMMARY
+        ================================= */
+
+        .price-summary {
+            grid-column: 1 / -1;
+            background: linear-gradient(135deg, #f8fcff, #eef8fd);
+            border: 1px solid #cfe2ed;
+            border-radius: 18px;
+            padding: 25px;
+            margin-top: 5px;
+        }
+
+        .price-summary h3 {
+            color: #0b4568;
+            margin-top: 0;
+            margin-bottom: 18px;
+        }
+
+        .price-row {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+            padding: 9px 0;
+            color: #536b7b;
+        }
+
+        .price-row.discount-row {
+            color: #087443;
+        }
+
+        .price-row.final-row {
+            border-top: 2px solid #d5e5ed;
+            margin-top: 8px;
+            padding-top: 15px;
+            color: #0b4568;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .price-row.special-charge-row {
+            color: #b45b00;
+            font-weight: 600;
+        }
+
+
+        /* ================================
+           SPECIAL REQUIREMENTS
+        ================================= */
+
+        .special-requirements {
+            grid-column: 1 / -1;
+            background: #f8fcff;
+            border: 1px solid #dbe8f0;
+            border-radius: 18px;
+            padding: 24px;
+            margin-top: 5px;
+        }
+
+        .special-requirements-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .special-requirements-header h3 {
+            color: #0b4568;
+            margin: 0 0 7px;
+            font-size: 22px;
+        }
+
+        .special-requirements-header p {
+            color: #627789;
+            margin: 0;
+            line-height: 1.6;
+        }
+
+        .special-charge-badge {
+            background: #fff3e8;
+            color: #c85b00;
+            border: 1px solid #ffc58f;
+            border-radius: 20px;
+            padding: 8px 14px;
+            font-size: 13px;
+            font-weight: bold;
+            white-space: nowrap;
+        }
+
+        .requirements-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 14px;
+        }
+
+        .requirement-card {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            background: white;
+            border: 1px solid #d8e5ed;
+            border-radius: 13px;
+            padding: 15px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .requirement-card:hover {
+            border-color: #1688bb;
+            transform: translateY(-2px);
+        }
+
+        .requirement-card input {
+            width: 18px;
+            height: 18px;
+            margin-top: 3px;
+            accent-color: #1688bb;
+            cursor: pointer;
+            flex-shrink: 0;
+        }
+
+        .requirement-card:has(input:checked) {
+            border-color: #1688bb;
+            background: #eef8fd;
+        }
+
+        .requirement-content {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .requirement-content strong {
+            color: #0b4568;
+            font-size: 15px;
+        }
+
+        .requirement-content small {
+            color: #6a7d8d;
+            line-height: 1.4;
+        }
+
+        .requirement-content b {
+            color: #ed7100;
+            font-size: 14px;
+        }
+
+        /* ================================
+           BOOK BUTTON
+        ================================= */
+
+        .book-button {
+            grid-column: 1 / -1;
+            width: 100%;
+            padding: 17px;
+            border: none;
+            border-radius: 12px;
+            background: linear-gradient(135deg, #ff7200, #ff9a35);
+            color: white;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .book-button:hover {
+            transform: translateY(-2px);
+        }
+
+
+        /* ================================
+           SUCCESS MESSAGE
+        ================================= */
+
+        .success-message {
+            display: none;
+            background: #e9f8ef;
+            color: #087443;
+            padding: 22px;
+            border-radius: 14px;
+            margin-top: 25px;
+            text-align: center;
+            line-height: 1.8;
+        }
+
+
+        /* ================================
+           RESPONSIVE
+        ================================= */
+
+        @media(max-width: 950px) {
+
+            .details-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .packages-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .travel-options {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .service-specific {
+                grid-template-columns: 1fr;
+            }
+
+            .coupon-list {
+                grid-template-columns: 1fr;
+            }
+
+            .requirements-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .special-requirements-header {
+                flex-direction: column;
+            }
+
+        }
+
+
+        @media(max-width: 600px) {
+
+            .booking-page {
+                padding: 25px 4%;
+            }
+
+            .destination-header {
+                padding: 30px 20px;
+            }
+
+            .destination-header h1 {
+                font-size: 30px;
+            }
+
+            .destination-image-box img {
+                height: 250px;
+            }
+
+            .packages-grid,
+            .booking-form {
+                grid-template-columns: 1fr;
+            }
+
+            .form-group.full,
+            .book-button {
+                grid-column: auto;
+            }
+
+            .travel-options {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .service-specific {
+                grid-template-columns: 1fr;
+            }
+
+            .coupon-input-row {
+                grid-template-columns: 1fr;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- ================================
+     NAVBAR
+================================ -->
+
+<header>
+
+    <div class="logo">
+        Travelora ✈
+    </div>
+
+    <nav>
+
+        <a href="index.html">Home</a>
+
+        <a href="destinations.html">Destinations</a>
+
+        <a href="offers.html">Offers</a>
+
+        <a href="packages.html">Packages</a>
+
+        <a href="activities.html">Activities</a>
+
+        <a href="trips.html">My Trips</a>
+
+    </nav>
+
+</header>
+
+
+
+<!-- ================================
+     BOOKING PAGE
+================================ -->
+
+<section class="booking-page">
+
+
+    <!-- DESTINATION HEADER -->
+
+    <div class="destination-header">
+
+        <h1 id="destinationName">
+            Travel Booking
+        </h1>
+
+        <p id="destinationIntro">
+            Plan your complete journey with Travelora.
+        </p>
+
+    </div>
+
+
+
+    <!-- DESTINATION IMAGE -->
+
+    <div class="destination-image-box">
+
+        <img
+            id="destinationImage"
+            src="https://picsum.photos/seed/travelora/1200/500"
+            alt="Destination"
+        >
+
+    </div>
+
+
+
+    <!-- DESTINATION DETAILS -->
+
+    <div class="details-grid">
+
+
+        <div class="detail-card">
+
+            <h2>
+                About <span id="aboutName">Destination</span>
+            </h2>
+
+            <p id="aboutDestination">
+
+                Explore this beautiful destination
+                and enjoy a memorable journey with Travelora.
+
+            </p>
+
+        </div>
+
+
+
+        <div class="detail-card">
+
+            <h2>
+                Places & Experiences
+            </h2>
+
+            <ul id="thingsToDo">
+
+                <li>Explore famous attractions</li>
+
+                <li>Enjoy local experiences</li>
+
+                <li>Visit beautiful places</li>
+
+                <li>Enjoy your holiday</li>
+
+            </ul>
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- ================================
+         BOOKING SECTION
+    ================================= -->
+
+    <div class="booking-box">
+
+
+        <h2>
+            Book Your Journey
+        </h2>
+
+
+        <p class="booking-subtitle">
+
+            Choose any service you need for your
+            <strong id="bookingDestination">
+                destination
+            </strong>
+            trip.
+
+        </p>
+
+
+
+        <!-- ================================
+             TRAVEL OPTIONS
+        ================================= -->
+
+        <div class="travel-options">
+
+
+            <div
+                class="travel-option selected"
+                onclick="selectTravel('Flight', this)"
+            >
+
+                <span class="travel-icon">
+                    ✈️
+                </span>
+
+                Flight
+
+            </div>
+
+
+
+            <div
+                class="travel-option"
+                onclick="selectTravel('Train', this)"
+            >
+
+                <span class="travel-icon">
+                    🚆
+                </span>
+
+                Train
+
+            </div>
+
+
+
+            <div
+                class="travel-option"
+                onclick="selectTravel('Bus', this)"
+            >
+
+                <span class="travel-icon">
+                    🚌
+                </span>
+
+                Bus
+
+            </div>
+
+
+
+            <div
+                class="travel-option"
+                onclick="selectTravel('Cab', this)"
+            >
+
+                <span class="travel-icon">
+                    🚕
+                </span>
+
+                Cab
+
+            </div>
+
+
+
+            <div
+                class="travel-option"
+                onclick="selectTravel('Hotel', this)"
+            >
+
+                <span class="travel-icon">
+                    🏨
+                </span>
+
+                Hotel
+
+            </div>
+
+
+
+            <div
+                class="travel-option"
+                onclick="selectTravel('Holiday', this)"
+            >
+
+                <span class="travel-icon">
+                    🌴
+                </span>
+
+                Holiday
+
+            </div>
+
+
+        </div>
+
+
+
+        <!-- ================================
+             PERSON DETAILS
+        ================================= -->
+
+        <h3 class="form-heading">
+            Traveller / Customer Details
+        </h3>
+
+
+        <form
+            class="booking-form"
+            onsubmit="confirmBooking(event)"
+        >
+
+
+            <!-- NAME -->
+
+            <div class="form-group">
+
+                <label>
+                    Full Name *
+                </label>
+
+                <input
+                    id="customerName"
+                    type="text"
+                    placeholder="Enter full name"
+                    required
+                >
+
+            </div>
+
+
+
+            <!-- EMAIL -->
+
+            <div class="form-group">
+
+                <label>
+                    Email Address *
+                </label>
+
+                <input
+                    id="customerEmail"
+                    type="email"
+                    placeholder="Enter email address"
+                    required
+                >
+
+            </div>
+
+
+
+            <!-- PHONE -->
+
+            <div class="form-group">
+
+                <label>
+                    Phone Number *
+                </label>
+
+                <input
+                    id="customerPhone"
+                    type="tel"
+                    placeholder="Enter phone number"
+                    required
+                >
+
+            </div>
+
+
+
+            <!-- AGE -->
+
+            <div class="form-group">
+
+                <label>
+                    Age
+                </label>
+
+                <input
+                    id="customerAge"
+                    type="number"
+                    min="1"
+                    max="120"
+                    placeholder="Enter age"
+                >
+
+            </div>
+
+
+
+            <!-- GENDER -->
+
+            <div class="form-group">
+
+                <label>
+                    Gender
+                </label>
+
+                <select id="customerGender">
+
+                    <option value="">
+                        Select Gender
+                    </option>
+
+                    <option>
+                        Male
+                    </option>
+
+                    <option>
+                        Female
+                    </option>
+
+                    <option>
+                        Other
+                    </option>
+
+                </select>
+
+            </div>
+
+
+
+            <!-- TRAVELLERS -->
+
+            <div class="form-group">
+
+                <label>
+                    Number of Travellers *
+                </label>
+
+                <select id="travellers" required>
+
+                    <option value="1">
+                        1 Traveller
+                    </option>
+
+                    <option value="2">
+                        2 Travellers
+                    </option>
+
+                    <option value="3">
+                        3 Travellers
+                    </option>
+
+                    <option value="4">
+                        4 Travellers
+                    </option>
+
+                    <option value="5">
+                        5 Travellers
+                    </option>
+
+                    <option value="6">
+                        6 Travellers
+                    </option>
+
+                    <option value="7">
+                        7 Travellers
+                    </option>
+
+                    <option value="8">
+                        8 Travellers
+                    </option>
+
+                    <option value="9">
+                        9 Travellers
+                    </option>
+
+                    <option value="10">
+                        10 Travellers
+                    </option>
+
+                </select>
+
+            </div>
+
+
+
+            <!-- SERVICE SPECIFIC BOOKING DETAILS -->
+
+            <div id="serviceTitle" class="service-heading">
+
+                ✈️ Flight Booking Details
+
+                <span>
+                    Enter the details required for your flight.
+                </span>
+
+            </div>
+
+
+            <div
+                id="serviceSpecificFields"
+                class="service-specific"
+            >
+
+                <!-- Flight fields will appear here -->
+
+            </div>
+
+
+
+            <!-- OLD GENERAL FIELDS -->
+
+            <div
+                class="form-group"
+                id="oldFromGroup"
+            >
+
+                <label>
+                    Starting From *
+                </label>
+
+                <input
+                    id="fromPlace"
+                    type="text"
+                    placeholder="Enter starting city"
+                >
+
+            </div>
+
+
+
+            <!-- DESTINATION -->
+
+            <div
+                class="form-group"
+                id="oldToGroup"
+            >
+
+                <label>
+                    Destination
+                </label>
+
+                <input
+                    id="toPlace"
+                    type="text"
+                    readonly
+                >
+
+            </div>
+
+
+
+            <!-- TRAVEL DATE -->
+
+            <div
+                class="form-group"
+                id="oldTravelDateGroup"
+            >
+
+                <label>
+                    Travel Date *
+                </label>
+
+                <input
+                    id="travelDate"
+                    type="date"
+                >
+
+            </div>
+
+
+
+            <!-- RETURN DATE -->
+
+            <div
+                class="form-group"
+                id="oldReturnDateGroup"
+            >
+
+                <label>
+                    Return Date
+                </label>
+
+                <input
+                    id="returnDate"
+                    type="date"
+                >
+
+            </div>
+
+
+
+            <!-- TRAVEL OPTION -->
+
+            <div class="form-group">
+
+                <label>
+                    Selected Service
+                </label>
+
+                <input
+                    id="selectedTravel"
+                    value="Flight"
+                    readonly
+                >
+
+            </div>
+
+
+
+            <!-- PAYMENT METHOD -->
+
+            <div class="form-group">
+
+                <label>
+                    Payment Method *
+                </label>
+
+                <select
+                    id="paymentMethod"
+                    required
+                >
+
+                    <option value="UPI">
+                        UPI
+                    </option>
+
+                    <option value="Google Pay">
+                        Google Pay
+                    </option>
+
+                    <option value="PhonePe">
+                        PhonePe
+                    </option>
+
+                    <option value="Paytm UPI">
+                        Paytm UPI
+                    </option>
+
+                    <option value="Amazon Pay UPI">
+                        Amazon Pay UPI
+                    </option>
+
+                    <option value="BHIM UPI">
+                        BHIM UPI
+                    </option>
+
+                    <option value="Credit Card">
+                        Credit Card
+                    </option>
+
+                    <option value="Debit Card">
+                        Debit Card
+                    </option>
+
+                    <option value="RuPay Card">
+                        RuPay Card
+                    </option>
+
+                    <option value="Net Banking">
+                        Net Banking
+                    </option>
+
+                    <option value="Paytm Wallet">
+                        Paytm Wallet
+                    </option>
+
+                    <option value="Amazon Pay Wallet">
+                        Amazon Pay Wallet
+                    </option>
+
+                    <option value="Mobikwik Wallet">
+                        Mobikwik Wallet
+                    </option>
+
+                    <option value="Cash on Booking">
+                        Cash on Booking
+                    </option>
+
+                </select>
+
+            </div>
+
+
+
+            <!-- ================================
+                 COUPON SECTION
+            ================================= -->
+
+            <div class="coupon-section">
+
+                <h3>
+                    Apply Coupon
+                </h3>
+
+                <p class="coupon-section-description">
+                    Get service-specific discounts when your booking
+                    satisfies all coupon conditions.
+                </p>
+
+
+                <button
+                    type="button"
+                    class="coupon-toggle"
+                    onclick="toggleCoupons()"
+                >
+                    View Available Coupons
+                </button>
+
+
+                <div
+                    id="couponList"
+                    class="coupon-list"
+                >
+
+                    <!-- FLIGHT -->
+
+                    <div class="coupon-card">
+
+                        <h4>
+                            Flight Discount
+                        </h4>
+
+                        <span class="coupon-code">
+                            FLY2000
+                        </span>
+
+                        <p>
+                            <strong>Save:</strong> ₹2,000
+                        </p>
+
+                        <p>
+                            <strong>Minimum booking:</strong> ₹15,000
+                        </p>
+
+                        <p>
+                            <strong>Payment:</strong>
+                            Credit Card / Debit Card / RuPay Card
+                        </p>
+
+                        <p>
+                            <strong>Valid until:</strong>
+                            31 December 2026
+                        </p>
+
+                        <p>
+                            <strong>Applicable on:</strong>
+                            Flight bookings only
+                        </p>
+
+                        <button
+                            type="button"
+                            class="use-coupon-button"
+                            onclick="useCoupon('FLY2000')"
+                        >
+                            Use Coupon
+                        </button>
+
+                    </div>
+
+
+
+                    <!-- TRAIN -->
+
+                    <div class="coupon-card">
+
+                        <h4>
+                            Train Discount
+                        </h4>
+
+                        <span class="coupon-code">
+                            TRAIN500
+                        </span>
+
+                        <p>
+                            <strong>Save:</strong> ₹500
+                        </p>
+
+                        <p>
+                            <strong>Minimum booking:</strong> ₹8,000
+                        </p>
+
+                        <p>
+                            <strong>Payment:</strong>
+                            UPI / Google Pay / PhonePe / Paytm UPI /
+                            Amazon Pay UPI / BHIM UPI /
+                            Debit Card / RuPay Card
+                        </p>
+
+                        <p>
+                            <strong>Valid until:</strong>
+                            30 November 2026
+                        </p>
+
+                        <p>
+                            <strong>Applicable on:</strong>
+                            Train bookings only
+                        </p>
+
+                        <button
+                            type="button"
+                            class="use-coupon-button"
+                            onclick="useCoupon('TRAIN500')"
+                        >
+                            Use Coupon
+                        </button>
+
+                    </div>
+
+
+
+                    <!-- BUS -->
+
+                    <div class="coupon-card">
+
+                        <h4>
+                            Bus Discount
+                        </h4>
+
+                        <span class="coupon-code">
+                            BUS300
+                        </span>
+
+                        <p>
+                            <strong>Save:</strong> ₹300
+                        </p>
+
+                        <p>
+                            <strong>Minimum booking:</strong> ₹6,000
+                        </p>
+
+                        <p>
+                            <strong>Payment:</strong>
+                            UPI / Google Pay / PhonePe / Paytm UPI /
+                            Amazon Pay UPI / BHIM UPI /
+                            Debit Card / RuPay Card
+                        </p>
+
+                        <p>
+                            <strong>Valid until:</strong>
+                            31 October 2026
+                        </p>
+
+                        <p>
+                            <strong>Applicable on:</strong>
+                            Bus bookings only
+                        </p>
+
+                        <button
+                            type="button"
+                            class="use-coupon-button"
+                            onclick="useCoupon('BUS300')"
+                        >
+                            Use Coupon
+                        </button>
+
+                    </div>
+
+
+
+                    <!-- CAB -->
+
+                    <div class="coupon-card">
+
+                        <h4>
+                            Cab Discount
+                        </h4>
+
+                        <span class="coupon-code">
+                            CAB250
+                        </span>
+
+                        <p>
+                            <strong>Save:</strong> ₹250
+                        </p>
+
+                        <p>
+                            <strong>Minimum booking:</strong> ₹3,000
+                        </p>
+
+                        <p>
+                            <strong>Payment:</strong>
+                            Credit Card / Debit Card / RuPay Card
+                        </p>
+
+                        <p>
+                            <strong>Valid until:</strong>
+                            30 November 2026
+                        </p>
+
+                        <p>
+                            <strong>Applicable on:</strong>
+                            Cab bookings only
+                        </p>
+
+                        <button
+                            type="button"
+                            class="use-coupon-button"
+                            onclick="useCoupon('CAB250')"
+                        >
+                            Use Coupon
+                        </button>
+
+                    </div>
+
+
+
+                    <!-- HOTEL -->
+
+                    <div class="coupon-card">
+
+                        <h4>
+                            Hotel Discount
+                        </h4>
+
+                        <span class="coupon-code">
+                            STAY1500
+                        </span>
+
+                        <p>
+                            <strong>Save:</strong> ₹1,500
+                        </p>
+
+                        <p>
+                            <strong>Minimum booking:</strong> ₹10,000
+                        </p>
+
+                        <p>
+                            <strong>Payment:</strong>
+                            Credit Card / Debit Card / RuPay Card
+                        </p>
+
+                        <p>
+                            <strong>Valid until:</strong>
+                            31 December 2026
+                        </p>
+
+                        <p>
+                            <strong>Applicable on:</strong>
+                            Hotel bookings only
+                        </p>
+
+                        <button
+                            type="button"
+                            class="use-coupon-button"
+                            onclick="useCoupon('STAY1500')"
+                        >
+                            Use Coupon
+                        </button>
+
+                    </div>
+
+
+
+                    <!-- HOLIDAY -->
+
+                    <div class="coupon-card">
+
+                        <h4>
+                            Holiday Discount
+                        </h4>
+
+                        <span class="coupon-code">
+                            HOLIDAY5000
+                        </span>
+
+                        <p>
+                            <strong>Save:</strong> ₹5,000
+                        </p>
+
+                        <p>
+                            <strong>Minimum booking:</strong> ₹30,000
+                        </p>
+
+                        <p>
+                            <strong>Payment:</strong>
+                            Credit Card only
+                        </p>
+
+                        <p>
+                            <strong>Valid until:</strong>
+                            31 December 2026
+                        </p>
+
+                        <p>
+                            <strong>Applicable on:</strong>
+                            Holiday bookings only
+                        </p>
+
+                        <button
+                            type="button"
+                            class="use-coupon-button"
+                            onclick="useCoupon('HOLIDAY5000')"
+                        >
+                            Use Coupon
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <!-- MANUAL COUPON -->
+
+                <div class="coupon-input-row">
+
+                    <input
+                        id="coupon"
+                        type="text"
+                        placeholder="Enter coupon code"
+                    >
+
+                    <button
+                        type="button"
+                        class="apply-coupon-button"
+                        onclick="applyCoupon()"
+                    >
+                        Apply Coupon
+                    </button>
+
+                </div>
+
+
+                <div
+                    id="couponMessage"
+                    class="coupon-message"
+                ></div>
+
+            </div>
+
+
+
+            <!-- ================================
+                 PRICE SUMMARY
+            ================================= -->
+
+            <div class="price-summary">
+
+                <h3>
+                    Booking Price Summary
+                </h3>
+
+                <div class="price-row">
+
+                    <span>
+                        Service
+                    </span>
+
+                    <strong id="summaryService">
+                        Flight
+                    </strong>
+
+                </div>
+
+
+                <div class="price-row">
+
+                    <span>
+                        Destination
+                    </span>
+
+                    <strong id="summaryDestination">
+                        Your Destination
+                    </strong>
+
+                </div>
+
+
+                <div class="price-row">
+
+                    <span>
+                        Booking Value
+                    </span>
+
+                    <strong id="bookingValue">
+                        ₹0
+                    </strong>
+
+                </div>
+
+
+                <div class="price-row special-charge-row">
+
+                    <span>
+                        Special Requirements Charges
+                    </span>
+
+                    <strong id="specialRequirementsCharge">
+                        ₹0
+                    </strong>
+
+                </div>
+
+
+                <div class="price-row discount-row">
+
+                    <span>
+                        Coupon Discount
+                    </span>
+
+                    <strong id="couponDiscount">
+                        - ₹0
+                    </strong>
+
+                </div>
+
+
+                <div class="price-row final-row">
+
+                    <span>
+                        Final Payable Amount
+                    </span>
+
+                    <strong id="finalPrice">
+                        ₹0
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- SPECIAL REQUIREMENTS -->
+
+            <div class="special-requirements full">
+
+                <div class="special-requirements-header">
+                    <div>
+                        <h3 id="specialRequirementsTitle">Flight Special Requirements & Paid Add-ons</h3>
+                        <p id="specialRequirementsDescription">
+                            Optional add-ons for your selected service. Select only the requirements you need. Charges apply only to selected requirements.
+                        </p>
+                    </div>
+                    <div class="special-charge-badge">
+                        Paid Add-ons
+                    </div>
+                </div>
+
+                <div id="requirementsGrid" class="requirements-grid"></div>
+
+                <div class="form-group full">
+                    <label for="requirements">
+                        Additional Instructions (Optional)
+                    </label>
+
+                    <textarea
+                        id="requirements"
+                        placeholder="Enter any additional instructions..."
+                    ></textarea>
+                </div>
+
+            </div>
+
+
+
+            <!-- BOOK -->
+
+            <button
+                type="submit"
+                class="book-button"
+            >
+
+                Confirm & Book Now
+
+            </button>
+
+
+        </form>
+
+
+
+        <!-- SUCCESS -->
+
+        <div
+            id="successMessage"
+            class="success-message"
+        >
+
+        </div>
+
+
+    </div>
+
+
+</section>
+
+
+
+<script src="script.js"></script>
+
+
+<script>
+
+
+/* ==================================================
+   GET DESTINATION FROM DESTINATIONS PAGE
+================================================== */
+
+const urlParams =
+    new URLSearchParams(window.location.search);
+
+const place =
+    urlParams.get("place");
+
+const destination =
+    place
+        ? decodeURIComponent(place)
+        : "Your Destination";
+
+
+/* ==================================================
+   DESTINATION IMAGE
+================================================== */
+
+document.getElementById("destinationImage").src =
+    "https://picsum.photos/seed/travelora-" +
+    encodeURIComponent(destination) +
+    "/1200/500";
+
+
+/* ==================================================
+   DESTINATION INFORMATION
+================================================== */
+
+const destinationData = {
+
+    "Goa": {
+        intro: "Goa is a popular coastal destination known for its beaches, sightseeing, relaxing holidays and exciting activities.",
+        about: "Explore Goa through its beautiful beaches, forts, markets, sightseeing locations and holiday experiences.",
+        places: [
+            "Baga Beach",
+            "Calangute Beach",
+            "Fort Aguada",
+            "Panaji",
+            "Anjuna"
+        ]
+    },
+
+    "Mumbai": {
+        intro: "Mumbai is a vibrant city known for its coastline, famous landmarks, entertainment and busy city life.",
+        about: "Explore Mumbai through its famous landmarks, beaches, markets, heritage areas and city attractions.",
+        places: [
+            "Gateway of India",
+            "Marine Drive",
+            "Colaba",
+            "Elephanta Caves",
+            "Juhu Beach"
+        ]
+    },
+
+    "New Delhi": {
+        intro: "New Delhi is India's capital region and is known for historic monuments, museums and important landmarks.",
+        about: "Explore historic monuments, museums, markets and famous landmarks around New Delhi.",
+        places: [
+            "India Gate",
+            "Red Fort",
+            "Qutub Minar",
+            "Lotus Temple",
+            "Humayun's Tomb"
+        ]
+    },
+
+    "Jaipur": {
+        intro: "Jaipur is known for its historic forts, palaces, architecture and colourful markets.",
+        about: "Discover Jaipur's royal heritage, historic architecture, forts, palaces and markets.",
+        places: [
+            "Amber Fort",
+            "Hawa Mahal",
+            "City Palace",
+            "Jantar Mantar",
+            "Nahargarh Fort"
+        ]
+    },
+
+    "Udaipur": {
+        intro: "Udaipur is known for its lakes, palaces, heritage architecture and beautiful surroundings.",
+        about: "Explore the City Palace, lakes, historic streets and beautiful viewpoints of Udaipur.",
+        places: [
+            "City Palace",
+            "Lake Pichola",
+            "Fateh Sagar Lake",
+            "Jag Mandir",
+            "Saheliyon Ki Bari"
+        ]
+    },
+
+    "Manali": {
+        intro: "Manali is a beautiful mountain destination known for scenic landscapes, valleys and adventure experiences.",
+        about: "Enjoy mountain scenery, valleys, sightseeing and adventure experiences around Manali.",
+        places: [
+            "Solang Valley",
+            "Old Manali",
+            "Hadimba Temple",
+            "Rohtang region",
+            "Mall Road"
+        ]
+    },
+
+    "Shimla": {
+        intro: "Shimla is a popular hill destination known for mountain scenery, colonial architecture and pleasant surroundings.",
+        about: "Explore Shimla's hill views, heritage buildings, markets and nearby attractions.",
+        places: [
+            "Mall Road",
+            "The Ridge",
+            "Jakhu Temple",
+            "Kufri",
+            "Christ Church"
+        ]
+    },
+
+    "Kerala": {
+        intro: "Kerala is known for backwaters, beaches, hill stations, nature and relaxing holiday experiences.",
+        about: "Explore Kerala's scenic backwaters, beaches, hill destinations and natural surroundings.",
+        places: [
+            "Alappuzha",
+            "Munnar",
+            "Kochi",
+            "Kovalam",
+            "Wayanad"
+        ]
+    },
+
+    "Munnar": {
+        intro: "Munnar is a scenic hill destination known for tea plantations, mountains and natural landscapes.",
+        about: "Explore tea gardens, hills, waterfalls and beautiful viewpoints around Munnar.",
+        places: [
+            "Tea Gardens",
+            "Eravikulam National Park",
+            "Mattupetty Dam",
+            "Top Station",
+            "Echo Point"
+        ]
+    },
+
+    "Agra": {
+        intro: "Agra is a historic destination known for iconic monuments and Mughal-era architecture.",
+        about: "Explore Agra's historic monuments, heritage areas and famous architectural landmarks.",
+        places: [
+            "Taj Mahal",
+            "Agra Fort",
+            "Mehtab Bagh",
+            "Fatehpur Sikri",
+            "Itmad-ud-Daulah"
+        ]
+    },
+
+    "Varanasi": {
+        intro: "Varanasi is a historic city known for the Ganges, ghats, temples and cultural experiences.",
+        about: "Explore the ghats, temples, markets and historic areas of Varanasi.",
+        places: [
+            "Dashashwamedh Ghat",
+            "Assi Ghat",
+            "Kashi Vishwanath Temple",
+            "Sarnath",
+            "Ganges Ghats"
+        ]
+    },
+
+    "Rishikesh": {
+        intro: "Rishikesh is known for its riverside setting, spiritual attractions and adventure activities.",
+        about: "Enjoy riverside experiences, bridges, temples, nature and adventure activities.",
+        places: [
+            "Laxman Jhula area",
+            "Ram Jhula",
+            "Triveni Ghat",
+            "River rafting",
+            "Neer Garh Waterfall"
+        ]
+    },
+
+    "Amritsar": {
+        intro: "Amritsar is a historic destination known for important landmarks, heritage and cultural experiences.",
+        about: "Explore historic attractions, markets and important landmarks around Amritsar.",
+        places: [
+            "Golden Temple",
+            "Jallianwala Bagh",
+            "Wagah Border",
+            "Partition Museum",
+            "Old City"
+        ]
+    },
+
+    "Kolkata": {
+        intro: "Kolkata is known for its historic buildings, culture, food, markets and riverside attractions.",
+        about: "Explore heritage buildings, museums, markets and famous city attractions.",
+        places: [
+            "Victoria Memorial",
+            "Howrah Bridge",
+            "Indian Museum",
+            "Park Street",
+            "Prinsep Ghat"
+        ]
+    },
+
+    "Chennai": {
+        intro: "Chennai is a coastal city known for beaches, temples, heritage and cultural attractions.",
+        about: "Explore beaches, temples, museums and historic areas of Chennai.",
+        places: [
+            "Marina Beach",
+            "Kapaleeshwarar Temple",
+            "Fort St. George",
+            "Government Museum",
+            "Besant Nagar"
+        ]
+    },
+
+    "Hyderabad": {
+        intro: "Hyderabad is known for historic landmarks, architecture, markets and modern city attractions.",
+        about: "Explore historic monuments, lakes, markets and modern areas of Hyderabad.",
+        places: [
+            "Charminar",
+            "Golconda Fort",
+            "Hussain Sagar",
+            "Salar Jung Museum",
+            "Ramoji Film City"
+        ]
+    },
+
+    "Bengaluru": {
+        intro: "Bengaluru is a modern city known for gardens, technology, shopping and cultural attractions.",
+        about: "Explore gardens, palaces, markets and popular city attractions.",
+        places: [
+            "Lalbagh",
+            "Bangalore Palace",
+            "Cubbon Park",
+            "Vidhana Soudha",
+            "MG Road"
+        ]
+    },
+
+    "Mysuru": {
+        intro: "Mysuru is known for its royal heritage, palace architecture, gardens and cultural attractions.",
+        about: "Explore the palace, gardens, heritage buildings and attractions of Mysuru.",
+        places: [
+            "Mysore Palace",
+            "Chamundi Hills",
+            "Brindavan Gardens",
+            "Mysuru Zoo",
+            "St. Philomena's Church"
+        ]
+    },
+
+    "Ooty": {
+        intro: "Ooty is a popular hill station known for its cool climate, gardens, lakes and tea plantations.",
+        about: "Enjoy scenic hills, gardens, lakes and tea estates around Ooty.",
+        places: [
+            "Ooty Lake",
+            "Botanical Gardens",
+            "Doddabetta Peak",
+            "Tea Gardens",
+            "Nilgiri Mountain Railway"
+        ]
+    },
+
+    "Darjeeling": {
+        intro: "Darjeeling is a scenic hill destination known for tea gardens, mountain views and heritage railway experiences.",
+        about: "Explore tea estates, mountain viewpoints and famous attractions around Darjeeling.",
+        places: [
+            "Tiger Hill",
+            "Batasia Loop",
+            "Darjeeling Himalayan Railway",
+            "Tea Gardens",
+            "Mall Road"
+        ]
+    },
+
+    "Pondicherry": {
+        intro: "Pondicherry is known for its coastal atmosphere, heritage streets, beaches and relaxing experiences.",
+        about: "Explore the French Quarter, beaches, cafes and heritage attractions.",
+        places: [
+            "Promenade Beach",
+            "French Quarter",
+            "Auroville",
+            "Paradise Beach",
+            "Sri Aurobindo Ashram"
+        ]
+    },
+
+    "Hampi": {
+        intro: "Hampi is a historic destination known for ancient ruins, temples and unique landscapes.",
+        about: "Explore the historic ruins, temples, monuments and scenic landscapes of Hampi.",
+        places: [
+            "Virupaksha Temple",
+            "Vittala Temple",
+            "Hampi Bazaar",
+            "Lotus Mahal",
+            "Matanga Hill"
+        ]
+    },
+
+    "Kochi": {
+        intro: "Kochi is a coastal destination known for heritage areas, waterfront attractions and cultural experiences.",
+        about: "Explore historic streets, waterfront areas, markets and heritage attractions.",
+        places: [
+            "Fort Kochi",
+            "Chinese Fishing Nets",
+            "Mattancherry Palace",
+            "Jew Town",
+            "Marine Drive"
+        ]
+    },
+
+    "Dharamshala": {
+        intro: "Dharamshala is a scenic mountain destination known for hills, monasteries and beautiful surroundings.",
+        about: "Explore mountain landscapes, monasteries, markets and nearby attractions.",
+        places: [
+            "McLeod Ganj",
+            "Bhagsu Waterfall",
+            "Dal Lake",
+            "Namgyal Monastery",
+            "Triund"
+        ]
+    },
+
+    "Mussoorie": {
+        intro: "Mussoorie is a popular hill station known for mountain views, waterfalls and scenic surroundings.",
+        about: "Explore viewpoints, waterfalls, markets and beautiful hill landscapes.",
+        places: [
+            "Mall Road",
+            "Kempty Falls",
+            "Gun Hill",
+            "Lal Tibba",
+            "Cloud's End"
+        ]
+    },
+
+    "Srinagar": {
+        intro: "Srinagar is known for its lakes, gardens, mountains and beautiful Kashmir Valley surroundings.",
+        about: "Explore lakes, gardens, markets and scenic areas around Srinagar.",
+        places: [
+            "Dal Lake",
+            "Mughal Gardens",
+            "Shankaracharya Temple",
+            "Nigeen Lake",
+            "Hazratbal"
+        ]
+    },
+
+    "Gulmarg": {
+        intro: "Gulmarg is a scenic mountain destination known for beautiful landscapes and outdoor experiences.",
+        about: "Enjoy mountain scenery, cable-car experiences and outdoor activities around Gulmarg.",
+        places: [
+            "Gulmarg Gondola",
+            "Gulmarg Valley",
+            "Apharwat Peak",
+            "Golf Course",
+            "Khilanmarg"
+        ]
+    },
+
+    "Dubai, UAE": {
+        intro: "Dubai is a modern destination known for its skyline, shopping, entertainment and desert experiences.",
+        about: "Explore modern attractions, shopping destinations, beaches and desert experiences.",
+        places: [
+            "Burj Khalifa",
+            "Dubai Mall",
+            "Palm Jumeirah",
+            "Dubai Marina",
+            "Desert Safari"
+        ]
+    },
+
+    "Paris, France": {
+        intro: "Paris is a famous European destination known for landmarks, museums, architecture and beautiful city experiences.",
+        about: "Explore famous landmarks, museums, historic streets and cultural attractions around Paris.",
+        places: [
+            "Eiffel Tower",
+            "Louvre Museum",
+            "Arc de Triomphe",
+            "Notre-Dame area",
+            "Montmartre"
+        ]
+    },
+
+    "London, United Kingdom": {
+        intro: "London is a historic and modern city known for landmarks, museums, royal attractions and parks.",
+        about: "Explore famous landmarks, museums, royal attractions and historic areas of London.",
+        places: [
+            "Big Ben",
+            "Tower Bridge",
+            "Buckingham Palace",
+            "London Eye",
+            "British Museum"
+        ]
+    },
+
+    "Bali, Indonesia": {
+        intro: "Bali is a tropical destination known for beaches, temples, nature and relaxing holiday experiences.",
+        about: "Explore beaches, temples, rice terraces and natural attractions around Bali.",
+        places: [
+            "Ubud",
+            "Kuta Beach",
+            "Seminyak",
+            "Tanah Lot",
+            "Nusa Dua"
+        ]
+    },
+
+    "Singapore": {
+        intro: "Singapore is a modern destination known for city attractions, shopping, gardens and entertainment.",
+        about: "Explore modern attractions, gardens, shopping areas and entertainment destinations.",
+        places: [
+            "Marina Bay",
+            "Gardens by the Bay",
+            "Sentosa",
+            "Singapore Zoo",
+            "Chinatown"
+        ]
+    },
+
+    "Maldives": {
+        intro: "The Maldives is known for beautiful islands, beaches, clear waters and relaxing holiday experiences.",
+        about: "Enjoy island stays, beaches, water activities and relaxing surroundings.",
+        places: [
+            "Malé",
+            "North Malé Atoll",
+            "South Malé Atoll",
+            "Private Islands",
+            "Coral Reefs"
+        ]
+    },
+
+    "Tokyo, Japan": {
+        intro: "Tokyo is a modern Japanese city known for technology, culture, shopping and historic attractions.",
+        about: "Explore modern districts, temples, shopping areas and cultural attractions.",
+        places: [
+            "Tokyo Tower",
+            "Shibuya",
+            "Asakusa",
+            "Meiji Shrine",
+            "Tokyo Skytree"
+        ]
+    },
+
+    "Sydney, Australia": {
+        intro: "Sydney is a coastal city known for its harbour, beaches, architecture and city attractions.",
+        about: "Explore the harbour, beaches, famous buildings and beautiful city surroundings.",
+        places: [
+            "Sydney Opera House",
+            "Harbour Bridge",
+            "Bondi Beach",
+            "Darling Harbour",
+            "Royal Botanic Garden"
+        ]
+    }
+
+};
+
+
+/* ==================================================
+   DISPLAY DESTINATION
+================================================== */
+
+document.getElementById("destinationName").textContent =
+    destination;
+
+document.getElementById("aboutName").textContent =
+    destination;
+
+document.getElementById("bookingDestination").textContent =
+    destination;
+
+document.getElementById("summaryDestination").textContent =
+    destination;
+
+document.getElementById("toPlace").value =
+    destination;
+
+
+const data =
+    destinationData[destination];
+
+
+if (data) {
+
+    document.getElementById("destinationIntro").textContent =
+        data.intro;
+
+    document.getElementById("aboutDestination").textContent =
+        data.about;
+
+
+    const list =
+        document.getElementById("thingsToDo");
+
+    list.innerHTML = "";
+
+
+    data.places.forEach(function(placeName) {
+
+        const li =
+            document.createElement("li");
+
+        li.textContent =
+            placeName;
+
+        list.appendChild(li);
+
+    });
+
+} else {
+
+    document.getElementById("destinationIntro").textContent =
+        "Explore " +
+        destination +
+        " with travelora and plan your journey with flights, trains, buses, cabs, hotels and holiday packages.";
+
+    document.getElementById("aboutDestination").textContent =
+        destination +
+        " is available as a travel destination on travelora. Choose your preferred travel service, package and travel dates below.";
+
+}
+
+
+/* ==================================================
+   DESTINATION BASE PRICE
+   DIFFERENT FOR EACH DESTINATION
+================================================== */
+
+function getDestinationBasePrice() {
+
+    /*
+       Every destination has its own base booking price.
+       The value is used by Flight, Train, Bus, Cab and Hotel
+       calculations, while Holiday uses the package prices below.
+    */
+
+    const destinationPrices = {
+
+        "Goa": 18000,
+        "Mumbai": 16000,
+        "New Delhi": 15000,
+        "Jaipur": 14000,
+        "Udaipur": 17500,
+        "Manali": 22000,
+        "Shimla": 20000,
+        "Kerala": 24000,
+        "Munnar": 21000,
+        "Agra": 13000,
+        "Varanasi": 12500,
+        "Rishikesh": 15500,
+        "Amritsar": 14500,
+        "Kolkata": 15000,
+        "Chennai": 14500,
+        "Hyderabad": 13500,
+        "Bengaluru": 15000,
+        "Mysuru": 12000,
+        "Ooty": 16000,
+        "Darjeeling": 19000,
+        "Pondicherry": 14000,
+        "Hampi": 13500,
+        "Kochi": 18000,
+        "Dharamshala": 17000,
+        "Mussoorie": 16500,
+        "Srinagar": 26000,
+        "Gulmarg": 28000,
+
+        "Dubai, UAE": 42000,
+        "Paris, France": 75000,
+        "London, United Kingdom": 82000,
+        "Bali, Indonesia": 48000,
+        "Singapore": 52000,
+        "Maldives": 65000,
+        "Tokyo, Japan": 90000,
+        "Sydney, Australia": 95000
+
+    };
+
+    /* Safe fallback for a destination not yet listed above. */
+    return destinationPrices[destination] || 15000;
+
+}
+
+
+/* ==================================================
+   PACKAGE PRICES
+================================================== */
+
+function getPackagePrices() {
+
+    const base =
+        getDestinationBasePrice();
+
+    const weekend =
+        Math.round(
+            base / 100
+        ) * 100;
+
+    const family =
+        Math.round(
+            (base * 1.8) / 100
+        ) * 100;
+
+    const complete =
+        Math.round(
+            (base * 2.6) / 100
+        ) * 100;
+
+    return {
+        weekend,
+        family,
+        complete
+    };
+
+}
+
+
+/* ==================================================
+   DISPLAY PACKAGE PRICES
+================================================== */
+
+function displayPackagePrices() {
+
+    const prices =
+        getPackagePrices();
+
+    document.getElementById("weekendPrice").textContent =
+        "Starting from ₹" +
+        prices.weekend.toLocaleString("en-IN");
+
+    document.getElementById("familyPrice").textContent =
+        "Starting from ₹" +
+        prices.family.toLocaleString("en-IN");
+
+    document.getElementById("completePrice").textContent =
+        "Starting from ₹" +
+        prices.complete.toLocaleString("en-IN");
+
+}
+
+
+
+
+/* ==================================================
+   COUPON DATA
+================================================== */
+
+const couponData = {
+
+    "FLY2000": {
+
+        service: "Flight",
+
+        discount: 2000,
+
+        minimum: 15000,
+
+        paymentMethods: [
+            "Credit Card",
+            "Debit Card",
+            "RuPay Card"
+        ],
+
+        expiry: "2026-12-31"
+
+    },
+
+
+    "TRAIN500": {
+
+        service: "Train",
+
+        discount: 500,
+
+        minimum: 8000,
+
+        paymentMethods: [
+            "UPI",
+            "Google Pay",
+            "PhonePe",
+            "Paytm UPI",
+            "Amazon Pay UPI",
+            "BHIM UPI",
+            "Debit Card",
+            "RuPay Card"
+        ],
+
+        expiry: "2026-11-30"
+
+    },
+
+
+    "BUS300": {
+
+        service: "Bus",
+
+        discount: 300,
+
+        minimum: 6000,
+
+        paymentMethods: [
+            "UPI",
+            "Google Pay",
+            "PhonePe",
+            "Paytm UPI",
+            "Amazon Pay UPI",
+            "BHIM UPI",
+            "Debit Card",
+            "RuPay Card"
+        ],
+
+        expiry: "2026-10-31"
+
+    },
+
+
+    "CAB250": {
+
+        service: "Cab",
+
+        discount: 250,
+
+        minimum: 3000,
+
+        paymentMethods: [
+            "Credit Card",
+            "Debit Card",
+            "RuPay Card"
+        ],
+
+        expiry: "2026-11-30"
+
+    },
+
+
+    "STAY1500": {
+
+        service: "Hotel",
+
+        discount: 1500,
+
+        minimum: 10000,
+
+        paymentMethods: [
+            "Credit Card",
+            "Debit Card",
+            "RuPay Card"
+        ],
+
+        expiry: "2026-12-31"
+
+    },
+
+
+    "HOLIDAY5000": {
+
+        service: "Holiday",
+
+        discount: 5000,
+
+        minimum: 30000,
+
+        paymentMethods: [
+            "Credit Card"
+        ],
+
+        expiry: "2026-12-31"
+
+    }
+
+};
+
+
+/* ==================================================
+   APPLIED COUPON
+================================================== */
+
+let appliedCoupon = null;
+
+
+/* ==================================================
+   GET NUMBER OF TRAVELLERS
+================================================== */
+
+function getTravellerCount() {
+
+    const value =
+        document.getElementById("travellers").value;
+
+    return parseInt(value) || 1;
+
+}
+
+
+/* ==================================================
+   GET NUMBER OF ROOMS
+================================================== */
+
+function getRoomCount() {
+
+    const element =
+        document.getElementById("numberRooms");
+
+    if (!element) {
+        return 1;
+    }
+
+    const match =
+        element.value.match(/\d+/);
+
+    return match
+        ? parseInt(match[0])
+        : 1;
+
+}
+
+
+/* ==================================================
+   SERVICE-SPECIFIC SPECIAL REQUIREMENTS
+================================================== */
+
+const serviceRequirements = {
+
+    Flight: [
+        ["Extra Baggage", "🧳", "Additional checked baggage allowance", 1500],
+        ["Window Seat Selection", "🪟", "Request a preferred window seat", 500],
+        ["Special Meal", "🍱", "Vegetarian, vegan or special meal", 700],
+        ["Priority Boarding", "🎫", "Board the flight with priority assistance", 800],
+        ["Airport Lounge Access", "✈️", "Relax in the airport lounge before departure", 1200],
+        ["Wheelchair Assistance", "♿", "Airport assistance for passengers requiring support", 600],
+        ["Travel Insurance", "🛡️", "Basic travel protection add-on", 2000],
+        ["Airport Transfer", "🚗", "Private pickup or drop from the airport", 2500],
+        ["Infant Assistance", "👶", "Additional assistance for travelling with an infant", 900],
+        ["Special Assistance", "🤝", "Extra airport assistance during the journey", 750]
+    ],
+
+    Train: [
+        ["Lower Berth Preference", "🛏️", "Request a lower berth where available", 400],
+        ["Window Seat Preference", "🪟", "Request a window-side seat where available", 300],
+        ["On-board Meal", "🍱", "Add a meal for your train journey", 500],
+        ["Bedroll / Bedding", "🛌", "Bedding or bedroll arrangement", 350],
+        ["Wheelchair Assistance", "♿", "Assistance at the railway station", 500],
+        ["Porter Assistance", "🧳", "Porter support for luggage at the station", 450],
+        ["Station Pickup", "🚗", "Pickup from the arrival railway station", 1200],
+        ["Travel Insurance", "🛡️", "Basic travel protection add-on", 1000],
+        ["Platform Assistance", "🚉", "Help with platform and boarding guidance", 300],
+        ["Extra Luggage", "🎒", "Additional luggage handling allowance", 600]
+    ],
+
+    Bus: [
+        ["Preferred Seat", "💺", "Request a preferred bus seat", 300],
+        ["Extra Luggage", "🧳", "Additional luggage allowance", 500],
+        ["Meal / Snack", "🍱", "Meal or snack for the journey", 350],
+        ["Pickup Point Assistance", "📍", "Assistance with pickup point coordination", 250],
+        ["Drop Point Assistance", "📍", "Assistance with drop point coordination", 250],
+        ["Blanket / Pillow", "🛌", "Comfort kit for the bus journey", 300],
+        ["AC Seat Upgrade", "❄️", "Request an upgraded AC seating option", 700],
+        ["Travel Insurance", "🛡️", "Basic travel protection add-on", 800],
+        ["Wheelchair Assistance", "♿", "Boarding and travel assistance", 500],
+        ["Priority Boarding", "🎫", "Priority boarding assistance", 400]
+    ],
+
+    Cab: [
+        ["Child Safety Seat", "👶", "Child seat arrangement for the cab", 500],
+        ["Extra Luggage Space", "🧳", "Additional luggage space arrangement", 400],
+        ["Airport Pickup", "✈️", "Dedicated airport pickup service", 800],
+        ["Airport Drop", "🚗", "Dedicated airport drop service", 800],
+        ["Extra Waiting Time", "⏱️", "Additional waiting time for pickup", 600],
+        ["Extra Stop", "📍", "Add an extra stop to your cab trip", 500],
+        ["Toll Package", "🛣️", "Prepaid toll handling for the trip", 700],
+        ["Driver Language Preference", "🗣️", "Request a preferred driver language", 300],
+        ["Pet Travel", "🐾", "Cab arrangement for travelling with a pet", 700],
+        ["Wheelchair Accessible Cab", "♿", "Accessible cab arrangement where available", 1000]
+    ],
+
+    Hotel: [
+        ["Breakfast Included", "🍳", "Add breakfast to your hotel stay", 800],
+        ["Extra Bed", "🛏️", "Additional bed for the room", 1800],
+        ["Early Check-in", "🏨", "Request an early hotel check-in", 1000],
+        ["Late Check-out", "🕐", "Request a later hotel check-out", 1000],
+        ["Airport Transfer", "🚗", "Hotel airport pickup or drop service", 1800],
+        ["Room Upgrade", "⭐", "Upgrade to a higher room category", 2500],
+        ["View Preference", "🌆", "Request a city, garden or scenic view", 900],
+        ["Extra Housekeeping", "🧹", "Additional housekeeping service", 500],
+        ["Welcome Kit", "🎁", "Special welcome arrangement at the hotel", 700],
+        ["In-room Celebration Setup", "🎉", "Simple celebration decoration in the room", 2000]
+    ],
+
+    Holiday: [
+        ["Airport Transfer", "🚗", "Private airport pickup and drop service", 2500],
+        ["Guided Sightseeing", "🧑‍💼", "Local guide for selected sightseeing", 2200],
+        ["Breakfast Package", "🍳", "Breakfast included during the holiday", 1500],
+        ["Activity Pass", "🎟️", "Access to selected destination activities", 2000],
+        ["Travel Insurance", "🛡️", "Basic travel protection add-on", 2000],
+        ["Private Cab", "🚕", "Private cab for sightseeing and transfers", 3000],
+        ["Extra Night Stay", "🌙", "Add one extra night to your holiday", 4500],
+        ["Special Meal Package", "🍱", "Special meal arrangements during the trip", 1200],
+        ["Photography Service", "📸", "Local travel photography assistance", 2500],
+        ["Celebration Decoration", "🎉", "Special room or celebration setup", 2000]
+    ]
+
+};
+
+function renderSpecialRequirements(service) {
+
+    const grid = document.getElementById("requirementsGrid");
+    const title = document.getElementById("specialRequirementsTitle");
+    const description = document.getElementById("specialRequirementsDescription");
+
+    if (!grid) return;
+
+    const items = serviceRequirements[service] || serviceRequirements.Flight;
+
+    title.textContent = service + " Special Requirements & Paid Add-ons";
+    description.textContent =
+        "Optional add-ons for your " +
+        service.toLowerCase() +
+        " booking. Select only the requirements you need. Charges apply only to selected requirements.";
+
+    grid.innerHTML = items.map(function(item) {
+
+        const name = item[0];
+        const icon = item[1];
+        const info = item[2];
+        const price = item[3];
+
+        return `
+            <label class="requirement-card">
+                <input type="checkbox" name="specialRequirement"
+                       value="${name}" data-price="${price}"
+                       onchange="updatePriceSummary()">
+                <span class="requirement-content">
+                    <strong>${icon} ${name}</strong>
+                    <small>${info}</small>
+                    <b>+ ₹${price.toLocaleString("en-IN")}</b>
+                </span>
+            </label>
+        `;
+
+    }).join("");
+
+}
+
+
+/* ==================================================
+   SPECIAL REQUIREMENTS CHARGES
+================================================== */
+
+function getSpecialRequirements() {
+
+    const selected =
+        document.querySelectorAll(
+            'input[name="specialRequirement"]:checked'
+        );
+
+    let total = 0;
+    const requirements = [];
+
+    selected.forEach(function(item) {
+
+        const price =
+            parseInt(item.dataset.price) || 0;
+
+        total += price;
+
+        requirements.push({
+            name: item.value,
+            price: price
+        });
+
+    });
+
+    return {
+        total: total,
+        requirements: requirements
+    };
+
+}
+
+
+/* ==================================================
+   VALIDATE SPECIAL REQUIREMENTS
+================================================== */
+
+function validateSpecialRequirements() {
+
+    /* Special requirements are optional.
+       Returning true allows the customer to continue
+       without selecting any add-on. */
+
+    return true;
+
+}
+
+
+/* ==================================================
+   CALCULATE BOOKING PRICE
+================================================== */
+
+function calculateBookingPrice() {
+
+    const service =
+        document.getElementById("selectedTravel").value;
+
+    const travellers =
+        getTravellerCount();
+
+    const destinationBase =
+        getDestinationBasePrice();
+
+    const prices =
+        getPackagePrices();
+
+    let amount = 0;
+
+
+    /* FLIGHT */
+
+    if (service === "Flight") {
+
+        amount =
+            destinationBase *
+            1.5 *
+            travellers;
+
+    }
+
+
+    /* TRAIN */
+
+    else if (service === "Train") {
+
+        amount =
+            destinationBase *
+            0.65 *
+            travellers;
+
+    }
+
+
+    /* BUS */
+
+    else if (service === "Bus") {
+
+        amount =
+            destinationBase *
+            0.45 *
+            travellers;
+
+    }
+
+
+    /* CAB */
+
+    else if (service === "Cab") {
+
+        amount =
+            destinationBase *
+            0.70;
+
+    }
+
+
+    /* HOTEL */
+
+    else if (service === "Hotel") {
+
+        amount =
+            destinationBase *
+            1.20 *
+            getRoomCount();
+
+    }
+
+
+    /* HOLIDAY */
+
+    else if (service === "Holiday") {
+
+        const packageTypeElement =
+            document.getElementById("holidayPackage");
+
+        const packageType =
+            packageTypeElement
+                ? packageTypeElement.value
+                : "";
+
+
+        if (packageType === "Weekend Getaway") {
+
+            amount =
+                prices.weekend *
+                travellers;
+
+        }
+
+        else if (packageType === "Family Holiday") {
+
+            amount =
+                prices.family *
+                travellers;
+
+        }
+
+        else if (packageType === "Honeymoon Package") {
+
+            amount =
+                prices.complete *
+                1.15 *
+                travellers;
+
+        }
+
+        else if (packageType === "Adventure Holiday") {
+
+            amount =
+                prices.family *
+                1.15 *
+                travellers;
+
+        }
+
+        else if (packageType === "Luxury Holiday") {
+
+            amount =
+                prices.complete *
+                1.35 *
+                travellers;
+
+        }
+
+        else if (packageType === "Complete Experience") {
+
+            amount =
+                prices.complete *
+                travellers;
+
+        }
+
+        else {
+
+            amount =
+                prices.weekend *
+                travellers;
+
+        }
+
+    }
+
+
+    return Math.round(amount);
+
+}
+
+
+/* ==================================================
+   VALIDATE COUPON
+================================================== */
+
+function validateCoupon(code, showMessage = true) {
+
+    const coupon =
+        couponData[code];
+
+    const service =
+        document.getElementById("selectedTravel").value;
+
+    const payment =
+        document.getElementById("paymentMethod").value;
+
+    const bookingValue =
+        calculateBookingPrice();
+
+
+    if (!coupon) {
+
+        if (showMessage) {
+
+            showCouponMessage(
+                "Invalid coupon code.",
+                "error"
+            );
+
+        }
+
+        return {
+            valid: false,
+            discount: 0
+        };
+
+    }
+
+
+    /* SERVICE CHECK */
+
+    if (coupon.service !== service) {
+
+        if (showMessage) {
+
+            showCouponMessage(
+                "This coupon is valid only for " +
+                coupon.service +
+                " bookings.",
+                "error"
+            );
+
+        }
+
+        return {
+            valid: false,
+            discount: 0
+        };
+
+    }
+
+
+    /* EXPIRY CHECK */
+
+    const today =
+        new Date();
+
+    today.setHours(0, 0, 0, 0);
+
+    const expiryDate =
+        new Date(coupon.expiry + "T23:59:59");
+
+
+    if (today > expiryDate) {
+
+        if (showMessage) {
+
+            showCouponMessage(
+                "This coupon has expired.",
+                "error"
+            );
+
+        }
+
+        return {
+            valid: false,
+            discount: 0
+        };
+
+    }
+
+
+    /* MINIMUM BOOKING CHECK */
+
+    if (bookingValue < coupon.minimum) {
+
+        if (showMessage) {
+
+            showCouponMessage(
+                "Minimum booking value for this coupon is ₹" +
+                coupon.minimum.toLocaleString("en-IN") +
+                ". Your booking value is ₹" +
+                bookingValue.toLocaleString("en-IN") +
+                ".",
+                "error"
+            );
+
+        }
+
+        return {
+            valid: false,
+            discount: 0
+        };
+
+    }
+
+
+    /* PAYMENT METHOD CHECK */
+
+    if (
+        !coupon.paymentMethods.includes(payment)
+    ) {
+
+        if (showMessage) {
+
+            showCouponMessage(
+                "This coupon is valid only with " +
+                coupon.paymentMethods.join(" / ") +
+                ". You selected " +
+                payment +
+                ".",
+                "error"
+            );
+
+        }
+
+        return {
+            valid: false,
+            discount: 0
+        };
+
+    }
+
+
+    /* SUCCESS */
+
+    if (showMessage) {
+
+        showCouponMessage(
+            "Coupon applied successfully. You saved ₹" +
+            coupon.discount.toLocaleString("en-IN") +
+            ".",
+            "success"
+        );
+
+    }
+
+
+    return {
+
+        valid: true,
+
+        discount:
+            Math.min(
+                coupon.discount,
+                bookingValue
+            )
+
+    };
+
+}
+
+
+/* ==================================================
+   SHOW COUPON MESSAGE
+================================================== */
+
+function showCouponMessage(
+    message,
+    type
+) {
+
+    const box =
+        document.getElementById("couponMessage");
+
+    box.textContent =
+        message;
+
+    box.className =
+        "coupon-message " +
+        type;
+
+}
+
+
+/* ==================================================
+   APPLY COUPON
+================================================== */
+
+function applyCoupon() {
+
+    const input =
+        document.getElementById("coupon");
+
+    const code =
+        input.value
+            .trim()
+            .toUpperCase();
+
+
+    if (!code) {
+
+        appliedCoupon = null;
+
+        showCouponMessage(
+            "Please enter a coupon code.",
+            "error"
+        );
+
+        updatePriceSummary();
+
+        return;
+
+    }
+
+
+    const result =
+        validateCoupon(
+            code,
+            true
+        );
+
+
+    if (result.valid) {
+
+        appliedCoupon = {
+
+            code: code,
+
+            discount:
+                result.discount
+
+        };
+
+    }
+
+    else {
+
+        appliedCoupon = null;
+
+    }
+
+
+    updatePriceSummary();
+
+}
+
+
+/* ==================================================
+   USE COUPON BUTTON
+================================================== */
+
+function useCoupon(code) {
+
+    document.getElementById("coupon").value =
+        code;
+
+    applyCoupon();
+
+}
+
+
+/* ==================================================
+   VIEW COUPONS
+================================================== */
+
+function toggleCoupons() {
+
+    const list =
+        document.getElementById("couponList");
+
+    list.classList.toggle("show");
+
+}
+
+
+/* ==================================================
+   CLEAR INVALID COUPON
+================================================== */
+
+function revalidateAppliedCoupon() {
+
+    if (!appliedCoupon) {
+        return;
+    }
+
+
+    const result =
+        validateCoupon(
+            appliedCoupon.code,
+            false
+        );
+
+
+    if (!result.valid) {
+
+        appliedCoupon = null;
+
+        document.getElementById("couponMessage").className =
+            "coupon-message";
+
+    }
+
+    else {
+
+        appliedCoupon.discount =
+            result.discount;
+
+    }
+
+}
+
+
+/* ==================================================
+   UPDATE PRICE SUMMARY
+================================================== */
+
+function updatePriceSummary() {
+
+    revalidateAppliedCoupon();
+
+
+    const service =
+        document.getElementById("selectedTravel").value;
+
+    const bookingValue =
+        calculateBookingPrice();
+
+    const specialRequirements =
+        getSpecialRequirements();
+
+    const specialCharge =
+        specialRequirements.total;
+
+
+    let discount = 0;
+
+
+    if (appliedCoupon) {
+
+        discount =
+            appliedCoupon.discount;
+
+    }
+
+
+    const finalPrice =
+        Math.max(
+            bookingValue +
+            specialCharge -
+            discount,
+            0
+        );
+
+
+    document.getElementById("summaryService").textContent =
+        service;
+
+    document.getElementById("summaryDestination").textContent =
+        destination;
+
+    document.getElementById("bookingValue").textContent =
+        "₹" +
+        bookingValue.toLocaleString("en-IN");
+
+    document.getElementById("specialRequirementsCharge").textContent =
+        "₹" +
+        specialCharge.toLocaleString("en-IN");
+
+    document.getElementById("couponDiscount").textContent =
+        "- ₹" +
+        discount.toLocaleString("en-IN");
+
+    document.getElementById("finalPrice").textContent =
+        "₹" +
+        finalPrice.toLocaleString("en-IN");
+
+}
+
+
+/* ==================================================
+   SERVICE SPECIFIC BOOKING FIELDS
+================================================== */
+
+function showServiceFields(service) {
+
+    const container =
+        document.getElementById("serviceSpecificFields");
+
+    const title =
+        document.getElementById("serviceTitle");
+
+
+    /* Hide old general travel fields */
+
+    document.getElementById("oldFromGroup").style.display =
+        "none";
+
+    document.getElementById("oldToGroup").style.display =
+        "none";
+
+    document.getElementById("oldTravelDateGroup").style.display =
+        "none";
+
+    document.getElementById("oldReturnDateGroup").style.display =
+        "none";
+
+
+    /* Clear old fields */
+
+    container.innerHTML = "";
+
+    /* Load requirements that match the selected service */
+    renderSpecialRequirements(service);
+
+
+    /* ==============================================
+       FLIGHT
+    ============================================== */
+
+    if (service === "Flight") {
+
+        title.innerHTML =
+            "✈️ Flight Booking Details" +
+            "<span>Enter your flight journey details.</span>";
+
+        container.innerHTML = `
+
+            <div class="form-group">
+
+                <label>From City *</label>
+
+                <input
+                    id="flightFrom"
+                    type="text"
+                    placeholder="Enter departure city"
+                    required
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>To City *</label>
+
+                <input
+                    id="flightTo"
+                    type="text"
+                    value="${destination}"
+                    readonly
+                    required
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>Departure Date *</label>
+
+                <input
+                    id="flightDeparture"
+                    type="date"
+                    required
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>Return Date</label>
+
+                <input
+                    id="flightReturn"
+                    type="date"
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>Travel Class *</label>
+
+                <select
+                    id="flightClass"
+                    required
+                >
+
+                    <option value="">
+                        Select Class
+                    </option>
+
+                    <option>
+                        Economy
+                    </option>
+
+                    <option>
+                        Premium Economy
+                    </option>
+
+                    <option>
+                        Business Class
+                    </option>
+
+                    <option>
+                        First Class
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>Preferred Airline</label>
+
+                <select id="airline">
+
+                    <option>
+                        No Preference
+                    </option>
+
+                    <option>
+                        IndiGo
+                    </option>
+
+                    <option>
+                        Air India
+                    </option>
+
+                    <option>
+                        Akasa Air
+                    </option>
+
+                    <option>
+                        Vistara
+                    </option>
+
+                    <option>
+                        Emirates
+                    </option>
+
+                    <option>
+                        Singapore Airlines
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>Meal Preference</label>
+
+                <select id="flightMeal">
+
+                    <option>
+                        Standard Meal
+                    </option>
+
+                    <option>
+                        Vegetarian
+                    </option>
+
+                    <option>
+                        Non-Vegetarian
+                    </option>
+
+                    <option>
+                        No Meal
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>Baggage Requirement</label>
+
+                <select id="baggage">
+
+                    <option>
+                        Cabin Baggage Only
+                    </option>
+
+                    <option>
+                        15 kg Check-in
+                    </option>
+
+                    <option>
+                        20 kg Check-in
+                    </option>
+
+                    <option>
+                        30 kg Check-in
+                    </option>
+
+                </select>
+
+            </div>
+
+        `;
+
+    }
+
+
+    /* ==============================================
+       TRAIN
+    ============================================== */
+
+    else if (service === "Train") {
+
+        title.innerHTML =
+            "🚆 Train Booking Details" +
+            "<span>Enter your railway journey details.</span>";
+
+        container.innerHTML = `
+
+            <div class="form-group">
+
+                <label>
+                    From Railway Station *
+                </label>
+
+                <input
+                    id="trainFrom"
+                    type="text"
+                    placeholder="Enter departure station"
+                    required
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    To Railway Station *
+                </label>
+
+                <input
+                    id="trainTo"
+                    type="text"
+                    value="${destination}"
+                    readonly
+                    required
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Journey Date *
+                </label>
+
+                <input
+                    id="trainDate"
+                    type="date"
+                    required
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Train Class *
+                </label>
+
+                <select
+                    id="trainClass"
+                    required
+                >
+
+                    <option value="">
+                        Select Class
+                    </option>
+
+                    <option>
+                        Sleeper
+                    </option>
+
+                    <option>
+                        AC 3 Tier
+                    </option>
+
+                    <option>
+                        AC 2 Tier
+                    </option>
+
+                    <option>
+                        AC First Class
+                    </option>
+
+                    <option>
+                        Chair Car
+                    </option>
+
+                    <option>
+                        Executive Chair Car
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Berth Preference
+                </label>
+
+                <select id="berthPreference">
+
+                    <option>
+                        No Preference
+                    </option>
+
+                    <option>
+                        Lower
+                    </option>
+
+                    <option>
+                        Middle
+                    </option>
+
+                    <option>
+                        Upper
+                    </option>
+
+                    <option>
+                        Side Lower
+                    </option>
+
+                    <option>
+                        Side Upper
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Train Type
+                </label>
+
+                <select id="trainType">
+
+                    <option>
+                        Any Train
+                    </option>
+
+                    <option>
+                        Express
+                    </option>
+
+                    <option>
+                        Superfast
+                    </option>
+
+                    <option>
+                        Vande Bharat
+                    </option>
+
+                    <option>
+                        Rajdhani
+                    </option>
+
+                    <option>
+                        Shatabdi
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Boarding Preference
+                </label>
+
+                <select id="trainBoarding">
+
+                    <option>
+                        Nearest Available Station
+                    </option>
+
+                    <option>
+                        Main Station
+                    </option>
+
+                    <option>
+                        Preferred Station
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Seat Preference
+                </label>
+
+                <select id="trainSeat">
+
+                    <option>
+                        No Preference
+                    </option>
+
+                    <option>
+                        Window
+                    </option>
+
+                    <option>
+                        Aisle
+                    </option>
+
+                </select>
+
+            </div>
+
+        `;
+
+    }
+
+
+    /* ==============================================
+       BUS
+    ============================================== */
+
+    else if (service === "Bus") {
+
+        title.innerHTML =
+            "🚌 Bus Booking Details" +
+            "<span>Choose your bus journey and seating preferences.</span>";
+
+        container.innerHTML = `
+
+            <div class="form-group">
+
+                <label>
+                    Boarding City *
+                </label>
+
+                <input
+                    id="busFrom"
+                    type="text"
+                    placeholder="Enter boarding city"
+                    required
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Drop City *
+                </label>
+
+                <input
+                    id="busTo"
+                    type="text"
+                    value="${destination}"
+                    readonly
+                    required
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Travel Date *
+                </label>
+
+                <input
+                    id="busDate"
+                    type="date"
+                    required
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Bus Type *
+                </label>
+
+                <select
+                    id="busType"
+                    required
+                >
+
+                    <option value="">
+                        Select Bus Type
+                    </option>
+
+                    <option>
+                        AC Sleeper
+                    </option>
+
+                    <option>
+                        AC Seater
+                    </option>
+
+                    <option>
+                        Non-AC Sleeper
+                    </option>
+
+                    <option>
+                        Non-AC Seater
+                    </option>
+
+                    <option>
+                        Volvo
+                    </option>
+
+                    <option>
+                        Luxury Coach
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Seat Preference
+                </label>
+
+                <select id="busSeat">
+
+                    <option>
+                        No Preference
+                    </option>
+
+                    <option>
+                        Window Seat
+                    </option>
+
+                    <option>
+                        Aisle Seat
+                    </option>
+
+                    <option>
+                        Lower Berth
+                    </option>
+
+                    <option>
+                        Upper Berth
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Boarding Point
+                </label>
+
+                <input
+                    id="boardingPoint"
+                    type="text"
+                    placeholder="Enter preferred boarding point"
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Drop Point
+                </label>
+
+                <input
+                    id="dropPoint"
+                    type="text"
+                    placeholder="Enter preferred drop point"
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Bus Timing
+                </label>
+
+                <select id="busTiming">
+
+                    <option>
+                        Morning
+                    </option>
+
+                    <option>
+                        Afternoon
+                    </option>
+
+                    <option>
+                        Evening
+                    </option>
+
+                    <option>
+                        Night
+                    </option>
+
+                </select>
+
+            </div>
+
+        `;
+
+    }
+
+
+    /* ==============================================
+       CAB
+    ============================================== */
+
+    else if (service === "Cab") {
+
+        title.innerHTML =
+            "🚕 Cab Booking Details" +
+            "<span>Book a cab according to your pickup and travel requirements.</span>";
+
+        container.innerHTML = `
+
+            <div class="form-group">
+
+                <label>
+                    Pickup Location *
+                </label>
+
+                <input
+                    id="cabPickup"
+                    type="text"
+                    placeholder="Enter pickup location"
+                    required
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Destination *
+                </label>
+
+                <input
+                    id="cabDestination"
+                    type="text"
+                    value="${destination}"
+                    readonly
+                    required
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Pickup Date *
+                </label>
+
+                <input
+                    id="cabDate"
+                    type="date"
+                    required
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Pickup Time *
+                </label>
+
+                <input
+                    id="cabTime"
+                    type="time"
+                    required
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Cab Type *
+                </label>
+
+                <select
+                    id="cabType"
+                    required
+                >
+
+                    <option value="">
+                        Select Cab Type
+                    </option>
+
+                    <option>
+                        Hatchback
+                    </option>
+
+                    <option>
+                        Sedan
+                    </option>
+
+                    <option>
+                        SUV
+                    </option>
+
+                    <option>
+                        Luxury Car
+                    </option>
+
+                    <option>
+                        Tempo Traveller
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Trip Type *
+                </label>
+
+                <select
+                    id="cabTripType"
+                    required
+                >
+
+                    <option value="">
+                        Select Trip Type
+                    </option>
+
+                    <option>
+                        One Way
+                    </option>
+
+                    <option>
+                        Round Trip
+                    </option>
+
+                    <option>
+                        Local Rental
+                    </option>
+
+                    <option>
+                        Airport Transfer
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Number of Hours
+                </label>
+
+                <select id="cabHours">
+
+                    <option>
+                        4 Hours
+                    </option>
+
+                    <option>
+                        8 Hours
+                    </option>
+
+                    <option>
+                        12 Hours
+                    </option>
+
+                    <option>
+                        24 Hours
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Driver Preference
+                </label>
+
+                <select id="driverPreference">
+
+                    <option>
+                        No Preference
+                    </option>
+
+                    <option>
+                        English Speaking
+                    </option>
+
+                    <option>
+                        Local Driver
+                    </option>
+
+                </select>
+
+            </div>
+
+        `;
+
+    }
+
+
+    /* ==============================================
+       HOTEL
+    ============================================== */
+
+    else if (service === "Hotel") {
+
+        title.innerHTML =
+            "🏨 Hotel Booking Details" +
+            "<span>Choose your stay dates, room type and hotel requirements.</span>";
+
+        container.innerHTML = `
+
+            <div class="form-group">
+
+                <label>
+                    Hotel City *
+                </label>
+
+                <input
+                    id="hotelCity"
+                    type="text"
+                    value="${destination}"
+                    readonly
+                    required
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Hotel / Property Name
+                </label>
+
+                <input
+                    id="hotelName"
+                    type="text"
+                    placeholder="Enter hotel name or area"
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Check-in Date *
+                </label>
+
+                <input
+                    id="checkIn"
+                    type="date"
+                    required
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Check-out Date *
+                </label>
+
+                <input
+                    id="checkOut"
+                    type="date"
+                    required
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Room Type *
+                </label>
+
+                <select
+                    id="roomType"
+                    required
+                >
+
+                    <option value="">
+                        Select Room Type
+                    </option>
+
+                    <option>
+                        Standard Room
+                    </option>
+
+                    <option>
+                        Deluxe Room
+                    </option>
+
+                    <option>
+                        Executive Room
+                    </option>
+
+                    <option>
+                        Family Room
+                    </option>
+
+                    <option>
+                        Suite
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Number of Rooms *
+                </label>
+
+                <select
+                    id="numberRooms"
+                    required
+                >
+
+                    <option>
+                        1 Room
+                    </option>
+
+                    <option>
+                        2 Rooms
+                    </option>
+
+                    <option>
+                        3 Rooms
+                    </option>
+
+                    <option>
+                        4 Rooms
+                    </option>
+
+                    <option>
+                        5 Rooms
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Number of Guests *
+                </label>
+
+                <select id="hotelGuests">
+
+                    <option>
+                        1 Guest
+                    </option>
+
+                    <option>
+                        2 Guests
+                    </option>
+
+                    <option>
+                        3 Guests
+                    </option>
+
+                    <option>
+                        4 Guests
+                    </option>
+
+                    <option>
+                        5 Guests
+                    </option>
+
+                    <option>
+                        6 Guests
+                    </option>
+
+                    <option>
+                        7 Guests
+                    </option>
+
+                    <option>
+                        8 Guests
+                    </option>
+
+                    <option>
+                        9 Guests
+                    </option>
+
+                    <option>
+                        10 Guests
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Meal Plan
+                </label>
+
+                <select id="mealPlan">
+
+                    <option>
+                        Room Only
+                    </option>
+
+                    <option>
+                        Breakfast Included
+                    </option>
+
+                    <option>
+                        Breakfast & Dinner
+                    </option>
+
+                    <option>
+                        All Meals
+                    </option>
+
+                </select>
+
+            </div>
+
+        `;
+
+    }
+
+
+    /* ==============================================
+       HOLIDAY
+    ============================================== */
+
+    else if (service === "Holiday") {
+
+        title.innerHTML =
+            "🌴 Holiday Package Booking Details" +
+            "<span>Customize your complete holiday experience.</span>";
+
+        container.innerHTML = `
+
+            <div class="form-group">
+
+                <label>
+                    Holiday Destination *
+                </label>
+
+                <input
+                    id="holidayDestination"
+                    type="text"
+                    value="${destination}"
+                    readonly
+                    required
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Package Type *
+                </label>
+
+                <select
+                    id="holidayPackage"
+                    required
+                >
+
+                    <option value="">
+                        Select Package
+                    </option>
+
+                    <option>
+                        Weekend Getaway
+                    </option>
+
+                    <option>
+                        Family Holiday
+                    </option>
+
+                    <option>
+                        Honeymoon Package
+                    </option>
+
+                    <option>
+                        Adventure Holiday
+                    </option>
+
+                    <option>
+                        Luxury Holiday
+                    </option>
+
+                    <option>
+                        Complete Experience
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Departure Date *
+                </label>
+
+                <input
+                    id="holidayStart"
+                    type="date"
+                    required
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Return Date *
+                </label>
+
+                <input
+                    id="holidayEnd"
+                    type="date"
+                    required
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Holiday Duration
+                </label>
+
+                <select id="holidayDuration">
+
+                    <option>
+                        2 Days / 1 Night
+                    </option>
+
+                    <option>
+                        3 Days / 2 Nights
+                    </option>
+
+                    <option>
+                        4 Days / 3 Nights
+                    </option>
+
+                    <option>
+                        5 Days / 4 Nights
+                    </option>
+
+                    <option>
+                        7 Days / 6 Nights
+                    </option>
+
+                    <option>
+                        10 Days / 9 Nights
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Accommodation *
+                </label>
+
+                <select
+                    id="holidayStay"
+                    required
+                >
+
+                    <option value="">
+                        Select Accommodation
+                    </option>
+
+                    <option>
+                        3 Star Hotel
+                    </option>
+
+                    <option>
+                        4 Star Hotel
+                    </option>
+
+                    <option>
+                        5 Star Hotel
+                    </option>
+
+                    <option>
+                        Resort
+                    </option>
+
+                    <option>
+                        Villa
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Meal Plan
+                </label>
+
+                <select id="holidayMeal">
+
+                    <option>
+                        Breakfast Only
+                    </option>
+
+                    <option>
+                        Breakfast & Dinner
+                    </option>
+
+                    <option>
+                        All Meals
+                    </option>
+
+                    <option>
+                        No Meal
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Activities
+                </label>
+
+                <select id="holidayActivities">
+
+                    <option>
+                        Sightseeing
+                    </option>
+
+                    <option>
+                        Adventure Activities
+                    </option>
+
+                    <option>
+                        Beach Activities
+                    </option>
+
+                    <option>
+                        Cultural Experiences
+                    </option>
+
+                    <option>
+                        Nature & Wildlife
+                    </option>
+
+                    <option>
+                        All Activities
+                    </option>
+
+                </select>
+
+            </div>
+
+        `;
+
+
+        /* Holiday package selection changes
+           the booking price. */
+
+        document
+            .getElementById("holidayPackage")
+            .addEventListener(
+                "change",
+                updatePriceSummary
+            );
+
+    }
+
+}
+
+
+/* ==================================================
+   SELECT TRAVEL OPTION
+================================================== */
+
+function selectTravel(
+    option,
+    element
+) {
+
+    document
+        .querySelectorAll(".travel-option")
+        .forEach(function(item) {
+
+            item.classList.remove("selected");
+
+        });
+
+
+    element.classList.add("selected");
+
+
+    document.getElementById("selectedTravel").value =
+        option;
+
+
+    /* Clear old coupon */
+
+    appliedCoupon = null;
+
+    document.getElementById("coupon").value =
+        "";
+
+    document.getElementById("couponMessage").className =
+        "coupon-message";
+
+
+    /* Change coupon example */
+
+    const coupon =
+        document.getElementById("coupon");
+
+
+    if (option === "Flight") {
+
+        coupon.placeholder =
+            "Example: FLY2000";
+
+    }
+
+    else if (option === "Train") {
+
+        coupon.placeholder =
+            "Example: TRAIN500";
+
+    }
+
+    else if (option === "Bus") {
+
+        coupon.placeholder =
+            "Example: BUS300";
+
+    }
+
+    else if (option === "Cab") {
+
+        coupon.placeholder =
+            "Example: CAB250";
+
+    }
+
+    else if (option === "Hotel") {
+
+        coupon.placeholder =
+            "Example: STAY1500";
+
+    }
+
+    else if (option === "Holiday") {
+
+        coupon.placeholder =
+            "Example: HOLIDAY5000";
+
+    }
+
+
+    /* Display correct booking form */
+
+    showServiceFields(option);
+
+
+    /* Update price */
+
+    updatePriceSummary();
+
+}
+
+
+/* ==================================================
+   CONFIRM BOOKING
+================================================== */
+
+function confirmBooking(event) {
+
+    event.preventDefault();
+
+
+    /* Special requirements are optional paid add-ons.
+       No requirement is compulsory. Charges apply only
+       when the traveller selects an add-on. */
+
+
+    /* Re-check coupon one final time */
+
+    if (appliedCoupon) {
+
+        const validation =
+            validateCoupon(
+                appliedCoupon.code,
+                true
+            );
+
+
+        if (!validation.valid) {
+
+            appliedCoupon = null;
+
+            updatePriceSummary();
+
+            return;
+
+        }
+
+
+        appliedCoupon.discount =
+            validation.discount;
+
+    }
+
+
+    const name =
+        document.getElementById("customerName").value;
+
+    const email =
+        document.getElementById("customerEmail").value;
+
+    const phone =
+        document.getElementById("customerPhone").value;
+
+    const travellers =
+        document.getElementById("travellers").value;
+
+    const travel =
+        document.getElementById("selectedTravel").value;
+
+    const payment =
+        document.getElementById("paymentMethod").value;
+
+
+    const bookingValue =
+        calculateBookingPrice();
+
+
+    const discount =
+        appliedCoupon
+            ? appliedCoupon.discount
+            : 0;
+
+
+    const specialRequirements =
+        getSpecialRequirements();
+
+    const specialCharge =
+        specialRequirements.total;
+
+
+    const finalPrice =
+        Math.max(
+            bookingValue +
+            specialCharge -
+            discount,
+            0
+        );
+
+
+    let serviceDetails = "";
+
+    let tripDate = "";
+
+
+    /* ==============================================
+       FLIGHT CONFIRMATION
+    ============================================== */
+
+    if (travel === "Flight") {
+
+        const from =
+            document.getElementById("flightFrom").value;
+
+        const departure =
+            document.getElementById("flightDeparture").value;
+
+        tripDate = departure;
+
+        const flightClass =
+            document.getElementById("flightClass").value;
+
+        serviceDetails =
+
+            "From: <strong>" +
+            from +
+            "</strong><br>" +
+
+            "Departure: <strong>" +
+            departure +
+            "</strong><br>" +
+
+            "Class: <strong>" +
+            flightClass +
+            "</strong><br>";
+
+    }
+
+
+    /* ==============================================
+       TRAIN CONFIRMATION
+    ============================================== */
+
+    else if (travel === "Train") {
+
+        const from =
+            document.getElementById("trainFrom").value;
+
+        const date =
+            document.getElementById("trainDate").value;
+
+        tripDate = date;
+
+        const trainClass =
+            document.getElementById("trainClass").value;
+
+        serviceDetails =
+
+            "From Station: <strong>" +
+            from +
+            "</strong><br>" +
+
+            "Journey Date: <strong>" +
+            date +
+            "</strong><br>" +
+
+            "Class: <strong>" +
+            trainClass +
+            "</strong><br>";
+
+    }
+
+
+    /* ==============================================
+       BUS CONFIRMATION
+    ============================================== */
+
+    else if (travel === "Bus") {
+
+        const from =
+            document.getElementById("busFrom").value;
+
+        const date =
+            document.getElementById("busDate").value;
+
+        tripDate = date;
+
+        const busType =
+            document.getElementById("busType").value;
+
+        serviceDetails =
+
+            "Boarding City: <strong>" +
+            from +
+            "</strong><br>" +
+
+            "Travel Date: <strong>" +
+            date +
+            "</strong><br>" +
+
+            "Bus Type: <strong>" +
+            busType +
+            "</strong><br>";
+
+    }
+
+
+    /* ==============================================
+       CAB CONFIRMATION
+    ============================================== */
+
+    else if (travel === "Cab") {
+
+        const pickup =
+            document.getElementById("cabPickup").value;
+
+        const date =
+            document.getElementById("cabDate").value;
+
+        tripDate = date;
+
+        const time =
+            document.getElementById("cabTime").value;
+
+        const cabType =
+            document.getElementById("cabType").value;
+
+        serviceDetails =
+
+            "Pickup: <strong>" +
+            pickup +
+            "</strong><br>" +
+
+            "Pickup Date: <strong>" +
+            date +
+            "</strong><br>" +
+
+            "Pickup Time: <strong>" +
+            time +
+            "</strong><br>" +
+
+            "Cab Type: <strong>" +
+            cabType +
+            "</strong><br>";
+
+    }
+
+
+    /* ==============================================
+       HOTEL CONFIRMATION
+    ============================================== */
+
+    else if (travel === "Hotel") {
+
+        const checkIn =
+            document.getElementById("checkIn").value;
+
+        tripDate = checkIn;
+
+        const checkOut =
+            document.getElementById("checkOut").value;
+
+        const roomType =
+            document.getElementById("roomType").value;
+
+        const rooms =
+            document.getElementById("numberRooms").value;
+
+        serviceDetails =
+
+            "Check-in: <strong>" +
+            checkIn +
+            "</strong><br>" +
+
+            "Check-out: <strong>" +
+            checkOut +
+            "</strong><br>" +
+
+            "Room Type: <strong>" +
+            roomType +
+            "</strong><br>" +
+
+            "Rooms: <strong>" +
+            rooms +
+            "</strong><br>";
+
+    }
+
+
+    /* ==============================================
+       HOLIDAY CONFIRMATION
+    ============================================== */
+
+    else if (travel === "Holiday") {
+
+        const packageType =
+            document.getElementById("holidayPackage").value;
+
+        const start =
+            document.getElementById("holidayStart").value;
+
+        tripDate = start;
+
+        const end =
+            document.getElementById("holidayEnd").value;
+
+        const stay =
+            document.getElementById("holidayStay").value;
+
+        serviceDetails =
+
+            "Package: <strong>" +
+            packageType +
+            "</strong><br>" +
+
+            "Departure: <strong>" +
+            start +
+            "</strong><br>" +
+
+            "Return: <strong>" +
+            end +
+            "</strong><br>" +
+
+            "Accommodation: <strong>" +
+            stay +
+            "</strong><br>";
+
+    }
+
+
+    /* ==============================================
+       SPECIAL REQUIREMENTS INFORMATION
+    ============================================== */
+
+    let specialRequirementsDetails =
+        "Special Requirements:<br>";
+
+    if (specialRequirements.requirements.length === 0) {
+
+        specialRequirementsDetails +=
+            "None selected (optional)<br>";
+
+    } else {
+
+        specialRequirements.requirements.forEach(
+            function(item) {
+
+                specialRequirementsDetails +=
+                    "• " +
+                    item.name +
+                    ": <strong>₹" +
+                    item.price.toLocaleString("en-IN") +
+                    "</strong><br>";
+
+            }
+        );
+
+    }
+
+    specialRequirementsDetails +=
+        "Special Requirements Charges: <strong>₹" +
+        specialCharge.toLocaleString("en-IN") +
+        "</strong><br><br>";
+
+
+    /* ==============================================
+       COUPON INFORMATION
+    ============================================== */
+
+    let couponDetails = "";
+
+
+    if (appliedCoupon) {
+
+        couponDetails =
+
+            "Coupon Applied: <strong>" +
+            appliedCoupon.code +
+            "</strong><br>" +
+
+            "Discount: <strong>₹" +
+            discount.toLocaleString("en-IN") +
+            "</strong><br>";
+
+    }
+
+    else {
+
+        couponDetails =
+            "Coupon Applied: <strong>None</strong><br>" +
+
+            "Discount: <strong>₹0</strong><br>";
+
+    }
+
+
+    /* ==============================================
+       SAVE BOOKING FOR MY TRIPS
+    ============================================== */
+
+    const tripBooking = {
+
+        id: Date.now(),
+        destination: destination,
+        customerName: name,
+        email: email,
+        phone: phone,
+        service: travel,
+        travellers: travellers,
+        paymentMethod: payment,
+        bookingValue: bookingValue,
+        specialRequirements: specialRequirements.requirements,
+        specialRequirementsCharge: specialCharge,
+        discount: discount,
+        finalPrice: finalPrice,
+        departureDate: tripDate,
+        bookingDate: new Date().toISOString(),
+        status: "Confirmed"
+
+    };
+
+    const savedTrips =
+        JSON.parse(
+            localStorage.getItem("traveloraTrips") || "[]"
+        );
+
+    savedTrips.push(tripBooking);
+
+    localStorage.setItem(
+        "traveloraTrips",
+        JSON.stringify(savedTrips)
+    );
+    
+
+
+    /* ==============================================
+       SUCCESS MESSAGE
+    ============================================== */
+
+    document.getElementById("successMessage").innerHTML =
+
+        "<strong>✓ Booking Submitted Successfully!</strong><br><br>" +
+
+        "Thank you, <strong>" +
+        name +
+        "</strong>.<br>" +
+
+        "Destination: <strong>" +
+        destination +
+        "</strong><br>" +
+
+        "Selected Service: <strong>" +
+        travel +
+        "</strong><br><br>" +
+
+        serviceDetails +
+
+        specialRequirementsDetails +
+
+        "Travellers: <strong>" +
+        travellers +
+        "</strong><br>" +
+
+        "Payment Method: <strong>" +
+        payment +
+        "</strong><br><br>" +
+
+        "Booking Value: <strong>₹" +
+        bookingValue.toLocaleString("en-IN") +
+        "</strong><br>" +
+
+        couponDetails +
+
+        "Final Payable Amount: <strong>₹" +
+        finalPrice.toLocaleString("en-IN") +
+        "</strong><br><br>" +
+
+        "Booking confirmation will be sent to <strong>" +
+        email +
+        "</strong>.";
+
+
+    document.getElementById("successMessage").style.display =
+        "block";
+
+
+    window.scrollTo({
+
+        top: document.body.scrollHeight,
+
+        behavior: "smooth"
+
+    });
+
+}
+
+
+/* ==================================================
+   PRICE UPDATE EVENTS
+================================================== */
+
+
+/* Travellers */
+
+document
+    .getElementById("travellers")
+    .addEventListener(
+        "change",
+        updatePriceSummary
+    );
+
+
+/* Payment method */
+
+document
+    .getElementById("paymentMethod")
+    .addEventListener(
+        "change",
+        function() {
+
+            if (appliedCoupon) {
+
+                const validation =
+                    validateCoupon(
+                        appliedCoupon.code,
+                        false
+                    );
+
+
+                if (!validation.valid) {
+
+                    appliedCoupon = null;
+
+                    showCouponMessage(
+                        "The applied coupon is not valid for this payment method.",
+                        "error"
+                    );
+
+                }
+
+                else {
+
+                    appliedCoupon.discount =
+                        validation.discount;
+
+                }
+
+            }
+
+
+            updatePriceSummary();
+
+        }
+    );
+
+
+/* ==================================================
+   LOAD FLIGHT BOOKING BY DEFAULT
+================================================== */
+
+showServiceFields("Flight");
+
+
+/* ==================================================
+   INITIAL PRICE
+================================================== */
+
+updatePriceSummary();
+
+
+</script>
+
+
+</body>

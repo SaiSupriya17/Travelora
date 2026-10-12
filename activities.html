@@ -1,0 +1,1275 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Travelora - Activities</title>
+
+<style>
+
+/* =========================================================
+   BASIC RESET
+========================================================= */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, sans-serif;
+}
+
+body{
+    background:#f4f8fc;
+    color:#17324d;
+}
+
+
+/* =========================================================
+   NAVBAR
+========================================================= */
+
+.navbar{
+    height:82px;
+    background:#fff;
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    padding:0 6%;
+
+    box-shadow:0 3px 15px rgba(0,0,0,.10);
+
+    position:sticky;
+    top:0;
+    z-index:1000;
+}
+
+.logo{
+    font-size:30px;
+    font-weight:bold;
+    color:#0b4568;
+}
+
+.logo span{
+    color:#ff6b00;
+}
+
+.nav-links{
+    display:flex;
+    align-items:center;
+    gap:32px;
+}
+
+.nav-links a{
+    text-decoration:none;
+    color:#172033;
+    font-size:17px;
+    font-weight:bold;
+}
+
+.nav-links a:hover{
+    color:#ff6b00;
+}
+
+.login-btn{
+    background:#0b4568;
+    color:white !important;
+    padding:12px 20px;
+    border-radius:10px;
+}
+
+.login-btn:hover{
+    background:#ff6b00;
+}
+
+
+/* =========================================================
+   HERO
+========================================================= */
+
+.hero{
+    min-height:420px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    text-align:center;
+
+    position:relative;
+    overflow:hidden;
+
+    background:
+        linear-gradient(
+            rgba(5,40,65,.55),
+            rgba(5,40,65,.65)
+        ),
+        url("https://picsum.photos/seed/skyloraHero/1600/700");
+
+    background-size:cover;
+    background-position:center;
+}
+
+.hero-content{
+    color:white;
+    padding:40px;
+}
+
+.hero h1{
+    font-size:52px;
+    margin-bottom:18px;
+}
+
+.hero h1 span{
+
+    background:linear-gradient(
+        90deg,
+        #ff6b00,
+        #ff3d81,
+        #a64cff
+    );
+
+    /* Standard property */
+    background-clip:text;
+
+    /* Browser compatibility */
+    -webkit-background-clip:text;
+
+    color:transparent;
+
+    /* Browser compatibility */
+    -webkit-text-fill-color:transparent;
+}
+
+.hero p{
+    font-size:19px;
+    line-height:1.6;
+    max-width:760px;
+    margin:auto;
+}
+
+
+/* =========================================================
+   SEARCH
+========================================================= */
+
+.search-section{
+    padding:35px 7% 15px;
+    text-align:center;
+}
+
+.search-box{
+    width:90%;
+    max-width:650px;
+
+    padding:16px 22px;
+
+    border:2px solid #dce8f2;
+    border-radius:35px;
+
+    font-size:17px;
+
+    outline:none;
+    background:white;
+
+    box-shadow:0 5px 20px rgba(0,0,0,.08);
+}
+
+.search-box:focus{
+    border-color:#ff6b00;
+}
+
+
+/* =========================================================
+   INFORMATION BOX
+========================================================= */
+
+.info{
+    width:90%;
+    max-width:1150px;
+
+    margin:20px auto 35px;
+
+    background:linear-gradient(
+        135deg,
+        #fff3df,
+        #fff
+    );
+
+    border-left:6px solid #ff6b00;
+
+    border-radius:13px;
+
+    padding:18px 22px;
+
+    font-size:16px;
+    line-height:1.6;
+
+    box-shadow:0 4px 15px rgba(0,0,0,.06);
+}
+
+
+/* =========================================================
+   MAIN CONTAINER
+========================================================= */
+
+.container{
+    width:92%;
+    max-width:1450px;
+    margin:auto;
+}
+
+
+/* =========================================================
+   GRID
+========================================================= */
+
+.grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:30px;
+}
+
+
+/* =========================================================
+   CARD
+========================================================= */
+
+.card{
+    background:white;
+
+    border-radius:18px;
+
+    overflow:hidden;
+
+    box-shadow:
+        0 7px 25px rgba(0,0,0,.10);
+
+    transition:.3s;
+}
+
+.card:hover{
+    transform:translateY(-7px);
+
+    box-shadow:
+        0 15px 35px rgba(0,0,0,.16);
+}
+
+
+/* =========================================================
+   IMAGE
+========================================================= */
+
+.destination-image{
+    width:100%;
+    height:220px;
+
+    object-fit:cover;
+
+    display:block;
+
+    background:#dce8f2;
+}
+
+
+/* =========================================================
+   CARD CONTENT
+========================================================= */
+
+.card-content{
+    padding:22px;
+}
+
+.badge{
+    display:inline-block;
+
+    background:#e9f4ff;
+    color:#08629a;
+
+    padding:7px 13px;
+
+    border-radius:20px;
+
+    font-size:12px;
+    font-weight:bold;
+
+    margin-bottom:10px;
+}
+
+.card h2{
+    color:#0b4568;
+
+    font-size:25px;
+
+    margin-bottom:15px;
+}
+
+.idea-title{
+    color:#ff6500;
+
+    font-size:16px;
+    font-weight:bold;
+
+    margin-bottom:8px;
+}
+
+.activity{
+    padding:11px 0;
+
+    border-bottom:1px solid #edf0f3;
+
+    font-size:15px;
+
+    line-height:1.45;
+}
+
+.activity:last-child{
+    border-bottom:none;
+}
+
+
+/* =========================================================
+   NO RESULTS
+========================================================= */
+
+.no-results{
+    display:none;
+
+    text-align:center;
+
+    font-size:22px;
+
+    padding:60px;
+
+    color:#777;
+}
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+footer{
+    background:#0b4568;
+
+    color:white;
+
+    text-align:center;
+
+    padding:30px;
+
+    margin-top:60px;
+}
+
+footer h2{
+    margin-bottom:8px;
+}
+
+
+/* =========================================================
+   RESPONSIVE - TABLET
+========================================================= */
+
+@media(max-width:1100px){
+
+    .grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .nav-links{
+        gap:17px;
+    }
+
+}
+
+
+/* =========================================================
+   RESPONSIVE - MOBILE
+========================================================= */
+
+@media(max-width:750px){
+
+    .navbar{
+        height:auto;
+
+        padding:18px 5%;
+
+        flex-direction:column;
+
+        gap:15px;
+    }
+
+    .nav-links{
+        flex-wrap:wrap;
+
+        justify-content:center;
+
+        gap:15px;
+    }
+
+    .hero h1{
+        font-size:36px;
+    }
+
+    .hero p{
+        font-size:16px;
+    }
+
+    .grid{
+        grid-template-columns:1fr;
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- =========================================================
+     NAVBAR
+========================================================= -->
+
+<nav class="navbar">
+
+    <div class="logo">
+
+        Travelora <span>✈</span>
+
+    </div>
+
+
+    <div class="nav-links">
+
+        <a href="index.html">
+            Home
+        </a>
+
+        <a href="destinations.html">
+            Destinations
+        </a>
+
+        <a href="offers.html">
+            Offers
+        </a>
+
+        <a href="packages.html">
+            Packages
+        </a>
+
+        <a href="activities.html">
+            Activities
+        </a>
+
+        <a href="wishlist.html">
+            ♡ Wishlist
+        </a>
+
+        <a href="trips.html">
+            My Trips
+        </a>
+
+        <a href="login.html" class="login-btn">
+            Login
+        </a>
+
+    </div>
+
+</nav>
+
+
+
+<!-- =========================================================
+     HERO
+========================================================= -->
+
+<section class="hero">
+
+    <div class="hero-content">
+
+        <h1>
+            ✨ Things To <span>Explore</span>
+        </h1>
+
+        <p>
+
+            Discover places to visit, things to do,
+            experiences to try and local ideas for
+            your destination.
+
+        </p>
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================================================
+     SEARCH
+========================================================= -->
+
+<section class="search-section">
+
+    <input
+        type="text"
+        id="searchBox"
+        class="search-box"
+        placeholder="🔍 Search a destination..."
+        onkeyup="searchDestination()"
+    >
+
+</section>
+
+
+
+<!-- =========================================================
+     INFORMATION
+========================================================= -->
+
+<div class="info">
+
+    💡 <b>Explore your destination your way!</b>
+
+    <br>
+
+    These are optional suggestions to help you plan
+    your trip. Choose the activities you like and
+    explore the destination at your own pace.
+
+</div>
+
+
+
+<!-- =========================================================
+     DESTINATION CARDS
+========================================================= -->
+
+<div class="container">
+
+    <div
+        id="activitiesGrid"
+        class="grid">
+    </div>
+
+
+    <div
+        id="noResults"
+        class="no-results">
+
+        😔 No destination found.
+
+    </div>
+
+</div>
+
+
+
+<!-- =========================================================
+     FOOTER
+========================================================= -->
+
+<footer>
+
+    <h2>
+        Travelora ✈
+    </h2>
+
+    <p>
+        Explore more. Travel more.
+        Create beautiful memories.
+    </p>
+
+</footer>
+
+
+
+<script>
+
+/* =========================================================
+   DESTINATIONS
+========================================================= */
+
+const destinations = [
+
+    "Goa",
+    "Mumbai",
+    "New Delhi",
+    "Jaipur",
+    "Udaipur",
+    "Manali",
+    "Shimla",
+    "Kerala",
+    "Munnar",
+    "Alappuzha",
+    "Varanasi",
+    "Agra",
+    "Rishikesh",
+    "Amritsar",
+    "Kolkata",
+    "Chennai",
+    "Hyderabad",
+    "Bengaluru",
+    "Mysuru",
+    "Ooty",
+    "Darjeeling",
+    "Gangtok",
+    "Leh",
+    "Srinagar",
+    "Jaisalmer",
+    "Jodhpur",
+    "Mount Abu",
+    "Pushkar",
+    "Ranthambore",
+    "Ajmer",
+    "Khajuraho",
+    "Bhopal",
+    "Indore",
+    "Pachmarhi",
+    "Kanha National Park",
+    "Bandhavgarh National Park",
+    "Rann of Kutch",
+    "Ahmedabad",
+    "Surat",
+    "Pune",
+    "Mahabaleshwar",
+    "Nashik",
+    "Aurangabad",
+    "Lonavala",
+    "Hampi",
+    "Coorg",
+    "Gokarna",
+    "Badami",
+    "Vijayawada",
+    "Visakhapatnam",
+    "Tirupati",
+    "Araku Valley",
+    "Kanyakumari",
+    "Madurai",
+    "Pondicherry",
+    "Kodaikanal",
+    "Kovalam",
+    "Wayanad",
+    "Thekkady",
+    "Varkala",
+    "Kochi",
+    "Kozhikode",
+    "Thrissur",
+    "Kumarakom",
+    "Kollam",
+    "Dharamshala",
+    "Dalhousie",
+    "Kasauli",
+    "Mussoorie",
+    "Nainital",
+    "Jim Corbett",
+    "Haridwar",
+    "Kedarnath",
+    "Badrinath",
+    "Auli",
+    "Spiti Valley",
+    "Kasol",
+    "Kullu",
+    "Chandigarh",
+    "Ludhiana",
+    "Patiala",
+    "Kashmir Valley",
+    "Gulmarg",
+    "Pahalgam",
+    "Sonamarg",
+    "Kargil",
+    "Diu",
+    "Daman",
+    "Bhubaneswar",
+    "Puri",
+    "Konark",
+    "Shillong",
+    "Cherrapunji",
+    "Kaziranga",
+    "Majuli",
+    "Tawang",
+    "Agartala",
+    "Port Blair",
+    "Havelock Island",
+
+    "Paris, France",
+    "London, United Kingdom",
+    "Rome, Italy",
+    "Venice, Italy",
+    "Florence, Italy",
+    "Milan, Italy",
+    "Barcelona, Spain",
+    "Madrid, Spain",
+    "Santorini, Greece",
+    "Athens, Greece",
+    "Amsterdam, Netherlands",
+    "Berlin, Germany",
+    "Munich, Germany",
+    "Vienna, Austria",
+    "Prague, Czechia",
+    "Budapest, Hungary",
+    "Zurich, Switzerland",
+    "Interlaken, Switzerland",
+    "Lucerne, Switzerland",
+    "Reykjavik, Iceland",
+    "Oslo, Norway",
+    "Stockholm, Sweden",
+    "Copenhagen, Denmark",
+    "Dublin, Ireland",
+    "Edinburgh, Scotland",
+    "Lisbon, Portugal",
+    "Porto, Portugal",
+    "Istanbul, Turkey",
+    "Cappadocia, Turkey",
+    "Dubrovnik, Croatia",
+
+    "New York, USA",
+    "Los Angeles, USA",
+    "San Francisco, USA",
+    "Las Vegas, USA",
+    "Miami, USA",
+    "Orlando, USA",
+    "Chicago, USA",
+    "Washington, DC, USA",
+    "Boston, USA",
+    "Seattle, USA",
+    "Toronto, Canada",
+    "Vancouver, Canada",
+    "Montreal, Canada",
+    "Quebec City, Canada",
+    "Banff, Canada",
+    "Niagara Falls, Canada",
+    "Mexico City, Mexico",
+    "Cancun, Mexico",
+    "Havana, Cuba",
+    "Punta Cana, Dominican Republic",
+    "Rio de Janeiro, Brazil",
+    "Sao Paulo, Brazil",
+    "Buenos Aires, Argentina",
+    "Santiago, Chile",
+    "Lima, Peru",
+    "Cusco, Peru",
+    "Machu Picchu, Peru",
+    "Quito, Ecuador",
+    "Galapagos Islands, Ecuador",
+    "Cartagena, Colombia",
+
+    "Dubai, UAE",
+    "Abu Dhabi, UAE",
+    "Doha, Qatar",
+    "Muscat, Oman",
+    "Riyadh, Saudi Arabia",
+    "Petra, Jordan",
+    "Cairo, Egypt",
+    "Giza, Egypt",
+    "Marrakech, Morocco",
+    "Cape Town, South Africa",
+    "Nairobi, Kenya",
+    "Zanzibar, Tanzania",
+    "Victoria Falls, Zimbabwe",
+    "Mauritius",
+    "Seychelles",
+    "Maldives",
+
+    "Bali, Indonesia",
+    "Jakarta, Indonesia",
+    "Singapore",
+    "Kuala Lumpur, Malaysia",
+    "Bangkok, Thailand",
+    "Phuket, Thailand",
+    "Chiang Mai, Thailand",
+    "Hanoi, Vietnam",
+    "Ho Chi Minh City, Vietnam",
+    "Ha Long Bay, Vietnam",
+    "Siem Reap, Cambodia",
+    "Manila, Philippines",
+    "Boracay, Philippines",
+    "Tokyo, Japan",
+    "Kyoto, Japan",
+    "Osaka, Japan",
+    "Seoul, South Korea",
+    "Beijing, China",
+    "Shanghai, China",
+    "Hong Kong",
+    "Taipei, Taiwan",
+    "Sydney, Australia",
+    "Melbourne, Australia",
+    "Auckland, New Zealand",
+    "Rotorua, New Zealand"
+
+];
+
+
+
+/* =========================================================
+   SPECIAL ACTIVITIES
+========================================================= */
+
+const specialActivities = {
+
+    "Goa":[
+        "🏖️ Relax at Baga and Calangute Beach",
+        "🌊 Try parasailing and water sports",
+        "🤿 Explore scuba diving and snorkeling",
+        "🏰 Visit Fort Aguada",
+        "🌅 Enjoy a sunset cruise",
+        "🍛 Taste authentic Goan food",
+        "🛍️ Explore local flea markets",
+        "🌴 Relax at quieter South Goa beaches",
+        "⛪ Visit Old Goa churches",
+        "🎶 Experience Goa's nightlife"
+    ],
+
+    "Mumbai":[
+        "🏛️ Visit Gateway of India",
+        "🚤 Take a ferry to Elephanta Caves",
+        "🌊 Walk along Marine Drive",
+        "📸 Explore Colaba Causeway",
+        "🏰 Visit Chhatrapati Shivaji Maharaj Terminus",
+        "🎬 Explore Bollywood areas",
+        "🍛 Try famous Mumbai street food",
+        "🌅 Enjoy a Marine Drive sunset",
+        "🛍️ Shop at local markets",
+        "🌆 Explore Bandra"
+    ],
+
+    "New Delhi":[
+        "🏛️ Visit India Gate",
+        "🕌 Explore Red Fort",
+        "🛕 Visit Lotus Temple",
+        "🏰 Explore Humayun's Tomb",
+        "🛍️ Shop at Chandni Chowk",
+        "🍛 Try Delhi street food",
+        "🌳 Relax at Lodhi Garden",
+        "🏛️ Visit Qutub Minar",
+        "📸 Explore Connaught Place",
+        "🕌 Visit Jama Masjid"
+    ],
+
+    "Jaipur":[
+        "🏰 Explore Amber Fort",
+        "🌸 Visit Hawa Mahal",
+        "🏛️ Explore City Palace",
+        "🔭 Visit Jantar Mantar",
+        "🛍️ Shop at Johari Bazaar",
+        "🍛 Try Rajasthani food",
+        "🐘 Enjoy a cultural experience",
+        "📸 Explore Patrika Gate",
+        "🌅 Watch sunset at Nahargarh Fort",
+        "🎨 Explore local handicrafts"
+    ],
+
+    "Udaipur":[
+        "🏰 Visit City Palace",
+        "🚤 Enjoy a Lake Pichola boat ride",
+        "🌅 Watch sunset at Fateh Sagar Lake",
+        "🌸 Visit Saheliyon-ki-Bari",
+        "📸 Explore Jagdish Temple",
+        "🎨 Shop for traditional handicrafts",
+        "🍛 Try Rajasthani cuisine",
+        "🏛️ Visit Bagore Ki Haveli",
+        "🌄 Explore Sajjangarh Palace",
+        "☕ Relax at lakeside cafés"
+    ],
+
+    "Manali":[
+        "🏔️ Visit Solang Valley",
+        "🌲 Explore Old Manali",
+        "🌊 Visit River Beas",
+        "🏞️ Explore Rohtang Pass",
+        "🥾 Try mountain trekking",
+        "🚲 Enjoy scenic cycling",
+        "🛕 Visit Hidimba Temple",
+        "♨️ Relax at Vashisht hot springs",
+        "📸 Take mountain photographs",
+        "☕ Enjoy valley-view cafés"
+    ],
+
+    "Shimla":[
+        "🏔️ Walk along Mall Road",
+        "⛪ Visit Christ Church",
+        "🚡 Enjoy the Jakhoo ropeway",
+        "🌲 Explore Kufri",
+        "🥾 Try nature walks",
+        "📸 Visit scenic viewpoints",
+        "🛍️ Shop for local handicrafts",
+        "🚂 Enjoy the toy train",
+        "🌅 Watch a mountain sunset",
+        "☕ Relax at hillside cafés"
+    ],
+
+    "Kerala":[
+        "🛶 Enjoy a backwater cruise",
+        "🌴 Explore palm-lined beaches",
+        "🐘 Visit wildlife attractions",
+        "🍛 Try traditional Kerala food",
+        "🌿 Explore spice plantations",
+        "🚤 Enjoy a houseboat experience",
+        "📸 Photograph scenic landscapes",
+        "🧘 Try an Ayurvedic experience",
+        "🥾 Explore nature trails",
+        "🎭 Watch a cultural performance"
+    ],
+
+    "Munnar":[
+        "🌿 Explore tea plantations",
+        "🏔️ Visit Eravikulam National Park",
+        "🌅 Watch sunrise from a viewpoint",
+        "📸 Photograph tea gardens",
+        "🥾 Try nature trekking",
+        "🌊 Visit Mattupetty Dam",
+        "🌲 Explore Echo Point",
+        "🍵 Taste fresh tea",
+        "🦋 Explore local wildlife",
+        "☕ Relax at scenic cafés"
+    ],
+
+    "Alappuzha":[
+        "🛶 Enjoy a traditional houseboat",
+        "🌴 Cruise through the backwaters",
+        "🏖️ Visit Alappuzha Beach",
+        "📸 Photograph village landscapes",
+        "🍛 Try Kerala cuisine",
+        "🌅 Enjoy a backwater sunset",
+        "🐦 Try bird watching",
+        "🚣 Try a canoe ride",
+        "🌿 Visit nearby countryside",
+        "☕ Relax beside the canals"
+    ],
+
+    "Varanasi":[
+        "🛕 Visit Kashi Vishwanath Temple",
+        "🌊 Take a boat ride on the Ganges",
+        "🔥 Attend Ganga Aarti",
+        "📸 Photograph the ghats",
+        "🚶 Walk through the old city",
+        "🛍️ Shop for Banarasi silk",
+        "🍛 Try local food",
+        "🌅 Watch sunrise over the Ganges",
+        "🛕 Explore nearby temples",
+        "🎶 Experience local culture"
+    ],
+
+    "Agra":[
+        "🏛️ Visit the Taj Mahal",
+        "🏰 Explore Agra Fort",
+        "🌅 Watch Taj Mahal at sunrise",
+        "📸 Explore Mehtab Bagh",
+        "🛍️ Shop for marble handicrafts",
+        "🍛 Try famous Agra food",
+        "🏛️ Visit Itmad-ud-Daulah",
+        "🚶 Explore the old city",
+        "🎨 Discover local crafts",
+        "🌇 Enjoy sunset views"
+    ],
+
+    "Rishikesh":[
+        "🌊 Try river rafting",
+        "🧘 Practice yoga",
+        "🌉 Explore Laxman Jhula area",
+        "🛕 Visit riverside temples",
+        "🏕️ Try camping",
+        "🥾 Explore nearby waterfalls",
+        "🌅 Attend Ganga Aarti",
+        "🧗 Try adventure activities",
+        "📸 Photograph the Ganges",
+        "☕ Relax at riverside cafés"
+    ],
+
+    "Amritsar":[
+        "🛕 Visit Golden Temple",
+        "🏛️ Explore Jallianwala Bagh",
+        "🇮🇳 Visit Wagah Border",
+        "🍛 Try Amritsari food",
+        "📸 Photograph the Golden Temple",
+        "🛍️ Shop around Hall Bazaar",
+        "🌅 Visit the temple at sunrise",
+        "🍽️ Try traditional Punjabi dishes",
+        "🚶 Explore the old city",
+        "🎶 Experience Punjabi culture"
+    ],
+
+    "Paris, France":[
+        "🗼 Visit the Eiffel Tower",
+        "🎨 Explore the Louvre Museum",
+        "⛪ Visit Notre-Dame area",
+        "🌳 Relax in Luxembourg Gardens",
+        "🚤 Take a Seine River cruise",
+        "🥐 Try French pastries",
+        "📸 Walk along Champs-Élysées",
+        "🎭 Explore Montmartre",
+        "🛍️ Explore Paris shopping streets",
+        "🌅 Enjoy Paris from a viewpoint"
+    ],
+
+    "London, United Kingdom":[
+        "🎡 Ride the London Eye",
+        "🏰 Visit Buckingham Palace",
+        "🕰️ See Big Ben",
+        "🌉 Walk across Tower Bridge",
+        "🏛️ Visit the British Museum",
+        "🌳 Relax in Hyde Park",
+        "🚤 Take a Thames River cruise",
+        "🛍️ Explore Oxford Street",
+        "🎭 Watch a West End show",
+        "📸 Explore colourful London streets"
+    ],
+
+    "Rome, Italy":[
+        "🏛️ Explore the Colosseum",
+        "⛲ Visit Trevi Fountain",
+        "🏛️ Explore Roman Forum",
+        "⛪ Visit the Pantheon",
+        "🇻🇦 Explore Vatican City",
+        "🎨 Visit Vatican Museums",
+        "🍝 Try authentic Italian pasta",
+        "🍦 Taste Italian gelato",
+        "📸 Explore historic streets",
+        "🌅 Enjoy Rome at sunset"
+    ],
+
+    "Dubai, UAE":[
+        "🏙️ Visit Burj Khalifa",
+        "🛍️ Explore Dubai Mall",
+        "🏜️ Try a desert safari",
+        "🐪 Enjoy a camel ride",
+        "🌴 Visit Palm Jumeirah",
+        "🚤 Take a marina cruise",
+        "🏖️ Visit Jumeirah Beach",
+        "🌆 Enjoy skyline views",
+        "🍽️ Try international cuisine",
+        "🎡 Explore Dubai attractions"
+    ],
+
+    "Singapore":[
+        "🌳 Explore Gardens by the Bay",
+        "🏙️ Visit Marina Bay Sands",
+        "🎡 Ride the Singapore Flyer",
+        "🦁 Visit Singapore Zoo",
+        "🌴 Explore Sentosa Island",
+        "🏖️ Relax at Sentosa Beach",
+        "🛍️ Shop along Orchard Road",
+        "🍜 Try Singaporean food",
+        "🌃 Explore Marina Bay at night",
+        "📸 Visit colourful neighbourhoods"
+    ],
+
+    "Tokyo, Japan":[
+        "🗼 Visit Tokyo Skytree",
+        "⛩️ Explore Senso-ji Temple",
+        "🌸 Walk around Ueno Park",
+        "🛍️ Explore Shibuya",
+        "📸 Visit Shibuya Crossing",
+        "🍣 Try Japanese food",
+        "🎮 Explore Akihabara",
+        "🌳 Relax at Meiji Shrine",
+        "🌃 Explore Tokyo nightlife",
+        "🛍️ Shop in Harajuku"
+    ],
+
+    "Maldives":[
+        "🏝️ Relax on white-sand beaches",
+        "🤿 Try snorkeling",
+        "🐠 Explore coral reefs",
+        "🤿 Try scuba diving",
+        "🚤 Enjoy a speedboat ride",
+        "🌅 Watch a tropical sunset",
+        "🛶 Try kayaking",
+        "🐬 Go dolphin watching",
+        "🍽️ Enjoy an island dinner",
+        "📸 Photograph turquoise lagoons"
+    ]
+
+};
+
+
+/* =========================================================
+   DEFAULT ACTIVITIES
+========================================================= */
+
+const defaultActivities = [
+
+    "🏛️ Explore popular attractions and landmarks",
+
+    "🌿 Discover nearby nature and scenic places",
+
+    "📸 Find beautiful spots for photography",
+
+    "🚶 Take a relaxed walk and explore the local area",
+
+    "🍴 Try local food, cafés and traditional dishes",
+
+    "🛍️ Explore local markets, shopping and handicrafts",
+
+    "🌅 Find a beautiful place for sunrise or sunset",
+
+    "🎭 Experience local culture and entertainment",
+
+    "🥾 Try a local outdoor or adventure experience",
+
+    "☕ Relax and enjoy the atmosphere of the destination"
+
+];
+
+
+/* =========================================================
+   DIFFERENT IMAGE FOR EVERY CARD
+========================================================= */
+
+function getImage(index){
+
+    return "https://picsum.photos/seed/skylora" +
+           index +
+           "/900/600";
+
+}
+
+
+/* =========================================================
+   DISPLAY DESTINATIONS
+========================================================= */
+
+function displayDestinations(list = destinations){
+
+    const grid =
+        document.getElementById("activitiesGrid");
+
+    const noResults =
+        document.getElementById("noResults");
+
+
+    grid.innerHTML = "";
+
+
+    if(list.length === 0){
+
+        noResults.style.display = "block";
+
+        return;
+
+    }
+
+
+    noResults.style.display = "none";
+
+
+    list.forEach(function(destination){
+
+        const index =
+            destinations.indexOf(destination);
+
+
+        const activities =
+            specialActivities[destination]
+            || defaultActivities;
+
+
+        let activityHTML = "";
+
+
+        activities.forEach(function(activity){
+
+            activityHTML += `
+
+                <div class="activity">
+                    ${activity}
+                </div>
+
+            `;
+
+        });
+
+
+        const card =
+            document.createElement("div");
+
+
+        card.className = "card";
+
+
+        card.innerHTML = `
+
+            <img
+                src="${getImage(index)}"
+                alt="${destination}"
+                class="destination-image"
+                loading="lazy"
+                onerror="this.src='https://picsum.photos/seed/fallback${index}/900/600';"
+            >
+
+            <div class="card-content">
+
+                <span class="badge">
+                    DESTINATION ${index + 1}
+                </span>
+
+                <h2>
+                    ${destination}
+                </h2>
+
+                <div class="idea-title">
+                    💡 Some ideas you may explore:
+                </div>
+
+                ${activityHTML}
+
+            </div>
+
+        `;
+
+
+        grid.appendChild(card);
+
+    });
+
+}
+
+
+/* =========================================================
+   SEARCH
+========================================================= */
+
+function searchDestination(){
+
+    const value =
+        document
+        .getElementById("searchBox")
+        .value
+        .toLowerCase()
+        .trim();
+
+
+    const filtered =
+        destinations.filter(function(destination){
+
+            return destination
+                .toLowerCase()
+                .includes(value);
+
+        });
+
+
+    displayDestinations(filtered);
+
+}
+
+
+/* =========================================================
+   LOAD PAGE
+========================================================= */
+
+displayDestinations();
+
+</script>
+
+
+</body>
+
+</html>

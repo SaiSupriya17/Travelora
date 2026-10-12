@@ -1,0 +1,1885 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Travelora - Destinations</title>
+
+<link rel="stylesheet" href="style.css">
+
+<style>
+
+*{
+    box-sizing:border-box;
+}
+
+body{
+    margin:0;
+    font-family:Arial, sans-serif;
+    background:linear-gradient(135deg,#eefaff,#fff7ef,#f6efff);
+    color:#173f58;
+}
+
+/* ================= HEADER ================= */
+
+header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:18px 5%;
+    background:white;
+    box-shadow:0 4px 20px rgba(0,0,0,.08);
+    position:sticky;
+    top:0;
+    z-index:1000;
+}
+
+.logo{
+    font-size:28px;
+    font-weight:bold;
+    color:#087ea4;
+}
+
+nav{
+    display:flex;
+    align-items:center;
+    gap:18px;
+    flex-wrap:wrap;
+}
+
+nav a{
+    text-decoration:none;
+    color:#17445b;
+    font-weight:600;
+    transition:.3s;
+}
+
+nav a:hover{
+    color:#ff6b35;
+}
+
+.login{
+    background:linear-gradient(135deg,#008fa3,#006b96);
+    color:white !important;
+    padding:9px 18px;
+    border-radius:25px;
+}
+
+/* ================= MAIN ================= */
+
+.catalog-section{
+    width:92%;
+    max-width:1450px;
+    margin:45px auto 80px;
+}
+
+/* ================= HEADING ================= */
+
+.catalog-heading{
+    text-align:center;
+    margin-bottom:30px;
+}
+
+.eyebrow{
+    display:inline-block;
+    padding:8px 18px;
+    border-radius:30px;
+    background:linear-gradient(135deg,#ff6b35,#ffb347);
+    color:white;
+    font-weight:bold;
+    font-size:13px;
+    letter-spacing:1.5px;
+}
+
+.catalog-heading h1{
+    margin:12px 0;
+    font-size:44px;
+    background:linear-gradient(
+        90deg,
+        #006b96,
+        #00a39c,
+        #ff6b35,
+        #8e44ad
+    );
+    background-clip:text;
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+}
+
+.catalog-heading p{
+    max-width:850px;
+    margin:auto;
+    color:#64788a;
+    line-height:1.7;
+    font-size:16px;
+}
+
+/* ================= SEARCH ================= */
+
+.catalog-search{
+    display:block;
+    width:min(650px,95%);
+    margin:30px auto 45px;
+    padding:17px 25px;
+    border:2px solid #d5e9f0;
+    border-radius:50px;
+    outline:none;
+    background:white;
+    font-size:16px;
+    box-shadow:0 8px 25px rgba(0,80,120,.10);
+}
+
+.catalog-search:focus{
+    border-color:#00a49c;
+    box-shadow:0 8px 30px rgba(0,164,156,.20);
+}
+
+/* ================= SECTION TITLE ================= */
+
+.catalog-subtitle{
+    margin:42px 0 22px;
+    padding:15px 20px;
+    border-radius:16px;
+    color:white;
+    font-size:25px;
+    background:linear-gradient(
+        90deg,
+        #0077a8,
+        #00a49c,
+        #38b66b
+    );
+    box-shadow:0 8px 20px rgba(0,100,130,.15);
+}
+
+/* ================= GRID ================= */
+
+.catalog-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:24px;
+}
+
+/* ================= CARD ================= */
+
+.catalog-card{
+    display:block;
+    text-decoration:none;
+    color:inherit;
+    background:white;
+    border-radius:21px;
+    overflow:hidden;
+    position:relative;
+    border:1px solid #e1edf2;
+    box-shadow:0 8px 25px rgba(0,0,0,.09);
+    transition:.35s ease;
+}
+
+.catalog-card:hover{
+    transform:translateY(-9px);
+    box-shadow:0 18px 40px rgba(0,100,130,.22);
+}
+
+.catalog-card::before{
+    content:"";
+    position:absolute;
+    top:0;
+    left:0;
+    right:0;
+    height:5px;
+    z-index:5;
+    background:linear-gradient(
+        90deg,
+        #ff6b35,
+        #ffc857,
+        #00a49c,
+        #0077a8,
+        #8e44ad
+    );
+}
+
+/* ================= IMAGE ================= */
+
+.catalog-card-image{
+    width:100%;
+    height:190px;
+    display:block;
+    object-fit:cover;
+    background:#dceff5;
+    transition:.4s ease;
+}
+
+.catalog-card:hover .catalog-card-image{
+    transform:scale(1.06);
+}
+
+/* ================= CARD CONTENT ================= */
+
+.catalog-card-info{
+    padding:16px 17px 20px;
+    background:linear-gradient(
+        180deg,
+        #ffffff,
+        #f7fcff
+    );
+}
+
+.catalog-number{
+    display:inline-block;
+    padding:6px 11px;
+    border-radius:20px;
+    color:white;
+    font-size:12px;
+    font-weight:bold;
+    background:linear-gradient(
+        135deg,
+        #ff6b35,
+        #ff9f43
+    );
+    margin-bottom:10px;
+}
+
+.catalog-card-info h4{
+    margin:0;
+    font-size:18px;
+    line-height:1.4;
+    color:#173f58;
+}
+
+.catalog-card:hover h4{
+    color:#008f9c;
+}
+
+/* ================= EMPTY ================= */
+
+.catalog-empty{
+    grid-column:1/-1;
+    text-align:center;
+    padding:35px;
+    background:white;
+    border-radius:18px;
+    color:#667788;
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media(max-width:1100px){
+
+    .catalog-grid{
+        grid-template-columns:repeat(3,1fr);
+    }
+
+}
+
+@media(max-width:800px){
+
+    header{
+        flex-direction:column;
+        gap:15px;
+    }
+
+    nav{
+        justify-content:center;
+    }
+
+    .catalog-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .catalog-heading h1{
+        font-size:35px;
+    }
+
+}
+
+@media(max-width:500px){
+
+    .catalog-grid{
+        grid-template-columns:1fr;
+    }
+
+    .catalog-card-image{
+        height:220px;
+    }
+
+    nav{
+        gap:10px;
+        font-size:13px;
+    }
+
+}
+
+/* ================= WISHLIST BUTTON ================= */
+
+.destination-wishlist {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    width: 42px;
+    height: 42px;
+    border: none;
+    border-radius: 50%;
+    background: white;
+    color: #087ea4;
+    font-size: 23px;
+    cursor: pointer;
+    z-index: 20;
+    box-shadow: 0 5px 15px rgba(0,0,0,.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: .25s ease;
+}
+
+.destination-wishlist:hover {
+    transform: scale(1.1);
+}
+
+.destination-wishlist.wishlisted {
+    background: #ff6b35;
+    color: white;
+}
+
+
+/* ==============================================
+   HOTEL SELECTION GALLERY
+============================================== */
+
+.hotel-gallery-section {
+    grid-column: 1 / -1;
+    padding: 24px;
+    margin: 15px 0;
+    background: #f8fcff;
+    border: 1px solid #dbe8f0;
+    border-radius: 18px;
+}
+
+.hotel-gallery-heading {
+    color: #0b4568;
+    margin: 0 0 8px;
+    font-size: 25px;
+}
+
+.hotel-gallery-description {
+    color: #627789;
+    line-height: 1.7;
+    margin: 0 0 22px;
+}
+
+.hotel-gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 20px;
+}
+
+.hotel-choice-card {
+    background: white;
+    border: 2px solid #e0eaf0;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 6px 18px rgba(0, 60, 90, 0.08);
+    transition: 0.25s ease;
+}
+
+.hotel-choice-card:hover {
+    transform: translateY(-5px);
+    border-color: #1688bb;
+    box-shadow: 0 12px 25px rgba(0, 80, 120, 0.14);
+}
+
+.hotel-choice-card.selected-hotel {
+    border-color: #00a49c;
+    box-shadow: 0 0 0 3px rgba(0, 164, 156, 0.15);
+}
+
+.hotel-choice-image {
+    display: block;
+    width: 100%;
+    height: 190px;
+    object-fit: cover;
+    background: #dceff5;
+}
+
+.hotel-choice-info {
+    padding: 17px;
+}
+
+.hotel-choice-info h4 {
+    color: #173f58;
+    font-size: 18px;
+    margin: 0 0 9px;
+    line-height: 1.4;
+}
+
+.hotel-choice-location {
+    color: #667788;
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+.hotel-choice-rating {
+    color: #d68a00;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.hotel-choice-facilities {
+    color: #627789;
+    font-size: 13px;
+    line-height: 1.7;
+    min-height: 44px;
+}
+
+.hotel-choice-price {
+    color: #ed7100;
+    font-size: 20px;
+    font-weight: bold;
+    margin: 14px 0;
+}
+
+.hotel-choice-price small {
+    color: #718292;
+    font-size: 12px;
+    font-weight: normal;
+}
+
+.hotel-select-button {
+    width: 100%;
+    border: none;
+    border-radius: 9px;
+    padding: 12px;
+    background: linear-gradient(135deg, #087ea4, #00a49c);
+    color: white;
+    font-size: 15px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.hotel-select-button:hover {
+    background: #0b4568;
+}
+
+.hotel-select-button.hotel-selected-button {
+    background: #087443;
+}
+
+.hotel-gallery-status {
+    display: none;
+    margin-top: 18px;
+    padding: 13px;
+    border-radius: 10px;
+    background: #e9f8ef;
+    color: #087443;
+    line-height: 1.6;
+}
+
+.hotel-gallery-status.show {
+    display: block;
+}
+
+@media (max-width: 950px) {
+    .hotel-gallery-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 600px) {
+    .hotel-gallery-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .hotel-gallery-section {
+        padding: 15px;
+    }
+}
+
+
+</style>
+</head>
+
+<body>
+
+<!-- ================= HEADER ================= -->
+
+<header>
+
+    <div class="logo">
+        ✈ Travelora
+    </div>
+
+    <nav>
+
+        <a href="index.html">Home</a>
+
+        <a href="destinations.html">
+            Destinations
+        </a>
+
+        <a href="offers.html">
+            Offers
+        </a>
+
+        <a href="packages.html">
+            Packages
+        </a>
+
+        <a href="activities.html">
+            Activities
+        </a>
+
+        <a href="wishlist.html">
+            ♡ Wishlist
+        </a>
+
+        <a href="trips.html">
+            My Trips
+        </a>
+
+        <a href="login.html" class="login">
+            Login
+        </a>
+
+    </nav>
+
+</header>
+
+<!-- ================= DESTINATIONS ================= -->
+
+<section class="catalog-section">
+
+    <div class="catalog-heading">
+
+        <span class="eyebrow">
+            ✈ TRAVELORA TRAVEL COLLECTION
+        </span>
+
+        <h1>
+            Explore 200 Destinations 🌍
+        </h1>
+
+        <p>
+            Discover beautiful destinations across India and
+            around the world. Choose your destination and start
+            planning your perfect journey with Travelora.
+        </p>
+
+    </div>
+
+    <!-- SEARCH -->
+
+    <input
+        type="search"
+        id="destinationSearch"
+        class="catalog-search"
+        placeholder="🔍 Search any destination..."
+        autocomplete="off"
+    >
+
+    <!-- INDIA -->
+
+    <h2 class="catalog-subtitle">
+        Indian Destinations
+    </h2>
+
+    <div
+        class="catalog-grid"
+        id="indiaCatalog">
+    </div>
+
+    <!-- INTERNATIONAL -->
+
+    <h2 class="catalog-subtitle">
+        International Destinations
+    </h2>
+
+    <div
+        class="catalog-grid"
+        id="internationalCatalog">
+    </div>
+
+</section>
+
+<script>
+
+/* =========================================================
+   ALL 200 DESTINATIONS
+   ========================================================= */
+
+const extraDestinations = [
+
+{number:1,name:"Goa"},
+{number:2,name:"Mumbai"},
+{number:3,name:"New Delhi"},
+{number:4,name:"Jaipur"},
+{number:5,name:"Udaipur"},
+{number:6,name:"Manali"},
+{number:7,name:"Shimla"},
+{number:8,name:"Kerala"},
+{number:9,name:"Munnar"},
+{number:10,name:"Alappuzha"},
+{number:11,name:"Varanasi"},
+{number:12,name:"Agra"},
+{number:13,name:"Rishikesh"},
+{number:14,name:"Amritsar"},
+{number:15,name:"Kolkata"},
+{number:16,name:"Chennai"},
+{number:17,name:"Hyderabad"},
+{number:18,name:"Bengaluru"},
+{number:19,name:"Mysuru"},
+{number:20,name:"Ooty"},
+{number:21,name:"Darjeeling"},
+{number:22,name:"Gangtok"},
+{number:23,name:"Leh"},
+{number:24,name:"Srinagar"},
+{number:25,name:"Jaisalmer"},
+{number:26,name:"Jodhpur"},
+{number:27,name:"Mount Abu"},
+{number:28,name:"Pushkar"},
+{number:29,name:"Ranthambore"},
+{number:30,name:"Ajmer"},
+{number:31,name:"Khajuraho"},
+{number:32,name:"Bhopal"},
+{number:33,name:"Indore"},
+{number:34,name:"Pachmarhi"},
+{number:35,name:"Kanha National Park"},
+{number:36,name:"Bandhavgarh National Park"},
+{number:37,name:"Rann of Kutch"},
+{number:38,name:"Ahmedabad"},
+{number:39,name:"Surat"},
+{number:40,name:"Pune"},
+{number:41,name:"Mahabaleshwar"},
+{number:42,name:"Nashik"},
+{number:43,name:"Aurangabad"},
+{number:44,name:"Lonavala"},
+{number:45,name:"Hampi"},
+{number:46,name:"Coorg"},
+{number:47,name:"Gokarna"},
+{number:48,name:"Badami"},
+{number:49,name:"Vijayawada"},
+{number:50,name:"Visakhapatnam"},
+{number:51,name:"Tirupati"},
+{number:52,name:"Araku Valley"},
+{number:53,name:"Kanyakumari"},
+{number:54,name:"Madurai"},
+{number:55,name:"Pondicherry"},
+{number:56,name:"Kodaikanal"},
+{number:57,name:"Kovalam"},
+{number:58,name:"Wayanad"},
+{number:59,name:"Thekkady"},
+{number:60,name:"Varkala"},
+{number:61,name:"Kochi"},
+{number:62,name:"Kozhikode"},
+{number:63,name:"Thrissur"},
+{number:64,name:"Kumarakom"},
+{number:65,name:"Kollam"},
+{number:66,name:"Munnar Hills"},
+{number:67,name:"Dharamshala"},
+{number:68,name:"Dalhousie"},
+{number:69,name:"Kasauli"},
+{number:70,name:"Mussoorie"},
+{number:71,name:"Nainital"},
+{number:72,name:"Jim Corbett"},
+{number:73,name:"Haridwar"},
+{number:74,name:"Kedarnath"},
+{number:75,name:"Badrinath"},
+{number:76,name:"Auli"},
+{number:77,name:"Spiti Valley"},
+{number:78,name:"Kasol"},
+{number:79,name:"Kullu"},
+{number:80,name:"Chandigarh"},
+{number:81,name:"Ludhiana"},
+{number:82,name:"Patiala"},
+{number:83,name:"Kashmir Valley"},
+{number:84,name:"Gulmarg"},
+{number:85,name:"Pahalgam"},
+{number:86,name:"Sonamarg"},
+{number:87,name:"Kargil"},
+{number:88,name:"Diu"},
+{number:89,name:"Daman"},
+{number:90,name:"Bhubaneswar"},
+{number:91,name:"Puri"},
+{number:92,name:"Konark"},
+{number:93,name:"Shillong"},
+{number:94,name:"Cherrapunji"},
+{number:95,name:"Kaziranga"},
+{number:96,name:"Majuli"},
+{number:97,name:"Tawang"},
+{number:98,name:"Agartala"},
+{number:99,name:"Port Blair"},
+{number:100,name:"Havelock Island"},
+
+{number:101,name:"Paris, France"},
+{number:102,name:"London, United Kingdom"},
+{number:103,name:"Rome, Italy"},
+{number:104,name:"Venice, Italy"},
+{number:105,name:"Florence, Italy"},
+{number:106,name:"Milan, Italy"},
+{number:107,name:"Barcelona, Spain"},
+{number:108,name:"Madrid, Spain"},
+{number:109,name:"Santorini, Greece"},
+{number:110,name:"Athens, Greece"},
+{number:111,name:"Amsterdam, Netherlands"},
+{number:112,name:"Berlin, Germany"},
+{number:113,name:"Munich, Germany"},
+{number:114,name:"Vienna, Austria"},
+{number:115,name:"Prague, Czechia"},
+{number:116,name:"Budapest, Hungary"},
+{number:117,name:"Zurich, Switzerland"},
+{number:118,name:"Interlaken, Switzerland"},
+{number:119,name:"Lucerne, Switzerland"},
+{number:120,name:"Reykjavik, Iceland"},
+{number:121,name:"Oslo, Norway"},
+{number:122,name:"Stockholm, Sweden"},
+{number:123,name:"Copenhagen, Denmark"},
+{number:124,name:"Dublin, Ireland"},
+{number:125,name:"Edinburgh, Scotland"},
+{number:126,name:"Lisbon, Portugal"},
+{number:127,name:"Porto, Portugal"},
+{number:128,name:"Istanbul, Turkey"},
+{number:129,name:"Cappadocia, Turkey"},
+{number:130,name:"Dubrovnik, Croatia"},
+{number:131,name:"New York, USA"},
+{number:132,name:"Los Angeles, USA"},
+{number:133,name:"San Francisco, USA"},
+{number:134,name:"Las Vegas, USA"},
+{number:135,name:"Miami, USA"},
+{number:136,name:"Orlando, USA"},
+{number:137,name:"Chicago, USA"},
+{number:138,name:"Washington, DC, USA"},
+{number:139,name:"Boston, USA"},
+{number:140,name:"Seattle, USA"},
+{number:141,name:"Toronto, Canada"},
+{number:142,name:"Vancouver, Canada"},
+{number:143,name:"Montreal, Canada"},
+{number:144,name:"Quebec City, Canada"},
+{number:145,name:"Banff, Canada"},
+{number:146,name:"Niagara Falls, Canada"},
+{number:147,name:"Mexico City, Mexico"},
+{number:148,name:"Cancun, Mexico"},
+{number:149,name:"Havana, Cuba"},
+{number:150,name:"Punta Cana, Dominican Republic"},
+{number:151,name:"Rio de Janeiro, Brazil"},
+{number:152,name:"Sao Paulo, Brazil"},
+{number:153,name:"Buenos Aires, Argentina"},
+{number:154,name:"Santiago, Chile"},
+{number:155,name:"Lima, Peru"},
+{number:156,name:"Cusco, Peru"},
+{number:157,name:"Machu Picchu, Peru"},
+{number:158,name:"Quito, Ecuador"},
+{number:159,name:"Galapagos Islands, Ecuador"},
+{number:160,name:"Cartagena, Colombia"},
+{number:161,name:"Dubai, UAE"},
+{number:162,name:"Abu Dhabi, UAE"},
+{number:163,name:"Doha, Qatar"},
+{number:164,name:"Muscat, Oman"},
+{number:165,name:"Riyadh, Saudi Arabia"},
+{number:166,name:"Petra, Jordan"},
+{number:167,name:"Cairo, Egypt"},
+{number:168,name:"Giza, Egypt"},
+{number:169,name:"Marrakech, Morocco"},
+{number:170,name:"Cape Town, South Africa"},
+{number:171,name:"Nairobi, Kenya"},
+{number:172,name:"Zanzibar, Tanzania"},
+{number:173,name:"Victoria Falls, Zimbabwe"},
+{number:174,name:"Mauritius"},
+{number:175,name:"Seychelles"},
+{number:176,name:"Maldives"},
+{number:177,name:"Bali, Indonesia"},
+{number:178,name:"Jakarta, Indonesia"},
+{number:179,name:"Singapore"},
+{number:180,name:"Kuala Lumpur, Malaysia"},
+{number:181,name:"Bangkok, Thailand"},
+{number:182,name:"Phuket, Thailand"},
+{number:183,name:"Chiang Mai, Thailand"},
+{number:184,name:"Hanoi, Vietnam"},
+{number:185,name:"Ho Chi Minh City, Vietnam"},
+{number:186,name:"Ha Long Bay, Vietnam"},
+{number:187,name:"Siem Reap, Cambodia"},
+{number:188,name:"Manila, Philippines"},
+{number:189,name:"Boracay, Philippines"},
+{number:190,name:"Tokyo, Japan"},
+{number:191,name:"Kyoto, Japan"},
+{number:192,name:"Osaka, Japan"},
+{number:193,name:"Seoul, South Korea"},
+{number:194,name:"Beijing, China"},
+{number:195,name:"Shanghai, China"},
+{number:196,name:"Hong Kong"},
+{number:197,name:"Taipei, Taiwan"},
+{number:198,name:"Sydney, Australia"},
+{number:199,name:"Melbourne, Australia"},
+{number:200,name:"Auckland, New Zealand"}
+
+];
+
+
+/* =========================================================
+   IMAGE SYSTEM
+   ========================================================= */
+
+const destinationImageCache = {};
+
+const destinationAliases = {
+
+    "Munnar Hills":"Munnar",
+
+    "Jim Corbett":
+        "Jim Corbett National Park",
+
+    "Havelock Island":
+        "Havelock Island, Andaman and Nicobar Islands",
+
+    "Pondicherry":
+        "Puducherry",
+
+    "Aurangabad":
+        "Aurangabad, Maharashtra",
+
+    "Mysuru":
+        "Mysore",
+
+    "Coorg":
+        "Kodagu",
+
+    "Puri":
+        "Puri, Odisha",
+
+    "Auli":
+        "Auli",
+
+    "Washington, DC, USA":
+        "Washington, D.C.",
+
+    "Niagara Falls, Canada":
+        "Niagara Falls",
+
+    "Machu Picchu, Peru":
+        "Machu Picchu",
+
+    "Galapagos Islands, Ecuador":
+        "Galápagos Islands",
+
+    "Victoria Falls, Zimbabwe":
+        "Victoria Falls",
+
+    "Ha Long Bay, Vietnam":
+        "Hạ Long Bay",
+
+    "Siem Reap, Cambodia":
+        "Siem Reap",
+
+    "Hong Kong":
+        "Hong Kong",
+
+    "New Delhi":
+        "New Delhi"
+};
+
+
+function getWikipediaTitle(item){
+
+    if(destinationAliases[item.name]){
+        return destinationAliases[item.name];
+    }
+
+    return item.name
+        .split(",")[0]
+        .trim();
+}
+
+
+/* =========================================================
+   IMAGE PLACEHOLDER
+   ========================================================= */
+
+function showImagePlaceholder(image,item){
+
+    image.src =
+        "data:image/svg+xml;charset=UTF-8," +
+        encodeURIComponent(
+            '<svg xmlns="http://www.w3.org/2000/svg" width="900" height="600">' +
+            '<rect width="100%" height="100%" fill="#dceff5"/>' +
+            '<text x="50%" y="50%" text-anchor="middle" dominant-baseline="middle" ' +
+            'font-family="Arial" font-size="30" fill="#087ea4">' +
+            'Loading ' +
+            item.name.replace(/&/g,"&amp;") +
+            '</text></svg>'
+        );
+}
+
+
+/* =========================================================
+   WIKIPEDIA IMAGE LOADING
+   ========================================================= */
+
+async function loadWikipediaImages(){
+
+    const batchSize = 40;
+
+    for(
+        let start = 0;
+        start < extraDestinations.length;
+        start += batchSize
+    ){
+
+        const batch =
+            extraDestinations.slice(
+                start,
+                start + batchSize
+            );
+
+        const titles =
+            batch.map(function(item){
+
+                return getWikipediaTitle(item);
+
+            });
+
+
+        try{
+
+            const url =
+                "https://en.wikipedia.org/w/api.php" +
+                "?action=query" +
+                "&format=json" +
+                "&origin=*" +
+                "&prop=pageimages" +
+                "&piprop=thumbnail" +
+                "&pithumbsize=900" +
+                "&redirects=1" +
+                "&titles=" +
+                encodeURIComponent(
+                    titles.join("|")
+                );
+
+
+            const response =
+                await fetch(url);
+
+
+            if(response.ok){
+
+                const data =
+                    await response.json();
+
+
+                const pages =
+                    data.query &&
+                    data.query.pages
+                    ? Object.values(
+                        data.query.pages
+                    )
+                    : [];
+
+
+                pages.forEach(function(page){
+
+                    if(
+                        page.thumbnail &&
+                        page.thumbnail.source
+                    ){
+
+                        const cleanTitle =
+                            String(page.title)
+                            .replace(/_/g," ")
+                            .toLowerCase();
+
+
+                        const matchingItem =
+                            batch.find(
+                                function(item){
+
+                                    return (
+                                        getWikipediaTitle(item)
+                                        .toLowerCase()
+                                        === cleanTitle
+                                    );
+
+                                }
+                            );
+
+
+                        if(matchingItem){
+
+                            destinationImageCache[
+                                matchingItem.name
+                            ] =
+                                page.thumbnail.source;
+
+                        }
+
+                    }
+
+                });
+
+            }
+
+        }
+        catch(error){
+
+            /* Wikimedia fallback will handle missing images. */
+
+        }
+
+    }
+
+
+    /* Update cards with Wikipedia images. */
+
+    document
+    .querySelectorAll(".catalog-card-image")
+    .forEach(function(image){
+
+        const item =
+            extraDestinations.find(
+                function(destination){
+
+                    return (
+                        destination.name ===
+                        image.alt
+                    );
+
+                }
+            );
+
+
+        if(
+            item &&
+            destinationImageCache[item.name]
+        ){
+
+            image.src =
+                destinationImageCache[item.name];
+
+        }
+
+    });
+
+
+    /* Load missing images from Wikimedia Commons. */
+
+    loadMissingCommonsImages();
+
+}
+
+
+/* =========================================================
+   WIKIMEDIA COMMONS FALLBACK
+   ========================================================= */
+
+async function loadCommonsImage(item){
+
+    const searchNames = [
+
+        getWikipediaTitle(item),
+
+        item.name,
+
+        item.name
+            .split(",")[0]
+            .trim()
+
+    ];
+
+
+    for(
+        const searchName of
+        [...new Set(searchNames)]
+    ){
+
+        try{
+
+            const url =
+                "https://commons.wikimedia.org/w/api.php" +
+                "?action=query" +
+                "&generator=search" +
+                "&gsrsearch=" +
+                encodeURIComponent(
+                    '"' +
+                    searchName +
+                    '"'
+                ) +
+                "&gsrnamespace=6" +
+                "&gsrlimit=5" +
+                "&prop=imageinfo" +
+                "&iiprop=url" +
+                "&iiurlwidth=900" +
+                "&format=json" +
+                "&origin=*";
+
+
+            const response =
+                await fetch(url);
+
+
+            if(!response.ok){
+                continue;
+            }
+
+
+            const data =
+                await response.json();
+
+
+            if(
+                !data.query ||
+                !data.query.pages
+            ){
+                continue;
+            }
+
+
+            const pages =
+                Object.values(
+                    data.query.pages
+                );
+
+
+            for(
+                const page of pages
+            ){
+
+                if(
+                    page.imageinfo &&
+                    page.imageinfo[0]
+                ){
+
+                    const imageURL =
+                        page.imageinfo[0].thumburl ||
+                        page.imageinfo[0].url;
+
+
+                    if(imageURL){
+
+                        destinationImageCache[
+                            item.name
+                        ] =
+                            imageURL;
+
+
+                        return imageURL;
+
+                    }
+
+                }
+
+            }
+
+        }
+        catch(error){
+
+            /* Try next search name. */
+
+        }
+
+    }
+
+
+    return null;
+}
+
+
+/* =========================================================
+   LOAD ONLY MISSING IMAGES
+   ========================================================= */
+
+async function loadMissingCommonsImages(){
+
+    for(
+        const item of extraDestinations
+    ){
+
+        if(
+            destinationImageCache[item.name]
+        ){
+            continue;
+        }
+
+
+        const imageURL =
+            await loadCommonsImage(item);
+
+
+        if(!imageURL){
+            continue;
+        }
+
+
+        const image =
+            document.querySelector(
+                '.catalog-card-image[alt="' +
+                CSS.escape(item.name) +
+                '"]'
+            );
+
+
+        if(image){
+
+            image.src =
+                imageURL;
+
+        }
+
+    }
+
+}
+
+
+/* =========================================================
+   CREATE DESTINATION CARD
+   ========================================================= */
+
+function createDestinationCard(item){
+
+    /* =========================================
+       CREATE CARD
+       ========================================= */
+
+    const card =
+        document.createElement("div");
+
+    card.className =
+        "catalog-card";
+
+
+    /* =========================================
+       DESTINATION LINK
+       ========================================= */
+
+    const destinationLink =
+        document.createElement("a");
+
+    destinationLink.href =
+        "booking.html?place=" +
+        encodeURIComponent(
+            item.name
+        );
+
+    destinationLink.style.textDecoration =
+        "none";
+
+    destinationLink.style.color =
+        "inherit";
+
+    destinationLink.style.display =
+        "block";
+
+
+    /* =========================================
+       IMAGE
+       ========================================= */
+
+    const image =
+        document.createElement("img");
+
+    image.className =
+        "catalog-card-image";
+
+    image.alt =
+        item.name;
+
+
+    showImagePlaceholder(
+        image,
+        item
+    );
+
+
+    if(
+        destinationImageCache[item.name]
+    ){
+
+        image.src =
+            destinationImageCache[item.name];
+
+    }
+
+
+    image.onerror =
+        function(){
+
+            if(!this.dataset.fallback){
+
+                this.dataset.fallback =
+                    "yes";
+
+
+                loadCommonsImage(item)
+                .then(function(imageURL){
+
+                    if(imageURL){
+
+                        image.src =
+                            imageURL;
+
+                    }
+
+                });
+
+                return;
+            }
+
+
+            if(!this.dataset.third){
+
+                this.dataset.third =
+                    "yes";
+
+
+                this.src =
+                    "https://placehold.co/900x600/" +
+                    "087ea4/ffffff?text=" +
+                    encodeURIComponent(
+                        "#" +
+                        item.number +
+                        " " +
+                        item.name
+                    );
+
+            }
+
+        };
+
+
+    /* =========================================
+       CARD INFORMATION
+       ========================================= */
+
+    const info =
+        document.createElement("div");
+
+    info.className =
+        "catalog-card-info";
+
+
+    const number =
+        document.createElement("span");
+
+    number.className =
+        "catalog-number";
+
+    number.textContent =
+        "#" +
+        item.number;
+
+
+    const title =
+        document.createElement("h4");
+
+    title.textContent =
+        item.name;
+
+
+    info.appendChild(
+        number
+    );
+
+    info.appendChild(
+        title
+    );
+
+
+    destinationLink.appendChild(
+        image
+    );
+
+    destinationLink.appendChild(
+        info
+    );
+
+
+    card.appendChild(
+        destinationLink
+    );
+
+
+    /* =========================================
+       WISHLIST BUTTON
+       ========================================= */
+
+    const wishlistButton =
+        document.createElement("button");
+
+    wishlistButton.className =
+        "destination-wishlist";
+
+    wishlistButton.type =
+        "button";
+
+    wishlistButton.innerHTML =
+        "♡";
+
+    wishlistButton.setAttribute(
+        "aria-label",
+        "Add to Wishlist"
+    );
+
+
+    /* =========================================
+       CHECK EXISTING WISHLIST
+       ========================================= */
+
+    let wishlistItems = [];
+
+    try{
+
+        const storedWishlist =
+            localStorage.getItem(
+                "traveloraWishlist"
+            );
+
+        const parsedWishlist =
+            storedWishlist
+            ? JSON.parse(storedWishlist)
+            : [];
+
+        wishlistItems =
+            Array.isArray(parsedWishlist)
+            ? parsedWishlist
+            : [];
+
+    }
+    catch(error){
+
+        wishlistItems = [];
+
+    }
+
+
+    function itemAlreadySaved(){
+
+        return wishlistItems.some(
+            function(savedItem){
+
+                if(
+                    typeof savedItem ===
+                    "string"
+                ){
+
+                    return (
+                        savedItem.toLowerCase() ===
+                        item.name.toLowerCase()
+                    );
+
+                }
+
+
+                if(
+                    savedItem &&
+                    savedItem.place
+                ){
+
+                    return (
+                        String(
+                            savedItem.place
+                        ).toLowerCase() ===
+                        item.name.toLowerCase()
+                    );
+
+                }
+
+
+                if(
+                    savedItem &&
+                    savedItem.name
+                ){
+
+                    return (
+                        String(
+                            savedItem.name
+                        ).toLowerCase() ===
+                        item.name.toLowerCase()
+                    );
+
+                }
+
+
+                return false;
+
+            }
+        );
+
+    }
+
+
+    /* =========================================
+       SHOW SAVED STATE
+       ========================================= */
+
+    if(itemAlreadySaved()){
+
+        wishlistButton.classList.add(
+            "wishlisted"
+        );
+
+        wishlistButton.innerHTML =
+            "♥";
+
+        wishlistButton.setAttribute(
+            "aria-label",
+            "Remove from Wishlist"
+        );
+
+    }
+
+
+    /* =========================================
+       WISHLIST CLICK
+       ========================================= */
+
+    wishlistButton.addEventListener(
+        "click",
+        function(event){
+
+            event.preventDefault();
+
+            event.stopPropagation();
+
+
+            let wishlistItems = [];
+
+            try{
+
+                const storedWishlist =
+                    localStorage.getItem(
+                        "traveloraWishlist"
+                    );
+
+                const parsedWishlist =
+                    storedWishlist
+                    ? JSON.parse(storedWishlist)
+                    : [];
+
+                wishlistItems =
+                    Array.isArray(parsedWishlist)
+                    ? parsedWishlist
+                    : [];
+
+            }
+            catch(error){
+
+                wishlistItems = [];
+
+            }
+
+
+            const itemIndex =
+                wishlistItems.findIndex(
+                    function(savedItem){
+
+                        if(
+                            typeof savedItem ===
+                            "string"
+                        ){
+
+                            return (
+                                savedItem.toLowerCase() ===
+                                item.name.toLowerCase()
+                            );
+
+                        }
+
+
+                        if(
+                            savedItem &&
+                            savedItem.place
+                        ){
+
+                            return (
+                                String(
+                                    savedItem.place
+                                ).toLowerCase() ===
+                                item.name.toLowerCase()
+                            );
+
+                        }
+
+
+                        if(
+                            savedItem &&
+                            savedItem.name
+                        ){
+
+                            return (
+                                String(
+                                    savedItem.name
+                                ).toLowerCase() ===
+                                item.name.toLowerCase()
+                            );
+
+                        }
+
+
+                        return false;
+
+                    }
+                );
+
+
+            /* =================================
+               REMOVE
+               ================================= */
+
+            if(itemIndex !== -1){
+
+                wishlistItems.splice(
+                    itemIndex,
+                    1
+                );
+
+
+                wishlistButton.classList.remove(
+                    "wishlisted"
+                );
+
+
+                wishlistButton.innerHTML =
+                    "♡";
+
+
+                wishlistButton.setAttribute(
+                    "aria-label",
+                    "Add to Wishlist"
+                );
+
+            }
+
+
+            /* =================================
+               ADD
+               ================================= */
+
+            else{
+
+                wishlistItems.push({
+
+                    name:
+                        item.name,
+
+                    place:
+                        item.name,
+
+                    number:
+                        item.number,
+
+                    type:
+                        item.number <= 100
+                        ? "India"
+                        : "International",
+
+                    source:
+                        "Destination"
+
+                });
+
+
+                wishlistButton.classList.add(
+                    "wishlisted"
+                );
+
+
+                wishlistButton.innerHTML =
+                    "♥";
+
+
+                wishlistButton.setAttribute(
+                    "aria-label",
+                    "Remove from Wishlist"
+                );
+
+            }
+
+
+            /* =================================
+               SAVE
+               ================================= */
+
+            try{
+
+                localStorage.setItem(
+
+                    "traveloraWishlist",
+
+                    JSON.stringify(
+                        wishlistItems
+                    )
+
+                );
+
+            }
+            catch(error){
+
+                alert(
+                    "Unable to save your wishlist. Please check your browser storage settings."
+                );
+
+            }
+
+        }
+    );
+
+
+    card.appendChild(
+        wishlistButton
+    );
+
+
+    return card;
+}
+
+
+/* =========================================================
+   RENDER ALL DESTINATIONS
+   ========================================================= */
+
+function renderDestinationCatalog(list){
+
+    const indiaCatalog =
+        document.getElementById(
+            "indiaCatalog"
+        );
+
+    const internationalCatalog =
+        document.getElementById(
+            "internationalCatalog"
+        );
+
+
+    indiaCatalog.innerHTML =
+        "";
+
+    internationalCatalog.innerHTML =
+        "";
+
+
+    const india =
+        list.filter(
+            function(item){
+
+                return item.number <= 100;
+
+            }
+        );
+
+
+    const international =
+        list.filter(
+            function(item){
+
+                return item.number > 100;
+
+            }
+        );
+
+
+    /* INDIA */
+
+    if(india.length === 0){
+
+        indiaCatalog.innerHTML =
+            '<div class="catalog-empty">' +
+            'No Indian destination found 🔍' +
+            '</div>';
+
+    }
+    else{
+
+        india.forEach(
+            function(item){
+
+                indiaCatalog.appendChild(
+                    createDestinationCard(item)
+                );
+
+            }
+        );
+
+    }
+
+
+    /* INTERNATIONAL */
+
+    if(international.length === 0){
+
+        internationalCatalog.innerHTML =
+            '<div class="catalog-empty">' +
+            'No international destination found 🔍' +
+            '</div>';
+
+    }
+    else{
+
+        international.forEach(
+            function(item){
+
+                internationalCatalog.appendChild(
+                    createDestinationCard(item)
+                );
+
+            }
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   SHOW ALL 200
+   ========================================================= */
+
+renderDestinationCatalog(
+    extraDestinations
+);
+
+
+/* =========================================================
+   LOAD CORRECT DESTINATION IMAGES
+   ========================================================= */
+
+loadWikipediaImages();
+
+
+/* =========================================================
+   SEARCH
+   ========================================================= */
+
+document
+.getElementById("destinationSearch")
+.addEventListener(
+    "input",
+    function(){
+
+        const searchText =
+            this.value
+            .toLowerCase()
+            .trim();
+
+
+        const filtered =
+            extraDestinations.filter(
+                function(item){
+
+                    return item.name
+                        .toLowerCase()
+                        .includes(searchText);
+
+                }
+            );
+
+
+        renderDestinationCatalog(
+            filtered
+        );
+
+    }
+);
+
+</script>
+
+</body>
+
+</html>

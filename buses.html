@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Travelora - Buses</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header>
+    <div class="logo">Travelora ✈️</div>
+
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="destinations.html">Destinations</a>
+        <a href="offers.html">Offers</a>
+        <a href="packages.html">Packages</a>
+        <a href="activities.html">Activities</a>
+        <a href="wishlist.html">♡ Wishlist</a>
+        <a href="trips.html">My Trips</a>
+        <a href="login.html" class="login">Login</a>
+    </nav>
+</header>
+
+
+<section class="page">
+
+    <h1>🚌 Search Buses</h1>
+
+    <div class="form-box">
+
+        <input id="busFrom" placeholder="From">
+
+        <input id="busTo" placeholder="To">
+
+        <input id="busDate" type="date">
+
+        <button onclick="searchBuses()">
+            Search Buses
+        </button>
+
+    </div>
+
+
+    <div id="busResults"></div>
+
+</section>
+
+
+<script src="script.js"></script>
+
+</body>
+</html>

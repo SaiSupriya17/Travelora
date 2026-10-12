@@ -1,0 +1,1025 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Travelora - Login</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+
+        /* =====================================================
+           TRAVELORA AUTH PAGE
+        ===================================================== */
+
+        .auth-page {
+
+            min-height: calc(100vh - 75px);
+
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+
+            padding: 50px 20px;
+
+            background:
+                linear-gradient(
+                    rgba(5, 40, 65, 0.45),
+                    rgba(5, 40, 65, 0.55)
+                ),
+                url("https://images.unsplash.com/photo-1500534623283-312aade485b7?auto=format&fit=crop&w=1800&q=80");
+
+            background-size: cover;
+
+            background-position: center;
+
+        }
+
+
+        .auth-box {
+
+            width: 450px;
+
+            max-width: 100%;
+
+            background: rgba(255,255,255,0.97);
+
+            padding: 38px;
+
+            border-radius: 20px;
+
+            box-shadow:
+                0 15px 45px rgba(0,0,0,0.25);
+
+        }
+
+
+        .auth-box h1 {
+
+            color: #073b5c;
+
+            margin-bottom: 8px;
+
+        }
+
+
+        .auth-subtitle {
+
+            color: #667085;
+
+            margin-bottom: 25px;
+
+            line-height: 1.5;
+
+        }
+
+
+        .auth-box label {
+
+            display: block;
+
+            font-weight: bold;
+
+            color: #172033;
+
+            margin-bottom: 7px;
+
+        }
+
+
+        .auth-box input,
+        .auth-box select {
+
+            width: 100%;
+
+            margin-bottom: 16px;
+
+        }
+
+
+        .auth-box button {
+
+            width: 100%;
+
+            margin-top: 5px;
+
+        }
+
+
+        .auth-switch {
+
+            text-align: center;
+
+            margin-top: 22px;
+
+            color: #667085;
+
+        }
+
+
+        .auth-switch button {
+
+            width: auto;
+
+            margin: 0;
+
+            padding: 0;
+
+            background: transparent;
+
+            color: #0e918c;
+
+            font-weight: bold;
+
+        }
+
+
+        .auth-switch button:hover {
+
+            background: transparent;
+
+            color: #ff7200;
+
+        }
+
+
+        .otp-info {
+
+            background: #eef8f7;
+
+            border-radius: 10px;
+
+            padding: 13px;
+
+            margin-bottom: 18px;
+
+            color: #073b5c;
+
+            font-size: 14px;
+
+            line-height: 1.5;
+
+        }
+
+
+        .demo-otp {
+
+            display: none;
+
+            background: #fff4e8;
+
+            border: 1px solid #ffd2a8;
+
+            color: #9a4d00;
+
+            padding: 12px;
+
+            border-radius: 10px;
+
+            margin-bottom: 18px;
+
+            text-align: center;
+
+            font-weight: bold;
+
+        }
+
+
+        .back-button {
+
+            background: #e9eef3 !important;
+
+            color: #073b5c !important;
+
+            margin-top: 10px !important;
+
+        }
+
+
+        .back-button:hover {
+
+            background: #dce5ec !important;
+
+        }
+
+
+        .auth-message {
+
+            text-align: center;
+
+            margin-top: 15px;
+
+            color: #0e918c;
+
+            font-weight: bold;
+
+        }
+
+
+        /* HIDE STEPS */
+
+        .auth-step {
+
+            display: none;
+
+        }
+
+
+        .auth-step.active {
+
+            display: block;
+
+        }
+
+
+        @media(max-width:600px) {
+
+            .auth-page {
+
+                padding: 30px 15px;
+
+            }
+
+            .auth-box {
+
+                padding: 28px 22px;
+
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     HEADER
+===================================================== -->
+
+<header>
+
+    <div class="logo">
+        Travelora ✈️
+    </div>
+
+
+    <nav>
+
+        <a href="index.html">
+            Home
+        </a>
+
+        <a href="destinations.html">
+            Destinations
+        </a>
+
+        <a href="offers.html">
+            Offers
+        </a>
+
+        <a href="packages.html">
+            Packages
+        </a>
+
+        <a href="activities.html">
+            Activities
+        </a>
+
+        <a href="wishlist.html">
+            ♡ Wishlist
+        </a>
+
+        <a href="trips.html">
+            My Trips
+        </a>
+
+    </nav>
+
+</header>
+
+
+
+<!-- =====================================================
+     AUTH PAGE
+===================================================== -->
+
+<section class="auth-page">
+
+
+    <div class="auth-box">
+
+
+        <!-- =================================================
+             STEP 1
+             LOGIN / SIGN UP
+        ================================================= -->
+
+        <div
+            id="authStep1"
+            class="auth-step active"
+        >
+
+            <h1 id="authTitle">
+                Welcome Back 👋
+            </h1>
+
+
+            <p
+                class="auth-subtitle"
+                id="authSubtitle"
+            >
+                Login to manage your travel bookings.
+            </p>
+
+
+            <!-- LOGIN MODE -->
+
+            <div id="loginMode">
+
+                <label>
+                    Email or Phone Number
+                </label>
+
+                <input
+                    type="text"
+                    id="authContact"
+                    placeholder="Enter email or phone number"
+                >
+
+
+                <button onclick="sendDemoOTP()">
+                    Login
+                </button>
+
+
+                <div class="auth-switch">
+
+                    New to Travelora?
+
+                    <button
+                        type="button"
+                        onclick="showSignup()"
+                    >
+                        Sign Up
+                    </button>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- SIGN UP MODE -->
+
+            <div
+                id="signupMode"
+                style="display:none;"
+            >
+
+                <label>
+                    Email or Phone Number
+                </label>
+
+                <input
+                    type="text"
+                    id="signupContact"
+                    placeholder="Enter email or phone number"
+                >
+
+
+                <button onclick="sendSignupOTP()">
+                    Sign Up
+                </button>
+
+
+                <div class="auth-switch">
+
+                    Already have an account?
+
+                    <button
+                        type="button"
+                        onclick="showLogin()"
+                    >
+                        Login
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <p
+                class="auth-message"
+                id="authMessage"
+            ></p>
+
+        </div>
+
+
+
+        <!-- =================================================
+             STEP 2
+             OTP
+        ================================================= -->
+
+        <div
+            id="authStep2"
+            class="auth-step"
+        >
+
+            <h1>
+                Verify Your Account
+            </h1>
+
+
+            <p class="auth-subtitle">
+
+                Enter the OTP to continue.
+
+            </p>
+
+
+            <div class="otp-info">
+
+                A demo OTP has been generated for this
+                project. No real SMS or payment service is
+                being used.
+
+            </div>
+
+
+            <div
+                id="demoOtpBox"
+                class="demo-otp"
+            >
+
+                Demo OTP:
+                <span id="demoOtp"></span>
+
+            </div>
+
+
+            <label>
+                Enter OTP
+            </label>
+
+
+            <input
+                type="text"
+                id="otpInput"
+                maxlength="6"
+                placeholder="Enter 6-digit OTP"
+            >
+
+
+            <button onclick="verifyDemoOTP()">
+                Verify OTP
+            </button>
+
+
+            <button
+                class="back-button"
+                onclick="backToAuthStart()"
+            >
+                Back
+            </button>
+
+
+            <p
+                class="auth-message"
+                id="otpMessage"
+            ></p>
+
+        </div>
+
+
+
+        <!-- =================================================
+             STEP 3
+             NEW USER DETAILS
+        ================================================= -->
+
+        <div
+            id="authStep3"
+            class="auth-step"
+        >
+
+            <h1>
+                Complete Your Profile
+            </h1>
+
+
+            <p class="auth-subtitle">
+
+                Tell us a little about yourself to complete
+                your Travelora account.
+
+            </p>
+
+
+            <label>
+                Your Name
+            </label>
+
+
+            <input
+                type="text"
+                id="newUserName"
+                placeholder="Enter your name"
+            >
+
+
+            <label>
+                Gender
+            </label>
+
+
+            <select id="newUserGender">
+
+                <option value="">
+                    Select Gender
+                </option>
+
+                <option value="Male">
+                    Male
+                </option>
+
+                <option value="Female">
+                    Female
+                </option>
+
+                <option value="Other">
+                    Other
+                </option>
+
+                <option value="Prefer not to say">
+                    Prefer not to say
+                </option>
+
+            </select>
+
+
+            <button onclick="completeSignup()">
+                Create Account
+            </button>
+
+
+            <p
+                class="auth-message"
+                id="profileMessage"
+            ></p>
+
+        </div>
+
+
+    </div>
+
+</section>
+
+
+
+<script src="script.js"></script>
+
+
+<script>
+
+/* =========================================================
+   AUTHENTICATION - DEMO OTP
+========================================================= */
+
+let authMode = "login";
+
+let generatedOTP = "";
+
+let pendingContact = "";
+
+
+
+/* =========================================================
+   SHOW LOGIN
+========================================================= */
+
+function showLogin() {
+
+    authMode = "login";
+
+    document.getElementById(
+        "loginMode"
+    ).style.display = "block";
+
+
+    document.getElementById(
+        "signupMode"
+    ).style.display = "none";
+
+
+    document.getElementById(
+        "authTitle"
+    ).innerText =
+        "Welcome Back 👋";
+
+
+    document.getElementById(
+        "authSubtitle"
+    ).innerText =
+        "Login to manage your travel bookings.";
+
+}
+
+
+
+/* =========================================================
+   SHOW SIGN UP
+========================================================= */
+
+function showSignup() {
+
+    authMode = "signup";
+
+    document.getElementById(
+        "loginMode"
+    ).style.display = "none";
+
+
+    document.getElementById(
+        "signupMode"
+    ).style.display = "block";
+
+
+    document.getElementById(
+        "authTitle"
+    ).innerText =
+        "Create Your Account";
+
+
+    document.getElementById(
+        "authSubtitle"
+    ).innerText =
+        "Sign up to start planning your next journey.";
+
+}
+
+
+
+/* =========================================================
+   GENERATE DEMO OTP
+========================================================= */
+
+function generateDemoOTP() {
+
+    return String(
+        Math.floor(
+            100000 +
+            Math.random() * 900000
+        )
+    );
+
+}
+
+
+
+/* =========================================================
+   LOGIN OTP
+========================================================= */
+
+function sendDemoOTP() {
+
+    let contact =
+        document.getElementById(
+            "authContact"
+        ).value.trim();
+
+
+    if (!contact) {
+
+        alert(
+            "Please enter your email or phone number."
+        );
+
+        return;
+    }
+
+
+    pendingContact = contact;
+
+    generatedOTP =
+        generateDemoOTP();
+
+
+    localStorage.setItem(
+        "pendingContact",
+        contact
+    );
+
+
+    document.getElementById(
+        "demoOtp"
+    ).innerText =
+        generatedOTP;
+
+
+    document.getElementById(
+        "demoOtpBox"
+    ).style.display =
+        "block";
+
+
+    document.getElementById(
+        "authStep1"
+    ).classList.remove("active");
+
+
+    document.getElementById(
+        "authStep2"
+    ).classList.add("active");
+
+
+    document.getElementById(
+        "otpMessage"
+    ).innerText =
+        "OTP generated successfully.";
+
+}
+
+
+
+/* =========================================================
+   SIGN UP OTP
+========================================================= */
+
+function sendSignupOTP() {
+
+    let contact =
+        document.getElementById(
+            "signupContact"
+        ).value.trim();
+
+
+    if (!contact) {
+
+        alert(
+            "Please enter your email or phone number."
+        );
+
+        return;
+    }
+
+
+    pendingContact = contact;
+
+    generatedOTP =
+        generateDemoOTP();
+
+
+    localStorage.setItem(
+        "pendingContact",
+        contact
+    );
+
+
+    document.getElementById(
+        "demoOtp"
+    ).innerText =
+        generatedOTP;
+
+
+    document.getElementById(
+        "demoOtpBox"
+    ).style.display =
+        "block";
+
+
+    document.getElementById(
+        "authStep1"
+    ).classList.remove("active");
+
+
+    document.getElementById(
+        "authStep2"
+    ).classList.add("active");
+
+
+    document.getElementById(
+        "otpMessage"
+    ).innerText =
+        "OTP generated successfully.";
+
+}
+
+
+
+/* =========================================================
+   VERIFY OTP
+========================================================= */
+
+function verifyDemoOTP() {
+
+    let enteredOTP =
+        document.getElementById(
+            "otpInput"
+        ).value.trim();
+
+
+    if (!enteredOTP) {
+
+        alert(
+            "Please enter the OTP."
+        );
+
+        return;
+    }
+
+
+    if (
+        enteredOTP !== generatedOTP
+    ) {
+
+        document.getElementById(
+            "otpMessage"
+        ).innerText =
+            "Incorrect OTP. Please try again.";
+
+        return;
+    }
+
+
+    pendingContact =
+        localStorage.getItem(
+            "pendingContact"
+        ) ||
+        pendingContact;
+
+
+    /*
+       SIGN UP
+       --------
+       New user must complete name
+       and gender.
+    */
+
+    if (authMode === "signup") {
+
+        document.getElementById(
+            "authStep2"
+        ).classList.remove("active");
+
+
+        document.getElementById(
+            "authStep3"
+        ).classList.add("active");
+
+
+        return;
+
+    }
+
+
+    /*
+       LOGIN
+       -----
+       Existing user information is loaded.
+    */
+
+    localStorage.setItem(
+        "isLoggedIn",
+        "true"
+    );
+
+
+    localStorage.setItem(
+        "userEmail",
+        pendingContact
+    );
+
+
+    localStorage.removeItem(
+        "pendingContact"
+    );
+
+
+    alert(
+        "Login successful!"
+    );
+
+
+    window.location.href =
+        "index.html";
+
+}
+
+
+
+/* =========================================================
+   COMPLETE SIGN UP
+========================================================= */
+
+function completeSignup() {
+
+    let name =
+        document.getElementById(
+            "newUserName"
+        ).value.trim();
+
+
+    let gender =
+        document.getElementById(
+            "newUserGender"
+        ).value;
+
+
+    if (!name) {
+
+        alert(
+            "Please enter your name."
+        );
+
+        return;
+    }
+
+
+    if (!gender) {
+
+        alert(
+            "Please select your gender."
+        );
+
+        return;
+    }
+
+
+    localStorage.setItem(
+        "userName",
+        name
+    );
+
+
+    localStorage.setItem(
+        "userGender",
+        gender
+    );
+
+
+    localStorage.setItem(
+        "userEmail",
+        pendingContact
+    );
+
+
+    localStorage.setItem(
+        "isLoggedIn",
+        "true"
+    );
+
+
+    localStorage.removeItem(
+        "pendingContact"
+    );
+
+
+    alert(
+        "Account created successfully! Welcome " +
+        name
+    );
+
+
+    window.location.href =
+        "index.html";
+
+}
+
+
+
+/* =========================================================
+   BACK TO LOGIN / SIGN UP
+========================================================= */
+
+function backToAuthStart() {
+
+    document.getElementById(
+        "authStep2"
+    ).classList.remove("active");
+
+
+    document.getElementById(
+        "authStep1"
+    ).classList.add("active");
+
+}
+
+</script>
+
+
+</body>
+
+</html>

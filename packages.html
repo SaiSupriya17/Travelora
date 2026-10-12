@@ -1,0 +1,3261 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Travelora - Packages</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+
+        /* =========================================
+           PACKAGE PAGE
+           ========================================= */
+
+        .page {
+            width: 90%;
+            max-width: 1400px;
+            margin: 50px auto 80px;
+        }
+
+        .page > h1 {
+            color: #0b4265;
+            margin-bottom: 10px;
+            font-size: 38px;
+        }
+
+        .package-intro {
+            color: #607086;
+            font-size: 17px;
+            margin-bottom: 25px;
+        }
+
+        /* =========================================
+           SEARCH
+           ========================================= */
+
+        .package-search {
+            display: block;
+            width: 90%;
+            max-width: 650px;
+            margin: 25px auto 40px;
+            padding: 16px 22px;
+            border: 1px solid #d5e2e8;
+            border-radius: 30px;
+            outline: none;
+            font-size: 16px;
+            box-sizing: border-box;
+            background: white;
+
+            box-shadow:
+                0 5px 18px rgba(0,0,0,0.08);
+        }
+
+        .package-search:focus {
+            border-color: #0b4265;
+        }
+
+        /* =========================================
+           PACKAGE LIST
+           ========================================= */
+
+        .package-list {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 28px;
+        }
+
+        /* =========================================
+           PACKAGE CARD
+           ========================================= */
+
+        .package-box {
+            position: relative;
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+
+            box-shadow:
+                0 7px 22px rgba(0,0,0,0.10);
+
+            transition:
+                transform 0.25s ease,
+                box-shadow 0.25s ease;
+        }
+
+        .package-box:hover {
+            transform: translateY(-7px);
+
+            box-shadow:
+                0 15px 35px rgba(11,66,101,0.18);
+        }
+
+        /* =========================================
+           TOP LINE
+           ========================================= */
+
+        .package-top-line {
+            height: 7px;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    #0b4265,
+                    #009688,
+                    #ff704d
+                );
+        }
+
+        /* =========================================
+           PACKAGE CONTENT
+           ========================================= */
+
+        .package-content {
+            padding: 24px;
+        }
+
+        .package-location {
+            display: inline-block;
+
+            background: #e8f4f7;
+            color: #0b4265;
+
+            font-size: 11px;
+            font-weight: bold;
+
+            letter-spacing: 1px;
+
+            padding: 6px 11px;
+
+            border-radius: 20px;
+
+            margin-bottom: 10px;
+        }
+
+        .package-box h2 {
+            color: #0b4265;
+            font-size: 23px;
+
+            margin-top: 0;
+            margin-bottom: 12px;
+        }
+
+        .package-duration {
+            color: #526b7a !important;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .package-type {
+            font-size: 14px;
+            color: #718497 !important;
+            line-height: 1.5;
+        }
+
+        .package-box h3 {
+            color: #009688;
+            font-size: 24px;
+
+            margin:
+                16px 0 2px;
+        }
+
+        .price-note {
+            font-size: 12px;
+            color: #8a99a6 !important;
+            margin-top: 0;
+        }
+
+        /* =========================================
+           SPECIAL PACKAGE TAG
+           ========================================= */
+
+        .package-special {
+            display: inline-block;
+
+            margin-top: 8px;
+
+            padding: 5px 9px;
+
+            border-radius: 12px;
+
+            background: #fff3ed;
+
+            color: #e65c3b;
+
+            font-size: 11px;
+
+            font-weight: bold;
+        }
+
+        /* =========================================
+           BUTTONS
+           ========================================= */
+
+        .package-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+
+            padding:
+                0 24px 24px;
+        }
+
+        .package-buttons button {
+            border: none;
+
+            border-radius: 9px;
+
+            padding: 11px 14px;
+
+            font-size: 13px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+
+            transition:
+                transform 0.2s ease,
+                box-shadow 0.2s ease,
+                background 0.2s ease;
+        }
+
+        .book-button {
+            background: #ff704d !important;
+            color: white !important;
+        }
+
+        .book-button:hover {
+            background: #ed5d3b !important;
+
+            transform: translateY(-2px);
+
+            box-shadow:
+                0 5px 12px
+                rgba(255,112,77,0.30);
+        }
+
+        /* =========================================
+           WISHLIST BUTTON
+           ========================================= */
+
+        .wishlist-button {
+            background: #e8f3f7 !important;
+            color: #0b4265 !important;
+        }
+
+        .wishlist-button:hover {
+            background: #d6eaf0 !important;
+
+            transform: translateY(-2px);
+        }
+
+        /* RED WHEN WISHLISTED */
+
+        .wishlist-button.wishlisted {
+            background: #ff3b30 !important;
+            color: white !important;
+
+            box-shadow:
+                0 5px 14px
+                rgba(255,59,48,0.28);
+        }
+
+        .wishlist-button.wishlisted:hover {
+            background: #e52f26 !important;
+            color: white !important;
+
+            transform: translateY(-2px);
+
+            box-shadow:
+                0 6px 16px
+                rgba(255,59,48,0.35);
+        }
+
+        .details-button {
+            background: #0b4265 !important;
+            color: white !important;
+        }
+
+        .details-button:hover {
+            background: #073750 !important;
+
+            transform: translateY(-2px);
+
+            box-shadow:
+                0 5px 12px
+                rgba(11,66,101,0.25);
+        }
+
+        /* =========================================
+           POPUP
+           ========================================= */
+
+        .package-details-modal {
+            display: none;
+
+            position: fixed;
+
+            z-index: 9999;
+
+            left: 0;
+            top: 0;
+
+            width: 100%;
+            height: 100%;
+
+            background:
+                rgba(0,30,50,0.72);
+
+            overflow-y: auto;
+
+            padding: 25px;
+
+            box-sizing: border-box;
+        }
+
+        .package-details-box {
+            position: relative;
+
+            background: white;
+
+            width: 90%;
+            max-width: 720px;
+
+            margin: 50px auto;
+
+            padding: 35px;
+
+            border-radius: 22px;
+
+            box-shadow:
+                0 18px 50px
+                rgba(0,0,0,0.28);
+
+            box-sizing: border-box;
+        }
+
+        .package-details-box h2 {
+            color: #0b4265;
+
+            font-size: 30px;
+
+            margin-top: 0;
+            margin-bottom: 10px;
+        }
+
+        .package-details-box p {
+            color: #607086;
+            line-height: 1.6;
+        }
+
+        .package-details-box h3 {
+            color: #0b4265;
+
+            margin-top: 25px;
+            margin-bottom: 10px;
+        }
+
+        .package-details-box ul {
+            color: #607086;
+
+            padding-left: 23px;
+
+            line-height: 1.8;
+        }
+
+        .package-details-box li {
+            margin-bottom: 5px;
+        }
+
+        .details-price {
+            color: #009688 !important;
+
+            font-size: 23px;
+
+            font-weight: bold;
+        }
+
+        .details-special {
+            display: inline-block;
+
+            background: #fff3ed;
+
+            color: #e65c3b;
+
+            padding: 7px 12px;
+
+            border-radius: 20px;
+
+            font-size: 12px;
+
+            font-weight: bold;
+
+            margin-top: 5px;
+        }
+
+        /* =========================================
+           CLOSE
+           ========================================= */
+
+        .close-details {
+            position: absolute;
+
+            right: 18px;
+            top: 12px;
+
+            border: none;
+
+            background: transparent;
+
+            color: #607086;
+
+            font-size: 32px;
+
+            cursor: pointer;
+        }
+
+        .close-details:hover {
+            color: #0b4265;
+        }
+
+        /* =========================================
+           NO RESULTS
+           ========================================= */
+
+        .no-results {
+            display: none;
+
+            text-align: center;
+
+            color: #607086;
+
+            font-size: 18px;
+
+            grid-column: 1 / -1;
+
+            padding: 40px;
+        }
+
+        /* =========================================
+           MOBILE
+           ========================================= */
+
+        @media (max-width: 1000px) {
+
+            .package-list {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+        }
+
+        @media (max-width: 650px) {
+
+            .page {
+                width: 90%;
+            }
+
+            .package-list {
+                grid-template-columns: 1fr;
+            }
+
+            .package-buttons {
+                flex-direction: column;
+            }
+
+            .package-buttons button {
+                width: 100%;
+            }
+
+            .package-details-box {
+                width: 95%;
+                padding: 25px;
+            }
+
+            .package-details-box h2 {
+                font-size: 25px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<!-- =========================================
+     HEADER
+     ========================================= -->
+
+<header>
+
+    <div class="logo">
+        Travelora ✈
+    </div>
+
+    <nav>
+
+        <a href="index.html">
+            Home
+        </a>
+
+        <a href="destinations.html">
+            Destinations
+        </a>
+
+        <a href="offers.html">
+            Offers
+        </a>
+
+        <a href="packages.html">
+            Packages
+        </a>
+
+        <a href="activities.html">
+            Activities
+        </a>
+
+        <a href="wishlist.html">
+            ♡ Wishlist
+        </a>
+
+        <a href="trips.html">
+            My Trips
+        </a>
+
+        <a href="login.html" class="login">
+            Login
+        </a>
+
+    </nav>
+
+</header>
+
+<!-- =========================================
+     PACKAGE PAGE
+     ========================================= -->
+
+<section class="page">
+
+    <h1>
+        🌴 Holiday Packages
+    </h1>
+
+    <p class="package-intro">
+
+        Explore destination-specific holiday packages
+        with sightseeing, local experiences,
+        accommodation and travel assistance.
+
+    </p>
+
+    <!-- SEARCH -->
+
+    <input
+        type="text"
+        id="packageSearch"
+        class="package-search"
+        placeholder="Search for a destination package..."
+    >
+
+    <!-- PACKAGE LIST -->
+
+    <div
+        class="package-list"
+        id="packageList">
+
+    </div>
+
+    <div
+        class="no-results"
+        id="noResults">
+
+        No package found for this destination.
+
+    </div>
+
+</section>
+
+<!-- =========================================
+     PACKAGE DETAILS POPUP
+     ========================================= -->
+
+<div
+    class="package-details-modal"
+    id="packageDetailsModal">
+
+    <div class="package-details-box">
+
+        <button
+            class="close-details"
+            onclick="closePackageDetails()">
+
+            ×
+
+        </button>
+
+        <h2 id="detailsPlace">
+            Destination
+        </h2>
+
+        <p id="detailsDuration"></p>
+
+        <p
+            id="detailsPrice"
+            class="details-price">
+        </p>
+
+        <p id="detailsType"></p>
+
+        <div
+            id="detailsSpecial"
+            class="details-special">
+        </div>
+
+        <h3>
+            What is included in this package?
+        </h3>
+
+        <ul id="detailsIncludes"></ul>
+
+        <h3>
+            Package Highlights
+        </h3>
+
+        <ul id="detailsHighlights"></ul>
+
+        <h3>
+            Important Information
+        </h3>
+
+        <ul id="detailsInformation"></ul>
+
+    </div>
+
+</div>
+
+<script>
+
+/* =====================================================
+   200 DESTINATIONS
+   ===================================================== */
+
+const packageDestinations = [
+
+    "Goa",
+    "Mumbai",
+    "New Delhi",
+    "Jaipur",
+    "Udaipur",
+    "Manali",
+    "Shimla",
+    "Kerala",
+    "Munnar",
+    "Alappuzha",
+    "Varanasi",
+    "Agra",
+    "Rishikesh",
+    "Amritsar",
+    "Kolkata",
+    "Chennai",
+    "Hyderabad",
+    "Bengaluru",
+    "Mysuru",
+    "Ooty",
+    "Darjeeling",
+    "Gangtok",
+    "Leh",
+    "Srinagar",
+    "Jaisalmer",
+    "Jodhpur",
+    "Mount Abu",
+    "Pushkar",
+    "Ranthambore",
+    "Ajmer",
+    "Khajuraho",
+    "Bhopal",
+    "Indore",
+    "Pachmarhi",
+    "Kanha National Park",
+    "Bandhavgarh National Park",
+    "Rann of Kutch",
+    "Ahmedabad",
+    "Surat",
+    "Pune",
+    "Mahabaleshwar",
+    "Nashik",
+    "Aurangabad",
+    "Lonavala",
+    "Hampi",
+    "Coorg",
+    "Gokarna",
+    "Badami",
+    "Vijayawada",
+    "Visakhapatnam",
+    "Tirupati",
+    "Araku Valley",
+    "Kanyakumari",
+    "Madurai",
+    "Pondicherry",
+    "Kodaikanal",
+    "Kovalam",
+    "Wayanad",
+    "Thekkady",
+    "Varkala",
+    "Kochi",
+    "Kozhikode",
+    "Thrissur",
+    "Kumarakom",
+    "Kollam",
+    "Munnar Hills",
+    "Dharamshala",
+    "Dalhousie",
+    "Kasauli",
+    "Mussoorie",
+    "Nainital",
+    "Jim Corbett",
+    "Haridwar",
+    "Kedarnath",
+    "Badrinath",
+    "Auli",
+    "Spiti Valley",
+    "Kasol",
+    "Kullu",
+    "Chandigarh",
+    "Ludhiana",
+    "Patiala",
+    "Kashmir Valley",
+    "Gulmarg",
+    "Pahalgam",
+    "Sonamarg",
+    "Kargil",
+    "Diu",
+    "Daman",
+    "Bhubaneswar",
+    "Puri",
+    "Konark",
+    "Shillong",
+    "Cherrapunji",
+    "Kaziranga",
+    "Majuli",
+    "Tawang",
+    "Agartala",
+    "Port Blair",
+    "Havelock Island",
+
+    "Paris, France",
+    "London, United Kingdom",
+    "Rome, Italy",
+    "Venice, Italy",
+    "Florence, Italy",
+    "Milan, Italy",
+    "Barcelona, Spain",
+    "Madrid, Spain",
+    "Santorini, Greece",
+    "Athens, Greece",
+    "Amsterdam, Netherlands",
+    "Berlin, Germany",
+    "Munich, Germany",
+    "Vienna, Austria",
+    "Prague, Czechia",
+    "Budapest, Hungary",
+    "Zurich, Switzerland",
+    "Interlaken, Switzerland",
+    "Lucerne, Switzerland",
+    "Reykjavik, Iceland",
+    "Oslo, Norway",
+    "Stockholm, Sweden",
+    "Copenhagen, Denmark",
+    "Dublin, Ireland",
+    "Edinburgh, Scotland",
+    "Lisbon, Portugal",
+    "Porto, Portugal",
+    "Istanbul, Turkey",
+    "Cappadocia, Turkey",
+    "Dubrovnik, Croatia",
+    "New York, USA",
+    "Los Angeles, USA",
+    "San Francisco, USA",
+    "Las Vegas, USA",
+    "Miami, USA",
+    "Orlando, USA",
+    "Chicago, USA",
+    "Washington, DC, USA",
+    "Boston, USA",
+    "Seattle, USA",
+    "Toronto, Canada",
+    "Vancouver, Canada",
+    "Montreal, Canada",
+    "Quebec City, Canada",
+    "Banff, Canada",
+    "Niagara Falls, Canada",
+    "Mexico City, Mexico",
+    "Cancun, Mexico",
+    "Havana, Cuba",
+    "Punta Cana, Dominican Republic",
+    "Rio de Janeiro, Brazil",
+    "Sao Paulo, Brazil",
+    "Buenos Aires, Argentina",
+    "Santiago, Chile",
+    "Lima, Peru",
+    "Cusco, Peru",
+    "Machu Picchu, Peru",
+    "Quito, Ecuador",
+    "Galapagos Islands, Ecuador",
+    "Cartagena, Colombia",
+    "Dubai, UAE",
+    "Abu Dhabi, UAE",
+    "Doha, Qatar",
+    "Muscat, Oman",
+    "Riyadh, Saudi Arabia",
+    "Petra, Jordan",
+    "Cairo, Egypt",
+    "Giza, Egypt",
+    "Marrakech, Morocco",
+    "Cape Town, South Africa",
+    "Nairobi, Kenya",
+    "Zanzibar, Tanzania",
+    "Victoria Falls, Zimbabwe",
+    "Mauritius",
+    "Seychelles",
+    "Maldives",
+    "Bali, Indonesia",
+    "Jakarta, Indonesia",
+    "Singapore",
+    "Kuala Lumpur, Malaysia",
+    "Bangkok, Thailand",
+    "Phuket, Thailand",
+    "Chiang Mai, Thailand",
+    "Hanoi, Vietnam",
+    "Ho Chi Minh City, Vietnam",
+    "Ha Long Bay, Vietnam",
+    "Siem Reap, Cambodia",
+    "Manila, Philippines",
+    "Boracay, Philippines",
+    "Tokyo, Japan",
+    "Kyoto, Japan",
+    "Osaka, Japan",
+    "Seoul, South Korea",
+    "Beijing, China",
+    "Shanghai, China",
+    "Hong Kong",
+    "Taipei, Taiwan",
+    "Sydney, Australia",
+    "Melbourne, Australia",
+    "Auckland, New Zealand"
+
+];
+
+/* =====================================================
+   DESTINATION-SPECIFIC PACKAGE INFORMATION
+   ===================================================== */
+
+const destinationProfiles = {
+
+    "Goa": {
+        theme: "Beaches • Nightlife • Water Sports",
+        duration: "5 Days / 4 Nights",
+        price: 14999,
+        special: "Beach & Adventure Escape",
+        includes: [
+            "Beachside hotel accommodation",
+            "Daily breakfast",
+            "North Goa sightseeing",
+            "South Goa sightseeing",
+            "Airport or railway station transfers",
+            "Water-sport assistance"
+        ],
+        highlights: [
+            "Baga and Calangute Beaches",
+            "Fort Aguada",
+            "Basilica of Bom Jesus",
+            "Goa sunset experience",
+            "Optional water sports"
+        ]
+    },
+
+    "Mumbai": {
+        theme: "City Life • Bollywood • Heritage",
+        duration: "4 Days / 3 Nights",
+        price: 15999,
+        special: "Mumbai City Explorer",
+        includes: [
+            "City hotel accommodation",
+            "Daily breakfast",
+            "Mumbai sightseeing",
+            "Local transport",
+            "Airport transfers",
+            "Travel assistance"
+        ],
+        highlights: [
+            "Gateway of India",
+            "Marine Drive",
+            "Colaba Causeway",
+            "Chhatrapati Shivaji Maharaj Terminus",
+            "Optional Bollywood experience"
+        ]
+    },
+
+    "New Delhi": {
+        theme: "History • Monuments • Culture",
+        duration: "5 Days / 4 Nights",
+        price: 16999,
+        special: "Capital Heritage Tour",
+        includes: [
+            "Hotel accommodation",
+            "Daily breakfast",
+            "Delhi sightseeing",
+            "Local transportation",
+            "Airport transfers",
+            "Guide assistance"
+        ],
+        highlights: [
+            "India Gate",
+            "Red Fort",
+            "Qutub Minar",
+            "Humayun's Tomb",
+            "Lotus Temple"
+        ]
+    },
+
+    "Jaipur": {
+        theme: "Royal Palaces • Forts • Rajasthan",
+        duration: "4 Days / 3 Nights",
+        price: 15999,
+        special: "Royal Rajasthan Escape",
+        includes: [
+            "Heritage hotel stay",
+            "Breakfast",
+            "Private sightseeing",
+            "Local transport",
+            "Airport or railway transfer",
+            "Travel assistance"
+        ],
+        highlights: [
+            "Amber Fort",
+            "City Palace",
+            "Hawa Mahal",
+            "Jantar Mantar",
+            "Local handicraft shopping"
+        ]
+    },
+
+    "Udaipur": {
+        theme: "Lakes • Palaces • Romance",
+        duration: "4 Days / 3 Nights",
+        price: 17999,
+        special: "Lake City Retreat",
+        includes: [
+            "Hotel accommodation",
+            "Breakfast",
+            "City Palace visit",
+            "Local sightseeing",
+            "Lake-area transfers",
+            "Travel assistance"
+        ],
+        highlights: [
+            "Lake Pichola",
+            "City Palace",
+            "Jag Mandir",
+            "Saheliyon-ki-Bari",
+            "Sunset boat experience"
+        ]
+    },
+
+    "Manali": {
+        theme: "Mountains • Snow • Adventure",
+        duration: "6 Days / 5 Nights",
+        price: 21999,
+        special: "Himalayan Adventure",
+        includes: [
+            "Mountain-view hotel",
+            "Daily breakfast",
+            "Manali sightseeing",
+            "Local transfers",
+            "Solang Valley visit",
+            "Trip assistance"
+        ],
+        highlights: [
+            "Solang Valley",
+            "Hadimba Temple",
+            "Old Manali",
+            "Mall Road",
+            "Snow activities depending on season"
+        ]
+    },
+
+    "Shimla": {
+        theme: "Hills • Snow • Colonial Charm",
+        duration: "5 Days / 4 Nights",
+        price: 19999,
+        special: "Queen of Hills Escape",
+        includes: [
+            "Hill-view accommodation",
+            "Breakfast",
+            "Shimla sightseeing",
+            "Local transportation",
+            "Mall Road visit",
+            "Travel assistance"
+        ],
+        highlights: [
+            "The Ridge",
+            "Mall Road",
+            "Kufri",
+            "Jakhoo Temple",
+            "Colonial-era architecture"
+        ]
+    },
+
+    "Kerala": {
+        theme: "Backwaters • Hills • Beaches",
+        duration: "7 Days / 6 Nights",
+        price: 24999,
+        special: "God's Own Country",
+        includes: [
+            "Hotel and resort accommodation",
+            "Breakfast",
+            "Kerala sightseeing",
+            "Private vehicle",
+            "Backwater experience",
+            "Airport transfers"
+        ],
+        highlights: [
+            "Alleppey backwaters",
+            "Munnar hills",
+            "Kovalam beach",
+            "Tea plantations",
+            "Traditional Kerala cuisine"
+        ]
+    },
+
+    "Munnar": {
+        theme: "Tea Gardens • Hills • Nature",
+        duration: "4 Days / 3 Nights",
+        price: 16999,
+        special: "Munnar Nature Escape",
+        includes: [
+            "Hill resort accommodation",
+            "Breakfast",
+            "Tea garden sightseeing",
+            "Local transport",
+            "Nature sightseeing",
+            "Travel assistance"
+        ],
+        highlights: [
+            "Tea plantations",
+            "Mattupetty Dam",
+            "Echo Point",
+            "Eravikulam National Park",
+            "Munnar viewpoints"
+        ]
+    },
+
+    "Alappuzha": {
+        theme: "Backwaters • Houseboats • Relaxation",
+        duration: "3 Days / 2 Nights",
+        price: 14999,
+        special: "Backwater Houseboat Stay",
+        includes: [
+            "Hotel accommodation",
+            "Houseboat experience",
+            "Breakfast",
+            "Backwater sightseeing",
+            "Local transfers",
+            "Travel assistance"
+        ],
+        highlights: [
+            "Alappuzha backwaters",
+            "Houseboat cruise",
+            "Village views",
+            "Coconut-lined waterways",
+            "Kerala cuisine"
+        ]
+    },
+
+    "Varanasi": {
+        theme: "Spirituality • Ghats • Heritage",
+        duration: "4 Days / 3 Nights",
+        price: 16999,
+        special: "Spiritual India Journey",
+        includes: [
+            "Hotel accommodation",
+            "Breakfast",
+            "Ganges-side sightseeing",
+            "Local transportation",
+            "Boat ride assistance",
+            "Travel assistance"
+        ],
+        highlights: [
+            "Ganga Aarti",
+            "Dashashwamedh Ghat",
+            "Boat ride on the Ganges",
+            "Kashi Vishwanath area",
+            "Sarnath visit"
+        ]
+    },
+
+    "Agra": {
+        theme: "Taj Mahal • Mughal Heritage • History",
+        duration: "3 Days / 2 Nights",
+        price: 13999,
+        special: "Taj Heritage Escape",
+        includes: [
+            "Hotel accommodation",
+            "Breakfast",
+            "Taj Mahal sightseeing",
+            "Agra Fort visit",
+            "Local transport",
+            "Travel assistance"
+        ],
+        highlights: [
+            "Taj Mahal",
+            "Agra Fort",
+            "Mehtab Bagh",
+            "Mughal architecture",
+            "Local handicrafts"
+        ]
+    },
+
+    "Rishikesh": {
+        theme: "Yoga • River • Adventure",
+        duration: "4 Days / 3 Nights",
+        price: 15999,
+        special: "Adventure & Wellness",
+        includes: [
+            "Hotel accommodation",
+            "Breakfast",
+            "Local sightseeing",
+            "River rafting assistance",
+            "Yoga experience",
+            "Local transfers"
+        ],
+        highlights: [
+            "River Ganga",
+            "Laxman Jhula area",
+            "Ganga Aarti",
+            "Yoga session",
+            "Optional river rafting"
+        ]
+    },
+
+    "Amritsar": {
+        theme: "Heritage • Sikh Culture • Food",
+        duration: "3 Days / 2 Nights",
+        price: 13999,
+        special: "Golden Temple Journey",
+        includes: [
+            "Hotel accommodation",
+            "Breakfast",
+            "City sightseeing",
+            "Local transport",
+            "Wagah Border visit",
+            "Travel assistance"
+        ],
+        highlights: [
+            "Golden Temple",
+            "Jallianwala Bagh",
+            "Wagah Border",
+            "Amritsari cuisine",
+            "Heritage streets"
+        ]
+    },
+
+    "Kolkata": {
+        theme: "Culture • Heritage • Food",
+        duration: "4 Days / 3 Nights",
+        price: 14999,
+        special: "City of Joy Experience",
+        includes: [
+            "City hotel",
+            "Breakfast",
+            "Heritage sightseeing",
+            "Local transportation",
+            "Cultural sightseeing",
+            "Travel assistance"
+        ],
+        highlights: [
+            "Victoria Memorial",
+            "Howrah Bridge",
+            "Indian Museum",
+            "College Street",
+            "Bengali food experience"
+        ]
+    },
+
+    "Chennai": {
+        theme: "Temples • Beaches • South Indian Culture",
+        duration: "4 Days / 3 Nights",
+        price: 14999,
+        special: "Chennai Heritage Escape",
+        includes: [
+            "Hotel accommodation",
+            "Breakfast",
+            "City sightseeing",
+            "Beach visit",
+            "Local transport",
+            "Travel assistance"
+        ],
+        highlights: [
+            "Marina Beach",
+            "Kapaleeshwarar Temple",
+            "Fort St. George",
+            "Mahabalipuram excursion",
+            "South Indian cuisine"
+        ]
+    },
+
+    "Hyderabad": {
+        theme: "History • Charminar • Food",
+        duration: "4 Days / 3 Nights",
+        price: 14999,
+        special: "Nizami Heritage Tour",
+        includes: [
+            "Hotel accommodation",
+            "Breakfast",
+            "City sightseeing",
+            "Local transportation",
+            "Heritage visits",
+            "Travel assistance"
+        ],
+        highlights: [
+            "Charminar",
+            "Golconda Fort",
+            "Hussain Sagar",
+            "Salar Jung Museum",
+            "Hyderabadi cuisine"
+        ]
+    },
+
+    "Bengaluru": {
+        theme: "Technology • Gardens • City Life",
+        duration: "4 Days / 3 Nights",
+        price: 15999,
+        special: "Garden City Escape",
+        includes: [
+            "City hotel",
+            "Breakfast",
+            "City sightseeing",
+            "Local transport",
+            "Garden visits",
+            "Travel assistance"
+        ],
+        highlights: [
+            "Lalbagh",
+            "Cubbon Park",
+            "Bangalore Palace",
+            "Vidhana Soudha",
+            "Local food experience"
+        ]
+    },
+
+    "Mysuru": {
+        theme: "Palaces • Culture • Heritage",
+        duration: "3 Days / 2 Nights",
+        price: 13999,
+        special: "Royal Mysore Experience",
+        includes: [
+            "Hotel accommodation",
+            "Breakfast",
+            "Mysore Palace visit",
+            "Local sightseeing",
+            "Transportation",
+            "Travel assistance"
+        ],
+        highlights: [
+            "Mysore Palace",
+            "Chamundi Hills",
+            "Brindavan Gardens",
+            "Devaraja Market",
+            "Traditional cuisine"
+        ]
+    },
+
+    "Ooty": {
+        theme: "Tea Gardens • Lakes • Hills",
+        duration: "4 Days / 3 Nights",
+        price: 16999,
+        special: "Nilgiri Hill Escape",
+        includes: [
+            "Hill resort",
+            "Breakfast",
+            "Ooty sightseeing",
+            "Local transport",
+            "Tea garden visit",
+            "Travel assistance"
+        ],
+        highlights: [
+            "Ooty Lake",
+            "Botanical Garden",
+            "Tea plantations",
+            "Nilgiri Mountain Railway",
+            "Doddabetta Peak"
+        ]
+    },
+
+    "Darjeeling": {
+        theme: "Tea • Mountains • Sunrise",
+        duration: "5 Days / 4 Nights",
+        price: 19999,
+        special: "Himalayan Tea Escape",
+        includes: [
+            "Hill hotel",
+            "Breakfast",
+            "Darjeeling sightseeing",
+            "Local transfers",
+            "Tea garden visit",
+            "Travel assistance"
+        ],
+        highlights: [
+            "Tiger Hill sunrise",
+            "Tea gardens",
+            "Batasia Loop",
+            "Darjeeling Himalayan Railway",
+            "Himalayan viewpoints"
+        ]
+    },
+
+    "Gangtok": {
+        theme: "Mountains • Monasteries • Lakes",
+        duration: "5 Days / 4 Nights",
+        price: 20999,
+        special: "Sikkim Mountain Escape",
+        includes: [
+            "Hotel accommodation",
+            "Breakfast",
+            "Gangtok sightseeing",
+            "Local transportation",
+            "Monastery visits",
+            "Travel assistance"
+        ],
+        highlights: [
+            "Tsomgo Lake",
+            "Rumtek Monastery",
+            "MG Marg",
+            "Mountain viewpoints",
+            "Local Sikkim cuisine"
+        ]
+    },
+
+    "Leh": {
+        theme: "High Mountains • Monasteries • Adventure",
+        duration: "6 Days / 5 Nights",
+        price: 27999,
+        special: "Ladakh Adventure",
+        includes: [
+            "Hotel accommodation",
+            "Breakfast",
+            "Leh sightseeing",
+            "Local vehicle",
+            "Monastery visits",
+            "Travel assistance"
+        ],
+        highlights: [
+            "Pangong Lake",
+            "Shanti Stupa",
+            "Leh Palace",
+            "Magnetic Hill",
+            "Ladakh monasteries"
+        ]
+    },
+
+    "Srinagar": {
+        theme: "Lakes • Gardens • Kashmir",
+        duration: "5 Days / 4 Nights",
+        price: 22999,
+        special: "Kashmir Valley Retreat",
+        includes: [
+            "Hotel or houseboat stay",
+            "Breakfast",
+            "Srinagar sightseeing",
+            "Local transportation",
+            "Shikara experience",
+            "Travel assistance"
+        ],
+        highlights: [
+            "Dal Lake",
+            "Mughal Gardens",
+            "Shikara ride",
+            "Local markets",
+            "Kashmiri cuisine"
+        ]
+    },
+
+    "Jaisalmer": {
+        theme: "Desert • Forts • Camel Safari",
+        duration: "4 Days / 3 Nights",
+        price: 17999,
+        special: "Thar Desert Adventure",
+        includes: [
+            "Hotel and desert camp stay",
+            "Breakfast",
+            "Jaisalmer sightseeing",
+            "Camel safari",
+            "Local transport",
+            "Travel assistance"
+        ],
+        highlights: [
+            "Jaisalmer Fort",
+            "Sam Sand Dunes",
+            "Camel safari",
+            "Desert sunset",
+            "Traditional Rajasthani evening"
+        ]
+    },
+
+    "Jodhpur": {
+        theme: "Blue City • Forts • Rajasthan",
+        duration: "4 Days / 3 Nights",
+        price: 16999,
+        special: "Blue City Heritage Tour",
+        includes: [
+            "Hotel accommodation",
+            "Breakfast",
+            "City sightseeing",
+            "Local transportation",
+            "Fort visit",
+            "Travel assistance"
+        ],
+        highlights: [
+            "Mehrangarh Fort",
+            "Blue City",
+            "Jaswant Thada",
+            "Clock Tower Market",
+            "Rajasthani food"
+        ]
+    },
+
+    "Mount Abu": {
+        theme: "Hills • Lakes • Temples",
+        duration: "3 Days / 2 Nights",
+        price: 13999,
+        special: "Rajasthan Hill Retreat",
+        includes: [
+            "Hotel accommodation",
+            "Breakfast",
+            "Local sightseeing",
+            "Transport",
+            "Temple visits",
+            "Travel assistance"
+        ],
+        highlights: [
+            "Nakki Lake",
+            "Dilwara Temples",
+            "Sunset Point",
+            "Guru Shikhar",
+            "Hill scenery"
+        ]
+    },
+
+    "Pushkar": {
+        theme: "Desert Town • Temples • Culture",
+        duration: "3 Days / 2 Nights",
+        price: 12999,
+        special: "Pushkar Cultural Escape",
+        includes: [
+            "Hotel accommodation",
+            "Breakfast",
+            "Pushkar sightseeing",
+            "Local transport",
+            "Temple visit",
+            "Travel assistance"
+        ],
+        highlights: [
+            "Pushkar Lake",
+            "Brahma Temple",
+            "Ghats",
+            "Local markets",
+            "Rajasthani culture"
+        ]
+    },
+
+    "Ranthambore": {
+        theme: "Wildlife • Safari • Nature",
+        duration: "4 Days / 3 Nights",
+        price: 19999,
+        special: "Wildlife Safari Escape",
+        includes: [
+            "Resort accommodation",
+            "Breakfast",
+            "Safari assistance",
+            "Local transportation",
+            "Nature activities",
+            "Travel assistance"
+        ],
+        highlights: [
+            "Ranthambore National Park",
+            "Wildlife safari",
+            "Ranthambore Fort",
+            "Forest landscapes",
+            "Photography opportunities"
+        ]
+    },
+
+    "Kanyakumari": {
+        theme: "Ocean • Temples • Sunsets",
+        duration: "3 Days / 2 Nights",
+        price: 13999,
+        special: "Southern India Escape",
+        includes: [
+            "Hotel accommodation",
+            "Breakfast",
+            "Local sightseeing",
+            "Transportation",
+            "Temple visits",
+            "Travel assistance"
+        ],
+        highlights: [
+            "Vivekananda Rock Memorial",
+            "Sunrise viewpoint",
+            "Sunset viewpoint",
+            "Kanyakumari Temple",
+            "Ocean views"
+        ]
+    },
+
+    "Hampi": {
+        theme: "Ruins • Temples • Heritage",
+        duration: "4 Days / 3 Nights",
+        price: 15999,
+        special: "Ancient Heritage Journey",
+        includes: [
+            "Hotel accommodation",
+            "Breakfast",
+            "Hampi sightseeing",
+            "Local transportation",
+            "Heritage guide",
+            "Travel assistance"
+        ],
+        highlights: [
+            "Virupaksha Temple",
+            "Vijaya Vittala Temple",
+            "Hampi Bazaar",
+            "Stone architecture",
+            "Sunset viewpoints"
+        ]
+    },
+
+    "Coorg": {
+        theme: "Coffee • Hills • Waterfalls",
+        duration: "4 Days / 3 Nights",
+        price: 16999,
+        special: "Coffee Country Retreat",
+        includes: [
+            "Resort accommodation",
+            "Breakfast",
+            "Local sightseeing",
+            "Coffee estate visit",
+            "Local transportation",
+            "Travel assistance"
+        ],
+        highlights: [
+            "Coffee plantations",
+            "Abbey Falls",
+            "Raja's Seat",
+            "Dubare",
+            "Coorg cuisine"
+        ]
+    },
+
+    "Gokarna": {
+        theme: "Beaches • Temples • Relaxation",
+        duration: "4 Days / 3 Nights",
+        price: 15999,
+        special: "Coastal Beach Escape",
+        includes: [
+            "Beach accommodation",
+            "Breakfast",
+            "Beach sightseeing",
+            "Local transport",
+            "Temple visit",
+            "Travel assistance"
+        ],
+        highlights: [
+            "Om Beach",
+            "Kudle Beach",
+            "Half Moon Beach",
+            "Mahabaleshwar Temple",
+            "Coastal sunset"
+        ]
+    },
+
+    "Vijayawada": {
+        theme: "Temples • River • Culture",
+        duration: "3 Days / 2 Nights",
+        price: 12999,
+        special: "Krishna River Escape",
+        includes: [
+            "Hotel accommodation",
+            "Breakfast",
+            "City sightseeing",
+            "Local transportation",
+            "Temple visit",
+            "Travel assistance"
+        ],
+        highlights: [
+            "Kanaka Durga Temple",
+            "Prakasam Barrage",
+            "Krishna River",
+            "Undavalli Caves",
+            "Local cuisine"
+        ]
+    },
+
+    "Visakhapatnam": {
+        theme: "Beaches • Hills • Coastal Life",
+        duration: "4 Days / 3 Nights",
+        price: 15999,
+        special: "Vizag Coastal Holiday",
+        includes: [
+            "Hotel accommodation",
+            "Breakfast",
+            "Beach sightseeing",
+            "Local transport",
+            "Araku excursion assistance",
+            "Travel assistance"
+        ],
+        highlights: [
+            "RK Beach",
+            "Kailasagiri",
+            "Submarine Museum",
+            "Araku Valley",
+            "Borra Caves"
+        ]
+    },
+
+    "Tirupati": {
+        theme: "Temple • Spirituality • Heritage",
+        duration: "3 Days / 2 Nights",
+        price: 12999,
+        special: "Spiritual South India",
+        includes: [
+            "Hotel accommodation",
+            "Breakfast",
+            "Temple-area transport",
+            "Local sightseeing",
+            "Darshan assistance",
+            "Travel assistance"
+        ],
+        highlights: [
+            "Tirumala Temple",
+            "Tirupati temples",
+            "Local heritage",
+            "Temple traditions",
+            "Local cuisine"
+        ]
+    },
+
+    "Araku Valley": {
+        theme: "Hills • Tribal Culture • Nature",
+        duration: "4 Days / 3 Nights",
+        price: 16999,
+        special: "Eastern Ghats Escape",
+        includes: [
+            "Hill accommodation",
+            "Breakfast",
+            "Valley sightseeing",
+            "Local transport",
+            "Nature sightseeing",
+            "Travel assistance"
+        ],
+        highlights: [
+            "Araku Valley",
+            "Borra Caves",
+            "Coffee plantations",
+            "Tribal Museum",
+            "Eastern Ghats scenery"
+        ]
+    },
+
+    "Pondicherry": {
+        theme: "French Streets • Beaches • Cafés",
+        duration: "4 Days / 3 Nights",
+        price: 15999,
+        special: "French Coastal Escape",
+        includes: [
+            "Hotel accommodation",
+            "Breakfast",
+            "Heritage sightseeing",
+            "Beach visit",
+            "Local transportation",
+            "Travel assistance"
+        ],
+        highlights: [
+            "French Quarter",
+            "Promenade Beach",
+            "Auroville",
+            "Sri Aurobindo Ashram",
+            "Café experience"
+        ]
+    },
+
+    "Kodaikanal": {
+        theme: "Lakes • Forests • Hills",
+        duration: "4 Days / 3 Nights",
+        price: 15999,
+        special: "Princess of Hill Stations",
+        includes: [
+            "Hill resort",
+            "Breakfast",
+            "Local sightseeing",
+            "Transportation",
+            "Nature visits",
+            "Travel assistance"
+        ],
+        highlights: [
+            "Kodaikanal Lake",
+            "Coaker's Walk",
+            "Pillar Rocks",
+            "Bryant Park",
+            "Forest viewpoints"
+        ]
+    },
+
+    "Wayanad": {
+        theme: "Forests • Waterfalls • Wildlife",
+        duration: "5 Days / 4 Nights",
+        price: 18999,
+        special: "Kerala Nature Escape",
+        includes: [
+            "Resort accommodation",
+            "Breakfast",
+            "Nature sightseeing",
+            "Local transportation",
+            "Waterfall visit",
+            "Travel assistance"
+        ],
+        highlights: [
+            "Edakkal Caves",
+            "Soochipara Falls",
+            "Wayanad wildlife",
+            "Tea and coffee plantations",
+            "Mountain viewpoints"
+        ]
+    },
+
+    "Kochi": {
+        theme: "Heritage • Backwaters • Food",
+        duration: "4 Days / 3 Nights",
+        price: 15999,
+        special: "Kerala Heritage Journey",
+        includes: [
+            "City hotel",
+            "Breakfast",
+            "Fort Kochi sightseeing",
+            "Local transport",
+            "Backwater experience",
+            "Travel assistance"
+        ],
+        highlights: [
+            "Fort Kochi",
+            "Chinese fishing nets",
+            "Mattancherry",
+            "Jew Town",
+            "Kerala cuisine"
+        ]
+    },
+
+    "Dharamshala": {
+        theme: "Mountains • Monasteries • Peace",
+        duration: "5 Days / 4 Nights",
+        price: 19999,
+        special: "Himalayan Wellness Escape",
+        includes: [
+            "Mountain hotel",
+            "Breakfast",
+            "Local sightseeing",
+            "Monastery visit",
+            "Local transportation",
+            "Travel assistance"
+        ],
+        highlights: [
+            "McLeod Ganj",
+            "Dalai Lama Temple area",
+            "Bhagsu Waterfall",
+            "Mountain views",
+            "Tibetan culture"
+        ]
+    },
+
+    "Mussoorie": {
+        theme: "Hills • Waterfalls • Colonial Charm",
+        duration: "4 Days / 3 Nights",
+        price: 17999,
+        special: "Queen of Hills Retreat",
+        includes: [
+            "Hill hotel",
+            "Breakfast",
+            "Local sightseeing",
+            "Transport",
+            "Waterfall visit",
+            "Travel assistance"
+        ],
+        highlights: [
+            "Mall Road",
+            "Kempty Falls",
+            "Gun Hill",
+            "Lal Tibba",
+            "Mountain viewpoints"
+        ]
+    },
+
+    "Nainital": {
+        theme: "Lake • Mountains • Boating",
+        duration: "4 Days / 3 Nights",
+        price: 17999,
+        special: "Lake City Holiday",
+        includes: [
+            "Lake-view hotel",
+            "Breakfast",
+            "Local sightseeing",
+            "Boat ride assistance",
+            "Local transportation",
+            "Travel assistance"
+        ],
+        highlights: [
+            "Naini Lake",
+            "Mall Road",
+            "Snow View Point",
+            "Naina Devi Temple",
+            "Boating experience"
+        ]
+    },
+
+    "Haridwar": {
+        theme: "Spirituality • Ganga • Temples",
+        duration: "3 Days / 2 Nights",
+        price: 12999,
+        special: "Ganga Spiritual Journey",
+        includes: [
+            "Hotel accommodation",
+            "Breakfast",
+            "Temple sightseeing",
+            "Local transportation",
+            "Ganga Aarti visit",
+            "Travel assistance"
+        ],
+        highlights: [
+            "Har Ki Pauri",
+            "Ganga Aarti",
+            "Mansa Devi Temple",
+            "Ganga riverfront",
+            "Local markets"
+        ]
+    },
+
+    "Auli": {
+        theme: "Snow • Skiing • Himalayas",
+        duration: "5 Days / 4 Nights",
+        price: 22999,
+        special: "Snow Adventure Escape",
+        includes: [
+            "Mountain accommodation",
+            "Breakfast",
+            "Auli sightseeing",
+            "Local transportation",
+            "Snow activity assistance",
+            "Travel assistance"
+        ],
+        highlights: [
+            "Auli slopes",
+            "Cable car experience",
+            "Snow landscapes",
+            "Himalayan viewpoints",
+            "Optional skiing"
+        ]
+    },
+
+    "Kasol": {
+        theme: "Valley • Trekking • Nature",
+        duration: "4 Days / 3 Nights",
+        price: 16999,
+        special: "Parvati Valley Escape",
+        includes: [
+            "Mountain stay",
+            "Breakfast",
+            "Local sightseeing",
+            "Trek assistance",
+            "Local transport",
+            "Travel assistance"
+        ],
+        highlights: [
+            "Parvati Valley",
+            "Kasol village",
+            "Nature walks",
+            "Local cafés",
+            "Optional short treks"
+        ]
+    },
+
+    "Port Blair": {
+        theme: "Islands • Beaches • History",
+        duration: "5 Days / 4 Nights",
+        price: 24999,
+        special: "Andaman Island Escape",
+        includes: [
+            "Hotel accommodation",
+            "Breakfast",
+            "Island sightseeing",
+            "Ferry assistance",
+            "Local transport",
+            "Travel assistance"
+        ],
+        highlights: [
+            "Cellular Jail",
+            "Corbyn's Cove",
+            "Ross Island",
+            "Island views",
+            "Sea activities"
+        ]
+    },
+
+    "Havelock Island": {
+        theme: "Beaches • Diving • Islands",
+        duration: "5 Days / 4 Nights",
+        price: 27999,
+        special: "Island Beach Adventure",
+        includes: [
+            "Beach resort",
+            "Breakfast",
+            "Island transfers",
+            "Beach sightseeing",
+            "Water activity assistance",
+            "Travel assistance"
+        ],
+        highlights: [
+            "Radhanagar Beach",
+            "Elephant Beach",
+            "Snorkelling",
+            "Island sunset",
+            "Marine experiences"
+        ]
+    },
+
+    "Paris, France": {
+        theme: "Art • Fashion • Landmarks",
+        duration: "6 Days / 5 Nights",
+        price: 69999,
+        special: "Paris City Escape",
+        includes: [
+            "Central hotel accommodation",
+            "Daily breakfast",
+            "Paris city tour",
+            "Airport transfer assistance",
+            "Local transport assistance",
+            "Travel support"
+        ],
+        highlights: [
+            "Eiffel Tower",
+            "Louvre Museum",
+            "Arc de Triomphe",
+            "Seine River area",
+            "Montmartre"
+        ]
+    },
+
+    "London, United Kingdom": {
+        theme: "Royal Heritage • History • City Life",
+        duration: "6 Days / 5 Nights",
+        price: 74999,
+        special: "London Heritage Journey",
+        includes: [
+            "Central hotel",
+            "Breakfast",
+            "London sightseeing",
+            "Airport transfer assistance",
+            "Local transport assistance",
+            "Travel support"
+        ],
+        highlights: [
+            "Big Ben",
+            "Tower Bridge",
+            "Buckingham Palace",
+            "London Eye",
+            "British Museum"
+        ]
+    },
+
+    "Rome, Italy": {
+        theme: "Ancient History • Art • Italian Food",
+        duration: "6 Days / 5 Nights",
+        price: 71999,
+        special: "Ancient Rome Experience",
+        includes: [
+            "City hotel",
+            "Breakfast",
+            "Rome sightseeing",
+            "Airport transfer assistance",
+            "Local travel assistance",
+            "Trip support"
+        ],
+        highlights: [
+            "Colosseum",
+            "Roman Forum",
+            "Trevi Fountain",
+            "Pantheon",
+            "Vatican area"
+        ]
+    },
+
+    "Venice, Italy": {
+        theme: "Canals • Gondolas • Romance",
+        duration: "5 Days / 4 Nights",
+        price: 69999,
+        special: "Venice Canal Escape",
+        includes: [
+            "Venice accommodation",
+            "Breakfast",
+            "City sightseeing",
+            "Airport transfer assistance",
+            "Local travel assistance",
+            "Trip support"
+        ],
+        highlights: [
+            "Grand Canal",
+            "St Mark's Square",
+            "Rialto Bridge",
+            "Gondola experience",
+            "Venetian streets"
+        ]
+    },
+
+    "Florence, Italy": {
+        theme: "Renaissance • Art • Architecture",
+        duration: "5 Days / 4 Nights",
+        price: 67999,
+        special: "Renaissance Italy",
+        includes: [
+            "Hotel accommodation",
+            "Breakfast",
+            "Florence sightseeing",
+            "Local transport assistance",
+            "Museum-area visits",
+            "Travel support"
+        ],
+        highlights: [
+            "Duomo",
+            "Uffizi area",
+            "Ponte Vecchio",
+            "Piazzale Michelangelo",
+            "Renaissance architecture"
+        ]
+    },
+
+    "Milan, Italy": {
+        theme: "Fashion • Shopping • Architecture",
+        duration: "5 Days / 4 Nights",
+        price: 68999,
+        special: "Milan Style Escape",
+        includes: [
+            "City hotel",
+            "Breakfast",
+            "Milan sightseeing",
+            "Local transport assistance",
+            "Shopping area visit",
+            "Travel support"
+        ],
+        highlights: [
+            "Duomo di Milano",
+            "Galleria Vittorio Emanuele II",
+            "Sforza Castle",
+            "Fashion district",
+            "Italian cuisine"
+        ]
+    },
+
+    "Barcelona, Spain": {
+        theme: "Architecture • Beaches • Culture",
+        duration: "6 Days / 5 Nights",
+        price: 69999,
+        special: "Barcelona Beach & Culture",
+        includes: [
+            "City hotel",
+            "Breakfast",
+            "Barcelona sightseeing",
+            "Beach visit",
+            "Local transport assistance",
+            "Travel support"
+        ],
+        highlights: [
+            "Sagrada Familia",
+            "Park Güell",
+            "Gothic Quarter",
+            "Barcelona beaches",
+            "Catalan cuisine"
+        ]
+    },
+
+    "Madrid, Spain": {
+        theme: "Art • Royal Heritage • Food",
+        duration: "5 Days / 4 Nights",
+        price: 67999,
+        special: "Madrid City Experience",
+        includes: [
+            "Hotel accommodation",
+            "Breakfast",
+            "Madrid sightseeing",
+            "Local transport assistance",
+            "Museum-area visits",
+            "Travel support"
+        ],
+        highlights: [
+            "Royal Palace",
+            "Prado Museum",
+            "Plaza Mayor",
+            "Retiro Park",
+            "Spanish cuisine"
+        ]
+    },
+
+    "Santorini, Greece": {
+        theme: "Islands • Sea Views • Sunsets",
+        duration: "6 Days / 5 Nights",
+        price: 79999,
+        special: "Greek Island Escape",
+        includes: [
+            "Sea-view hotel",
+            "Breakfast",
+            "Island sightseeing",
+            "Airport transfer assistance",
+            "Local travel support",
+            "Trip assistance"
+        ],
+        highlights: [
+            "Oia",
+            "Caldera views",
+            "Santorini sunset",
+            "Fira",
+            "Greek cuisine"
+        ]
+    },
+
+    "Amsterdam, Netherlands": {
+        theme: "Canals • Museums • Cycling",
+        duration: "5 Days / 4 Nights",
+        price: 69999,
+        special: "Amsterdam Canal Holiday",
+        includes: [
+            "Central hotel",
+            "Breakfast",
+            "City sightseeing",
+            "Canal area visit",
+            "Local transport assistance",
+            "Travel support"
+        ],
+        highlights: [
+            "Canal cruise",
+            "Rijksmuseum",
+            "Dam Square",
+            "Jordaan",
+            "Cycling culture"
+        ]
+    },
+
+    "Dubai, UAE": {
+        theme: "Luxury • Desert • Shopping",
+        duration: "5 Days / 4 Nights",
+        price: 54999,
+        special: "Dubai Luxury Escape",
+        includes: [
+            "4-star hotel",
+            "Daily breakfast",
+            "Dubai city tour",
+            "Airport transfers",
+            "Desert safari assistance",
+            "Travel support"
+        ],
+        highlights: [
+            "Burj Khalifa",
+            "Dubai Mall",
+            "Desert safari",
+            "Palm Jumeirah",
+            "Dubai Marina"
+        ]
+    },
+
+    "Abu Dhabi, UAE": {
+        theme: "Luxury • Mosques • Culture",
+        duration: "5 Days / 4 Nights",
+        price: 57999,
+        special: "Abu Dhabi Luxury Tour",
+        includes: [
+            "Hotel accommodation",
+            "Breakfast",
+            "City sightseeing",
+            "Airport transfers",
+            "Local transport assistance",
+            "Travel support"
+        ],
+        highlights: [
+            "Sheikh Zayed Grand Mosque",
+            "Yas Island",
+            "Louvre Abu Dhabi",
+            "Corniche",
+            "Qasr Al Watan"
+        ]
+    },
+
+    "Maldives": {
+        theme: "Beaches • Resorts • Ocean",
+        duration: "6 Days / 5 Nights",
+        price: 74999,
+        special: "Maldives Island Retreat",
+        includes: [
+            "Beach resort accommodation",
+            "Breakfast",
+            "Airport-to-resort transfer assistance",
+            "Island activities",
+            "Beach experience",
+            "Travel support"
+        ],
+        highlights: [
+            "Private island resort",
+            "Lagoon views",
+            "Snorkelling",
+            "Sunset experience",
+            "Water activities"
+        ]
+    },
+
+    "Bali, Indonesia": {
+        theme: "Beaches • Temples • Island Life",
+        duration: "6 Days / 5 Nights",
+        price: 59999,
+        special: "Bali Paradise Escape",
+        includes: [
+            "Resort accommodation",
+            "Breakfast",
+            "Bali sightseeing",
+            "Airport transfers",
+            "Temple visits",
+            "Travel support"
+        ],
+        highlights: [
+            "Ubud",
+            "Tanah Lot",
+            "Kuta Beach",
+            "Rice terraces",
+            "Balinese culture"
+        ]
+    },
+
+    "Singapore": {
+        theme: "City • Shopping • Attractions",
+        duration: "5 Days / 4 Nights",
+        price: 57999,
+        special: "Singapore City Escape",
+        includes: [
+            "City hotel",
+            "Breakfast",
+            "City sightseeing",
+            "Airport transfers",
+            "Local transport assistance",
+            "Travel support"
+        ],
+        highlights: [
+            "Marina Bay Sands",
+            "Gardens by the Bay",
+            "Sentosa",
+            "Universal Studios area",
+            "Orchard Road"
+        ]
+    },
+
+    "Kuala Lumpur, Malaysia": {
+        theme: "City • Shopping • Culture",
+        duration: "5 Days / 4 Nights",
+        price: 49999,
+        special: "Malaysia City Holiday",
+        includes: [
+            "City hotel",
+            "Breakfast",
+            "City sightseeing",
+            "Airport transfers",
+            "Local transport assistance",
+            "Travel support"
+        ],
+        highlights: [
+            "Petronas Towers",
+            "Batu Caves",
+            "Bukit Bintang",
+            "KL Tower",
+            "Malaysian cuisine"
+        ]
+    },
+
+    "Bangkok, Thailand": {
+        theme: "Temples • Shopping • City Life",
+        duration: "5 Days / 4 Nights",
+        price: 44999,
+        special: "Bangkok Explorer",
+        includes: [
+            "City hotel",
+            "Breakfast",
+            "Bangkok sightseeing",
+            "Airport transfers",
+            "Local transport assistance",
+            "Travel support"
+        ],
+        highlights: [
+            "Grand Palace",
+            "Wat Arun",
+            "Floating market",
+            "Bangkok shopping",
+            "Thai cuisine"
+        ]
+    },
+
+    "Phuket, Thailand": {
+        theme: "Beaches • Islands • Adventure",
+        duration: "6 Days / 5 Nights",
+        price: 52999,
+        special: "Phuket Island Adventure",
+        includes: [
+            "Beach resort",
+            "Breakfast",
+            "Island sightseeing",
+            "Airport transfers",
+            "Beach activity assistance",
+            "Travel support"
+        ],
+        highlights: [
+            "Patong Beach",
+            "Phi Phi Islands",
+            "Island cruise",
+            "Old Phuket Town",
+            "Thai beach experience"
+        ]
+    },
+
+    "Tokyo, Japan": {
+        theme: "Technology • Culture • Food",
+        duration: "7 Days / 6 Nights",
+        price: 89999,
+        special: "Tokyo Future & Tradition",
+        includes: [
+            "City hotel",
+            "Breakfast",
+            "Tokyo sightseeing",
+            "Airport transfer assistance",
+            "Local travel support",
+            "Trip assistance"
+        ],
+        highlights: [
+            "Shibuya Crossing",
+            "Tokyo Tower",
+            "Asakusa",
+            "Akihabara",
+            "Japanese food experience"
+        ]
+    },
+
+    "Kyoto, Japan": {
+        theme: "Temples • Gardens • Traditional Japan",
+        duration: "6 Days / 5 Nights",
+        price: 84999,
+        special: "Traditional Japan Escape",
+        includes: [
+            "Traditional-style accommodation",
+            "Breakfast",
+            "Kyoto sightseeing",
+            "Local transport assistance",
+            "Temple visits",
+            "Travel support"
+        ],
+        highlights: [
+            "Fushimi Inari",
+            "Kinkaku-ji",
+            "Arashiyama",
+            "Gion",
+            "Japanese gardens"
+        ]
+    },
+
+    "Osaka, Japan": {
+        theme: "Food • Shopping • Entertainment",
+        duration: "6 Days / 5 Nights",
+        price: 82999,
+        special: "Osaka Food & Fun",
+        includes: [
+            "City hotel",
+            "Breakfast",
+            "Osaka sightseeing",
+            "Local transport assistance",
+            "City attractions",
+            "Travel support"
+        ],
+        highlights: [
+            "Osaka Castle",
+            "Dotonbori",
+            "Universal Studios area",
+            "Shinsaibashi",
+            "Japanese food experience"
+        ]
+    },
+
+    "Seoul, South Korea": {
+        theme: "K-Culture • Palaces • Shopping",
+        duration: "6 Days / 5 Nights",
+        price: 79999,
+        special: "Seoul Culture Escape",
+        includes: [
+            "City hotel",
+            "Breakfast",
+            "Seoul sightseeing",
+            "Airport transfer assistance",
+            "Local transport support",
+            "Travel assistance"
+        ],
+        highlights: [
+            "Gyeongbokgung Palace",
+            "Myeongdong",
+            "N Seoul Tower",
+            "Bukchon Hanok Village",
+            "Korean food experience"
+        ]
+    },
+
+    "Sydney, Australia": {
+        theme: "Harbour • Beaches • City Life",
+        duration: "7 Days / 6 Nights",
+        price: 99999,
+        special: "Sydney Coastal Holiday",
+        includes: [
+            "City hotel",
+            "Breakfast",
+            "Sydney sightseeing",
+            "Airport transfer assistance",
+            "Local transport support",
+            "Travel assistance"
+        ],
+        highlights: [
+            "Sydney Opera House",
+            "Harbour Bridge",
+            "Bondi Beach",
+            "Darling Harbour",
+            "Blue Mountains excursion"
+        ]
+    },
+
+    "Melbourne, Australia": {
+        theme: "Culture • Cafés • Great Ocean Road",
+        duration: "7 Days / 6 Nights",
+        price: 94999,
+        special: "Melbourne Discovery",
+        includes: [
+            "City hotel",
+            "Breakfast",
+            "City sightseeing",
+            "Great Ocean Road assistance",
+            "Airport transfers",
+            "Travel support"
+        ],
+        highlights: [
+            "Great Ocean Road",
+            "Federation Square",
+            "Melbourne laneways",
+            "Royal Botanic Gardens",
+            "Café culture"
+        ]
+    },
+
+    "Auckland, New Zealand": {
+        theme: "Nature • Mountains • Adventure",
+        duration: "7 Days / 6 Nights",
+        price: 104999,
+        special: "New Zealand Nature Escape",
+        includes: [
+            "Hotel accommodation",
+            "Breakfast",
+            "Auckland sightseeing",
+            "Airport transfer assistance",
+            "Nature excursion assistance",
+            "Travel support"
+        ],
+        highlights: [
+            "Sky Tower",
+            "Auckland Harbour",
+            "Waiheke Island",
+            "Nature experiences",
+            "New Zealand landscapes"
+        ]
+    }
+
+};
+
+/* =====================================================
+   DEFAULT PACKAGE PROFILES
+   ===================================================== */
+
+const profileTemplates = [
+
+    {
+        themes: [
+            "Heritage • Culture • Local Experiences",
+            "Historic Sites • Food • Culture",
+            "Monuments • Markets • Local Life"
+        ],
+
+        durations: [
+            "4 Days / 3 Nights",
+            "5 Days / 4 Nights"
+        ],
+
+        price: 14999,
+
+        special: "Heritage & Culture Escape",
+
+        includes: [
+            "Comfortable hotel accommodation",
+            "Daily breakfast",
+            "Destination sightseeing",
+            "Local transportation",
+            "Major attraction visits",
+            "Travel assistance"
+        ],
+
+        highlights: [
+            "Historic landmarks",
+            "Local cultural experiences",
+            "Traditional food experience",
+            "Popular sightseeing areas",
+            "Local shopping"
+        ]
+    },
+
+    {
+        themes: [
+            "Nature • Hills • Scenic Views",
+            "Mountains • Waterfalls • Nature",
+            "Forests • Lakes • Adventure"
+        ],
+
+        durations: [
+            "4 Days / 3 Nights",
+            "5 Days / 4 Nights",
+            "6 Days / 5 Nights"
+        ],
+
+        price: 17999,
+
+        special: "Nature & Adventure Escape",
+
+        includes: [
+            "Nature-view accommodation",
+            "Daily breakfast",
+            "Local sightseeing",
+            "Private/local transportation",
+            "Nature excursion",
+            "Travel assistance"
+        ],
+
+        highlights: [
+            "Scenic viewpoints",
+            "Nature trails",
+            "Local waterfalls or lakes",
+            "Photography spots",
+            "Outdoor experiences"
+        ]
+    },
+
+    {
+        themes: [
+            "Beaches • Relaxation • Local Culture",
+            "Coast • Beaches • Water Activities",
+            "Islands • Beaches • Ocean Views"
+        ],
+
+        durations: [
+            "4 Days / 3 Nights",
+            "5 Days / 4 Nights",
+            "6 Days / 5 Nights"
+        ],
+
+        price: 19999,
+
+        special: "Coastal Holiday Escape",
+
+        includes: [
+            "Beach or city hotel",
+            "Daily breakfast",
+            "Beach sightseeing",
+            "Local transportation",
+            "Water activity assistance",
+            "Travel assistance"
+        ],
+
+        highlights: [
+            "Popular beaches",
+            "Sunset experience",
+            "Local coastal food",
+            "Water activities",
+            "Beach relaxation"
+        ]
+    }
+
+];
+
+/* =====================================================
+   GET PACKAGE INFORMATION
+   ===================================================== */
+
+function getPackageInfo(place, index) {
+
+    if (destinationProfiles[place]) {
+
+        return destinationProfiles[place];
+
+    }
+
+    const template =
+        profileTemplates[
+            index % profileTemplates.length
+        ];
+
+    const isInternational =
+        index >= 100;
+
+    const price =
+        isInternational
+            ? template.price + 30000
+            : template.price;
+
+    const duration =
+        template.durations[
+            index % template.durations.length
+        ];
+
+    const theme =
+        template.themes[
+            index % template.themes.length
+        ];
+
+    return {
+
+        theme: theme,
+
+        duration: duration,
+
+        price: price,
+
+        special:
+            template.special,
+
+        includes:
+            template.includes,
+
+        highlights:
+            template.highlights
+
+    };
+
+}
+
+/* =====================================================
+   CREATE PACKAGE CARD
+   ===================================================== */
+
+function createPackageCard(place, index) {
+
+    const isIndia =
+        index < 100;
+
+    const data =
+        getPackageInfo(
+            place,
+            index
+        );
+
+    const box =
+        document.createElement(
+            "div"
+        );
+
+    box.className =
+        "package-box";
+
+    box.setAttribute(
+        "data-place",
+        place.toLowerCase()
+    );
+
+    box.innerHTML = `
+
+        <div class="package-top-line"></div>
+
+        <div class="package-content">
+
+            <div class="package-location">
+
+                ${
+                    isIndia
+                        ? "INDIA"
+                        : "INTERNATIONAL"
+                }
+
+            </div>
+
+            <h2>
+                ${place}
+            </h2>
+
+            <p class="package-duration">
+                ${data.duration}
+            </p>
+
+            <p class="package-type">
+                ${data.theme}
+            </p>
+
+            <h3>
+                ₹${Number(data.price)
+                    .toLocaleString("en-IN")}
+            </h3>
+
+            <p class="price-note">
+                Starting price per person
+            </p>
+
+            <span class="package-special">
+                ${data.special}
+            </span>
+
+        </div>
+
+        <div class="package-buttons">
+
+            <button
+                class="wishlist-button"
+                data-action="wishlist">
+
+                ♡
+
+            </button>
+
+            <button
+                class="details-button"
+                data-action="details">
+
+                View Package Details
+
+            </button>
+
+        </div>
+
+    `;
+
+    /* =========================================
+       WISHLIST BUTTON
+       ========================================= */
+
+    const wishlistButton =
+        box.querySelector(
+            '[data-action="wishlist"]'
+        );
+
+    /*
+       Read saved wishlist.
+       This makes the red state remain
+       even after refreshing the page.
+    */
+
+    let wishlistItems =
+        JSON.parse(
+            localStorage.getItem(
+                "traveloraWishlist"
+            )
+        ) || [];
+
+    /*
+       Check both the simple format ("Mumbai")
+       and object format ({ place: "Mumbai" })
+       so the package button stays synchronized
+       with the Wishlist page.
+    */
+
+    function wishlistContainsPlace(items, destination) {
+
+        return items.some(
+            function(item) {
+
+                if (typeof item === "string") {
+
+                    return item.toLowerCase() ===
+                        destination.toLowerCase();
+
+                }
+
+                if (item && item.place) {
+
+                    return String(item.place).toLowerCase() ===
+                        destination.toLowerCase();
+
+                }
+
+                return false;
+
+            }
+        );
+
+    }
+
+    /*
+       If this destination was already
+       wishlisted, show it as red.
+    */
+
+    if (
+        wishlistContainsPlace(
+            wishlistItems,
+            place
+        )
+    ) {
+
+        wishlistButton.classList.add(
+            "wishlisted"
+        );
+
+        wishlistButton.innerHTML =
+            "♥";
+
+        wishlistButton.setAttribute(
+            "aria-label",
+            "Remove from Wishlist"
+        );
+
+        wishlistButton.setAttribute(
+            "aria-pressed",
+            "true"
+        );
+
+    }
+
+    /*
+       Wishlist click.
+       No popup/message is shown.
+    */
+
+    wishlistButton.addEventListener(
+        "click",
+        function() {
+
+            let wishlistItems =
+                JSON.parse(
+                    localStorage.getItem(
+                        "traveloraWishlist"
+                    )
+                ) || [];
+
+            const itemIndex =
+                wishlistItems.findIndex(
+                    function(item) {
+
+                        if (typeof item === "string") {
+
+                            return item.toLowerCase() ===
+                                place.toLowerCase();
+
+                        }
+
+                        if (item && item.place) {
+
+                            return String(item.place).toLowerCase() ===
+                                place.toLowerCase();
+
+                        }
+
+                        return false;
+
+                    }
+                );
+
+            /* ===============================
+               REMOVE FROM WISHLIST
+               =============================== */
+
+            if (
+                itemIndex !== -1
+            ) {
+
+                wishlistItems.splice(
+                    itemIndex,
+                    1
+                );
+
+                wishlistButton.classList.remove(
+                    "wishlisted"
+                );
+
+                wishlistButton.innerHTML =
+                    "♡";
+
+                wishlistButton.setAttribute(
+                    "aria-label",
+                    "Add to Wishlist"
+                );
+
+                wishlistButton.setAttribute(
+                    "aria-pressed",
+                    "false"
+                );
+
+            }
+
+            /* ===============================
+               ADD TO WISHLIST
+               =============================== */
+
+            else {
+
+                wishlistItems.push(
+                    place
+                );
+
+                wishlistButton.classList.add(
+                    "wishlisted"
+                );
+
+                wishlistButton.innerHTML =
+                    "♥";
+
+                wishlistButton.setAttribute(
+                    "aria-label",
+                    "Remove from Wishlist"
+                );
+
+                wishlistButton.setAttribute(
+                    "aria-pressed",
+                    "true"
+                );
+
+            }
+
+            /*
+               Save the new wishlist state.
+            */
+
+            localStorage.setItem(
+                "traveloraWishlist",
+                JSON.stringify(
+                    wishlistItems
+                )
+            );
+
+
+        }
+    );
+
+    /* =========================================
+       DETAILS BUTTON
+       ========================================= */
+
+    box
+        .querySelector(
+            '[data-action="details"]'
+        )
+        .addEventListener(
+            "click",
+            function() {
+
+                showPackageDetails(
+                    place,
+                    data,
+                    isIndia
+                );
+
+            }
+        );
+
+    return box;
+
+}
+
+/* =====================================================
+   GENERATE ALL PACKAGES
+   ===================================================== */
+
+const packageList =
+    document.getElementById(
+        "packageList"
+    );
+
+packageDestinations.forEach(
+    function(place, index) {
+
+        const card =
+            createPackageCard(
+                place,
+                index
+            );
+
+        packageList.appendChild(
+            card
+        );
+
+    }
+);
+
+/* =====================================================
+   SHOW PACKAGE DETAILS
+   ===================================================== */
+
+function showPackageDetails(
+    place,
+    data,
+    isIndia
+) {
+
+    document.getElementById(
+        "detailsPlace"
+    ).textContent =
+        place;
+
+    document.getElementById(
+        "detailsDuration"
+    ).textContent =
+        "Duration: " +
+        data.duration;
+
+    document.getElementById(
+        "detailsPrice"
+    ).textContent =
+        "Starting from: ₹" +
+        Number(data.price)
+            .toLocaleString("en-IN");
+
+    document.getElementById(
+        "detailsType"
+    ).textContent =
+        (
+            isIndia
+                ? "India Holiday Package"
+                : "International Holiday Package"
+        ) +
+        " • " +
+        data.theme;
+
+    document.getElementById(
+        "detailsSpecial"
+    ).textContent =
+        data.special;
+
+    document.getElementById(
+        "detailsIncludes"
+    ).innerHTML =
+        data.includes
+            .map(
+                function(item) {
+
+                    return `
+                        <li>
+                            ${item}
+                        </li>
+                    `;
+
+                }
+            )
+            .join("");
+
+    document.getElementById(
+        "detailsHighlights"
+    ).innerHTML =
+        data.highlights
+            .map(
+                function(item) {
+
+                    return `
+                        <li>
+                            ${item}
+                        </li>
+                    `;
+
+                }
+            )
+            .join("");
+
+    document.getElementById(
+        "detailsInformation"
+    ).innerHTML = `
+
+        <li>
+            Package price starts from
+            ₹${Number(data.price)
+                .toLocaleString("en-IN")}
+            per person.
+        </li>
+
+        <li>
+            Final price may change depending
+            on travel dates and hotel category.
+        </li>
+
+        <li>
+            Availability of activities may
+            depend on season and weather.
+        </li>
+
+        <li>
+            Entry tickets and personal expenses
+            may be extra unless specifically included.
+        </li>
+
+        <li>
+            Flight tickets are not included
+            unless mentioned during booking.
+        </li>
+
+    `;
+
+    document.getElementById(
+        "packageDetailsModal"
+    ).style.display =
+        "block";
+
+    document.body.style.overflow =
+        "hidden";
+
+}
+
+/* =====================================================
+   CLOSE DETAILS
+   ===================================================== */
+
+function closePackageDetails() {
+
+    document.getElementById(
+        "packageDetailsModal"
+    ).style.display =
+        "none";
+
+    document.body.style.overflow =
+        "";
+
+}
+
+/* =====================================================
+   SEARCH
+   ===================================================== */
+
+document
+    .getElementById(
+        "packageSearch"
+    )
+    .addEventListener(
+        "input",
+        function() {
+
+            const searchText =
+                this.value
+                    .toLowerCase()
+                    .trim();
+
+            const allPackages =
+                document.querySelectorAll(
+                    "#packageList .package-box"
+                );
+
+            let found =
+                false;
+
+            allPackages.forEach(
+                function(box) {
+
+                    const title =
+                        box
+                            .querySelector("h2")
+                            .textContent
+                            .toLowerCase();
+
+                    if (
+                        title.includes(
+                            searchText
+                        )
+                    ) {
+
+                        box.style.display =
+                            "";
+
+                        found = true;
+
+                    }
+
+                    else {
+
+                        box.style.display =
+                            "none";
+
+                    }
+
+                }
+            );
+
+            document.getElementById(
+                "noResults"
+            ).style.display =
+                found
+                    ? "none"
+                    : "block";
+
+        }
+    );
+
+/* =====================================================
+   CLOSE POPUP WHEN CLICKING OUTSIDE
+   ===================================================== */
+
+window.addEventListener(
+    "click",
+    function(event) {
+
+        const modal =
+            document.getElementById(
+                "packageDetailsModal"
+            );
+
+        if (
+            event.target === modal
+        ) {
+
+            closePackageDetails();
+
+        }
+
+    }
+);
+
+/* =====================================================
+   ESCAPE KEY
+   ===================================================== */
+
+document.addEventListener(
+    "keydown",
+    function(event) {
+
+        if (
+            event.key === "Escape"
+        ) {
+
+            closePackageDetails();
+
+        }
+
+    }
+);
+
+</script>
+
+<!-- =========================================
+     EXISTING PROJECT SCRIPT
+     ========================================= -->
+
+<script src="script.js"></script>
+
+</body>
+
+</html>

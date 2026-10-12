@@ -1,0 +1,1477 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>travelora - Destination Details</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+
+        /* ==============================
+           DETAILS PAGE
+        ============================== */
+
+        .destination-details-page {
+            width: 100%;
+            padding: 50px 7%;
+            box-sizing: border-box;
+        }
+
+        .details-container {
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        .details-title {
+            text-align: center;
+            font-size: 45px;
+            color: #0b4f75;
+            margin-bottom: 12px;
+        }
+
+        .details-intro {
+            text-align: center;
+            max-width: 900px;
+            margin: 0 auto 35px;
+            font-size: 18px;
+            line-height: 1.7;
+            color: #526b80;
+        }
+
+        .main-image {
+            width: 100%;
+            height: 480px;
+            object-fit: cover;
+            border-radius: 22px;
+            display: block;
+            margin-bottom: 45px;
+        }
+
+        .details-section {
+            margin-bottom: 50px;
+        }
+
+        .details-section h2 {
+            color: #0b4f75;
+            font-size: 30px;
+            margin-bottom: 20px;
+        }
+
+        .details-section > p {
+            font-size: 17px;
+            line-height: 1.8;
+            color: #526b80;
+        }
+
+        /* Cards */
+
+        .details-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 25px;
+        }
+
+        .details-card {
+            background: white;
+            border-radius: 18px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.10);
+        }
+
+        .details-card img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .details-card-content {
+            padding: 20px;
+        }
+
+        .details-card h3 {
+            color: #0b4f75;
+            margin: 0 0 10px;
+            font-size: 22px;
+        }
+
+        .details-card p {
+            color: #526b80;
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        /* Experience list */
+
+        .experience-list {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            padding: 0;
+            list-style: none;
+        }
+
+        .experience-list li {
+            background: #f2f8fb;
+            padding: 17px 20px;
+            border-radius: 12px;
+            font-size: 17px;
+            color: #164b68;
+        }
+
+        /* Back button */
+
+        .back-button {
+            display: inline-block;
+            padding: 13px 25px;
+            background: #0b4f75;
+            color: white;
+            text-decoration: none;
+            border-radius: 10px;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+        .back-button:hover {
+            background: #083b58;
+        }
+
+        /* Mobile */
+
+        @media (max-width: 768px) {
+
+            .destination-details-page {
+                padding: 35px 5%;
+            }
+
+            .details-title {
+                font-size: 34px;
+            }
+
+            .main-image {
+                height: 300px;
+            }
+
+            .details-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .experience-list {
+                grid-template-columns: 1fr;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- ==========================================
+     HEADER
+========================================== -->
+
+<header>
+
+    <div class="logo">
+        Travelora ✈️
+    </div>
+
+    <nav>
+
+        <a href="index.html">
+            Home
+        </a>
+
+        <a href="destinations.html">
+            Destinations
+        </a>
+
+        <a href="offers.html">
+            Offers
+        </a>
+
+        <a href="packages.html">
+            Packages
+        </a>
+
+        <a href="activities.html">
+            Activities
+        </a>
+
+        <a href="wishlist.html">
+            ♡ Wishlist
+        </a>
+
+        <a href="trips.html">
+            My Trips
+        </a>
+
+        <a href="login.html">
+            Login
+        </a>
+
+    </nav>
+
+</header>
+
+
+
+<!-- ==========================================
+     DESTINATION DETAILS
+========================================== -->
+
+<section class="destination-details-page">
+
+    <div class="details-container">
+
+        <h1
+            class="details-title"
+            id="placeName">
+        </h1>
+
+
+        <p
+            class="details-intro"
+            id="placeIntro">
+        </p>
+
+
+        <img
+            id="mainImage"
+            class="main-image"
+            src=""
+            alt="">
+
+
+
+        <!-- ==================================
+             PLACES TO VISIT
+        ================================== -->
+
+        <div class="details-section">
+
+            <h2>
+                Places to Visit
+            </h2>
+
+            <div
+                class="details-grid"
+                id="placesGrid">
+            </div>
+
+        </div>
+
+
+
+        <!-- ==================================
+             FOOD
+        ================================== -->
+
+        <div class="details-section">
+
+            <h2>
+                Famous Food
+            </h2>
+
+            <div
+                class="details-grid"
+                id="foodGrid">
+            </div>
+
+        </div>
+
+
+
+        <!-- ==================================
+             CULTURE
+        ================================== -->
+
+        <div class="details-section">
+
+            <h2>
+                Culture
+            </h2>
+
+            <p id="cultureText"></p>
+
+        </div>
+
+
+
+        <!-- ==================================
+             DANCE
+        ================================== -->
+
+        <div class="details-section">
+
+            <h2>
+                Traditional Dance
+            </h2>
+
+            <p id="danceText"></p>
+
+        </div>
+
+
+
+        <!-- ==================================
+             FAMOUS FOR
+        ================================== -->
+
+        <div class="details-section">
+
+            <h2>
+                Famous For
+            </h2>
+
+            <p id="famousText"></p>
+
+        </div>
+
+
+
+        <!-- ==================================
+             EXPERIENCES
+        ================================== -->
+
+        <div class="details-section">
+
+            <h2>
+                Things to Experience
+            </h2>
+
+            <ul
+                class="experience-list"
+                id="experienceList">
+            </ul>
+
+        </div>
+
+
+        <a
+            href="index.html"
+            class="back-button">
+
+            ← Back to Home
+
+        </a>
+
+    </div>
+
+</section>
+
+
+
+<script>
+
+/* =====================================================
+   DESTINATION INFORMATION
+===================================================== */
+
+const destinationData = {
+
+
+    /* =================================================
+       GOA
+    ================================================= */
+
+    goa: {
+
+        name: "Goa",
+
+        intro:
+        "Goa is a beautiful coastal destination known for its beaches, Portuguese heritage, local culture, seafood and relaxed atmosphere.",
+
+        mainImage:
+        "https://images.unsplash.com/photo-1512343879784-a960bf40e7f2?auto=format&fit=crop&w=1400&q=80",
+
+        places: [
+
+            {
+                name: "Baga Beach",
+
+                image:
+                "https://images.unsplash.com/photo-1512343879784-a960bf40e7f2?auto=format&fit=crop&w=900&q=80",
+
+                text:
+                "A popular beach known for its beautiful coastline and lively surroundings."
+            },
+
+            {
+                name: "Calangute Beach",
+
+                image:
+                "https://picsum.photos/seed/calangute/900/600",
+
+                text:
+                "One of the well-known beaches of Goa with a long stretch of sandy coastline."
+            },
+
+            {
+                name: "Fort Aguada",
+
+                image:
+                "https://picsum.photos/seed/fortaguada/900/600",
+
+                text:
+                "A historic fort offering beautiful views of the Arabian Sea."
+            },
+
+            {
+                name: "Basilica of Bom Jesus",
+
+                image:
+                "https://picsum.photos/seed/goachurch/900/600",
+
+                text:
+                "A famous historic church that reflects Goa's Portuguese heritage."
+            }
+
+        ],
+
+        food: [
+
+            {
+                name: "Goan Fish Curry",
+
+                image:
+                "https://picsum.photos/seed/goanfishcurry/900/600",
+
+                text:
+                "A traditional Goan dish prepared with fish and a flavorful coconut-based curry."
+            },
+
+            {
+                name: "Bebinca",
+
+                image:
+                "https://picsum.photos/seed/bebinca/900/600",
+
+                text:
+                "A traditional layered Goan dessert."
+            }
+
+        ],
+
+        culture:
+        "Goan culture combines Indian traditions with Portuguese influences. Festivals, music, architecture, food and local traditions are important parts of Goa.",
+
+        dance:
+        "Fugdi and Dekhnni are traditional Goan folk dance forms performed during cultural celebrations.",
+
+        famous:
+        "Goa is famous for its beaches, seafood, Portuguese architecture, nightlife and relaxed holiday atmosphere.",
+
+        experiences: [
+
+            "Relax at beautiful beaches",
+
+            "Visit historic forts",
+
+            "Explore Portuguese heritage",
+
+            "Taste traditional Goan food",
+
+            "Explore local markets"
+
+        ]
+
+    },
+
+
+    /* =================================================
+       MANALI
+    ================================================= */
+
+    manali: {
+
+        name: "Manali",
+
+        intro:
+        "Manali is a scenic hill destination surrounded by mountains, forests, valleys and beautiful Himalayan landscapes.",
+
+        mainImage:
+        "https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?auto=format&fit=crop&w=1400&q=80",
+
+        places: [
+
+            {
+                name: "Solang Valley",
+
+                image:
+                "https://picsum.photos/seed/solangvalley/900/600",
+
+                text:
+                "A beautiful valley surrounded by mountains and known for scenic views."
+            },
+
+            {
+                name: "Rohtang Pass",
+
+                image:
+                "https://picsum.photos/seed/rohtang/900/600",
+
+                text:
+                "A famous mountain pass surrounded by spectacular Himalayan scenery."
+            },
+
+            {
+                name: "Hadimba Temple",
+
+                image:
+                "https://picsum.photos/seed/hadimbatemple/900/600",
+
+                text:
+                "A historic wooden temple surrounded by cedar forests."
+            },
+
+            {
+                name: "Old Manali",
+
+                image:
+                "https://picsum.photos/seed/oldmanali/900/600",
+
+                text:
+                "A peaceful area known for local culture, cafes and mountain views."
+            }
+
+        ],
+
+        food: [
+
+            {
+                name: "Siddu",
+
+                image:
+                "https://picsum.photos/seed/siddu/900/600",
+
+                text:
+                "A traditional steamed bread popular in Himachal Pradesh."
+            },
+
+            {
+                name: "Thukpa",
+
+                image:
+                "https://picsum.photos/seed/thukpa/900/600",
+
+                text:
+                "A warm noodle soup popular in Himalayan regions."
+            }
+
+        ],
+
+        culture:
+        "Manali has a rich Himalayan culture influenced by Himachali traditions, temples, festivals and local handicrafts.",
+
+        dance:
+        "Traditional Himachali folk dances are performed during festivals and cultural celebrations.",
+
+        famous:
+        "Manali is famous for mountains, valleys, snow, temples and beautiful Himalayan scenery.",
+
+        experiences: [
+
+            "Enjoy mountain scenery",
+
+            "Visit historic temples",
+
+            "Explore beautiful valleys",
+
+            "Experience local culture",
+
+            "Visit Old Manali"
+
+        ]
+
+    },
+
+
+    /* =================================================
+       DUBAI
+    ================================================= */
+
+    dubai: {
+
+        name: "Dubai",
+
+        intro:
+        "Dubai is a modern city known for impressive architecture, shopping, entertainment, beaches and desert landscapes.",
+
+        mainImage:
+        "https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=1400&q=80",
+
+        places: [
+
+            {
+                name: "Burj Khalifa",
+
+                image:
+                "https://picsum.photos/seed/burjkhalifa/900/600",
+
+                text:
+                "One of the world's most recognizable skyscrapers."
+            },
+
+            {
+                name: "Dubai Marina",
+
+                image:
+                "https://picsum.photos/seed/dubaïmarina/900/600",
+
+                text:
+                "A modern waterfront area surrounded by impressive buildings."
+            },
+
+            {
+                name: "Palm Jumeirah",
+
+                image:
+                "https://picsum.photos/seed/palmjumeirah/900/600",
+
+                text:
+                "A famous artificial island shaped like a palm tree."
+            },
+
+            {
+                name: "Dubai Mall",
+
+                image:
+                "https://picsum.photos/seed/dubaimall/900/600",
+
+                text:
+                "A major shopping and entertainment destination."
+            }
+
+        ],
+
+        food: [
+
+            {
+                name: "Shawarma",
+
+                image:
+                "https://picsum.photos/seed/shawarma/900/600",
+
+                text:
+                "A popular Middle Eastern dish made with seasoned meat and bread."
+            },
+
+            {
+                name: "Machboos",
+
+                image:
+                "https://picsum.photos/seed/machboos/900/600",
+
+                text:
+                "A traditional rice dish prepared with spices and meat or seafood."
+            }
+
+        ],
+
+        culture:
+        "Dubai combines Emirati traditions with cultural influences from people and communities around the world.",
+
+        dance:
+        "Al Ayala is a traditional Emirati performance associated with cultural celebrations.",
+
+        famous:
+        "Dubai is famous for modern architecture, shopping, desert landscapes, beaches and entertainment.",
+
+        experiences: [
+
+            "See the Burj Khalifa",
+
+            "Explore Dubai Marina",
+
+            "Visit Palm Jumeirah",
+
+            "Explore shopping areas",
+
+            "Discover Emirati culture"
+
+        ]
+
+    },
+
+
+    /* =================================================
+       PARIS
+    ================================================= */
+
+    paris: {
+
+        name: "Paris",
+
+        intro:
+        "Paris is a historic European city famous for art, architecture, museums, food and iconic landmarks.",
+
+        mainImage:
+        "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&w=1400&q=80",
+
+        places: [
+
+            {
+                name: "Eiffel Tower",
+
+                image:
+                "https://picsum.photos/seed/eiffeltower/900/600",
+
+                text:
+                "One of the world's most famous landmarks."
+            },
+
+            {
+                name: "Louvre Museum",
+
+                image:
+                "https://picsum.photos/seed/louvre/900/600",
+
+                text:
+                "A famous museum containing a large collection of artworks."
+            },
+
+            {
+                name: "Notre-Dame",
+
+                image:
+                "https://picsum.photos/seed/notredame/900/600",
+
+                text:
+                "A historic cathedral located in central Paris."
+            },
+
+            {
+                name: "Montmartre",
+
+                image:
+                "https://picsum.photos/seed/montmartre/900/600",
+
+                text:
+                "A historic neighborhood known for art and beautiful views."
+            }
+
+        ],
+
+        food: [
+
+            {
+                name: "Croissant",
+
+                image:
+                "https://picsum.photos/seed/croissant/900/600",
+
+                text:
+                "A famous French pastry with a flaky texture."
+            },
+
+            {
+                name: "Crêpes",
+
+                image:
+                "https://picsum.photos/seed/crepes/900/600",
+
+                text:
+                "Thin French pancakes that can be served with sweet or savory fillings."
+            }
+
+        ],
+
+        culture:
+        "Paris has a rich cultural history connected with art, fashion, literature, architecture and food.",
+
+        dance:
+        "Paris is known for classical ballet and many other forms of dance and performing arts.",
+
+        famous:
+        "Paris is famous for the Eiffel Tower, museums, art, fashion, architecture and cuisine.",
+
+        experiences: [
+
+            "Visit the Eiffel Tower",
+
+            "Explore museums",
+
+            "Walk along the Seine",
+
+            "Explore historic neighborhoods",
+
+            "Taste French food"
+
+        ]
+
+    },
+
+
+    /* =================================================
+       BALI
+    ================================================= */
+
+    bali: {
+
+        name: "Bali",
+
+        intro:
+        "Bali is an Indonesian island known for beautiful beaches, temples, rice terraces, traditional culture and natural scenery.",
+
+        mainImage:
+        "https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=1400&q=80",
+
+        places: [
+
+            {
+                name: "Uluwatu Temple",
+
+                image:
+                "https://picsum.photos/seed/uluwatu/900/600",
+
+                text:
+                "A famous temple located on a cliff overlooking the ocean."
+            },
+
+            {
+                name: "Ubud",
+
+                image:
+                "https://picsum.photos/seed/ubud/900/600",
+
+                text:
+                "A cultural area known for art, temples and rice terraces."
+            },
+
+            {
+                name: "Seminyak Beach",
+
+                image:
+                "https://picsum.photos/seed/seminyak/900/600",
+
+                text:
+                "A popular coastal destination with beautiful beach views."
+            },
+
+            {
+                name: "Tegallalang Rice Terraces",
+
+                image:
+                "https://picsum.photos/seed/balirice/900/600",
+
+                text:
+                "Beautiful terraced rice fields surrounded by green landscapes."
+            }
+
+        ],
+
+        food: [
+
+            {
+                name: "Nasi Goreng",
+
+                image:
+                "https://picsum.photos/seed/nasigoreng/900/600",
+
+                text:
+                "A popular Indonesian fried rice dish."
+            },
+
+            {
+                name: "Satay",
+
+                image:
+                "https://picsum.photos/seed/satay/900/600",
+
+                text:
+                "Grilled skewered food commonly served with flavorful sauces."
+            }
+
+        ],
+
+        culture:
+        "Bali has a rich cultural tradition influenced by Balinese Hinduism, temples, art, music and festivals.",
+
+        dance:
+        "Legong and Barong are well-known traditional Balinese dance forms.",
+
+        famous:
+        "Bali is famous for beaches, temples, rice terraces, traditional culture and natural beauty.",
+
+        experiences: [
+
+            "Visit traditional temples",
+
+            "Explore rice terraces",
+
+            "Enjoy beautiful beaches",
+
+            "Explore Ubud",
+
+            "Experience Balinese culture"
+
+        ]
+
+    },
+
+
+    /* =================================================
+       MALDIVES
+    ================================================= */
+
+    maldives: {
+
+        name: "Maldives",
+
+        intro:
+        "The Maldives is an island nation famous for tropical beaches, clear waters, coral reefs and beautiful islands.",
+
+        mainImage:
+        "https://images.unsplash.com/photo-1573843981267-be1999ff37cd?auto=format&fit=crop&w=1400&q=80",
+
+        places: [
+
+            {
+                name: "Malé",
+
+                image:
+                "https://picsum.photos/seed/male/900/600",
+
+                text:
+                "The capital city of the Maldives."
+            },
+
+            {
+                name: "Hulhumalé",
+
+                image:
+                "https://picsum.photos/seed/hulhumale/900/600",
+
+                text:
+                "An island city with beaches and modern development."
+            },
+
+            {
+                name: "Ari Atoll",
+
+                image:
+                "https://picsum.photos/seed/ariatoll/900/600",
+
+                text:
+                "A beautiful atoll known for marine life and clear waters."
+            },
+
+            {
+                name: "Vaavu Atoll",
+
+                image:
+                "https://picsum.photos/seed/vaavu/900/600",
+
+                text:
+                "An island region known for coral reefs and ocean scenery."
+            }
+
+        ],
+
+        food: [
+
+            {
+                name: "Mas Huni",
+
+                image:
+                "https://picsum.photos/seed/mashuni/900/600",
+
+                text:
+                "A traditional Maldivian breakfast made with tuna, coconut and other ingredients."
+            },
+
+            {
+                name: "Garudhiya",
+
+                image:
+                "https://picsum.photos/seed/garudhiya/900/600",
+
+                text:
+                "A traditional fish broth commonly served with rice."
+            }
+
+        ],
+
+        culture:
+        "Maldivian culture has strong island traditions influenced by South Asian and Islamic heritage.",
+
+        dance:
+        "Bodu Beru is a traditional Maldivian performance involving drums, singing and rhythmic movement.",
+
+        famous:
+        "The Maldives is famous for tropical islands, beaches, coral reefs and clear blue waters.",
+
+        experiences: [
+
+            "Enjoy beautiful beaches",
+
+            "Explore island scenery",
+
+            "Discover local culture",
+
+            "Enjoy ocean views",
+
+            "Explore coral reef areas"
+
+        ]
+
+    },
+
+
+    /* =================================================
+       SINGAPORE
+    ================================================= */
+
+    singapore: {
+
+        name: "Singapore",
+
+        intro:
+        "Singapore is a modern island city-state known for its architecture, gardens, food and multicultural society.",
+
+        mainImage:
+        "https://images.unsplash.com/photo-1525625293386-3f8f99389edd?auto=format&fit=crop&w=1400&q=80",
+
+        places: [
+
+            {
+                name: "Marina Bay",
+
+                image:
+                "https://picsum.photos/seed/marinabay/900/600",
+
+                text:
+                "A modern waterfront area with impressive city views."
+            },
+
+            {
+                name: "Gardens by the Bay",
+
+                image:
+                "https://picsum.photos/seed/gardensbythebay/900/600",
+
+                text:
+                "A famous garden complex featuring the iconic Supertrees."
+            },
+
+            {
+                name: "Sentosa Island",
+
+                image:
+                "https://picsum.photos/seed/sentosa/900/600",
+
+                text:
+                "An island destination with beaches and entertainment."
+            },
+
+            {
+                name: "Chinatown",
+
+                image:
+                "https://picsum.photos/seed/singaporechinatown/900/600",
+
+                text:
+                "A historic neighborhood with cultural landmarks and local food."
+            }
+
+        ],
+
+        food: [
+
+            {
+                name: "Hainanese Chicken Rice",
+
+                image:
+                "https://picsum.photos/seed/chickenrice/900/600",
+
+                text:
+                "One of Singapore's most well-known dishes."
+            },
+
+            {
+                name: "Laksa",
+
+                image:
+                "https://picsum.photos/seed/laksa/900/600",
+
+                text:
+                "A flavorful noodle soup popular in Singapore."
+            }
+
+        ],
+
+        culture:
+        "Singapore has a multicultural society with Chinese, Malay, Indian and other cultural influences.",
+
+        dance:
+        "Singapore hosts many cultural performances representing its diverse communities.",
+
+        famous:
+        "Singapore is famous for modern architecture, gardens, food, shopping and multicultural heritage.",
+
+        experiences: [
+
+            "Explore Marina Bay",
+
+            "Visit Gardens by the Bay",
+
+            "Explore Sentosa",
+
+            "Taste local food",
+
+            "Visit cultural neighborhoods"
+
+        ]
+
+    },
+
+
+    /* =================================================
+       LONDON
+    ================================================= */
+
+    london: {
+
+        name: "London",
+
+        intro:
+        "London is a historic city known for landmarks, museums, royal heritage, parks, theatres and diverse culture.",
+
+        mainImage:
+        "https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?auto=format&fit=crop&w=1400&q=80",
+
+        places: [
+
+            {
+                name: "Big Ben",
+
+                image:
+                "https://picsum.photos/seed/bigben/900/600",
+
+                text:
+                "One of London's most recognizable landmarks."
+            },
+
+            {
+                name: "Tower Bridge",
+
+                image:
+                "https://picsum.photos/seed/towerbridge/900/600",
+
+                text:
+                "A famous historic bridge crossing the River Thames."
+            },
+
+            {
+                name: "Buckingham Palace",
+
+                image:
+                "https://picsum.photos/seed/buckinghampalace/900/600",
+
+                text:
+                "A famous royal residence in London."
+            },
+
+            {
+                name: "British Museum",
+
+                image:
+                "https://picsum.photos/seed/britishmuseum/900/600",
+
+                text:
+                "A major museum with collections from many cultures and historical periods."
+            }
+
+        ],
+
+        food: [
+
+            {
+                name: "Fish and Chips",
+
+                image:
+                "https://picsum.photos/seed/fishchips/900/600",
+
+                text:
+                "A classic British dish consisting of fried fish and chips."
+            },
+
+            {
+                name: "Sunday Roast",
+
+                image:
+                "https://picsum.photos/seed/sundayroast/900/600",
+
+                text:
+                "A traditional British meal commonly served with roasted meat and vegetables."
+            }
+
+        ],
+
+        culture:
+        "London has a diverse cultural scene covering history, theatre, music, art, literature and traditions from around the world.",
+
+        dance:
+        "London hosts many forms of classical, traditional and contemporary dance performances.",
+
+        famous:
+        "London is famous for historic landmarks, royal heritage, museums, theatres and multicultural life.",
+
+        experiences: [
+
+            "Visit historic landmarks",
+
+            "Explore museums",
+
+            "Walk beside the River Thames",
+
+            "Explore historic neighborhoods",
+
+            "Taste traditional British food"
+
+        ]
+
+    }
+
+};
+
+
+
+/* =====================================================
+   GET PLACE FROM URL
+===================================================== */
+
+const params =
+    new URLSearchParams(
+        window.location.search
+    );
+
+const requestedPlace =
+    params.get("place");
+
+
+/*
+   If someone opens this page without a place,
+   send them back to Home instead of showing
+   some random destination.
+*/
+
+if (
+    !requestedPlace ||
+    !destinationData[
+        requestedPlace.toLowerCase()
+    ]
+) {
+
+    window.location.href =
+        "index.html";
+
+}
+
+
+/* =====================================================
+   GET SELECTED DESTINATION
+===================================================== */
+
+const place =
+    requestedPlace.toLowerCase();
+
+const data =
+    destinationData[place];
+
+
+
+/* =====================================================
+   BASIC INFORMATION
+===================================================== */
+
+document.getElementById(
+    "placeName"
+).textContent =
+    data.name;
+
+
+document.getElementById(
+    "placeIntro"
+).textContent =
+    data.intro;
+
+
+document.getElementById(
+    "mainImage"
+).src =
+    data.mainImage;
+
+
+document.getElementById(
+    "mainImage"
+).alt =
+    data.name;
+
+
+
+/* =====================================================
+   PLACES TO VISIT
+===================================================== */
+
+const placesGrid =
+    document.getElementById(
+        "placesGrid"
+    );
+
+
+data.places.forEach(
+    function(placeItem) {
+
+        placesGrid.innerHTML += `
+
+            <div class="details-card">
+
+                <img
+                    src="${placeItem.image}"
+                    alt="${placeItem.name}"
+                >
+
+                <div class="details-card-content">
+
+                    <h3>
+                        ${placeItem.name}
+                    </h3>
+
+                    <p>
+                        ${placeItem.text}
+                    </p>
+
+                </div>
+
+            </div>
+
+        `;
+
+    }
+);
+
+
+
+/* =====================================================
+   FOOD
+===================================================== */
+
+const foodGrid =
+    document.getElementById(
+        "foodGrid"
+    );
+
+
+data.food.forEach(
+    function(foodItem) {
+
+        foodGrid.innerHTML += `
+
+            <div class="details-card">
+
+                <img
+                    src="${foodItem.image}"
+                    alt="${foodItem.name}"
+                >
+
+                <div class="details-card-content">
+
+                    <h3>
+                        ${foodItem.name}
+                    </h3>
+
+                    <p>
+                        ${foodItem.text}
+                    </p>
+
+                </div>
+
+            </div>
+
+        `;
+
+    }
+);
+
+
+
+/* =====================================================
+   CULTURE
+===================================================== */
+
+document.getElementById(
+    "cultureText"
+).textContent =
+    data.culture;
+
+
+
+/* =====================================================
+   DANCE
+===================================================== */
+
+document.getElementById(
+    "danceText"
+).textContent =
+    data.dance;
+
+
+
+/* =====================================================
+   FAMOUS FOR
+===================================================== */
+
+document.getElementById(
+    "famousText"
+).textContent =
+    data.famous;
+
+
+
+/* =====================================================
+   EXPERIENCES
+===================================================== */
+
+const experienceList =
+    document.getElementById(
+        "experienceList"
+    );
+
+
+data.experiences.forEach(
+    function(experience) {
+
+        experienceList.innerHTML +=
+            `<li>${experience}</li>`;
+
+    }
+);
+
+
+
+/* =====================================================
+   PAGE TITLE
+===================================================== */
+
+document.title =
+    "Travelora - " +
+    data.name;
+
+</script>
+
+
+</body>
+
+</html>

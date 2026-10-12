@@ -1,0 +1,1934 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Travelora - Notifications</title>
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+          rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        :root {
+            --primary: #176b80;
+            --dark: #104d60;
+            --orange: #ff8a3d;
+            --background: #f4f7fb;
+            --text: #263445;
+            --muted: #7b8794;
+            --border: #e5ebf0;
+            --white: #ffffff;
+        }
+
+        body {
+            background: var(--background);
+            color: var(--text);
+        }
+
+        /* NAVBAR */
+
+        header {
+            background: white;
+            box-shadow: 0 3px 15px rgba(0,0,0,0.06);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .navbar {
+            max-width: 1250px;
+            margin: auto;
+            padding: 17px 25px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        .logo {
+            text-decoration: none;
+            font-size: 25px;
+            font-weight: 800;
+            color: var(--primary);
+            white-space: nowrap;
+        }
+
+        .logo span {
+            color: var(--orange);
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #465364;
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        nav a:hover,
+        nav a.active {
+            color: var(--primary);
+        }
+
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+        }
+
+        .icon-btn {
+            border: none;
+            background: transparent;
+            color: var(--primary);
+            font-size: 20px;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .notification-count {
+            position: absolute;
+            top: -9px;
+            right: -10px;
+            min-width: 19px;
+            height: 19px;
+            border-radius: 50%;
+            background: var(--orange);
+            color: white;
+            font-size: 10px;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 2px;
+        }
+
+        /* HERO */
+
+        .hero {
+            background: linear-gradient(120deg, #104d60, #176b80, #2997a7);
+            color: white;
+            padding: 45px 25px 65px;
+        }
+
+        .hero-content {
+            max-width: 1150px;
+            margin: auto;
+        }
+
+        .breadcrumb {
+            font-size: 12px;
+            margin-bottom: 17px;
+            color: #d9edf1;
+        }
+
+        .breadcrumb a {
+            color: white;
+            text-decoration: none;
+        }
+
+        .hero h1 {
+            font-size: 34px;
+            margin-bottom: 10px;
+        }
+
+        .hero p {
+            font-size: 13px;
+            line-height: 1.8;
+            color: #e1f1f4;
+        }
+
+        /* MAIN */
+
+        .container {
+            max-width: 1150px;
+            margin: -30px auto 55px;
+            padding: 0 20px;
+        }
+
+        .summary-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+            margin-bottom: 25px;
+        }
+
+        .summary-card {
+            background: white;
+            padding: 22px;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            box-shadow: 0 5px 20px rgba(25,50,70,0.06);
+        }
+
+        .summary-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 13px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 21px;
+            flex-shrink: 0;
+        }
+
+        .blue {
+            color: #176b80;
+            background: #e4f4fa;
+        }
+
+        .orange {
+            color: #f17c2d;
+            background: #fff0e5;
+        }
+
+        .green {
+            color: #198754;
+            background: #e5f7ed;
+        }
+
+        .summary-card h3 {
+            font-size: 24px;
+        }
+
+        .summary-card p {
+            font-size: 12px;
+            color: var(--muted);
+            margin-top: 3px;
+        }
+
+        /* PANEL */
+
+        .notification-panel {
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 5px 25px rgba(25,50,70,0.05);
+            overflow: hidden;
+        }
+
+        .panel-heading {
+            padding: 25px 28px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .panel-heading h2 {
+            font-size: 21px;
+        }
+
+        .panel-heading p {
+            font-size: 12px;
+            color: var(--muted);
+            margin-top: 5px;
+        }
+
+        button {
+            font-family: inherit;
+        }
+
+        .mark-all {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 11px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .mark-all:hover {
+            background: var(--dark);
+        }
+
+        /* SEARCH */
+
+        .toolbar {
+            padding: 20px 28px;
+            display: flex;
+            gap: 15px;
+            align-items: center;
+            flex-wrap: wrap;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .search-box {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: #f5f8fa;
+            border: 1px solid var(--border);
+            border-radius: 9px;
+            padding: 11px 14px;
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .search-box i {
+            color: var(--muted);
+        }
+
+        .search-box input {
+            border: none;
+            outline: none;
+            background: transparent;
+            width: 100%;
+            font-size: 12px;
+        }
+
+        .filters {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 9px 13px;
+            font-size: 11px;
+            color: #526173;
+            cursor: pointer;
+        }
+
+        .filter-btn.active,
+        .filter-btn:hover {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        /* NOTIFICATION ITEMS */
+
+        .notification-list {
+            padding: 0 28px;
+        }
+
+        .notification-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+            padding: 23px 12px;
+            border-bottom: 1px solid var(--border);
+            transition: 0.2s;
+        }
+
+        .notification-item:hover {
+            background: #fbfdfe;
+        }
+
+        .notification-item.unread {
+            background: #f0f9fc;
+            border-left: 3px solid var(--primary);
+        }
+
+        .type-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 19px;
+            flex-shrink: 0;
+        }
+
+        .flight {
+            color: #2875d7;
+            background: #e7f1ff;
+        }
+
+        .train {
+            color: #7952c7;
+            background: #f0eaff;
+        }
+
+        .bus {
+            color: #b78112;
+            background: #fff3d9;
+        }
+
+        .cab {
+            color: #16885b;
+            background: #e1f8ee;
+        }
+
+        .hotel {
+            color: #d64c49;
+            background: #ffe9e8;
+        }
+
+        .package {
+            color: #7b52b9;
+            background: #f0eaff;
+        }
+
+        .activity {
+            color: #16885b;
+            background: #e1f8ee;
+        }
+
+        .payment {
+            color: #198754;
+            background: #e0f5e7;
+        }
+
+        .general {
+            color: var(--primary);
+            background: #e5f4f7;
+        }
+
+        .notification-content {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .title-row {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 9px;
+            margin-bottom: 7px;
+        }
+
+        .notification-title {
+            font-size: 14px;
+            font-weight: 700;
+        }
+
+        .new-badge {
+            background: #dff3f8;
+            color: var(--primary);
+            padding: 3px 7px;
+            border-radius: 5px;
+            font-size: 9px;
+            font-weight: 700;
+        }
+
+        .notification-message {
+            color: #697789;
+            font-size: 12px;
+            line-height: 1.8;
+            overflow-wrap: anywhere;
+        }
+
+        .booking-id {
+            display: inline-block;
+            margin-top: 9px;
+            background: #edf2f6;
+            color: #4d5b6a;
+            padding: 5px 8px;
+            border-radius: 5px;
+            font-size: 10px;
+        }
+
+        .notification-time {
+            color: #98a2af;
+            font-size: 10px;
+            margin-top: 9px;
+        }
+
+        .notification-actions {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .action-btn {
+            border: none;
+            background: transparent;
+            color: #8b97a5;
+            cursor: pointer;
+            font-size: 14px;
+            padding: 6px;
+        }
+
+        .action-btn:hover {
+            color: var(--primary);
+        }
+
+        .action-btn.delete:hover {
+            color: #dc3545;
+        }
+
+        /* EMPTY STATE */
+
+        .empty-state {
+            display: none;
+            text-align: center;
+            padding: 65px 20px;
+        }
+
+        .empty-state i {
+            font-size: 45px;
+            color: #b9cbd4;
+            margin-bottom: 18px;
+        }
+
+        .empty-state h3 {
+            font-size: 18px;
+            margin-bottom: 8px;
+        }
+
+        .empty-state p {
+            font-size: 12px;
+            color: var(--muted);
+            line-height: 1.8;
+        }
+
+        .clear-area {
+            padding: 20px 28px;
+            border-top: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .clear-area p {
+            color: var(--muted);
+            font-size: 11px;
+        }
+
+        .clear-btn {
+            background: #fff0f0;
+            color: #dc3545;
+            border: none;
+            border-radius: 8px;
+            padding: 10px 14px;
+            font-size: 11px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .clear-btn:hover {
+            background: #ffe0e0;
+        }
+
+        /* TOAST */
+
+        .toast {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            background: #173f4b;
+            color: white;
+            padding: 14px 20px;
+            border-radius: 10px;
+            font-size: 12px;
+            opacity: 0;
+            transform: translateY(15px);
+            pointer-events: none;
+            transition: 0.3s;
+            z-index: 999;
+        }
+
+        .toast.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* FOOTER */
+
+        footer {
+            background: #103f4c;
+            color: white;
+            text-align: center;
+            padding: 35px 20px;
+        }
+
+        .footer-logo {
+            font-size: 23px;
+            font-weight: 800;
+            margin-bottom: 10px;
+        }
+
+        .footer-logo span {
+            color: var(--orange);
+        }
+
+        footer p {
+            font-size: 11px;
+            color: #c4dce2;
+            line-height: 1.8;
+        }
+
+        .footer-links {
+            margin: 18px 0;
+            display: flex;
+            justify-content: center;
+            gap: 22px;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: white;
+            text-decoration: none;
+            font-size: 11px;
+        }
+
+        .footer-links a:hover {
+            color: var(--orange);
+        }
+
+        /* RESPONSIVE */
+
+        @media (max-width: 900px) {
+            .navbar {
+                flex-wrap: wrap;
+            }
+
+            nav {
+                order: 3;
+                width: 100%;
+                justify-content: center;
+                flex-wrap: wrap;
+                gap: 15px;
+            }
+
+            .summary-grid {
+                grid-template-columns: 1fr;
+                gap: 12px;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .navbar {
+                padding: 15px;
+            }
+
+            .logo {
+                font-size: 21px;
+            }
+
+            nav {
+                gap: 12px;
+            }
+
+            nav a {
+                font-size: 10px;
+            }
+
+            .hero {
+                padding: 35px 20px 55px;
+            }
+
+            .hero h1 {
+                font-size: 27px;
+            }
+
+            .container {
+                padding: 0 12px;
+            }
+
+            .panel-heading {
+                padding: 20px 16px;
+                align-items: flex-start;
+                flex-direction: column;
+            }
+
+            .toolbar {
+                padding: 17px 15px;
+            }
+
+            .filters {
+                width: 100%;
+            }
+
+            .filter-btn {
+                flex: 1;
+            }
+
+            .notification-list {
+                padding: 0 10px;
+            }
+
+            .notification-item {
+                gap: 10px;
+                padding: 18px 8px;
+            }
+
+            .type-icon {
+                width: 39px;
+                height: 39px;
+                font-size: 15px;
+            }
+
+            .notification-title {
+                font-size: 12px;
+            }
+
+            .notification-message {
+                font-size: 11px;
+            }
+
+            .notification-actions {
+                flex-direction: column;
+                gap: 5px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- NAVIGATION BAR -->
+
+    <header>
+        <div class="navbar">
+
+            <a href="index.html" class="logo">
+                Travelora<span>🌍✈️</span>
+            </a>
+
+            <nav>
+                <a href="index.html">Home</a>
+                <a href="destinations.html">Destinations</a>
+                <a href="offers.html">Offers</a>
+                <a href="packages.html">Packages</a>
+                <a href="activities.html">Activities</a>
+                <a href="trips.html">My Trips</a>
+            </nav>
+
+            <div class="nav-actions">
+
+                <button class="icon-btn"
+                        onclick="window.location.href='wishlist.html'"
+                        aria-label="Wishlist">
+                    <i class="fa-regular fa-heart"></i>
+                </button>
+
+                <button class="icon-btn"
+                        onclick="window.location.href='notifications.html'"
+                        aria-label="Notifications">
+                    <i class="fa-regular fa-bell"></i>
+                    <span class="notification-count" id="navCount">0</span>
+                </button>
+
+                <button class="icon-btn"
+                        onclick="window.location.href='login.html'"
+                        aria-label="Profile">
+                    <i class="fa-regular fa-user"></i>
+                </button>
+
+            </div>
+        </div>
+    </header>
+
+    <!-- HERO -->
+
+    <section class="hero">
+        <div class="hero-content">
+
+            <div class="breadcrumb">
+                <a href="index.html">Home</a>
+                &nbsp; / &nbsp; Notifications
+            </div>
+
+            <h1>
+                <i class="fa-regular fa-bell"></i>
+                Your Notifications
+            </h1>
+
+            <p>
+                Get updates about your flights, trains, buses, cabs,
+                hotels, payments and bookings.
+            </p>
+
+        </div>
+    </section>
+
+    <!-- MAIN CONTENT -->
+
+    <main class="container">
+
+        <section class="summary-grid">
+
+            <div class="summary-card">
+                <div class="summary-icon blue">
+                    <i class="fa-regular fa-bell"></i>
+                </div>
+
+                <div>
+                    <h3 id="totalCount">0</h3>
+                    <p>Total Notifications</p>
+                </div>
+            </div>
+
+            <div class="summary-card">
+                <div class="summary-icon orange">
+                    <i class="fa-solid fa-envelope"></i>
+                </div>
+
+                <div>
+                    <h3 id="unreadCount">0</h3>
+                    <p>Unread Notifications</p>
+                </div>
+            </div>
+
+            <div class="summary-card">
+                <div class="summary-icon green">
+                    <i class="fa-solid fa-ticket"></i>
+                </div>
+
+                <div>
+                    <h3 id="bookingCount">0</h3>
+                    <p>Booking Notifications</p>
+                </div>
+            </div>
+
+        </section>
+
+        <section class="notification-panel">
+
+            <div class="panel-heading">
+
+                <div>
+                    <h2>Recent Notifications</h2>
+                    <p>Your latest Travelora booking updates.</p>
+                </div>
+
+                <button class="mark-all" onclick="markAllAsRead()">
+                    <i class="fa-solid fa-check-double"></i>
+                    Mark All as Read
+                </button>
+
+            </div>
+
+            <!-- SEARCH AND FILTER -->
+
+            <div class="toolbar">
+
+                <div class="search-box">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+
+                    <input type="text"
+                           id="searchInput"
+                           placeholder="Search notifications..."
+                           oninput="renderNotifications()">
+                </div>
+
+                <div class="filters">
+
+                    <button class="filter-btn active"
+                            onclick="setFilter('all', this)">
+                        All
+                    </button>
+
+                    <button class="filter-btn"
+                            onclick="setFilter('unread', this)">
+                        Unread
+                    </button>
+
+                    <button class="filter-btn"
+                            onclick="setFilter('booking', this)">
+                        Bookings
+                    </button>
+
+                    <button class="filter-btn"
+                            onclick="setFilter('payment', this)">
+                        Payments
+                    </button>
+
+                </div>
+
+            </div>
+
+            <!-- DYNAMIC NOTIFICATION LIST -->
+
+            <div class="notification-list" id="notificationList"></div>
+
+            <!-- EMPTY STATE -->
+
+            <div class="empty-state" id="emptyState">
+                <i class="fa-regular fa-bell-slash"></i>
+
+                <h3>No Notifications Yet</h3>
+
+                <p>
+                    Your notifications will appear here after you
+                    successfully complete a booking on Travelora.
+                </p>
+            </div>
+
+            <div class="clear-area">
+
+                <p id="footerCount">No notifications available.</p>
+
+                <button class="clear-btn" onclick="clearNotifications()">
+                    <i class="fa-regular fa-trash-can"></i>
+                    Clear All Notifications
+                </button>
+
+            </div>
+
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+
+    <footer>
+
+        <div class="footer-logo">
+            Travelora<span>🌍✈️</span>
+        </div>
+
+        <p>
+            One Platform. Every Journey.<br>
+            Your travel plans, bookings and memories — all in one place.
+        </p>
+
+        <div class="footer-links">
+            <a href="index.html">Home</a>
+            <a href="destinations.html">Destinations</a>
+            <a href="offers.html">Offers</a>
+            <a href="trips.html">My Trips</a>
+        </div>
+
+        <p>© 2026 Travelora. All rights reserved.</p>
+
+    </footer>
+
+    <div class="toast" id="toast"></div>
+
+    <!-- NOTIFICATION JAVASCRIPT -->
+
+    <script>
+        /* ==============================================
+           STORAGE KEY
+
+           All booking pages must use this same key when
+           saving notification objects.
+        ============================================== */
+
+        const STORAGE_KEY = "traveloraNotifications";
+
+        let currentFilter = "all";
+        let toastTimer;
+
+        /* ==============================================
+           CREATE A STABLE ID FOR OLDER NOTIFICATIONS
+        ============================================== */
+
+        function createNotificationId() {
+
+            if (
+                window.crypto &&
+                typeof window.crypto.randomUUID === "function"
+            ) {
+                return "notification-" + window.crypto.randomUUID();
+            }
+
+            return "notification-" +
+                Date.now() + "-" +
+                Math.random().toString(36).slice(2, 12);
+
+        }
+
+        /* ==============================================
+           CONVERT DIFFERENT TIMESTAMP FORMATS
+
+           Supports numeric timestamps, numeric strings,
+           ISO date strings and normal date strings.
+        ============================================== */
+
+        function parseNotificationTime(notification) {
+
+            const possibleValues = [
+                notification.time,
+                notification.timestamp,
+                notification.createdAt,
+                notification.date
+            ];
+
+            for (const value of possibleValues) {
+
+                if (value === undefined || value === null || value === "") {
+                    continue;
+                }
+
+                if (typeof value === "number" && Number.isFinite(value)) {
+
+                    if (value > 0) {
+                        return value;
+                    }
+
+                    continue;
+                }
+
+                const stringValue = String(value).trim();
+
+                if (!stringValue) {
+                    continue;
+                }
+
+                /*
+                   Numeric timestamps may be stored as strings.
+                   Ten-digit timestamps are treated as seconds.
+                   Thirteen-digit timestamps are milliseconds.
+                */
+
+                if (/^\d{10,13}$/.test(stringValue)) {
+
+                    const numericValue = Number(stringValue);
+
+                    const timestamp = stringValue.length === 10
+                        ? numericValue * 1000
+                        : numericValue;
+
+                    if (Number.isFinite(timestamp) && timestamp > 0) {
+                        return timestamp;
+                    }
+
+                }
+
+                /*
+                   Correctly parse ISO strings such as:
+                   2026-10-11T12:30:00.000Z
+                */
+
+                const parsed = Date.parse(stringValue);
+
+                if (Number.isFinite(parsed) && parsed > 0) {
+                    return parsed;
+                }
+
+            }
+
+            return Date.now();
+
+        }
+
+        /* ==============================================
+           NORMALIZE A NOTIFICATION
+
+           Keeps the original data and adds safe defaults.
+        ============================================== */
+
+        function normalizeNotification(item, index) {
+
+            const notification =
+                item && typeof item === "object" && !Array.isArray(item)
+                    ? { ...item }
+                    : {};
+
+            if (
+                notification.id === undefined ||
+                notification.id === null ||
+                String(notification.id).trim() === ""
+            ) {
+                notification.id = createNotificationId();
+            } else {
+                notification.id = String(notification.id);
+            }
+
+            if (!notification.title) {
+                notification.title = "Booking Confirmed";
+            }
+
+            if (!notification.message) {
+                notification.message =
+                    "Your Travelora booking has been confirmed.";
+            }
+
+            /*
+               Preserve explicit categories.
+               Otherwise identify payment notifications by type,
+               category, title or message.
+            */
+
+            const originalType =
+                String(notification.type || "").toLowerCase().trim();
+
+            const originalCategory =
+                String(notification.category || "").toLowerCase().trim();
+
+            const categoryText = (
+                originalType + " " +
+                originalCategory + " " +
+                String(notification.title || "") + " " +
+                String(notification.message || "")
+            ).toLowerCase();
+
+            if (
+                originalCategory === "payment" ||
+                originalType === "payment" ||
+                categoryText.includes("payment") ||
+                categoryText.includes("transaction")
+            ) {
+                notification.category = "payment";
+            } else {
+                notification.category = "booking";
+            }
+
+            /*
+               Determine the service type using the saved type,
+               service name, booking name and message.
+            */
+
+            const rawService = [
+                notification.service,
+                notification.travel,
+                notification.bookingName,
+                notification.bookingType,
+                notification.name,
+                notification.destination,
+                notification.title,
+                notification.message,
+                notification.type
+            ].filter(Boolean).join(" ").toLowerCase();
+
+            let serviceType = "general";
+
+            if (
+                originalType === "payment" ||
+                notification.category === "payment"
+            ) {
+                serviceType = "payment";
+
+            } else if (
+                /\bflight(s)?\b/.test(rawService) ||
+                rawService.includes("airline") ||
+                rawService.includes("indigo") ||
+                rawService.includes("air india") ||
+                rawService.includes("akasa air")
+            ) {
+                serviceType = "flight";
+
+            } else if (
+                /\bhotel(s)?\b/.test(rawService) ||
+                rawService.includes("resort") ||
+                rawService.includes("accommodation") ||
+                originalType === "hotel"
+            ) {
+                serviceType = "hotel";
+
+            } else if (
+                /\bcab(s)?\b/.test(rawService) ||
+                rawService.includes("taxi") ||
+                rawService.includes("car rental") ||
+                originalType === "cab"
+            ) {
+                serviceType = "cab";
+
+            } else if (
+                /\bbus(es)?\b/.test(rawService) ||
+                rawService.includes("bus booking") ||
+                originalType === "bus"
+            ) {
+                serviceType = "bus";
+
+            } else if (
+                /\btrain(s)?\b/.test(rawService) ||
+                rawService.includes("railway") ||
+                rawService.includes("superfast") ||
+                originalType === "train"
+            ) {
+                serviceType = "train";
+
+            } else if (
+                rawService.includes("package") ||
+                rawService.includes("holiday package") ||
+                originalType === "package"
+            ) {
+                serviceType = "package";
+
+            } else if (
+                rawService.includes("activity") ||
+                rawService.includes("adventure") ||
+                originalType === "activity"
+            ) {
+                serviceType = "activity";
+
+            } else {
+
+                const validTypes = [
+                    "flight",
+                    "train",
+                    "bus",
+                    "cab",
+                    "hotel",
+                    "package",
+                    "activity",
+                    "payment",
+                    "general"
+                ];
+
+                if (validTypes.includes(originalType)) {
+                    serviceType = originalType;
+                }
+
+            }
+
+            notification.type = serviceType;
+
+            /*
+               Correctly handle timestamps saved as ISO strings.
+            */
+
+            const timestamp = parseNotificationTime(notification);
+
+            notification.time = timestamp;
+
+            if (!notification.date) {
+                notification.date = new Date(timestamp).toISOString();
+            }
+
+            if (typeof notification.read !== "boolean") {
+                notification.read = false;
+            }
+
+            return notification;
+
+        }
+
+        /* ==============================================
+           READ SAVED NOTIFICATIONS
+
+           Does not generate sample or demo notifications.
+        ============================================== */
+
+        function getNotifications() {
+
+            try {
+
+                const saved = localStorage.getItem(STORAGE_KEY);
+
+                if (!saved) {
+                    return [];
+                }
+
+                const data = JSON.parse(saved);
+
+                if (!Array.isArray(data)) {
+                    console.error(
+                        "Travelora notifications storage is not an array."
+                    );
+
+                    return [];
+                }
+
+                return data.map(function(item, index) {
+
+                    return normalizeNotification(item, index);
+
+                });
+
+            } catch (error) {
+
+                console.error(
+                    "Unable to read Travelora notifications:",
+                    error
+                );
+
+                return [];
+
+            }
+
+        }
+
+        let notifications = getNotifications();
+
+        /* ==============================================
+           SAVE NOTIFICATIONS
+
+           Reads the latest saved list before applying changes.
+           This reduces the chance of overwriting notifications
+           that were added by another page or browser tab.
+        ============================================== */
+
+        function saveNotifications() {
+
+            try {
+
+                /*
+                   Keep the current list as the intended state.
+                   Mutations are performed before calling this
+                   function, so do not replace them blindly with
+                   stale storage data.
+                */
+
+                localStorage.setItem(
+                    STORAGE_KEY,
+                    JSON.stringify(notifications)
+                );
+
+                return true;
+
+            } catch (error) {
+
+                console.error(
+                    "Unable to save Travelora notifications:",
+                    error
+                );
+
+                showToast(
+                    "Unable to save changes in this browser."
+                );
+
+                return false;
+
+            }
+
+        }
+
+        /* ==============================================
+           SERVICE ICONS
+        ============================================== */
+
+        function getIcon(type) {
+
+            const icons = {
+
+                flight: "fa-plane",
+
+                train: "fa-train",
+
+                bus: "fa-bus",
+
+                cab: "fa-taxi",
+
+                hotel: "fa-hotel",
+
+                package: "fa-suitcase-rolling",
+
+                activity: "fa-person-hiking",
+
+                payment: "fa-credit-card",
+
+                general: "fa-bell"
+
+            };
+
+            return icons[type] || icons.general;
+
+        }
+
+        /* ==============================================
+           ESCAPE TEXT BEFORE INSERTING INTO HTML
+        ============================================== */
+
+        function escapeHTML(value) {
+
+            return String(value ?? "").replace(/[&<>"']/g, function(char) {
+
+                const entities = {
+
+                    "&": "&amp;",
+
+                    "<": "&lt;",
+
+                    ">": "&gt;",
+
+                    '"': "&quot;",
+
+                    "'": "&#39;"
+
+                };
+
+                return entities[char];
+
+            });
+
+        }
+
+        /* ==============================================
+           FORMAT NOTIFICATION TIME
+        ============================================== */
+
+        function formatTime(timestamp) {
+
+            const time = Number(timestamp);
+
+            if (!Number.isFinite(time) || time <= 0) {
+                return "Recently";
+            }
+
+            const elapsed = Math.max(0, Date.now() - time);
+
+            const minutes = Math.floor(elapsed / 60000);
+
+            if (minutes < 1) {
+                return "Just now";
+            }
+
+            if (minutes < 60) {
+                return minutes + " minute(s) ago";
+            }
+
+            const hours = Math.floor(minutes / 60);
+
+            if (hours < 24) {
+                return hours + " hour(s) ago";
+            }
+
+            const days = Math.floor(hours / 24);
+
+            if (days < 7) {
+                return days + " day(s) ago";
+            }
+
+            return new Date(time).toLocaleDateString("en-IN");
+
+        }
+
+        /* ==============================================
+           UPDATE SUMMARY COUNTS AND NAVIGATION BELL
+        ============================================== */
+
+        function updateCounts() {
+
+            const unread = notifications.filter(
+                function(item) {
+                    return !item.read;
+                }
+            ).length;
+
+            const bookings = notifications.filter(
+                function(item) {
+                    return item.category === "booking";
+                }
+            ).length;
+
+            document.getElementById("totalCount").textContent =
+                notifications.length;
+
+            document.getElementById("unreadCount").textContent =
+                unread;
+
+            document.getElementById("bookingCount").textContent =
+                bookings;
+
+            const bellCount = document.getElementById("navCount");
+
+            bellCount.textContent = unread > 99 ? "99+" : unread;
+
+            bellCount.style.display =
+                unread > 0 ? "flex" : "none";
+
+            document.getElementById("footerCount").textContent =
+                notifications.length === 0
+                    ? "No notifications available."
+                    : notifications.length + " notification(s) saved.";
+
+        }
+
+        /* ==============================================
+           RENDER NOTIFICATIONS
+        ============================================== */
+
+        function renderNotifications() {
+
+            const list =
+                document.getElementById("notificationList");
+
+            const emptyState =
+                document.getElementById("emptyState");
+
+            const searchText =
+                document.getElementById("searchInput")
+                    .value.trim().toLowerCase();
+
+            const filtered = notifications
+                .filter(function(item) {
+
+                    const searchableText = [
+
+                        item.title,
+
+                        item.message,
+
+                        item.type,
+
+                        item.service,
+
+                        item.bookingName,
+
+                        item.destination,
+
+                        item.bookingId,
+
+                        item.category
+
+                    ].filter(Boolean).join(" ").toLowerCase();
+
+                    const matchesSearch =
+                        searchableText.includes(searchText);
+
+                    let matchesFilter = true;
+
+                    if (currentFilter === "unread") {
+
+                        matchesFilter = !item.read;
+
+                    } else if (currentFilter === "booking") {
+
+                        matchesFilter =
+                            item.category === "booking";
+
+                    } else if (currentFilter === "payment") {
+
+                        matchesFilter =
+                            item.category === "payment";
+
+                    }
+
+                    return matchesSearch && matchesFilter;
+
+                })
+                .sort(function(a, b) {
+
+                    return Number(b.time || 0) -
+                           Number(a.time || 0);
+
+                });
+
+            list.innerHTML = "";
+
+            if (filtered.length === 0) {
+
+                emptyState.style.display = "block";
+
+            } else {
+
+                emptyState.style.display = "none";
+
+            }
+
+            filtered.forEach(function(item) {
+
+                const element = document.createElement("article");
+
+                element.className =
+                    "notification-item" +
+                    (!item.read ? " unread" : "");
+
+                const id = escapeHTML(item.id);
+
+                const title = escapeHTML(
+                    item.title || "Booking Confirmed"
+                );
+
+                const message = escapeHTML(
+                    item.message || ""
+                );
+
+                const bookingId = escapeHTML(
+                    item.bookingId ||
+                    item.bookingID ||
+                    item.reference ||
+                    ""
+                );
+
+                const validTypes = [
+
+                    "flight",
+
+                    "train",
+
+                    "bus",
+
+                    "cab",
+
+                    "hotel",
+
+                    "package",
+
+                    "activity",
+
+                    "payment",
+
+                    "general"
+
+                ];
+
+                const type = validTypes.includes(item.type)
+                    ? item.type
+                    : "general";
+
+                element.innerHTML = `
+
+                    <div class="type-icon ${type}">
+
+                        <i class="fa-solid ${getIcon(type)}"></i>
+
+                    </div>
+
+                    <div class="notification-content">
+
+                        <div class="title-row">
+
+                            <span class="notification-title">
+                                ${title}
+                            </span>
+
+                            ${!item.read
+                                ? '<span class="new-badge">NEW</span>'
+                                : ''}
+
+                        </div>
+
+                        <p class="notification-message">
+                            ${message}
+                        </p>
+
+                        ${bookingId
+                            ? `<span class="booking-id">
+                                <i class="fa-solid fa-ticket"></i>
+                                Booking ID: ${bookingId}
+                               </span>`
+                            : ''}
+
+                        <div class="notification-time">
+
+                            <i class="fa-regular fa-clock"></i>
+
+                            ${escapeHTML(formatTime(item.time))}
+
+                        </div>
+
+                    </div>
+
+                    <div class="notification-actions">
+
+                        <button
+                            class="action-btn"
+                            data-action="toggle"
+                            data-id="${id}"
+                            title="${item.read ? 'Mark unread' : 'Mark read'}"
+                            aria-label="${item.read ? 'Mark unread' : 'Mark read'}">
+
+                            <i class="fa-solid ${
+                                item.read
+                                    ? 'fa-envelope-open'
+                                    : 'fa-envelope'
+                            }"></i>
+
+                        </button>
+
+                        <button
+                            class="action-btn delete"
+                            data-action="delete"
+                            data-id="${id}"
+                            title="Delete notification"
+                            aria-label="Delete notification">
+
+                            <i class="fa-regular fa-trash-can"></i>
+
+                        </button>
+
+                    </div>
+
+                `;
+
+                list.appendChild(element);
+
+            });
+
+            updateCounts();
+
+        }
+
+        /* ==============================================
+           FILTER NOTIFICATIONS
+        ============================================== */
+
+        function setFilter(filter, button) {
+
+            currentFilter = filter;
+
+            document.querySelectorAll(".filter-btn").forEach(
+                function(btn) {
+
+                    btn.classList.remove("active");
+
+                }
+            );
+
+            button.classList.add("active");
+
+            renderNotifications();
+
+        }
+
+        /* ==============================================
+           MARK AS READ / UNREAD OR DELETE
+        ============================================== */
+
+        document.getElementById("notificationList")
+            .addEventListener("click", function(event) {
+
+                const button =
+                    event.target.closest("button[data-action]");
+
+                if (!button) {
+                    return;
+                }
+
+                const id = button.dataset.id;
+
+                const action = button.dataset.action;
+
+                if (action === "toggle") {
+
+                    const item = notifications.find(
+                        function(notification) {
+
+                            return String(notification.id) === id;
+
+                        }
+                    );
+
+                    if (item) {
+
+                        const previousReadState = item.read;
+
+                        item.read = !item.read;
+
+                        if (saveNotifications()) {
+
+                            renderNotifications();
+
+                            showToast(
+                                item.read
+                                    ? "Marked as read."
+                                    : "Marked as unread."
+                            );
+
+                        } else {
+
+                            item.read = previousReadState;
+
+                            renderNotifications();
+
+                        }
+
+                    }
+
+                }
+
+                if (action === "delete") {
+
+                    const previousNotifications =
+                        notifications.map(function(item) {
+                            return { ...item };
+                        });
+
+                    notifications = notifications.filter(
+                        function(item) {
+
+                            return String(item.id) !== id;
+
+                        }
+                    );
+
+                    if (saveNotifications()) {
+
+                        renderNotifications();
+
+                        showToast("Notification deleted.");
+
+                    } else {
+
+                        notifications = previousNotifications;
+
+                        renderNotifications();
+
+                    }
+
+                }
+
+            });
+
+        /* ==============================================
+           MARK ALL AS READ
+        ============================================== */
+
+        function markAllAsRead() {
+
+            if (notifications.length === 0) {
+
+                showToast("There are no notifications to mark.");
+
+                return;
+
+            }
+
+            const previousNotifications =
+                notifications.map(function(item) {
+                    return { ...item };
+                });
+
+            notifications.forEach(function(item) {
+
+                item.read = true;
+
+            });
+
+            if (saveNotifications()) {
+
+                renderNotifications();
+
+                showToast("All notifications marked as read.");
+
+            } else {
+
+                notifications = previousNotifications;
+
+                renderNotifications();
+
+            }
+
+        }
+
+        /* ==============================================
+           CLEAR ALL NOTIFICATIONS
+        ============================================== */
+
+        function clearNotifications() {
+
+            if (notifications.length === 0) {
+
+                showToast("There are no notifications to clear.");
+
+                return;
+
+            }
+
+            if (!confirm("Delete all your notifications?")) {
+
+                return;
+
+            }
+
+            const previousNotifications =
+                notifications.map(function(item) {
+                    return { ...item };
+                });
+
+            notifications = [];
+
+            if (saveNotifications()) {
+
+                renderNotifications();
+
+                showToast("All notifications cleared.");
+
+            } else {
+
+                notifications = previousNotifications;
+
+                renderNotifications();
+
+            }
+
+        }
+
+        /* ==============================================
+           TOAST MESSAGE
+        ============================================== */
+
+        function showToast(message) {
+
+            const toast = document.getElementById("toast");
+
+            toast.textContent = message;
+
+            toast.classList.add("show");
+
+            clearTimeout(toastTimer);
+
+            toastTimer = setTimeout(function() {
+
+                toast.classList.remove("show");
+
+            }, 2500);
+
+        }
+
+        /* ==============================================
+           REFRESH WHEN ANOTHER PAGE OR TAB CHANGES STORAGE
+
+           The storage event fires in other same-origin tabs,
+           not in the tab that made the change.
+        ============================================== */
+
+        window.addEventListener("storage", function(event) {
+
+            if (
+                event.key === STORAGE_KEY ||
+                event.key === null
+            ) {
+
+                notifications = getNotifications();
+
+                renderNotifications();
+
+            }
+
+        });
+
+        /* ==============================================
+           REFRESH WHEN RETURNING TO THIS TAB
+        ============================================== */
+
+        window.addEventListener("focus", function() {
+
+            notifications = getNotifications();
+
+            renderNotifications();
+
+        });
+
+        /* ==============================================
+           REFRESH WHEN THE PAGE BECOMES VISIBLE
+        ============================================== */
+
+        document.addEventListener("visibilitychange", function() {
+
+            if (!document.hidden) {
+
+                notifications = getNotifications();
+
+                renderNotifications();
+
+            }
+
+        });
+
+        /* ==============================================
+           INITIALIZE NOTIFICATIONS PAGE
+
+           Reads notifications saved by booking pages.
+           Does not create demo or fake notifications.
+        ============================================== */
+
+        renderNotifications();
+
+    </script>
+
+</body>
+</html>

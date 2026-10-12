@@ -1,0 +1,849 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #f7f9fc;
+    color: #172033;
+}
+
+
+/* =========================================
+   NAVBAR
+========================================= */
+
+header {
+    height: 75px;
+    background: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 6%;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 3px 15px rgba(0,0,0,0.1);
+}
+
+.logo {
+    font-size: 27px;
+    font-weight: bold;
+    color: #073b5c;
+    white-space: nowrap;
+}
+
+nav {
+    display: flex;
+    gap: 14px;
+    align-items: center;
+}
+
+nav a {
+    text-decoration: none;
+    color: #172033;
+    font-weight: bold;
+    padding: 10px 8px;
+    white-space: nowrap;
+}
+
+nav a:hover {
+    color: #ff7200;
+}
+
+
+/* LOGIN */
+
+nav .login {
+    background: #073b5c;
+    color: white;
+    border-radius: 8px;
+    padding: 10px 16px;
+}
+
+nav .login:hover {
+    background: #0e918c;
+    color: white;
+}
+
+
+/* SIGN UP */
+
+.signup-nav {
+    background: #ff7200;
+    color: white !important;
+    border-radius: 8px;
+    padding: 10px 16px !important;
+}
+
+.signup-nav:hover {
+    background: #e85f00;
+    color: white !important;
+}
+
+
+/* WISHLIST */
+
+.wishlist-nav {
+    color: #172033;
+}
+
+
+/* NOTIFICATION */
+
+.notification-nav {
+    color: #172033;
+}
+
+
+/* PROFILE */
+
+.profile-nav {
+    color: #172033;
+}
+
+
+/* =========================================
+   HERO
+========================================= */
+
+.hero {
+    min-height: 650px;
+    padding: 100px 7%;
+    background:
+        linear-gradient(
+            rgba(5,40,65,0.65),
+            rgba(5,40,65,0.65)
+        ),
+        url("https://images.unsplash.com/photo-1500534623283-312aade485b7?auto=format&fit=crop&w=1800&q=80");
+
+    background-size: cover;
+    background-position: center;
+    color: white;
+}
+
+.hero-content {
+    max-width: 700px;
+}
+
+.hero-content p:first-child {
+    color: #ffb703;
+    font-weight: bold;
+    letter-spacing: 2px;
+}
+
+.hero h1 {
+    font-size: 55px;
+    margin: 20px 0;
+}
+
+.hero-content p {
+    font-size: 18px;
+    line-height: 1.6;
+}
+
+
+/* =========================================
+   TRAVEL DESTINATION SCROLL
+========================================= */
+
+.travel-explore {
+    background: white;
+    margin: 50px auto 0;
+    width: 100%;
+    padding: 25px 0 30px;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.20);
+}
+
+.travel-explore h2 {
+    margin: 0 30px;
+    color: #073b5c;
+    font-size: 28px;
+}
+
+.travel-line {
+    width: calc(100% - 60px);
+    height: 2px;
+    background: #e5e7eb;
+    margin: 15px 30px 22px;
+}
+
+.destination-scroll {
+    display: flex;
+    gap: 20px;
+    width: max-content;
+    padding: 0;
+    margin: 0;
+    animation: travelScroll 25s linear infinite;
+}
+
+.destination-scroll:hover {
+    animation-play-state: paused;
+}
+
+.destination-item {
+    width: 220px;
+    height: 155px;
+    flex-shrink: 0;
+    border-radius: 16px;
+    overflow: hidden;
+    position: relative;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+.destination-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.4s;
+}
+
+.destination-item:hover img {
+    transform: scale(1.08);
+}
+
+.destination-name {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 12px;
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+    background: linear-gradient(
+        transparent,
+        rgba(0,0,0,0.75)
+    );
+}
+
+@keyframes travelScroll {
+
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(-50%);
+    }
+
+}
+
+
+/* =========================================
+   GENERAL FORM ELEMENTS
+========================================= */
+
+input,
+select,
+textarea {
+    width: 100%;
+    padding: 14px;
+    border: 1px solid #d5dbe2;
+    border-radius: 8px;
+    outline: none;
+    font-size: 15px;
+}
+
+textarea {
+    min-height: 130px;
+    resize: vertical;
+}
+
+button,
+.main-button {
+    padding: 14px 20px;
+    border: none;
+    border-radius: 8px;
+    background: #ff7200;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+button:hover,
+.main-button:hover {
+    background: #e85f00;
+}
+
+
+/* =========================================
+   STATS
+========================================= */
+
+.stats {
+    background: white;
+    padding: 35px 7%;
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    text-align: center;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+}
+
+.stats h2 {
+    color: #073b5c;
+    font-size: 28px;
+}
+
+
+/* =========================================
+   SECTIONS
+========================================= */
+
+.section {
+    padding: 80px 7%;
+}
+
+.section-title {
+    margin-bottom: 35px;
+}
+
+.section-title p {
+    color: #ff7200;
+    font-weight: bold;
+    letter-spacing: 2px;
+}
+
+.section-title h2 {
+    font-size: 35px;
+    margin-top: 8px;
+}
+
+
+/* =========================================
+   CARDS
+========================================= */
+
+.cards {
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    gap: 20px;
+}
+
+.card {
+    background: white;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+    transition: 0.3s;
+}
+
+.card:hover {
+    transform: translateY(-8px);
+}
+
+.card img {
+    width: 100%;
+    height: 230px;
+    object-fit: cover;
+}
+
+.card h3,
+.card p,
+.card a {
+    margin-left: 18px;
+}
+
+.card h3 {
+    margin-top: 18px;
+}
+
+.card p {
+    color: #667085;
+    margin-top: 8px;
+}
+
+.card a {
+    display: inline-block;
+    margin-top: 15px;
+    margin-bottom: 20px;
+    color: #0e918c;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+
+/* =========================================
+   PLANNER
+========================================= */
+
+.planner-section {
+    margin: 40px 7%;
+    padding: 60px;
+    border-radius: 20px;
+    background: linear-gradient(
+        135deg,
+        #073b5c,
+        #0e918c
+    );
+    color: white;
+    text-align: center;
+}
+
+.planner-section h2 {
+    font-size: 35px;
+    margin-bottom: 15px;
+}
+
+.planner-section p {
+    margin-bottom: 25px;
+}
+
+
+/* =========================================
+   GENERAL PAGES
+========================================= */
+
+.page {
+    padding: 70px 7%;
+    min-height: 80vh;
+}
+
+.page > h1 {
+    font-size: 40px;
+    margin-bottom: 35px;
+    color: #073b5c;
+}
+
+
+/* =========================================
+   FORM
+========================================= */
+
+.form-box {
+    background: white;
+    padding: 30px;
+    border-radius: 15px;
+    display: grid;
+    grid-template-columns: repeat(4,1fr) 150px;
+    gap: 12px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+    margin-bottom: 40px;
+}
+
+
+/* =========================================
+   RESULTS
+========================================= */
+
+.result-box {
+    background: white;
+    padding: 25px;
+    border-radius: 15px;
+    margin-top: 25px;
+}
+
+.result {
+    padding: 20px;
+    margin-top: 15px;
+    border: 1px solid #e1e5ea;
+    border-radius: 12px;
+}
+
+.result h3 {
+    color: #073b5c;
+    margin-bottom: 8px;
+}
+
+.result p {
+    color: #667085;
+    margin: 7px 0;
+}
+
+
+/* =========================================
+   PACKAGES
+========================================= */
+
+.package-list,
+.destination-list,
+.offer-list,
+.activity-list {
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    gap: 25px;
+}
+
+.package-box,
+.destination-box,
+.offer-box,
+.activity-box {
+    background: white;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+}
+
+.package-box h2,
+.destination-box h2,
+.offer-box h2,
+.activity-box h2 {
+    color: #073b5c;
+    margin-bottom: 12px;
+}
+
+.package-box p,
+.destination-box p,
+.offer-box p,
+.activity-box p {
+    color: #667085;
+    margin: 8px 0;
+}
+
+.package-box h3,
+.activity-box h3 {
+    color: #0e918c;
+    margin: 15px 0;
+}
+
+
+/* =========================================
+   LOGIN
+========================================= */
+
+.login-page {
+    min-height: 85vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 50px;
+}
+
+.login-box,
+.planner-box,
+.contact-box {
+    width: 450px;
+    max-width: 100%;
+    background: white;
+    padding: 40px;
+    border-radius: 18px;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+}
+
+.login-box h1,
+.planner-box h1 {
+    color: #073b5c;
+    margin-bottom: 10px;
+}
+
+.login-box p {
+    color: #667085;
+    margin-bottom: 20px;
+}
+
+.login-box input,
+.login-box select,
+.planner-box input,
+.planner-box select,
+.contact-box input,
+.contact-box textarea {
+    margin-bottom: 15px;
+}
+
+.login-box button,
+.planner-box button,
+.contact-box button {
+    width: 100%;
+}
+
+.google {
+    background: #073b5c;
+    margin-top: 10px;
+}
+
+
+/* =========================================
+   PLANNER BOX
+========================================= */
+
+.planner-box {
+    margin: auto;
+    text-align: center;
+}
+
+.planner-box p {
+    margin: 10px 0 25px;
+}
+
+.plan-result {
+    margin-top: 30px;
+    padding: 25px;
+    background: #eef8f7;
+    border-radius: 12px;
+    text-align: left;
+}
+
+.plan-result h2 {
+    color: #073b5c;
+    margin-bottom: 15px;
+}
+
+.plan-result p {
+    margin: 10px 0;
+}
+
+
+/* =========================================
+   CONTACT
+========================================= */
+
+.contact-box {
+    margin: auto;
+}
+
+.contact-box h2 {
+    margin-bottom: 20px;
+}
+
+
+/* =========================================
+   FOOTER
+========================================= */
+
+footer {
+    background: #073b5c;
+    color: white;
+    padding: 50px 7%;
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 40px;
+}
+
+footer h2 {
+    color: white;
+}
+
+footer h3 {
+    margin-bottom: 15px;
+}
+
+footer a {
+    display: block;
+    color: #dbeafe;
+    text-decoration: none;
+    margin: 10px 0;
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media(max-width:900px) {
+
+    header {
+        height: auto;
+        padding: 20px;
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    nav {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 8px;
+    }
+
+    nav a {
+        padding: 8px 6px;
+        font-size: 14px;
+    }
+
+    .hero {
+        padding: 80px 7%;
+    }
+
+    .hero h1 {
+        font-size: 40px;
+    }
+
+    .stats {
+        grid-template-columns: 1fr 1fr;
+        gap: 25px;
+    }
+
+    .cards,
+    .package-list,
+    .destination-list,
+    .offer-list,
+    .activity-list {
+        grid-template-columns: 1fr;
+    }
+
+    footer {
+        grid-template-columns: 1fr;
+    }
+
+    .travel-explore {
+        width: 100%;
+    }
+
+    .travel-explore h2 {
+        font-size: 23px;
+        margin-left: 20px;
+    }
+
+    .travel-line {
+        width: calc(100% - 40px);
+        margin-left: 20px;
+    }
+
+    .destination-item {
+        width: 180px;
+        height: 130px;
+    }
+
+}
+
+
+/* =========================================
+   SMALL MOBILE
+========================================= */
+
+@media(max-width:600px) {
+
+    .hero {
+        min-height: 600px;
+        padding: 60px 6%;
+    }
+
+    .hero h1 {
+        font-size: 34px;
+    }
+
+    .hero-content p {
+        font-size: 16px;
+    }
+
+    .stats {
+        padding: 30px 5%;
+    }
+
+    .stats h2 {
+        font-size: 24px;
+    }
+
+    .section {
+        padding: 60px 6%;
+    }
+
+    .section-title h2 {
+        font-size: 30px;
+    }
+
+    .login-page {
+        padding: 30px 20px;
+    }
+
+    .login-box,
+    .planner-box,
+    .contact-box {
+        padding: 28px 22px;
+    }
+    .profile-icon {
+    width: 42px;
+    height: 42px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    cursor: pointer;
+    margin-left: 8px;
+}
+
+.profile-icon svg {
+    width: 28px;
+    height: 28px;
+    fill: none;
+    stroke: #172033;
+    stroke-width: 1.8;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.profile-icon:hover svg {
+    stroke: #0b4263;
+    transform: scale(1.08);
+}
+.profile-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #0b5269;
+    color: white;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    text-decoration: none;
+    font-size: 18px;
+
+    transition: 0.3s;
+}
+
+.profile-icon:hover {
+    background-color: #083f52;
+    transform: scale(1.05);
+}
+.profile-icon {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background: #0b5269;
+    color: white;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    text-decoration: none;
+    font-size: 18px;
+
+    transition: all 0.3s ease;
+}
+
+.profile-icon:hover {
+    background: #f7941d;
+    transform: scale(1.08);
+}
+.profile-icon {
+    width: 42px !important;
+    height: 42px !important;
+    padding: 0 !important;
+    border-radius: 50% !important;
+
+    background: #073b5c !important;
+    color: white !important;
+
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 18px;
+    text-decoration: none;
+
+    transition: all 0.3s ease;
+}
+
+.profile-icon:hover {
+    background: #ff7200 !important;
+    color: white !important;
+    transform: scale(1.08);
+}
+
+
+
+
+}

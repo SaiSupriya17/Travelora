@@ -1,0 +1,779 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Travelora - Festival Offers</title>
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        .offers-page {
+            background: #f4f8fc;
+            min-height: calc(100vh - 100px);
+            padding: 55px 7% 80px;
+        }
+
+        .offers-heading {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .offers-heading h1 {
+            color: #073f60;
+            font-size: 42px;
+            margin: 0 0 10px;
+        }
+
+        .offers-heading p {
+            color: #667788;
+            font-size: 17px;
+        }
+
+        .today-status {
+            max-width: 1200px;
+            margin: 0 auto 30px;
+            padding: 15px 20px;
+            border-radius: 12px;
+            background: #e9f7ef;
+            color: #146c43;
+            text-align: center;
+            font-weight: 600;
+        }
+
+        .today-status.none {
+            background: #fff4e5;
+            color: #9a5b00;
+        }
+
+        .offer-list {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        .offer-box {
+            background: white;
+            border-radius: 18px;
+            padding: 27px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(0, 50, 80, 0.10);
+            border-top: 6px solid #ff7300;
+            transition: 0.3s;
+        }
+
+        .offer-box:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 16px 35px rgba(0, 50, 80, 0.17);
+        }
+
+        .offer-icon {
+            font-size: 55px;
+            margin-bottom: 15px;
+            background: #fff5e9;
+            width: 85px;
+            height: 85px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 18px;
+        }
+
+        .offer-type {
+            font-size: 12px;
+            font-weight: bold;
+            letter-spacing: 1.5px;
+            color: #7b8b96;
+            margin-bottom: 8px;
+        }
+
+        .offer-box h2 {
+            color: #073f60;
+            font-size: 22px;
+            margin: 0 0 10px;
+        }
+
+        .offer-box p {
+            color: #667788;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .offer-discount {
+            font-size: 30px;
+            font-weight: bold;
+            color: #ff7300;
+            margin: 15px 0;
+        }
+
+        .status {
+            display: inline-block;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: bold;
+            margin-bottom: 12px;
+        }
+
+        .active {
+            background: #dff5e7;
+            color: #147a42;
+        }
+
+        .inactive {
+            background: #eeeeee;
+            color: #777;
+        }
+
+        .dates {
+            background: #f3f7fa;
+            padding: 10px;
+            border-radius: 8px;
+            color: #073f60;
+            font-size: 13px;
+            margin-bottom: 10px;
+        }
+
+        .services {
+            color: #667788;
+            font-size: 13px;
+            margin-bottom: 12px;
+        }
+
+        .coupon-box {
+            background: #f8fafc;
+            border: 1px dashed #9db0bd;
+            border-radius: 9px;
+            padding: 10px;
+            margin-bottom: 12px;
+            font-size: 13px;
+            color: #073f60;
+        }
+
+        .coupon-box b {
+            color: #ff7300;
+        }
+
+        .button-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+        }
+
+        .offer-box button {
+            width: 100%;
+            border: none;
+            padding: 12px 8px;
+            border-radius: 8px;
+            background: #ff7300;
+            color: white;
+            font-size: 13px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .offer-box button:hover {
+            background: #e86000;
+        }
+
+        .offer-box button.secondary {
+            background: #073f60;
+        }
+
+        .offer-box button:disabled {
+            background: #b8c0c5;
+            cursor: not-allowed;
+        }
+
+        .extra-offer {
+            grid-column: span 3;
+            background: linear-gradient(135deg, #073f60, #087f8c);
+            color: white;
+            border-top: none;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 32px;
+        }
+
+        .extra-offer h2 {
+            color: white;
+        }
+
+        .extra-offer p {
+            color: rgba(255,255,255,0.9);
+        }
+
+        .extra-icon {
+            font-size: 65px;
+        }
+
+        .message {
+            position: fixed;
+            left: 50%;
+            bottom: 25px;
+            transform: translateX(-50%);
+            background: #073f60;
+            color: white;
+            padding: 13px 20px;
+            border-radius: 10px;
+            display: none;
+            z-index: 9999;
+            max-width: 90%;
+            text-align: center;
+        }
+
+        @media (max-width: 950px) {
+            .offer-list {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .extra-offer {
+                grid-column: span 2;
+            }
+        }
+
+        @media (max-width: 650px) {
+            .offers-page {
+                padding: 40px 20px 60px;
+            }
+
+            .offers-heading h1 {
+                font-size: 32px;
+            }
+
+            .offer-list {
+                grid-template-columns: 1fr;
+            }
+
+            .extra-offer {
+                grid-column: span 1;
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .button-row {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <div class="logo">✈️ Travelora</div>
+
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="destinations.html">Destinations</a>
+        <a href="offers.html">Offers</a>
+        <a href="packages.html">Packages</a>
+        <a href="activities.html">Activities</a>
+        <a href="wishlist.html">♡ Wishlist</a>
+        <a href="trips.html">My Trips</a>
+        <a href="login.html" class="login">Login</a>
+    </nav>
+</header>
+
+<section class="offers-page">
+
+    <div class="offers-heading">
+        <h1>🎉 Festival & Special Offers</h1>
+        <p>Celebrate festivals, special occasions and holidays with Travelora's exclusive travel discounts.</p>
+    </div>
+
+    <div id="todayStatus" class="today-status"></div>
+    <div id="offerList" class="offer-list"></div>
+
+</section>
+
+<div id="message" class="message" role="status" aria-live="polite"></div>
+
+<script>
+const offers = [
+    {
+        id: "NEWYEAR",
+        icon: "🎆",
+        title: "New Year Travel Offer",
+        type: "NEW YEAR",
+        discount: "25% OFF",
+        amount: 25,
+        start: "2026-12-28",
+        end: "2027-01-05",
+        services: "Flights, Trains, Buses, Cabs, Hotels and Holidays",
+        desc: "Welcome the New Year with fireworks, new destinations and exciting travel savings."
+    },
+    {
+        id: "PONGAL",
+        icon: "🪴",
+        title: "Pongal Travel Offer",
+        type: "PONGAL",
+        discount: "20% OFF",
+        amount: 20,
+        start: "2027-01-11",
+        end: "2027-01-17",
+        services: "Flights, Trains, Buses, Cabs, Hotels and Holidays",
+        desc: "Celebrate the harvest festival with sugarcane, traditional Pongal and a family trip."
+    },
+    {
+        id: "MAKAR",
+        icon: "🪁",
+        title: "Makar Sankranti Offer",
+        type: "MAKAR SANKRANTI",
+        discount: "15% OFF",
+        amount: 15,
+        start: "2027-01-12",
+        end: "2027-01-16",
+        services: "Flights, Trains, Buses, Cabs and Hotels",
+        desc: "Fly into the festive spirit with colourful kites and special travel savings."
+    },
+    {
+        id: "REPUBLIC",
+        icon: "🎖️",
+        title: "Republic Day Travel Offer",
+        type: "REPUBLIC DAY",
+        discount: "20% OFF",
+        amount: 20,
+        start: "2027-01-23",
+        end: "2027-01-27",
+        services: "Flights, Trains, Buses, Cabs, Hotels and Holidays",
+        desc: "Celebrate India's Republic Day and explore a new destination."
+    },
+    {
+        id: "VALENTINE",
+        icon: "💝",
+        title: "Valentine's Day Getaway",
+        type: "VALENTINE'S DAY",
+        discount: "30% OFF",
+        amount: 30,
+        start: "2027-02-10",
+        end: "2027-02-16",
+        services: "Hotels, Flights and Holiday Packages",
+        desc: "Make special memories with a romantic getaway and beautiful views."
+    },
+    {
+        id: "SHIVARATRI",
+        icon: "🔱",
+        title: "Maha Shivaratri Offer",
+        type: "MAHA SHIVARATRI",
+        discount: "15% OFF",
+        amount: 15,
+        start: "2027-03-04",
+        end: "2027-03-08",
+        services: "Flights, Trains, Buses, Cabs and Hotels",
+        desc: "Plan a peaceful spiritual journey to sacred temples."
+    },
+    {
+        id: "HOLI",
+        icon: "🎨",
+        title: "Holi Travel Offer",
+        type: "HOLI",
+        discount: "25% OFF",
+        amount: 25,
+        start: "2027-03-20",
+        end: "2027-03-26",
+        services: "Flights, Trains, Buses, Cabs, Hotels and Holidays",
+        desc: "Celebrate the festival of colours with a fun-filled holiday."
+    },
+    {
+        id: "UGADI",
+        icon: "🥭",
+        title: "Ugadi New Year Offer",
+        type: "UGADI",
+        discount: "20% OFF",
+        amount: 20,
+        start: "2027-04-06",
+        end: "2027-04-12",
+        services: "Flights, Trains, Buses, Cabs, Hotels and Holidays",
+        desc: "Welcome the Telugu New Year with fresh beginnings and a refreshing trip."
+    },
+    {
+        id: "EASTER",
+        icon: "🐣",
+        title: "Easter Holiday Offer",
+        type: "EASTER",
+        discount: "15% OFF",
+        amount: 15,
+        start: "2027-03-25",
+        end: "2027-03-29",
+        services: "Flights, Hotels and Holiday Packages",
+        desc: "Enjoy a joyful spring holiday with family and friends."
+    },
+    {
+        id: "RAMZAN",
+        icon: "🌙",
+        title: "Eid al-Fitr Travel Offer",
+        type: "EID AL-FITR",
+        discount: "20% OFF",
+        amount: 20,
+        start: "2027-03-08",
+        end: "2027-03-14",
+        services: "Flights, Trains, Buses, Cabs, Hotels and Holidays",
+        desc: "Celebrate Eid with family and friends and make your journeys memorable."
+    },
+    {
+        id: "RAMANAVAMI",
+        icon: "🏹",
+        title: "Rama Navami Offer",
+        type: "RAMA NAVAMI",
+        discount: "15% OFF",
+        amount: 15,
+        start: "2027-04-13",
+        end: "2027-04-17",
+        services: "Flights, Trains, Buses, Cabs and Hotels",
+        desc: "Plan your festive visit to beautiful temples and pilgrimage destinations."
+    },
+    {
+        id: "AKSHAYA",
+        icon: "✨",
+        title: "Akshaya Tritiya Offer",
+        type: "AKSHAYA TRITIYA",
+        discount: "20% OFF",
+        amount: 20,
+        start: "2027-05-06",
+        end: "2027-05-10",
+        services: "Flights, Trains, Buses, Cabs, Hotels and Holidays",
+        desc: "Begin an auspicious new journey with special travel savings."
+    },
+    {
+        id: "BAKRID",
+        icon: "🌙",
+        title: "Eid al-Adha Travel Offer",
+        type: "EID AL-ADHA",
+        discount: "20% OFF",
+        amount: 20,
+        start: "2027-05-15",
+        end: "2027-05-21",
+        services: "Flights, Trains, Buses, Cabs and Hotels",
+        desc: "Make time for family, sharing and meaningful journeys."
+    },
+    {
+        id: "INDEPENDENCE",
+        icon: "🏵️",
+        title: "Independence Day Offer",
+        type: "INDEPENDENCE DAY",
+        discount: "25% OFF",
+        amount: 25,
+        start: "2027-08-12",
+        end: "2027-08-17",
+        services: "Flights, Trains, Buses, Cabs, Hotels and Holidays",
+        desc: "Celebrate freedom and discover somewhere new."
+    },
+
+    {
+        id: "JANMASHTAMI",
+        icon: "🦚",
+        title: "Janmashtami Travel Offer",
+        type: "JANMASHTAMI",
+        discount: "15% OFF",
+        amount: 15,
+        start: "2027-08-24",
+        end: "2027-08-30",
+        services: "Flights, Trains, Buses, Cabs and Hotels",
+        desc: "Celebrate Krishna Janmashtami with a meaningful festive journey."
+    },
+    {
+        id: "ONAM",
+        icon: "💐",
+        title: "Onam Travel Offer",
+        type: "ONAM",
+        discount: "20% OFF",
+        amount: 20,
+        start: "2027-08-24",
+        end: "2027-08-30",
+        services: "Flights, Trains, Buses, Cabs, Hotels and Holidays",
+        desc: "Celebrate Kerala's harvest festival with flowers, culture and travel."
+    },
+    {
+        id: "VINAYAKA",
+        icon: "🪷",
+        title: "Vinayaka Chavithi Offer",
+        type: "VINAYAKA CHAVITHI",
+        discount: "25% OFF",
+        amount: 25,
+        start: "2027-09-02",
+        end: "2027-09-08",
+        services: "Flights, Trains, Buses, Cabs, Hotels and Holidays",
+        desc: "Celebrate Vinayaka Chavithi and plan your next festive trip."
+    },
+    {
+        id: "NAVRATRI",
+        icon: "🪔",
+        title: "Navratri Special Offer",
+        type: "NAVRATRI",
+        discount: "25% OFF",
+        amount: 25,
+        start: "2027-10-06",
+        end: "2027-10-14",
+        services: "Flights, Trains, Buses, Cabs, Hotels and Holidays",
+        desc: "Celebrate nine nights of devotion, dance and festive travel."
+    },
+    {
+        id: "DUSSEHRA",
+        icon: "🏹",
+        title: "Dussehra Travel Offer",
+        type: "DUSSEHRA",
+        discount: "25% OFF",
+        amount: 25,
+        start: "2027-10-14",
+        end: "2027-10-19",
+        services: "Flights, Trains, Buses, Cabs, Hotels and Holidays",
+        desc: "Enjoy the festive season with an exciting holiday getaway."
+    },
+    {
+        id: "DIWALI",
+        icon: "🪔",
+        title: "Diwali Travel Offer",
+        type: "DIWALI",
+        discount: "30% OFF",
+        amount: 30,
+        start: "2027-10-27",
+        end: "2027-11-05",
+        services: "Flights, Trains, Buses, Cabs, Hotels and Holidays",
+        desc: "Celebrate the festival of lights with sparkling travel savings."
+    },
+    {
+        id: "CHRISTMAS",
+        icon: "🎄",
+        title: "Christmas Holiday Offer",
+        type: "CHRISTMAS",
+        discount: "30% OFF",
+        amount: 30,
+        start: "2027-12-20",
+        end: "2027-12-27",
+        services: "Flights, Trains, Buses, Cabs, Hotels and Holidays",
+        desc: "Make your Christmas holiday bright with special travel savings."
+    },
+
+];
+
+const coupons = [
+    { code: "NEWYEAR25", amount: 25, service: "Holiday", minimum: 10000, start: "2026-12-28", end: "2027-01-05" },
+    { code: "PONGAL20", amount: 20, service: "Train", minimum: 3000, start: "2027-01-11", end: "2027-01-17" },
+    { code: "REPUBLIC20", amount: 20, service: "Flight", minimum: 5000, start: "2027-01-23", end: "2027-01-27" },
+    { code: "LOVE30", amount: 30, service: "Hotel", minimum: 5000, start: "2027-02-10", end: "2027-02-16" },
+    { code: "HOLI25", amount: 25, service: "Holiday", minimum: 5000, start: "2027-03-20", end: "2027-03-26" },
+    { code: "UGADI20", amount: 20, service: "Flight", minimum: 5000, start: "2027-04-06", end: "2027-04-12" },
+    { code: "AKSHAYA20", amount: 20, service: "Hotel", minimum: 5000, start: "2027-05-06", end: "2027-05-10" },
+    { code: "INDEPENDENCE25", amount: 25, service: "Flight", minimum: 5000, start: "2027-08-12", end: "2027-08-17" },
+    { code: "VINAYAKA25", amount: 25, service: "Train", minimum: 2000, start: "2027-09-02", end: "2027-09-08" },
+    { code: "NAVRATRI25", amount: 25, service: "Holiday", minimum: 8000, start: "2027-10-06", end: "2027-10-14" },
+    { code: "DIWALI30", amount: 30, service: "Holiday", minimum: 10000, start: "2027-10-27", end: "2027-11-05" },
+    { code: "CHRISTMAS30", amount: 30, service: "Hotel", minimum: 5000, start: "2027-12-20", end: "2027-12-27" },
+    { code: "TRAVELORA35", amount: 35, service: "Flight", minimum: 5000, start: "2026-10-09", end: "2026-10-20" },
+    { code: "COUPLE30", amount: 30, service: "Holiday", minimum: 8000, start: "2026-10-09", end: "2026-12-31" }
+];
+
+function todayOnly() {
+    const d = new Date();
+    return new Date(d.getFullYear(), d.getMonth(), d.getDate());
+}
+
+function dateOnly(value) {
+    const parts = value.split("-");
+    return new Date(
+        Number(parts[0]),
+        Number(parts[1]) - 1,
+        Number(parts[2])
+    );
+}
+
+function isActive(start, end) {
+    const today = todayOnly();
+    return today >= dateOnly(start) && today <= dateOnly(end);
+}
+
+function formatDate(value) {
+    return dateOnly(value).toLocaleDateString("en-IN", {
+        day: "2-digit",
+        month: "short",
+        year: "numeric"
+    });
+}
+
+let messageTimer;
+
+function showMessage(text) {
+    const box = document.getElementById("message");
+    box.textContent = text;
+    box.style.display = "block";
+
+    clearTimeout(messageTimer);
+
+    messageTimer = setTimeout(function() {
+        box.style.display = "none";
+    }, 2800);
+}
+
+function showTodayStatus() {
+    const activeOffers = offers.filter(function(offer) {
+        return isActive(offer.start, offer.end);
+    });
+
+    const box = document.getElementById("todayStatus");
+
+    if (activeOffers.length > 0) {
+        box.className = "today-status";
+        box.textContent = "🎉 Active today: " +
+            activeOffers.map(function(offer) {
+                return offer.icon + " " + offer.title;
+            }).join(" • ");
+    } else {
+        box.className = "today-status none";
+        box.textContent =
+            "📅 No festival offer is active today. Check the dates below for upcoming offers.";
+    }
+}
+
+function getCouponForOffer(offer) {
+    return coupons.find(function(coupon) {
+        return coupon.start === offer.start &&
+               coupon.end === offer.end;
+    });
+}
+
+function displayOffers() {
+    const list = document.getElementById("offerList");
+
+    list.innerHTML = offers.map(function(offer) {
+        const active = isActive(offer.start, offer.end);
+        const coupon = getCouponForOffer(offer);
+
+        return `
+            <div class="offer-box">
+                <div class="offer-icon">${offer.icon}</div>
+                <div class="offer-type">${offer.type}</div>
+                <h2>${offer.title}</h2>
+                <p>${offer.desc}</p>
+
+                <div class="offer-discount">${offer.discount}</div>
+
+                <span class="status ${active ? "active" : "inactive"}">
+                    ${active ? "ACTIVE NOW" : "UPCOMING / EXPIRED"}
+                </span>
+
+                <div class="dates">
+                    📅 <b>Valid:</b>
+                    ${formatDate(offer.start)} – ${formatDate(offer.end)}
+                </div>
+
+                <div class="services">
+                    <b>Applicable:</b> ${offer.services}
+                </div>
+
+                ${coupon ? `
+                    <div class="coupon-box">
+                        🎟 Coupon: <b>${coupon.code}</b><br>
+                        ${coupon.amount}% OFF
+                        • ${coupon.service}
+                        • Minimum booking ₹${coupon.minimum}
+                    </div>
+                ` : ""}
+
+                <div class="button-row">
+                    <button
+                        ${active ? "" : "disabled"}
+                        onclick="applyOffer('${offer.id}')">
+                        Apply Offer
+                    </button>
+
+                    ${coupon ? `
+                        <button
+                            class="secondary"
+                            ${active && isActive(coupon.start, coupon.end) ? "" : "disabled"}
+                            onclick="applyCoupon('${coupon.code}')">
+                            Use Coupon
+                        </button>
+                    ` : `
+                        <button class="secondary" disabled>
+                            No Coupon
+                        </button>
+                    `}
+                </div>
+            </div>
+        `;
+    }).join("");
+
+    list.innerHTML += `
+        <div class="offer-box extra-offer">
+            <div>
+                <h2>🌍 More Ways to Save on Travel</h2>
+                <p>
+                    Choose an active festival offer or an eligible coupon.
+                    Discounts depend on the offer dates, service and minimum booking value.
+                </p>
+            </div>
+            <div class="extra-icon">🎒✈️</div>
+        </div>
+    `;
+}
+
+function applyOffer(id) {
+    const offer = offers.find(function(item) {
+        return item.id === id;
+    });
+
+    if (!offer || !isActive(offer.start, offer.end)) {
+        showMessage("This offer is not active today.");
+        return;
+    }
+
+    localStorage.setItem("traveloraOffer", JSON.stringify({
+        id: offer.id,
+        title: offer.title,
+        amount: offer.amount,
+        discountType: "percentage",
+        start: offer.start,
+        end: offer.end
+    }));
+
+    localStorage.removeItem("traveloraCoupon");
+
+    showMessage(offer.title + " selected — " + offer.amount + "% OFF!");
+
+    setTimeout(function() {
+        window.location.href = "booking.html";
+    }, 700);
+}
+
+function applyCoupon(code) {
+    const coupon = coupons.find(function(item) {
+        return item.code === code;
+    });
+
+    if (!coupon || !isActive(coupon.start, coupon.end)) {
+        showMessage("This coupon is not valid today.");
+        return;
+    }
+
+    localStorage.setItem("traveloraCoupon", JSON.stringify({
+        code: coupon.code,
+        amount: coupon.amount,
+        discountType: "percentage",
+        service: coupon.service,
+        minimum: coupon.minimum,
+        start: coupon.start,
+        end: coupon.end
+    }));
+
+    localStorage.removeItem("traveloraOffer");
+
+    showMessage("Coupon " + coupon.code + " selected — " + coupon.amount + "% OFF!");
+
+    setTimeout(function() {
+        window.location.href = "booking.html";
+    }, 700);
+}
+
+showTodayStatus();
+displayOffers();
+</script>
+
+<script src="script.js"></script>
+
+</body>
+</html>
