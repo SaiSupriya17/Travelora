@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Travelora - OTP Verification</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+
+        .otp-page {
+            min-height: 85vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 50px 20px;
+        }
+
+        .otp-box {
+            width: 450px;
+            max-width: 100%;
+            background: white;
+            padding: 40px;
+            border-radius: 18px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .otp-box h1 {
+            color: #073b5c;
+            margin-bottom: 12px;
+        }
+
+        .otp-box p {
+            color: #667085;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .otp-box input {
+            text-align: center;
+            font-size: 28px;
+            font-weight: bold;
+            letter-spacing: 10px;
+            margin-bottom: 18px;
+        }
+
+        .otp-box button {
+            width: 100%;
+        }
+
+        .demo-otp {
+            background: #eef8f7;
+            color: #073b5c;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+
+        .otp-error {
+            color: #d92d20 !important;
+            min-height: 22px;
+            margin-top: 12px;
+            margin-bottom: 0 !important;
+        }
+
+        .resend {
+            display: inline-block;
+            margin-top: 18px;
+            color: #0e918c;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<header>
+
+    <div class="logo">
+        Travelora ✈️
+    </div>
+
+    <nav>
+
+        <a href="index.html">
+            Home
+        </a>
+
+    </nav>
+
+</header>
+
+
+
+<section class="otp-page">
+
+    <div class="otp-box">
+
+        <h1>
+            Verify Your Account
+        </h1>
+
+        <p id="otpMessage">
+            Enter the OTP sent to your registered contact.
+        </p>
+
+
+        <div class="demo-otp">
+
+            Demo OTP:
+            <strong id="demoOtp">
+                123456
+            </strong>
+
+        </div>
+
+
+        <input
+            type="text"
+            id="otpInput"
+            maxlength="6"
+            inputmode="numeric"
+            autocomplete="one-time-code"
+            placeholder="••••••"
+        >
+
+
+        <button onclick="verifyOTP()">
+            Verify OTP
+        </button>
+
+
+        <ps
+            id="otpError"
+            class="otp-error">
+        </p>
+
+
+        <span
+            class="resend"
+            onclick="resendOTP()">
+            Resend OTP
+        </span>
+
+    </div>
+
+</section>
+
+
+
+<script src="script.js"></script>
+
+</body>
+
+</html>

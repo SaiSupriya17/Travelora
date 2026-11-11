@@ -1,0 +1,1593 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Customer Reviews | Travelora</title>
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <style>
+
+        /* =========================================
+           GENERAL STYLING
+        ========================================= */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f5f8fc;
+            color: #172033;
+            line-height: 1.6;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        /* =========================================
+           HEADER
+        ========================================= */
+
+        .review-header {
+            background: #ffffff;
+            padding: 18px 6%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+            flex-wrap: wrap;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+        }
+
+        .review-logo {
+            color: #126782;
+            font-size: 25px;
+            font-weight: 800;
+        }
+
+        .review-nav {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            flex-wrap: wrap;
+        }
+
+        .review-nav a {
+            color: #172033;
+            font-size: 14px;
+            font-weight: 600;
+            transition: color 0.2s;
+        }
+
+        .review-nav a:hover,
+        .review-nav a.active {
+            color: #ff7200;
+        }
+
+        .home-button {
+            display: inline-block;
+            background: #126782;
+            color: white;
+            padding: 10px 18px;
+            border-radius: 8px;
+            font-weight: 600;
+        }
+
+        .home-button:hover {
+            background: #0d5269;
+        }
+
+        /* =========================================
+           HERO SECTION
+        ========================================= */
+
+        .review-hero {
+            min-height: 290px;
+            padding: 65px 20px;
+            text-align: center;
+            color: white;
+
+            background:
+                linear-gradient(
+                    rgba(0, 40, 70, 0.75),
+                    rgba(0, 40, 70, 0.80)
+                ),
+                url("https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1800&q=85");
+
+            background-position: center;
+            background-size: cover;
+        }
+
+        .review-hero .eyebrow {
+            color: #ffd29d;
+            font-weight: 700;
+            letter-spacing: 2px;
+            font-size: 13px;
+            margin-bottom: 12px;
+        }
+
+        .review-hero h1 {
+            font-size: clamp(30px, 5vw, 45px);
+            margin-bottom: 12px;
+        }
+
+        .review-hero p {
+            max-width: 650px;
+            margin: auto;
+            font-size: 16px;
+            color: #f0f6fc;
+        }
+
+        /* =========================================
+           PAGE CONTAINER
+        ========================================= */
+
+        .review-container {
+            width: min(1100px, 92%);
+            margin: 45px auto;
+        }
+
+        /* =========================================
+           REVIEW SUMMARY
+        ========================================= */
+
+        .review-summary {
+            background: white;
+            padding: 28px;
+            border-radius: 16px;
+            box-shadow: 0 5px 22px rgba(0, 0, 0, 0.05);
+
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+
+            margin-bottom: 35px;
+            text-align: center;
+        }
+
+        .summary-item h2 {
+            color: #126782;
+            font-size: 28px;
+        }
+
+        .summary-item p {
+            color: #718096;
+            font-size: 14px;
+        }
+
+        .summary-stars {
+            color: #ffad21;
+            font-size: 22px;
+            margin: 4px 0;
+        }
+
+        /* =========================================
+           SECTION TITLES
+        ========================================= */
+
+        .section-heading {
+            text-align: center;
+            margin-bottom: 28px;
+        }
+
+        .section-heading .eyebrow {
+            color: #ff7200;
+            font-size: 12px;
+            font-weight: 800;
+            letter-spacing: 2px;
+        }
+
+        .section-heading h2 {
+            font-size: 30px;
+            margin: 6px 0;
+            color: #172033;
+        }
+
+        .section-heading p {
+            color: #718096;
+            font-size: 14px;
+        }
+
+        /* =========================================
+           REVIEW FORM
+        ========================================= */
+
+        .review-form-card {
+            background: white;
+            border-radius: 18px;
+            padding: 35px;
+            margin-bottom: 55px;
+
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.06);
+        }
+
+        .review-form {
+            max-width: 760px;
+            margin: auto;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 700;
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 13px 14px;
+
+            border: 1px solid #dce3ec;
+            border-radius: 9px;
+
+            background: #fbfcfe;
+            color: #172033;
+
+            font-family: inherit;
+            font-size: 14px;
+
+            outline: none;
+            transition: border 0.2s, box-shadow 0.2s;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            border-color: #126782;
+            box-shadow: 0 0 0 3px rgba(18, 103, 130, 0.10);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 140px;
+        }
+
+        /* =========================================
+           INTERACTIVE STAR RATING
+        ========================================= */
+
+        .rating-stars {
+            display: flex;
+            flex-direction: row-reverse;
+            justify-content: flex-end;
+            gap: 8px;
+        }
+
+        .rating-stars input {
+            display: none;
+        }
+
+        .rating-stars label {
+            cursor: pointer;
+            font-size: 36px;
+            color: #d7dee8;
+            transition: color 0.15s, transform 0.15s;
+        }
+
+        .rating-stars label:hover {
+            transform: scale(1.12);
+        }
+
+        .rating-stars label:hover,
+        .rating-stars label:hover ~ label,
+        .rating-stars input:checked ~ label {
+            color: #ffad21;
+        }
+
+        .rating-hint {
+            margin-top: 5px;
+            color: #718096;
+            font-size: 13px;
+        }
+
+        /* =========================================
+           SUBMIT BUTTON
+        ========================================= */
+
+        .submit-review-button {
+            width: 100%;
+            border: none;
+            border-radius: 10px;
+
+            background: #126782;
+            color: white;
+
+            padding: 15px;
+            font-size: 16px;
+            font-weight: 700;
+
+            cursor: pointer;
+            transition: background 0.2s, transform 0.2s;
+        }
+
+        .submit-review-button:hover {
+            background: #0d5269;
+            transform: translateY(-1px);
+        }
+
+        .submit-review-button i {
+            margin-right: 8px;
+        }
+
+        .form-message {
+            display: none;
+            margin-top: 15px;
+            padding: 12px;
+            border-radius: 8px;
+            font-size: 14px;
+        }
+
+        .form-message.success {
+            display: block;
+            background: #e8f8ef;
+            color: #176c3a;
+        }
+
+        .form-message.error {
+            display: block;
+            background: #fff0f0;
+            color: #a52222;
+        }
+
+        /* =========================================
+           CUSTOMER REVIEWS
+        ========================================= */
+
+        .reviews-list {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 22px;
+        }
+
+        .customer-review {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.045);
+
+            border: 1px solid #edf1f6;
+            overflow-wrap: anywhere;
+        }
+
+        .customer-review-top {
+            display: flex;
+            align-items: center;
+            gap: 13px;
+            margin-bottom: 15px;
+        }
+
+        .review-avatar {
+            width: 48px;
+            height: 48px;
+            flex-shrink: 0;
+
+            border-radius: 50%;
+            background: #e1f2f7;
+            color: #126782;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 19px;
+            font-weight: 800;
+        }
+
+        .review-customer-info {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .review-customer-info h3 {
+            font-size: 16px;
+            color: #172033;
+        }
+
+        .review-date {
+            color: #8995a7;
+            font-size: 12px;
+        }
+
+        .review-card-stars {
+            color: #ffad21;
+            font-size: 15px;
+            margin-bottom: 9px;
+            letter-spacing: 2px;
+        }
+
+        .review-category {
+            display: inline-block;
+            background: #edf7fa;
+            color: #126782;
+
+            padding: 5px 10px;
+            border-radius: 20px;
+
+            font-size: 11px;
+            font-weight: 700;
+
+            margin-bottom: 12px;
+        }
+
+        .review-title {
+            font-size: 17px;
+            font-weight: 700;
+            margin-bottom: 7px;
+        }
+
+        .review-text {
+            color: #64748b;
+            font-size: 14px;
+            line-height: 1.8;
+            white-space: pre-wrap;
+        }
+
+        /* DELETE INDIVIDUAL REVIEW BUTTON */
+        .delete-review-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 16px;
+            padding: 9px 13px;
+            border: none;
+            border-radius: 8px;
+            background: #fff0f0;
+            color: #b42323;
+            font-size: 13px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background 0.2s, color 0.2s;
+        }
+
+        .delete-review-button:hover {
+            background: #b42323;
+            color: #ffffff;
+        }
+
+        .empty-reviews {
+            grid-column: 1 / -1;
+            background: white;
+            border-radius: 15px;
+            padding: 40px 20px;
+            text-align: center;
+            color: #718096;
+        }
+
+        .empty-reviews i {
+            color: #126782;
+            font-size: 35px;
+            margin-bottom: 12px;
+        }
+
+        /* =========================================
+           FOOTER
+        ========================================= */
+
+        .review-footer {
+            background: #102d43;
+            color: white;
+            padding: 35px 6%;
+            margin-top: 65px;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .review-footer h2 {
+            color: white;
+            margin-bottom: 5px;
+        }
+
+        .review-footer p {
+            color: #cbd5e1;
+            font-size: 13px;
+        }
+
+        .review-footer a {
+            color: #ffffff;
+            font-weight: 600;
+        }
+
+        .review-footer a:hover {
+            color: #ffad21;
+        }
+
+        /* =========================================
+           RESPONSIVE DESIGN
+        ========================================= */
+
+        @media (max-width: 768px) {
+
+            .review-header {
+                justify-content: center;
+                text-align: center;
+            }
+
+            .review-nav {
+                justify-content: center;
+                gap: 13px;
+            }
+
+            .review-summary {
+                grid-template-columns: 1fr;
+                gap: 18px;
+            }
+
+            .reviews-list {
+                grid-template-columns: 1fr;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+                gap: 0;
+            }
+
+            .review-form-card {
+                padding: 22px;
+            }
+
+            .review-container {
+                margin: 30px auto;
+            }
+
+            .review-footer {
+                justify-content: center;
+                text-align: center;
+            }
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <!-- =========================================
+         HEADER
+    ========================================= -->
+
+    <header class="review-header">
+
+        <a href="index.html" class="review-logo">
+            Travelora ✈
+        </a>
+
+        <nav class="review-nav">
+
+            <a href="destinations.html">Destinations</a>
+
+            <a href="offers.html">Offers</a>
+
+            <a href="packages.html">Packages</a>
+
+            <a href="activities.html">Activities</a>
+
+            <a href="reviews.html" class="active">Reviews</a>
+
+            <a href="subscription.html">Subscription</a>
+
+            <a href="trips.html">My Trips</a>
+
+        </nav>
+
+        <a href="index.html" class="home-button">
+            <i class="fa-solid fa-house"></i>
+            Home
+        </a>
+
+    </header>
+
+
+    <!-- =========================================
+         HERO SECTION
+    ========================================= -->
+
+    <section class="review-hero">
+
+        <p class="eyebrow">
+            YOUR JOURNEY MATTERS
+        </p>
+
+        <h1>Share Your Travel Experience</h1>
+
+        <p>
+            Every journey tells a story. Share your experience
+            with Travelora and help other travelers plan their
+            next unforgettable adventure.
+        </p>
+
+    </section>
+
+
+    <main class="review-container">
+
+        <!-- =========================================
+             REVIEW SUMMARY
+        ========================================= -->
+
+        <section class="review-summary">
+
+            <div class="summary-item">
+
+                <h2 id="averageRating">0.0 / 5</h2>
+
+                <div class="summary-stars" id="averageStars">
+                    ☆☆☆☆☆
+                </div>
+
+                <p>Average Customer Rating</p>
+
+            </div>
+
+            <div class="summary-item">
+
+                <h2 id="totalReviews">0</h2>
+
+                <p>Total Customer Reviews</p>
+
+            </div>
+
+            <div class="summary-item">
+
+                <h2>
+                    <i class="fa-solid fa-heart"></i>
+                </h2>
+
+                <p>Your feedback helps us improve</p>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================================
+             SUBMIT REVIEW FORM
+        ========================================= -->
+
+        <section class="review-form-card">
+
+            <div class="section-heading">
+
+                <p class="eyebrow">YOUR FEEDBACK</p>
+
+                <h2>Write a Review</h2>
+
+                <p>
+                    Tell us about your experience using Travelora.
+                </p>
+
+            </div>
+
+
+            <form id="reviewForm" class="review-form">
+
+                <!-- CUSTOMER NAME -->
+
+                <div class="form-row">
+
+                    <div class="form-group">
+
+                        <label for="customerName">
+                            Your Name *
+                        </label>
+
+                        <input
+                            type="text"
+                            id="customerName"
+                            name="customerName"
+                            placeholder="Enter your name"
+                            maxlength="60"
+                            autocomplete="name"
+                            required
+                        >
+
+                    </div>
+
+
+                    <!-- EMAIL -->
+
+                    <div class="form-group">
+
+                        <label for="customerEmail">
+                            Email Address (Optional)
+                        </label>
+
+                        <input
+                            type="email"
+                            id="customerEmail"
+                            name="customerEmail"
+                            placeholder="you@example.com"
+                            autocomplete="email"
+                        >
+
+                    </div>
+
+                </div>
+
+
+                <!-- EXPERIENCE CATEGORY -->
+
+                <div class="form-group">
+
+                    <label for="reviewCategory">
+                        What would you like to review? *
+                    </label>
+
+                    <select
+                        id="reviewCategory"
+                        name="reviewCategory"
+                        required
+                    >
+
+                        <option value="">
+                            Select your experience
+                        </option>
+
+                        <option value="Overall Platform">
+                            Overall Travelora Platform
+                        </option>
+
+                        <option value="Booking Experience">
+                            Booking Experience
+                        </option>
+
+                        <option value="Holiday Packages">
+                            Holiday Packages
+                        </option>
+
+                        <option value="Destinations">
+                            Destinations
+                        </option>
+
+                        <option value="Customer Support">
+                            Customer Support
+                        </option>
+
+                        <option value="Offers and Discounts">
+                            Offers and Discounts
+                        </option>
+
+                        <option value="Website Experience">
+                            Website Experience
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <!-- STAR RATING -->
+
+                <div class="form-group">
+
+                    <label>
+                        Your Rating *
+                    </label>
+
+                    <div class="rating-stars">
+
+                        <input
+                            type="radio"
+                            id="star5"
+                            name="rating"
+                            value="5"
+                            required
+                        >
+
+                        <label for="star5"
+                               title="Excellent"
+                               aria-label="5 stars">
+                            ★
+                        </label>
+
+
+                        <input
+                            type="radio"
+                            id="star4"
+                            name="rating"
+                            value="4"
+                        >
+
+                        <label for="star4"
+                               title="Very Good"
+                               aria-label="4 stars">
+                            ★
+                        </label>
+
+
+                        <input
+                            type="radio"
+                            id="star3"
+                            name="rating"
+                            value="3"
+                        >
+
+                        <label for="star3"
+                               title="Good"
+                               aria-label="3 stars">
+                            ★
+                        </label>
+
+
+                        <input
+                            type="radio"
+                            id="star2"
+                            name="rating"
+                            value="2"
+                        >
+
+                        <label for="star2"
+                               title="Fair"
+                               aria-label="2 stars">
+                            ★
+                        </label>
+
+
+                        <input
+                            type="radio"
+                            id="star1"
+                            name="rating"
+                            value="1"
+                        >
+
+                        <label for="star1"
+                               title="Poor"
+                               aria-label="1 star">
+                            ★
+                        </label>
+
+                    </div>
+
+                    <p class="rating-hint" id="ratingHint">
+                        Select a star rating from 1 to 5.
+                    </p>
+
+                </div>
+
+
+                <!-- REVIEW TITLE -->
+
+                <div class="form-group">
+
+                    <label for="reviewTitle">
+                        Review Title *
+                    </label>
+
+                    <input
+                        type="text"
+                        id="reviewTitle"
+                        name="reviewTitle"
+                        placeholder="Summarize your experience"
+                        maxlength="100"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- REVIEW MESSAGE -->
+
+                <div class="form-group">
+
+                    <label for="reviewMessage">
+                        Your Review *
+                    </label>
+
+                    <textarea
+                        id="reviewMessage"
+                        name="reviewMessage"
+                        placeholder="Tell us what you liked and how we can improve..."
+                        minlength="10"
+                        maxlength="1500"
+                        required
+                    ></textarea>
+
+                </div>
+
+
+                <!-- SUBMIT BUTTON -->
+
+                <button
+                    type="submit"
+                    class="submit-review-button"
+                >
+
+                    <i class="fa-solid fa-paper-plane"></i>
+
+                    Submit Your Review
+
+                </button>
+
+
+                <div
+                    id="formMessage"
+                    class="form-message"
+                    role="status"
+                    aria-live="polite"
+                ></div>
+
+            </form>
+
+        </section>
+
+
+        <!-- =========================================
+             CUSTOMER REVIEW LIST
+        ========================================= -->
+
+        <section class="customer-reviews-section">
+
+            <div class="section-heading">
+
+                <p class="eyebrow">TRAVELER STORIES</p>
+
+                <h2>What Our Customers Say</h2>
+
+                <p>
+                    Read experiences shared by visitors to Travelora.
+                </p>
+
+            </div>
+
+
+            <div class="reviews-list" id="reviewsList">
+
+                <!-- Reviews are rendered here by JavaScript. -->
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- =========================================
+         FOOTER
+    ========================================= -->
+
+    <footer class="review-footer">
+
+        <div>
+
+            <h2>Travelora ✈</h2>
+
+            <p>
+                Your trusted travel booking partner.
+            </p>
+
+        </div>
+
+        <div>
+
+            <a href="index.html">
+                <i class="fa-solid fa-arrow-left"></i>
+                Back to Home
+            </a>
+
+        </div>
+
+        <p>
+            &copy; <span id="currentYear"></span> Travelora.
+            All rights reserved.
+        </p>
+
+    </footer>
+
+
+    <!-- =========================================
+         REVIEWS JAVASCRIPT
+    ========================================= -->
+
+    <script>
+
+        document.addEventListener("DOMContentLoaded", function () {
+
+            const reviewForm = document.getElementById("reviewForm");
+
+            const reviewsList = document.getElementById("reviewsList");
+
+            const totalReviewsElement =
+                document.getElementById("totalReviews");
+
+            const averageRatingElement =
+                document.getElementById("averageRating");
+
+            const averageStarsElement =
+                document.getElementById("averageStars");
+
+            const ratingHint =
+                document.getElementById("ratingHint");
+
+            const formMessage =
+                document.getElementById("formMessage");
+
+
+            const STORAGE_KEY = "traveloraCustomerReviews";
+
+            const ratingDescriptions = {
+                1: "Poor",
+                2: "Fair",
+                3: "Good",
+                4: "Very Good",
+                5: "Excellent"
+            };
+
+
+            document.getElementById("currentYear").textContent =
+                new Date().getFullYear();
+
+
+            /* =========================================
+               LOAD SAVED REVIEWS
+            ========================================= */
+
+            function loadReviews() {
+
+                try {
+
+                    const savedReviews =
+                        localStorage.getItem(STORAGE_KEY);
+
+                    if (!savedReviews) {
+                        return [];
+                    }
+
+                    const parsedReviews = JSON.parse(savedReviews);
+
+                    if (!Array.isArray(parsedReviews)) {
+                        return [];
+                    }
+
+                    return parsedReviews.filter(function (review) {
+
+                        return review &&
+                            typeof review.name === "string" &&
+                            typeof review.title === "string" &&
+                            typeof review.message === "string" &&
+                            typeof review.category === "string" &&
+                            Number.isInteger(Number(review.rating)) &&
+                            Number(review.rating) >= 1 &&
+                            Number(review.rating) <= 5;
+
+                    });
+
+                } catch (error) {
+
+                    console.error("Unable to load reviews:", error);
+
+                    return [];
+
+                }
+
+            }
+
+
+            /* =========================================
+               SAVE REVIEWS
+            ========================================= */
+
+            function saveReviews(reviews) {
+
+                try {
+
+                    localStorage.setItem(
+                        STORAGE_KEY,
+                        JSON.stringify(reviews)
+                    );
+
+                    return true;
+
+                } catch (error) {
+
+                    console.error("Unable to save reviews:", error);
+
+                    return false;
+
+                }
+
+            }
+
+
+            /* =========================================
+               CREATE SAFE HTML ELEMENTS
+            ========================================= */
+
+            function createElement(tag, className, text) {
+
+                const element = document.createElement(tag);
+
+                if (className) {
+                    element.className = className;
+                }
+
+                if (text !== undefined) {
+                    element.textContent = text;
+                }
+
+                return element;
+
+            }
+
+
+            /* =========================================
+               DISPLAY STAR RATING
+            ========================================= */
+
+            function createStars(rating) {
+
+                const stars = document.createElement("div");
+
+                stars.className = "review-card-stars";
+
+                stars.setAttribute(
+                    "aria-label",
+                    rating + " out of 5 stars"
+                );
+
+                stars.textContent =
+                    "★".repeat(rating) +
+                    "☆".repeat(5 - rating);
+
+                return stars;
+
+            }
+
+
+            /* =========================================
+               UPDATE SUMMARY
+            ========================================= */
+
+            function updateSummary(reviews) {
+
+                const total = reviews.length;
+
+                totalReviewsElement.textContent = total;
+
+                if (total === 0) {
+
+                    averageRatingElement.textContent = "0.0 / 5";
+
+                    averageStarsElement.textContent = "☆☆☆☆☆";
+
+                    return;
+
+                }
+
+                const totalRating = reviews.reduce(
+                    function (sum, review) {
+
+                        return sum + Number(review.rating);
+
+                    },
+                    0
+                );
+
+                const average = totalRating / total;
+
+                averageRatingElement.textContent =
+                    average.toFixed(1) + " / 5";
+
+                const roundedAverage = Math.round(average);
+
+                averageStarsElement.textContent =
+                    "★".repeat(roundedAverage) +
+                    "☆".repeat(5 - roundedAverage);
+
+            }
+
+
+            /* =========================================
+               DISPLAY CUSTOMER REVIEWS
+            ========================================= */
+
+            function renderReviews() {
+
+                const reviews = loadReviews();
+
+                reviewsList.replaceChildren();
+
+                updateSummary(reviews);
+
+
+                if (reviews.length === 0) {
+
+                    const empty = createElement(
+                        "div",
+                        "empty-reviews"
+                    );
+
+                    const icon = createElement("i");
+
+                    icon.className =
+                        "fa-regular fa-comments";
+
+                    const heading = createElement(
+                        "h3",
+                        "",
+                        "Be the first to review Travelora!"
+                    );
+
+                    const paragraph = createElement(
+                        "p",
+                        "",
+                        "Share your experience using the form above."
+                    );
+
+                    empty.append(icon, heading, paragraph);
+
+                    reviewsList.appendChild(empty);
+
+                    return;
+
+                }
+
+
+                // Show newest reviews first.
+
+                reviews.slice().reverse().forEach(function (review) {
+
+                    const card = createElement(
+                        "article",
+                        "customer-review"
+                    );
+
+
+                    const top = createElement(
+                        "div",
+                        "customer-review-top"
+                    );
+
+
+                    const avatar = createElement(
+                        "div",
+                        "review-avatar",
+                        review.name.trim().charAt(0).toUpperCase()
+                    );
+
+
+                    const customerInfo = createElement(
+                        "div",
+                        "review-customer-info"
+                    );
+
+
+                    const name = createElement(
+                        "h3",
+                        "",
+                        review.name
+                    );
+
+
+                    const date = createElement(
+                        "p",
+                        "review-date",
+                        review.date || "Customer review"
+                    );
+
+
+                    customerInfo.append(name, date);
+
+                    top.append(avatar, customerInfo);
+
+
+                    const stars = createStars(
+                        Number(review.rating)
+                    );
+
+
+                    const category = createElement(
+                        "span",
+                        "review-category",
+                        review.category
+                    );
+
+
+                    const title = createElement(
+                        "h4",
+                        "review-title",
+                        review.title
+                    );
+
+
+                    const message = createElement(
+                        "p",
+                        "review-text",
+                        review.message
+                    );
+
+                    // Add a delete button for this individual review.
+                    const deleteButton = createElement(
+                        "button",
+                        "delete-review-button"
+                    );
+
+                    deleteButton.type = "button";
+                    deleteButton.setAttribute(
+                        "aria-label",
+                        "Delete review by " + review.name
+                    );
+
+                    const deleteIcon = createElement("i");
+                    deleteIcon.className = "fa-solid fa-trash";
+                    const deleteLabel = createElement(
+                        "span",
+                        "",
+                        "Delete Review"
+                    );
+
+                    deleteButton.append(deleteIcon, deleteLabel);
+
+                    deleteButton.addEventListener("click", function () {
+                        const confirmed = window.confirm(
+                            "Are you sure you want to delete this review?"
+                        );
+
+                        if (!confirmed) {
+                            return;
+                        }
+
+                        const currentReviews = loadReviews();
+                        const reviewIndex = currentReviews.findIndex(
+                            function (savedReview) {
+                                return savedReview.id === review.id;
+                            }
+                        );
+
+                        if (reviewIndex === -1) {
+                            alert("This review could not be found.");
+                            return;
+                        }
+
+                        currentReviews.splice(reviewIndex, 1);
+
+                        if (!saveReviews(currentReviews)) {
+                            alert("The review could not be deleted. Please try again.");
+                            return;
+                        }
+
+                        renderReviews();
+                    });
+
+                    card.append(
+                        top,
+                        stars,
+                        category,
+                        title,
+                        message,
+                        deleteButton
+                    );
+
+
+                    reviewsList.appendChild(card);
+
+                });
+
+            }
+
+
+            /* =========================================
+               STAR RATING HINT
+            ========================================= */
+
+            document.querySelectorAll(
+                'input[name="rating"]'
+            ).forEach(function (input) {
+
+                input.addEventListener("change", function () {
+
+                    ratingHint.textContent =
+                        ratingDescriptions[this.value] +
+                        " — " +
+                        this.value +
+                        " out of 5 stars.";
+
+                });
+
+            });
+
+
+            /* =========================================
+               SUBMIT CUSTOMER REVIEW
+            ========================================= */
+
+            reviewForm.addEventListener(
+                "submit",
+                function (event) {
+
+                    event.preventDefault();
+
+                    formMessage.className = "form-message";
+
+                    formMessage.textContent = "";
+
+
+                    if (!reviewForm.reportValidity()) {
+                        return;
+                    }
+
+
+                    const name =
+                        document.getElementById("customerName")
+                            .value.trim();
+
+                    const email =
+                        document.getElementById("customerEmail")
+                            .value.trim();
+
+                    const category =
+                        document.getElementById("reviewCategory")
+                            .value;
+
+                    const ratingInput =
+                        document.querySelector(
+                            'input[name="rating"]:checked'
+                        );
+
+                    const title =
+                        document.getElementById("reviewTitle")
+                            .value.trim();
+
+                    const message =
+                        document.getElementById("reviewMessage")
+                            .value.trim();
+
+
+                    if (
+                        !name ||
+                        !category ||
+                        !ratingInput ||
+                        !title ||
+                        message.length < 10
+                    ) {
+
+                        formMessage.textContent =
+                            "Please complete all required fields and select a star rating.";
+
+                        formMessage.className =
+                            "form-message error";
+
+                        return;
+
+                    }
+
+
+                    const rating = Number(ratingInput.value);
+
+
+                    const newReview = {
+
+                        id:
+                            Date.now().toString() +
+                            Math.random().toString(36).slice(2),
+
+                        name: name,
+
+                        // Email is intentionally not displayed
+                        // or stored in public review records.
+
+                        category: category,
+
+                        rating: rating,
+
+                        title: title,
+
+                        message: message,
+
+                        date: new Date().toLocaleDateString(
+                            undefined,
+                            {
+                                year: "numeric",
+                                month: "short",
+                                day: "numeric"
+                            }
+                        )
+
+                    };
+
+
+                    const reviews = loadReviews();
+
+                    reviews.push(newReview);
+
+
+                    if (!saveReviews(reviews)) {
+
+                        formMessage.textContent =
+                            "Your review could not be saved. Please check your browser storage settings.";
+
+                        formMessage.className =
+                            "form-message error";
+
+                        return;
+
+                    }
+
+
+                    renderReviews();
+
+                    reviewForm.reset();
+
+                    ratingHint.textContent =
+                        "Select a star rating from 1 to 5.";
+
+
+                    formMessage.textContent =
+                        "Thank you, " +
+                        name +
+                        "! Your review has been added successfully.";
+
+                    formMessage.className =
+                        "form-message success";
+
+
+                    // Move to the customer reviews section.
+
+                    document.querySelector(
+                        ".customer-reviews-section"
+                    ).scrollIntoView({
+                        behavior: "smooth",
+                        block: "start"
+                    });
+
+                }
+            );
+
+
+            /* =========================================
+               INITIALIZE PAGE
+            ========================================= */
+
+            renderReviews();
+
+
+            /* =========================================
+               UPDATE IF STORAGE CHANGES IN ANOTHER TAB
+            ========================================= */
+
+            window.addEventListener("storage", function (event) {
+
+                if (
+                    event.key === STORAGE_KEY ||
+                    event.key === null
+                ) {
+
+                    renderReviews();
+
+                }
+
+            });
+
+        });
+
+    </script>
+
+</body>
+
+</html>

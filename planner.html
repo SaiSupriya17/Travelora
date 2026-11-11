@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Travelora - Trip Planner</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header>
+    <div class="logo">Travelora ✈️</div>
+
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="destinations.html">Destinations</a>
+        <a href="offers.html">Offers</a>
+        <a href="packages.html">Packages</a>
+        <a href="activities.html">Activities</a>
+        <a href="wishlist.html">♡ Wishlist</a>
+        <a href="trips.html">My Trips</a>
+    </nav>
+</header>
+
+
+<section class="page">
+
+    <div class="planner-box">
+
+        <h1>✨ AI Trip Planner</h1>
+
+        <p>
+            Create your personalized travel plan.
+        </p>
+
+        <input
+            id="plannerDestination"
+            placeholder="Where do you want to go?">
+
+        <select id="plannerBudget">
+            <option>₹10,000 - ₹20,000</option>
+            <option>₹20,000 - ₹50,000</option>
+            <option>₹50,000+</option>
+        </select>
+
+        <select id="plannerStyle">
+            <option>Adventure</option>
+            <option>Relaxation</option>
+            <option>Family</option>
+            <option>Luxury</option>
+            <option>Solo Travel</option>
+        </select>
+
+        <button onclick="generateTrip()">
+            Create My Trip
+        </button>
+
+        <div id="tripPlan"></div>
+
+    </div>
+
+</section>
+
+
+<script src="script.js"></script>
+
+</body>
+</html>

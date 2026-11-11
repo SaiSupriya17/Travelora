@@ -1,0 +1,1333 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Travelora - Profile</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+
+        /* =========================================
+           PROFILE PAGE
+        ========================================= */
+
+        .profile-page {
+            min-height: 85vh;
+            padding: 55px 7%;
+            background: #f7f9fc;
+        }
+
+
+        /* =========================================
+           PROFILE HEADER
+        ========================================= */
+
+        .profile-heading {
+            background: white;
+            padding: 30px;
+            border-radius: 18px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            margin-bottom: 25px;
+        }
+
+        .profile-heading h1 {
+            color: #073b5c;
+            font-size: 32px;
+            margin-bottom: 8px;
+        }
+
+        .profile-heading p {
+            color: #667085;
+            font-size: 16px;
+        }
+
+
+        /* =========================================
+           MAIN PROFILE MENU BOX
+        ========================================= */
+
+        .profile-menu-box {
+            background: white;
+            border-radius: 18px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            margin-bottom: 25px;
+        }
+
+
+        .profile-menu-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 20px 25px;
+            border-bottom: 1px solid #edf0f3;
+            color: #172033;
+            text-decoration: none;
+            font-size: 17px;
+            font-weight: 600;
+            transition: 0.2s;
+        }
+
+        .profile-menu-item:last-child {
+            border-bottom: none;
+        }
+
+        .profile-menu-item:hover {
+            background: #f7f9fc;
+            color: #ff7200;
+        }
+
+        .profile-menu-arrow {
+            color: #98a2b3;
+            font-size: 20px;
+        }
+
+
+        /* =========================================
+           ACCOUNT SECTION
+        ========================================= */
+
+        .profile-section-title {
+            color: #073b5c;
+            font-size: 22px;
+            margin: 30px 0 12px;
+        }
+
+
+        /* =========================================
+           TRAVELORA SUGGESTIONS
+        ========================================= */
+
+        .suggestion-box {
+            background: linear-gradient(
+                135deg,
+                #073b5c,
+                #0e918c
+            );
+
+            color: white;
+            padding: 28px;
+            border-radius: 18px;
+            margin-bottom: 25px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.10);
+        }
+
+        .suggestion-box h2 {
+            margin-bottom: 8px;
+        }
+
+        .suggestion-box p {
+            margin-bottom: 20px;
+        }
+
+        .suggestion-places {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+        }
+
+        .suggestion-place {
+            background: rgba(255,255,255,0.15);
+            padding: 18px;
+            border-radius: 12px;
+        }
+
+        .suggestion-place h3 {
+            margin-bottom: 5px;
+        }
+
+        .suggestion-place p {
+            margin: 0;
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+
+        /* =========================================
+           LOGOUT
+        ========================================= */
+
+        .logout-button {
+            width: 100%;
+            padding: 16px;
+            border: none;
+            border-radius: 12px;
+            background: #d92d20;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 5px;
+        }
+
+        .logout-button:hover {
+            background: #b42318;
+        }
+
+
+        /* =========================================
+           MOBILE
+        ========================================= */
+
+        @media (max-width: 768px) {
+
+            .profile-page {
+                padding: 35px 5%;
+            }
+
+            .profile-heading h1 {
+                font-size: 26px;
+            }
+
+            .suggestion-places {
+                grid-template-columns: 1fr;
+            }
+
+        }
+
+
+        /* =========================================
+           INFORMATION POPUP
+           ADDED FOR SETTINGS / ACCOUNT / INFO
+        ========================================= */
+
+        .profile-info-overlay {
+            display: none;
+
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+
+            background: rgba(0, 0, 0, 0.55);
+
+            z-index: 99999;
+
+            align-items: center;
+            justify-content: center;
+
+            padding: 20px;
+        }
+
+
+        .profile-info-box {
+            background: white;
+
+            width: 650px;
+            max-width: 95%;
+
+            max-height: 85vh;
+            overflow-y: auto;
+
+            border-radius: 20px;
+
+            padding: 32px;
+
+            position: relative;
+
+            box-shadow:
+                0 20px 60px rgba(0,0,0,0.30);
+
+            animation: profilePopupAnimation 0.25s ease;
+        }
+
+
+        @keyframes profilePopupAnimation {
+
+            from {
+                opacity: 0;
+                transform: translateY(25px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+
+        }
+
+
+        .profile-info-close {
+            position: absolute;
+
+            top: 18px;
+            right: 18px;
+
+            width: 38px;
+            height: 38px;
+
+            border: none;
+
+            border-radius: 50%;
+
+            background: #eef3f7;
+
+            color: #17324a;
+
+            font-size: 24px;
+
+            cursor: pointer;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+
+        .profile-info-close:hover {
+            background: #dce7ee;
+        }
+
+
+        .profile-info-box h2 {
+            color: #073b5c;
+
+            font-size: 28px;
+
+            margin-top: 0;
+            margin-right: 45px;
+            margin-bottom: 20px;
+        }
+
+
+        .profile-info-box h3 {
+            color: #07496b;
+
+            font-size: 19px;
+
+            margin-top: 22px;
+
+            margin-bottom: 8px;
+        }
+
+
+        .profile-info-box p {
+            color: #526273;
+
+            font-size: 15px;
+
+            line-height: 1.7;
+
+            margin-bottom: 10px;
+        }
+
+
+        .profile-info-box ul {
+            color: #526273;
+
+            line-height: 1.8;
+
+            padding-left: 22px;
+        }
+
+
+        .profile-info-done {
+            margin-top: 22px;
+
+            padding: 12px 25px;
+
+            border: none;
+
+            border-radius: 8px;
+
+            background: #07506d;
+
+            color: white;
+
+            font-size: 15px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+        }
+
+
+        .profile-info-done:hover {
+            background: #087f8c;
+        }
+
+
+        @media (max-width: 600px) {
+
+            .profile-info-box {
+                padding: 25px;
+            }
+
+            .profile-info-box h2 {
+                font-size: 24px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- =========================================
+     HEADER
+========================================= -->
+
+<header>
+
+    <div class="logo">
+        Travelora ✈️
+    </div>
+
+    <nav>
+
+        <a href="index.html">
+            Home
+        </a>
+
+        <a href="destinations.html">
+            Destinations
+        </a>
+
+        <a href="offers.html">
+            Offers
+        </a>
+
+        <a href="packages.html">
+            Packages
+        </a>
+
+        <a href="activities.html">
+            Activities
+        </a>
+
+        <a href="wishlist.html">
+            ♡ Wishlist
+        </a>
+
+        <a href="notifications.html">
+            Notification
+        </a>
+
+    </nav>
+
+</header>
+
+
+
+<!-- =========================================
+     PROFILE PAGE
+========================================= -->
+
+<main class="profile-page">
+
+
+    <!-- PROFILE NAME -->
+
+    <section class="profile-heading">
+
+        <h1>
+            Hello, <span id="profileName">Traveller</span> 👋
+        </h1>
+
+        <p>
+            Manage your Travelora account and travel preferences.
+        </p>
+
+    </section>
+
+
+
+    <!-- =========================================
+         TRAVEL MENU
+    ========================================= -->
+
+    <h2 class="profile-section-title">
+        Your Travel
+    </h2>
+
+
+    <section class="profile-menu-box">
+
+        <a
+            href="trips.html"
+            class="profile-menu-item"
+        >
+            <span>My Trips</span>
+            <span class="profile-menu-arrow">›</span>
+        </a>
+
+
+        <a
+            href="contact.html"
+            class="profile-menu-item"
+        >
+            <span>Help Center</span>
+            <span class="profile-menu-arrow">›</span>
+        </a>
+
+
+        <a
+            href="offers.html"
+            class="profile-menu-item"
+        >
+            <span>Offers</span>
+            <span class="profile-menu-arrow">›</span>
+        </a>
+
+
+        <a
+            href="destinations.html"
+            class="profile-menu-item"
+        >
+            <span>Destinations</span>
+            <span class="profile-menu-arrow">›</span>
+        </a>
+
+
+        <a
+            href="packages.html"
+            class="profile-menu-item"
+        >
+            <span>Packages</span>
+            <span class="profile-menu-arrow">›</span>
+        </a>
+
+
+        <a
+            href="wishlist.html"
+            class="profile-menu-item"
+        >
+            <span>Wishlist</span>
+            <span class="profile-menu-arrow">›</span>
+        </a>
+
+    </section>
+
+
+
+    <!-- =========================================
+         ACCOUNT
+    ========================================= -->
+
+    <h2 class="profile-section-title">
+        Account
+    </h2>
+
+
+    <section class="profile-menu-box">
+
+        <a
+            href="#"
+            class="profile-menu-item"
+            onclick="openProfileInfo('settings'); return false;"
+        >
+            <span>Settings</span>
+            <span class="profile-menu-arrow">›</span>
+        </a>
+
+
+        <a
+            href="#"
+            class="profile-menu-item"
+            onclick="openProfileInfo('manageAccount'); return false;"
+        >
+            <span>Manage Account</span>
+            <span class="profile-menu-arrow">›</span>
+        </a>
+
+    </section>
+
+
+
+    <!-- =========================================
+         TRAVELORA SUGGESTIONS
+    ========================================= -->
+
+    <h2 class="profile-section-title">
+        Travelora Suggestions
+    </h2>
+
+
+    <section class="suggestion-box">
+
+        <h2>
+            Places you may love ✨
+        </h2>
+
+        <p>
+            Explore destinations selected for your next adventure.
+        </p>
+
+
+        <div class="suggestion-places">
+
+
+            <div class="suggestion-place">
+
+                <h3>
+                    Bali
+                </h3>
+
+                <p>
+                    Beaches • Temples • Culture
+                </p>
+
+            </div>
+
+
+            <div class="suggestion-place">
+
+                <h3>
+                    Maldives
+                </h3>
+
+                <p>
+                    Islands • Beaches • Diving
+                </p>
+
+            </div>
+
+
+            <div class="suggestion-place">
+
+                <h3>
+                    Manali
+                </h3>
+
+                <p>
+                    Mountains • Snow • Nature
+                </p>
+
+            </div>
+
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =========================================
+         INFORMATION
+    ========================================= -->
+
+    <h2 class="profile-section-title">
+        Information
+    </h2>
+
+
+    <section class="profile-menu-box">
+
+        <a
+            href="#"
+            class="profile-menu-item"
+            onclick="openProfileInfo('about'); return false;"
+        >
+            <span>About Us</span>
+            <span class="profile-menu-arrow">›</span>
+        </a>
+
+
+        <a
+            href="#"
+            class="profile-menu-item"
+            onclick="openProfileInfo('terms'); return false;"
+        >
+            <span>Terms of Use</span>
+            <span class="profile-menu-arrow">›</span>
+        </a>
+
+
+        <a
+            href="#"
+            class="profile-menu-item"
+            onclick="openProfileInfo('privacy'); return false;"
+        >
+            <span>Privacy Policy</span>
+            <span class="profile-menu-arrow">›</span>
+        </a>
+
+
+        <a
+            href="#"
+            class="profile-menu-item"
+            onclick="openProfileInfo('privacyCenter'); return false;"
+        >
+            <span>Privacy Center</span>
+            <span class="profile-menu-arrow">›</span>
+        </a>
+
+    </section>
+
+
+
+    <!-- =========================================
+         LOGOUT
+    ========================================= -->
+
+    <button
+        class="logout-button"
+        onclick="logoutUser()"
+    >
+        Logout
+    </button>
+
+
+</main>
+
+
+
+<!-- =========================================
+     FOOTER
+========================================= -->
+
+<footer>
+
+    <div>
+
+        <h2>
+            Travelora ✈️
+        </h2>
+
+        <p>
+            Your trusted travel booking partner.
+        </p>
+
+    </div>
+
+
+    <div>
+
+        <h3>
+            Explore
+        </h3>
+
+        <a href="destinations.html">
+            Destinations
+        </a>
+
+        <a href="offers.html">
+            Offers
+        </a>
+
+        <a href="packages.html">
+            Packages
+        </a>
+
+        <a href="activities.html">
+            Activities
+        </a>
+
+    </div>
+
+
+    <div>
+
+        <h3>
+            Support
+        </h3>
+
+        <a href="contact.html">
+            Help & Contact
+        </a>
+
+        <a href="trips.html">
+            Manage Booking
+        </a>
+
+    </div>
+
+</footer>
+
+
+
+<!-- =========================================
+     PROFILE INFORMATION POPUP
+========================================= -->
+
+<div
+    class="profile-info-overlay"
+    id="profileInfoOverlay"
+>
+
+
+    <div class="profile-info-box">
+
+
+        <button
+            class="profile-info-close"
+            onclick="closeProfileInfo()"
+        >
+            ×
+        </button>
+
+
+        <div id="profileInfoContent"></div>
+
+
+    </div>
+
+</div>
+
+
+
+<script src="script.js"></script>
+
+
+
+<script>
+
+    /* =========================================
+       SHOW LOGGED-IN USER NAME
+    ========================================= */
+
+    document.addEventListener(
+        "DOMContentLoaded",
+        function() {
+
+            let userName =
+                localStorage.getItem("userName");
+
+            let profileName =
+                document.getElementById("profileName");
+
+            if (userName && profileName) {
+
+                profileName.innerText =
+                    userName;
+
+            }
+
+        }
+    );
+
+
+
+    /* =========================================
+       LOGOUT
+    ========================================= */
+
+    function logoutUser() {
+
+        localStorage.removeItem("isLoggedIn");
+        localStorage.removeItem("userName");
+        localStorage.removeItem("userEmail");
+        localStorage.removeItem("userPhone");
+        localStorage.removeItem("userGender");
+
+        alert("You have been logged out.");
+
+        window.location.href =
+            "login.html";
+
+    }
+
+
+
+    /* =========================================
+       PROFILE INFORMATION CONTENT
+    ========================================= */
+
+    const profileInformation = {
+
+
+        /* =====================================
+           SETTINGS
+        ===================================== */
+
+        settings: {
+
+            title: "Settings",
+
+            content: `
+
+                <p>
+                    Customize your Travelora experience from here.
+                </p>
+
+
+                <h3>
+                    Notifications
+                </h3>
+
+                <p>
+                    Manage notifications about bookings, offers,
+                    travel updates and other important information.
+                </p>
+
+
+                <h3>
+                    Language
+                </h3>
+
+                <p>
+                    Choose your preferred language for the
+                    Travelora website.
+                </p>
+
+
+                <h3>
+                    Currency
+                </h3>
+
+                <p>
+                    Select the currency you want to use while viewing
+                    travel packages and offers.
+                </p>
+
+
+                <h3>
+                    Travel Preferences
+                </h3>
+
+                <p>
+                    Update your preferred destinations, activities
+                    and travel interests.
+                </p>
+
+            `
+
+        },
+
+
+
+        /* =====================================
+           MANAGE ACCOUNT
+        ===================================== */
+
+        manageAccount: {
+
+            title: "Manage Account",
+
+            content: `
+
+                <p>
+                    Manage your Travelora account and personal
+                    information from this section.
+                </p>
+
+
+                <h3>
+                    Personal Information
+                </h3>
+
+                <p>
+                    View and update your name, email address,
+                    phone number and other profile details.
+                </p>
+
+
+                <h3>
+                    Password
+                </h3>
+
+                <p>
+                    Change your account password whenever you
+                    need to.
+                </p>
+
+
+                <h3>
+                    Account Security
+                </h3>
+
+                <p>
+                    Review your account security settings and
+                    keep your account protected.
+                </p>
+
+
+                <h3>
+                    Delete Account
+                </h3>
+
+                <p>
+                    If you no longer want to use Travelora,
+                    you can request deletion of your account.
+                </p>
+
+            `
+
+        },
+
+
+
+        /* =====================================
+           ABOUT US
+        ===================================== */
+
+        about: {
+
+            title: "About Us",
+
+            content: `
+
+                <p>
+                    Welcome to Travelora ✈️
+                </p>
+
+
+                <p>
+                    Travelora is a travel platform designed to
+                    help travelers discover beautiful destinations,
+                    explore travel packages, find activities and
+                    plan memorable adventures.
+                </p>
+
+
+                <h3>
+                    Our Mission
+                </h3>
+
+                <p>
+                    Our goal is to make travel planning simple,
+                    enjoyable and convenient.
+                </p>
+
+
+                <h3>
+                    What We Offer
+                </h3>
+
+
+                <ul>
+
+                    <li>
+                        Explore travel destinations
+                    </li>
+
+                    <li>
+                        Discover travel packages
+                    </li>
+
+                    <li>
+                        Find exciting activities
+                    </li>
+
+                    <li>
+                        Save favorite destinations
+                    </li>
+
+                    <li>
+                        Discover travel offers
+                    </li>
+
+                </ul>
+
+
+                <p>
+                    Thank you for choosing Travelora for your
+                    next adventure!
+                </p>
+
+            `
+
+        },
+
+
+
+        /* =====================================
+           TERMS OF USE
+        ===================================== */
+
+        terms: {
+
+            title: "Terms of Use",
+
+            content: `
+
+                <p>
+                    Welcome to Travelora. By using this website,
+                    you agree to use the platform responsibly
+                    and for lawful purposes.
+                </p>
+
+
+                <h3>
+                    Using Travelora
+                </h3>
+
+                <p>
+                    You agree to use Travelora responsibly and
+                    follow applicable rules while using the website.
+                </p>
+
+
+                <h3>
+                    Account Information
+                </h3>
+
+                <p>
+                    You are responsible for keeping your account
+                    information accurate and protecting your
+                    login details.
+                </p>
+
+
+                <h3>
+                    Travel Information
+                </h3>
+
+                <p>
+                    Destination, package, activity and offer
+                    information may change from time to time.
+                </p>
+
+
+                <h3>
+                    Website Content
+                </h3>
+
+                <p>
+                    Travelora content is provided for general
+                    informational purposes and may be updated
+                    when necessary.
+                </p>
+
+            `
+
+        },
+
+
+
+        /* =====================================
+           PRIVACY POLICY
+        ===================================== */
+
+        privacy: {
+
+            title: "Privacy Policy",
+
+            content: `
+
+                <p>
+                    Your privacy is important to us. This section
+                    explains how information may be handled when
+                    you use Travelora.
+                </p>
+
+
+                <h3>
+                    Information We Collect
+                </h3>
+
+                <p>
+                    Information such as your name, email address,
+                    preferences and account details may be collected
+                    when you use certain features.
+                </p>
+
+
+                <h3>
+                    How We Use Information
+                </h3>
+
+                <p>
+                    Information may be used to provide account
+                    services, improve the Travelora experience
+                    and communicate important updates.
+                </p>
+
+
+                <h3>
+                    Data Protection
+                </h3>
+
+                <p>
+                    Reasonable measures are taken to protect
+                    information associated with your account.
+                </p>
+
+
+                <h3>
+                    Your Choices
+                </h3>
+
+                <p>
+                    You can review or update certain account
+                    information through your account settings.
+                </p>
+
+            `
+
+        },
+
+
+
+        /* =====================================
+           PRIVACY CENTER
+        ===================================== */
+
+        privacyCenter: {
+
+            title: "Privacy Center",
+
+            content: `
+
+                <p>
+                    Welcome to the Travelora Privacy Center.
+                </p>
+
+
+                <h3>
+                    Your Privacy Choices
+                </h3>
+
+                <p>
+                    Review and manage your privacy preferences
+                    and understand how your information is used.
+                </p>
+
+
+                <h3>
+                    Account Information
+                </h3>
+
+                <p>
+                    Review and update personal information
+                    associated with your Travelora account.
+                </p>
+
+
+                <h3>
+                    Notifications
+                </h3>
+
+                <p>
+                    Manage the types of notifications and
+                    communications you receive from Travelora.
+                </p>
+
+
+                <h3>
+                    Privacy Questions
+                </h3>
+
+                <p>
+                    If you have questions about privacy or your
+                    account, contact the Travelora support team.
+                </p>
+
+            `
+
+        }
+
+    };
+
+
+
+    /* =========================================
+       OPEN PROFILE INFORMATION
+    ========================================= */
+
+    function openProfileInfo(page) {
+
+        const information =
+            profileInformation[page];
+
+
+        if (!information) {
+
+            return;
+
+        }
+
+
+        document.getElementById(
+            "profileInfoContent"
+        ).innerHTML = `
+
+            <h2>
+                ${information.title}
+            </h2>
+
+            ${information.content}
+
+            <button
+                class="profile-info-done"
+                onclick="closeProfileInfo()"
+            >
+                Done
+            </button>
+
+        `;
+
+
+        document.getElementById(
+            "profileInfoOverlay"
+        ).style.display = "flex";
+
+
+        document.body.style.overflow = "hidden";
+
+    }
+
+
+
+    /* =========================================
+       CLOSE PROFILE INFORMATION
+    ========================================= */
+
+    function closeProfileInfo() {
+
+        document.getElementById(
+            "profileInfoOverlay"
+        ).style.display = "none";
+
+
+        document.body.style.overflow = "";
+
+    }
+
+
+
+    /* =========================================
+       CLOSE WHEN CLICKING OUTSIDE POPUP
+    ========================================= */
+
+    document.getElementById(
+        "profileInfoOverlay"
+    ).addEventListener(
+        "click",
+        function(event) {
+
+            if (event.target === this) {
+
+                closeProfileInfo();
+
+            }
+
+        }
+    );
+
+
+
+    /* =========================================
+       CLOSE WITH ESC KEY
+    ========================================= */
+
+    document.addEventListener(
+        "keydown",
+        function(event) {
+
+            if (event.key === "Escape") {
+
+                closeProfileInfo();
+
+            }
+
+        }
+    );
+
+</script>
+
+
+</body>
+
+</html>

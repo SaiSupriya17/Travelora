@@ -1,0 +1,1821 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Travelora - Travel Booking</title>
+
+<link rel="stylesheet" href="style.css">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+
+<style>
+
+/* =====================================================
+   HOME DESTINATION SCROLLER - LARGER CARDS
+===================================================== */
+
+.travel-explore{
+    background:transparent;
+    width:calc(100% + 14%);
+    margin-left:-7%;
+    margin-top:45px;
+    padding:25px 0 35px;
+    border-radius:0;
+    overflow:hidden;
+    box-shadow:none;
+    box-sizing:border-box;
+}
+
+.travel-explore h2{
+    margin:0 7%;
+    color:white;
+    font-size:32px;
+    font-weight:bold;
+    text-shadow:0 2px 6px rgba(0,0,0,.45);
+}
+
+.travel-line{
+    width:86%;
+    height:2px;
+    background:rgba(255,255,255,.75);
+    margin:15px 7% 25px;
+}
+
+.destination-scroll{
+    display:flex;
+    align-items:stretch;
+    gap:24px;
+    width:max-content;
+    padding:0;
+    margin:0;
+    animation:travelScroll 35s linear infinite;
+    will-change:transform;
+}
+
+.destination-scroll:hover{
+    animation-play-state:paused;
+}
+
+.destination-item{
+    width:310px;
+    height:210px;
+    flex-shrink:0;
+    border-radius:18px;
+    overflow:hidden;
+    position:relative;
+    cursor:pointer;
+    box-shadow:0 7px 20px rgba(0,0,0,.30);
+}
+
+.destination-item img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    display:block;
+    transition:transform .4s ease;
+}
+
+.destination-item:hover img{
+    transform:scale(1.08);
+}
+
+.destination-name{
+    position:absolute;
+    bottom:0;
+    left:0;
+    right:0;
+    padding:15px;
+    box-sizing:border-box;
+    color:white;
+    font-size:24px;
+    font-weight:bold;
+    background:linear-gradient(transparent,rgba(0,0,0,.8));
+}
+
+@keyframes travelScroll{
+    0%{
+        transform:translateX(0);
+    }
+    100%{
+        transform:translateX(-50%);
+    }
+}
+
+
+/* =====================================================
+   HEADER
+===================================================== */
+
+.travelora-header{
+    width:100%;
+    height:72px;
+    display:flex;
+    align-items:center;
+    box-sizing:border-box;
+    padding:0 64px;
+    background:#fff;
+    position:relative;
+    z-index:1000;
+}
+
+
+/* =====================================================
+   LOGO - LEFT
+===================================================== */
+
+.travelora-header .logo{
+    flex:0 0 auto;
+    white-space:nowrap;
+    font-size:22px;
+    font-weight:700;
+    color:#126782;
+}
+
+
+/* =====================================================
+   GUEST NAVIGATION - CENTER
+===================================================== */
+
+.travelora-main-navigation{
+    position:absolute;
+    left:50%;
+    transform:translateX(-50%);
+    display:flex !important;
+    align-items:center;
+    justify-content:center;
+    gap:6px;
+    white-space:nowrap;
+    visibility:visible !important;
+    opacity:1 !important;
+}
+
+
+/* =====================================================
+   NAVIGATION BUTTONS
+===================================================== */
+
+.travelora-main-navigation a{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:9px 13px;
+    color:#172033;
+    text-decoration:none;
+    font-size:14px;
+    font-weight:600;
+    border-radius:8px;
+    white-space:nowrap;
+    transition:color .2s ease, background .2s ease;
+}
+
+.travelora-main-navigation a:hover{
+    color:#ff7200;
+    background:#f5f7fa;
+}
+
+
+/* =====================================================
+   LOGGED-IN NAVIGATION - CENTER
+===================================================== */
+
+.travelora-user-navigation{
+    position:absolute;
+    left:50%;
+    transform:translateX(-50%);
+    display:none;
+    align-items:center;
+    justify-content:center;
+    gap:6px;
+    white-space:nowrap;
+}
+
+
+/* =====================================================
+   LOGGED-IN MIDDLE BUTTONS
+===================================================== */
+
+.travelora-user-navigation .top-nav-button{
+    width:auto !important;
+    height:auto !important;
+    padding:9px 13px !important;
+    display:flex !important;
+    align-items:center;
+    justify-content:center;
+    color:#172033;
+    background:transparent;
+    border-radius:8px;
+    text-decoration:none;
+    font-size:14px;
+    font-weight:600;
+    white-space:nowrap;
+    transition:color .2s ease, background .2s ease;
+}
+
+.travelora-user-navigation .top-nav-button:hover{
+    color:#ff7200;
+    background:#f5f7fa;
+}
+
+
+/* =====================================================
+   RIGHT SIDE ICONS
+===================================================== */
+
+.travelora-user-actions{
+    margin-left:auto;
+    display:flex;
+    align-items:center;
+    gap:5px;
+}
+
+
+/* =====================================================
+   WISHLIST / NOTIFICATION / PROFILE
+===================================================== */
+
+.travelora-user-actions > a{
+    width:42px;
+    height:42px;
+    padding:0;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:50%;
+    color:#172033;
+    text-decoration:none;
+    font-size:20px;
+    transition:color .2s ease, background .2s ease;
+}
+
+.travelora-user-actions > a:hover{
+    color:#ff7200;
+    background:#f5f7fa;
+}
+
+
+/* =====================================================
+   PROFILE
+===================================================== */
+
+.travelora-user-actions .travelora-profile{
+    border:1.5px solid #d9dee5;
+    background:#fff;
+    font-size:18px;
+    box-shadow:0 2px 7px rgba(0,0,0,.10);
+}
+
+.travelora-user-actions .travelora-profile:hover{
+    color:#ff7200;
+    border-color:#ff7200;
+    background:#fff7f0;
+}
+
+
+/* =====================================================
+   NOTIFICATION BADGE
+===================================================== */
+
+.notification-link{
+    position:relative;
+}
+
+.notification-badge{
+    display:none;
+    position:absolute;
+    top:-2px;
+    right:-2px;
+    min-width:19px;
+    height:19px;
+    padding:0 4px;
+    box-sizing:border-box;
+    align-items:center;
+    justify-content:center;
+    background:#ff7200;
+    color:#fff;
+    border:2px solid #fff;
+    border-radius:50%;
+    font-family:Arial,sans-serif;
+    font-size:10px;
+    font-weight:700;
+    line-height:1;
+    text-align:center;
+    white-space:nowrap;
+    pointer-events:none;
+}
+
+.notification-link.has-notification .notification-badge{
+    display:flex;
+}
+
+
+/* =====================================================
+   NEWSLETTER SUBSCRIPTION
+===================================================== */
+
+.travelora-subscription{
+    padding:65px 7% 45px;
+    background:#f3f7fa;
+    box-sizing:border-box;
+}
+
+.travelora-subscription-panel{
+    position:relative;
+    overflow:hidden;
+    max-width:1210px;
+    min-height:286px;
+    margin:0 auto;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:44px 35px;
+    box-sizing:border-box;
+    border-radius:25px;
+    background:#176b80;
+    box-shadow:0 12px 32px rgba(7,59,92,.10);
+}
+
+.travelora-subscription-panel::before,
+.travelora-subscription-panel::after{
+    content:"";
+    position:absolute;
+    width:190px;
+    height:190px;
+    border-radius:50%;
+    background:rgba(255,255,255,.055);
+    pointer-events:none;
+}
+
+.travelora-subscription-panel::before{
+    top:-50px;
+    left:-20px;
+}
+
+.travelora-subscription-panel::after{
+    right:-90px;
+    bottom:-100px;
+}
+
+.travelora-subscription-content{
+    position:relative;
+    z-index:1;
+    width:100%;
+    max-width:660px;
+    text-align:center;
+    color:#fff;
+}
+
+.travelora-subscription-content h2{
+    margin:0 0 14px;
+    color:#fff;
+    font-size:34px;
+    font-weight:750;
+}
+
+.travelora-subscription-content > p{
+    margin:0 auto 27px;
+    max-width:650px;
+    color:#fff;
+    font-size:16px;
+    line-height:1.7;
+}
+
+.subscription-form{
+    width:100%;
+    max-width:570px;
+    margin:0 auto;
+    display:flex;
+    overflow:hidden;
+    background:#fff;
+    border-radius:9px;
+}
+
+.subscription-form input{
+    flex:1;
+    min-width:0;
+    padding:15px 18px;
+    border:0;
+    outline:none;
+    color:#263746;
+    background:#fff;
+    font-size:14px;
+}
+
+.subscription-form input:focus{
+    box-shadow:inset 0 0 0 2px #7fc9d1;
+}
+
+.subscription-form button{
+    flex-shrink:0;
+    border:0;
+    padding:0 25px;
+    color:#fff;
+    background:#ff7200;
+    font-size:14px;
+    font-weight:700;
+    cursor:pointer;
+    transition:background .2s ease;
+}
+
+.subscription-form button:hover{
+    background:#e96500;
+}
+
+.subscription-message{
+    display:none;
+    max-width:570px;
+    margin:12px auto 0;
+    padding:10px 12px;
+    border-radius:8px;
+    background:#e8f8f2;
+    color:#12684f;
+    font-weight:600;
+    font-size:14px;
+    line-height:1.5;
+}
+
+.subscription-message.error{
+    background:#fff0ed;
+    color:#a83220;
+}
+
+
+/* =====================================================
+   FOOTER
+===================================================== */
+
+footer.travelora-footer{
+    display:grid;
+    grid-template-columns:2fr 1fr 1fr 1.4fr;
+    gap:40px;
+    padding:55px 7%;
+    background:#0b3b59;
+    color:#fff;
+    box-sizing:border-box;
+}
+
+.travelora-footer h2{
+    margin:0 0 12px;
+    color:#fff;
+    font-size:25px;
+}
+
+.travelora-footer h3{
+    margin:0 0 18px;
+    color:#fff;
+    font-size:18px;
+}
+
+.travelora-footer p{
+    margin:6px 0;
+    color:#e0eaf1;
+    font-size:14px;
+    line-height:1.7;
+}
+
+.travelora-footer-links{
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+}
+
+.travelora-footer-links a{
+    color:#e0eaf1;
+    text-decoration:none;
+    font-size:14px;
+    transition:color .3s ease;
+}
+
+.travelora-footer-links a:hover{
+    color:#ff9a42;
+}
+
+
+/* =====================================================
+   SOCIAL MEDIA ICONS
+===================================================== */
+
+.travelora-social-icons{
+    display:flex;
+    flex-wrap:wrap;
+    gap:12px;
+    margin-top:18px;
+}
+
+.travelora-social-icons a{
+    width:42px;
+    height:42px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border:1px solid rgba(255,255,255,.35);
+    border-radius:50%;
+    color:#fff;
+    background:rgba(255,255,255,.08);
+    text-decoration:none;
+    font-size:19px;
+    transition:all .3s ease;
+}
+
+.travelora-social-icons a:hover{
+    background:#ff7200;
+    border-color:#ff7200;
+    color:#fff;
+    transform:translateY(-4px);
+}
+
+
+/* =====================================================
+   FOOTER BOTTOM
+===================================================== */
+
+.travelora-footer-bottom{
+    padding:17px 7%;
+    text-align:center;
+    color:#dce7ef;
+    background:#082f48;
+    font-size:13px;
+}
+
+
+/* =====================================================
+   TABLET RESPONSIVE DESIGN
+===================================================== */
+
+@media(max-width:1100px){
+
+    .travelora-header{
+        padding:0 25px;
+    }
+
+    .travelora-main-navigation,
+    .travelora-user-navigation{
+        position:static;
+        transform:none;
+        margin-left:auto;
+        margin-right:auto;
+    }
+
+    .travelora-main-navigation a,
+    .travelora-user-navigation .top-nav-button{
+        padding:8px 8px !important;
+        font-size:13px;
+    }
+
+    footer.travelora-footer{
+        grid-template-columns:repeat(2,minmax(0,1fr));
+    }
+
+}
+
+
+/* =====================================================
+   TABLET REVIEW / SUBSCRIPTION
+===================================================== */
+
+@media(max-width:850px){
+
+    .travelora-subscription{
+        padding:55px 5% 35px;
+    }
+
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media(max-width:768px){
+
+    .travelora-header{
+        height:auto;
+        min-height:70px;
+        padding:12px 18px;
+        flex-wrap:wrap;
+        gap:10px;
+    }
+
+    .travelora-header .logo{
+        font-size:20px;
+    }
+
+    .travelora-main-navigation,
+    .travelora-user-navigation{
+        width:100%;
+        order:3;
+        justify-content:center;
+        flex-wrap:wrap;
+        margin:0;
+    }
+
+    .travelora-user-actions{
+        margin-left:auto;
+    }
+
+    .travelora-user-actions > a{
+        width:38px;
+        height:38px;
+        font-size:18px;
+    }
+
+    .travel-explore{
+        width:calc(100% + 14%);
+        margin-left:-7%;
+        padding-bottom:30px;
+    }
+
+    .travel-explore h2{
+        font-size:25px;
+        margin-left:7%;
+    }
+
+    .travel-line{
+        width:86%;
+        margin-left:7%;
+    }
+
+    /* INCREASED TABLET DESTINATION CARDS */
+
+    .destination-scroll{
+        gap:20px;
+    }
+
+    .destination-item{
+        width:250px;
+        height:175px;
+    }
+
+    .destination-name{
+        font-size:21px;
+        padding:13px;
+    }
+
+    .travelora-subscription{
+        padding:40px 5% 25px;
+    }
+
+    .travelora-subscription-panel{
+        padding:38px 22px;
+        min-height:0;
+        border-radius:18px;
+    }
+
+    .travelora-subscription-content h2{
+        font-size:28px;
+    }
+
+    .travelora-subscription-content > p{
+        font-size:14px;
+        margin-bottom:22px;
+    }
+
+}
+
+
+/* =====================================================
+   VERY SMALL MOBILE
+===================================================== */
+
+@media(max-width:500px){
+
+    .travelora-header{
+        padding:10px 14px;
+    }
+
+    .travelora-main-navigation,
+    .travelora-user-navigation{
+        gap:2px;
+    }
+
+    .travelora-main-navigation a,
+    .travelora-user-navigation .top-nav-button{
+        font-size:12px;
+        padding:7px 6px !important;
+    }
+
+    /* LARGER CARDS FOR SMALL MOBILE SCREENS */
+
+    .destination-scroll{
+        gap:16px;
+    }
+
+    .destination-item{
+        width:225px;
+        height:160px;
+        border-radius:15px;
+    }
+
+    .destination-name{
+        font-size:20px;
+        padding:12px;
+    }
+
+    .travelora-subscription{
+        padding:30px 5% 20px;
+    }
+
+    .travelora-subscription-panel{
+        padding:32px 16px;
+    }
+
+    .travelora-subscription-content h2{
+        font-size:25px;
+    }
+
+    .subscription-form{
+        flex-direction:column;
+    }
+
+    .subscription-form input{
+        min-height:48px;
+        box-sizing:border-box;
+    }
+
+    .subscription-form button{
+        min-height:48px;
+    }
+
+    footer.travelora-footer{
+        grid-template-columns:1fr;
+        gap:28px;
+        padding:40px 7%;
+    }
+
+    .travelora-footer-bottom{
+        padding:16px 5%;
+        font-size:12px;
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     HEADER
+===================================================== -->
+
+<header class="travelora-header">
+
+
+    <!-- LOGO -->
+
+    <div class="logo">
+        Travelora ✈
+    </div>
+
+
+    <!-- GUEST NAVIGATION -->
+
+    <nav
+        id="homeGuestNavigation"
+        class="travelora-main-navigation"
+    >
+
+        <a href="destinations.html">
+            Destinations
+        </a>
+
+        <a href="offers.html">
+            Offers
+        </a>
+
+        <a href="packages.html">
+            Packages
+        </a>
+
+        <a href="reviews.html">
+            Reviews
+        </a>
+
+        <a href="subscription.html">
+            Subscription
+        </a>
+
+        <a href="activities.html">
+            Activities
+        </a>
+
+        <a href="trips.html">
+            My Trips
+        </a>
+
+    </nav>
+
+
+    <!-- LOGGED-IN NAVIGATION -->
+
+    <nav
+        id="homeUserNavigation"
+        class="travelora-user-navigation"
+    >
+
+        <a href="destinations.html" class="top-nav-button">
+            Destinations
+        </a>
+
+        <a href="offers.html" class="top-nav-button">
+            Offers
+        </a>
+
+        <a href="packages.html" class="top-nav-button">
+            Packages
+        </a>
+
+        <a href="reviews.html" class="top-nav-button">
+            Reviews
+        </a>
+
+        <a href="subscription.html" class="top-nav-button">
+            Subscription
+        </a>
+
+        <a href="activities.html" class="top-nav-button">
+            Activities
+        </a>
+
+        <a href="trips.html" class="top-nav-button">
+            My Trips
+        </a>
+
+    </nav>
+
+
+    <!-- RIGHT SIDE ICONS -->
+
+    <div class="travelora-user-actions">
+
+        <a
+            href="wishlist.html"
+            title="Wishlist"
+            aria-label="Wishlist"
+        >
+            <i class="fa-regular fa-heart"></i>
+        </a>
+
+        <!-- NOTIFICATION BELL WITH UNREAD COUNT -->
+
+        <a
+            href="notifications.html"
+            title="Notifications"
+            class="notification-link"
+            aria-label="Notifications"
+        >
+            <i class="fa-regular fa-bell"></i>
+
+            <span
+                class="notification-badge"
+                id="notificationBadge"
+                aria-live="polite"
+                aria-label="Unread notifications"
+            >0</span>
+
+        </a>
+
+        <a
+            href="profile.html"
+            class="travelora-profile"
+            title="Profile"
+            aria-label="Profile"
+        >
+            <i class="fa-regular fa-user"></i>
+        </a>
+
+    </div>
+
+
+</header>
+
+
+
+<!-- =====================================================
+     HERO SECTION
+===================================================== -->
+
+<section
+    class="hero"
+    style="
+        background-image:
+        linear-gradient(
+            rgba(0,40,70,.30),
+            rgba(0,40,70,.48)
+        ),
+        url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=2000&q=90');
+
+        background-size:cover;
+        background-position:center;
+        background-repeat:no-repeat;
+    "
+>
+
+
+    <div class="hero-content">
+
+        <p>
+            EXPLORE • DISCOVER • EXPERIENCE
+        </p>
+
+        <h1>
+            Travel the world.<br>
+            Make beautiful memories.
+        </h1>
+
+        <p>
+            Discover and book complete holiday packages
+            with everything you need for an unforgettable
+            journey.
+        </p>
+
+    </div>
+
+
+
+    <!-- FIND YOUR PERFECT HOLIDAY -->
+
+    <div class="travel-explore">
+
+        <h2>
+            Find Your Perfect Holiday
+        </h2>
+
+        <div class="travel-line"></div>
+
+        <div class="destination-scroll">
+
+
+            <!-- FIRST SET: GOA -->
+
+            <div class="destination-item">
+                <img
+                    src="https://images.unsplash.com/photo-1512343879784-a960bf40e7f2?auto=format&fit=crop&w=800&q=80"
+                    alt="Goa"
+                >
+                <div class="destination-name">Goa</div>
+            </div>
+
+
+            <!-- MANALI -->
+
+            <div class="destination-item">
+                <img
+                    src="https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?auto=format&fit=crop&w=800&q=80"
+                    alt="Manali"
+                >
+                <div class="destination-name">Manali</div>
+            </div>
+
+
+            <!-- DUBAI -->
+
+            <div class="destination-item">
+                <img
+                    src="https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=800&q=80"
+                    alt="Dubai"
+                >
+                <div class="destination-name">Dubai</div>
+            </div>
+
+
+            <!-- PARIS -->
+
+            <div class="destination-item">
+                <img
+                    src="https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&w=800&q=80"
+                    alt="Paris"
+                >
+                <div class="destination-name">Paris</div>
+            </div>
+
+
+            <!-- BALI -->
+
+            <div class="destination-item">
+                <img
+                    src="https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=800&q=80"
+                    alt="Bali"
+                >
+                <div class="destination-name">Bali</div>
+            </div>
+
+
+            <!-- MALDIVES -->
+
+            <div class="destination-item">
+                <img
+                    src="https://images.unsplash.com/photo-1518509562904-e7ef99cdcc86?auto=format&fit=crop&w=800&q=80"
+                    alt="Maldives"
+                >
+                <div class="destination-name">Maldives</div>
+            </div>
+
+
+            <!-- SINGAPORE -->
+
+            <div class="destination-item">
+                <img
+                    src="https://images.unsplash.com/photo-1525625293386-3f8f99389edd?auto=format&fit=crop&w=800&q=80"
+                    alt="Singapore"
+                >
+                <div class="destination-name">Singapore</div>
+            </div>
+
+
+
+            <!-- DUPLICATE SET FOR CONTINUOUS SCROLL -->
+
+            <div class="destination-item">
+                <img
+                    src="https://images.unsplash.com/photo-1512343879784-a960bf40e7f2?auto=format&fit=crop&w=800&q=80"
+                    alt="Goa"
+                >
+                <div class="destination-name">Goa</div>
+            </div>
+
+            <div class="destination-item">
+                <img
+                    src="https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?auto=format&fit=crop&w=800&q=80"
+                    alt="Manali"
+                >
+                <div class="destination-name">Manali</div>
+            </div>
+
+            <div class="destination-item">
+                <img
+                    src="https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=800&q=80"
+                    alt="Dubai"
+                >
+                <div class="destination-name">Dubai</div>
+            </div>
+
+            <div class="destination-item">
+                <img
+                    src="https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&w=800&q=80"
+                    alt="Paris"
+                >
+                <div class="destination-name">Paris</div>
+            </div>
+
+            <div class="destination-item">
+                <img
+                    src="https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=800&q=80"
+                    alt="Bali"
+                >
+                <div class="destination-name">Bali</div>
+            </div>
+
+            <div class="destination-item">
+                <img
+                    src="https://images.unsplash.com/photo-1518509562904-e7ef99cdcc86?auto=format&fit=crop&w=800&q=80"
+                    alt="Maldives"
+                >
+                <div class="destination-name">Maldives</div>
+            </div>
+
+            <div class="destination-item">
+                <img
+                    src="https://images.unsplash.com/photo-1525625293386-3f8f99389edd?auto=format&fit=crop&w=800&q=80"
+                    alt="Singapore"
+                >
+                <div class="destination-name">Singapore</div>
+            </div>
+
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     STATISTICS
+===================================================== -->
+
+<section class="stats">
+
+    <div>
+        <h2>10M+</h2>
+        <p>Happy Travellers</p>
+    </div>
+
+    <div>
+        <h2>500+</h2>
+        <p>Destinations</p>
+    </div>
+
+    <div>
+        <h2>50K+</h2>
+        <p>Hotels</p>
+    </div>
+
+    <div>
+        <h2>24/7</h2>
+        <p>Customer Support</p>
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     POPULAR DESTINATIONS
+===================================================== -->
+
+<section class="section">
+
+    <div class="section-title">
+        <p>TRAVEL INSPIRATION</p>
+        <h2>Popular Destinations</h2>
+    </div>
+
+    <div class="cards">
+
+
+        <!-- GOA -->
+
+        <div class="card">
+            <img
+                src="https://images.unsplash.com/photo-1512343879784-a960bf40e7f2?auto=format&fit=crop&w=800&q=80"
+                alt="Goa"
+            >
+            <h3>Goa</h3>
+            <p>Beaches • Adventure • Nightlife</p>
+            <a href="destination-details.html?place=goa">Explore</a>
+        </div>
+
+
+        <!-- MANALI -->
+
+        <div class="card">
+            <img
+                src="https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?auto=format&fit=crop&w=800&q=80"
+                alt="Manali"
+            >
+            <h3>Manali</h3>
+            <p>Mountains • Snow • Nature</p>
+            <a href="destination-details.html?place=manali">Explore</a>
+        </div>
+
+
+        <!-- DUBAI -->
+
+        <div class="card">
+            <img
+                src="https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=800&q=80"
+                alt="Dubai"
+            >
+            <h3>Dubai</h3>
+            <p>Luxury • Shopping • Desert</p>
+            <a href="destination-details.html?place=dubai">Explore</a>
+        </div>
+
+
+        <!-- PARIS -->
+
+        <div class="card">
+            <img
+                src="https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&w=800&q=80"
+                alt="Paris"
+            >
+            <h3>Paris</h3>
+            <p>Art • Culture • Romance</p>
+            <a href="destination-details.html?place=paris">Explore</a>
+        </div>
+
+
+        <!-- BALI -->
+
+        <div class="card">
+            <img
+                src="https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=800&q=80"
+                alt="Bali"
+            >
+            <h3>Bali</h3>
+            <p>Beaches • Temples • Culture</p>
+            <a href="destination-details.html?place=bali">Explore</a>
+        </div>
+
+
+        <!-- MALDIVES -->
+
+        <div class="card">
+            <img
+                src="https://images.unsplash.com/photo-1518509562904-e7ef99cdcc86?auto=format&fit=crop&w=800&q=80"
+                alt="Maldives"
+            >
+            <h3>Maldives</h3>
+            <p>Beaches • Islands • Diving</p>
+            <a href="destination-details.html?place=maldives">Explore</a>
+        </div>
+
+
+        <!-- SINGAPORE -->
+
+        <div class="card">
+            <img
+                src="https://images.unsplash.com/photo-1525625293386-3f8f99389edd?auto=format&fit=crop&w=800&q=80"
+                alt="Singapore"
+            >
+            <h3>Singapore</h3>
+            <p>City • Shopping • Attractions</p>
+            <a href="destination-details.html?place=singapore">Explore</a>
+        </div>
+
+
+        <!-- LONDON -->
+
+        <div class="card">
+            <img
+                src="https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?auto=format&fit=crop&w=800&q=80"
+                alt="London"
+            >
+            <h3>London</h3>
+            <p>History • Culture • Landmarks</p>
+            <a href="destination-details.html?place=london">Explore</a>
+        </div>
+
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     NEWSLETTER SUBSCRIPTION
+===================================================== -->
+
+<section class="travelora-subscription" id="subscription">
+
+    <div class="travelora-subscription-panel">
+
+        <div class="travelora-subscription-content">
+
+            <h2>Get Travel Inspiration</h2>
+
+            <p>
+                Subscribe to receive travel ideas, special offers,
+                destination inspiration and updates from Travelora.
+            </p>
+
+            <form class="subscription-form" id="traveloraSubscriptionForm">
+
+                <input
+                    type="email"
+                    id="subscriptionEmail"
+                    name="email"
+                    placeholder="Enter your email address"
+                    aria-label="Email address"
+                    autocomplete="email"
+                    required
+                >
+
+                <button type="submit">
+                    Subscribe
+                </button>
+
+            </form>
+
+            <div
+                class="subscription-message"
+                id="subscriptionMessage"
+                role="status"
+                aria-live="polite">
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     FOOTER WITH SOCIAL MEDIA
+===================================================== -->
+
+<footer class="travelora-footer">
+
+
+    <!-- TRAVELORA BRAND AND SOCIAL MEDIA -->
+
+    <div class="travelora-footer-brand">
+
+        <h2>Travelora ✈</h2>
+
+        <p>Your trusted travel booking partner.</p>
+
+        <p>
+            Plan, explore and book your complete journey from one place.
+        </p>
+
+        <h3 style="margin-top:22px;">
+            Follow Our Journey
+        </h3>
+
+        <div class="travelora-social-icons">
+
+            <a
+                href="https://www.instagram.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Instagram"
+                title="Instagram"
+            >
+                <i class="fa-brands fa-instagram"></i>
+            </a>
+
+            <a
+                href="https://www.facebook.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Facebook"
+                title="Facebook"
+            >
+                <i class="fa-brands fa-facebook-f"></i>
+            </a>
+
+            <a
+                href="https://x.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="X"
+                title="X"
+            >
+                <i class="fa-brands fa-x-twitter"></i>
+            </a>
+
+            <a
+                href="https://www.youtube.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="YouTube"
+                title="YouTube"
+            >
+                <i class="fa-brands fa-youtube"></i>
+            </a>
+
+            <a
+                href="https://www.whatsapp.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="WhatsApp"
+                title="WhatsApp"
+            >
+                <i class="fa-brands fa-whatsapp"></i>
+            </a>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- EXPLORE LINKS -->
+
+    <div>
+
+        <h3>Explore</h3>
+
+        <div class="travelora-footer-links">
+
+            <a href="destinations.html">Destinations</a>
+
+            <a href="offers.html">Offers</a>
+
+            <a href="packages.html">Packages</a>
+
+            <a href="activities.html">Activities</a>
+
+            <a href="trips.html">My Trips</a>
+
+            <a href="reviews.html">Customer Reviews</a>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- SUPPORT LINKS -->
+
+    <div>
+
+        <h3>Support</h3>
+
+        <div class="travelora-footer-links">
+
+            <a href="contact.html">Help &amp; Contact</a>
+
+            <a href="trips.html">Manage Booking</a>
+
+            <a href="wishlist.html">My Wishlist</a>
+
+            <a href="profile.html">My Profile</a>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- CONTACT DETAILS -->
+
+    <div>
+
+        <h3>Get in Touch</h3>
+
+        <p>
+            <i class="fa-regular fa-envelope"></i>
+            &nbsp; support@travelora.com
+        </p>
+
+        <p>
+            <i class="fa-solid fa-globe"></i>
+            &nbsp; Explore the world with us.
+        </p>
+
+        <p>
+            Follow us for travel inspiration, exciting destinations
+            and special offers.
+        </p>
+
+    </div>
+
+
+</footer>
+
+
+
+<!-- =====================================================
+     FOOTER BOTTOM
+===================================================== -->
+
+<div class="travelora-footer-bottom">
+
+    &copy; 2026 Travelora. All rights reserved.
+
+    &nbsp; | &nbsp;
+
+    One Platform. Every Journey.
+
+</div>
+
+
+
+<!-- =====================================================
+     EXTERNAL JAVASCRIPT
+===================================================== -->
+
+<script src="script.js"></script>
+
+
+
+<script>
+
+/* =====================================================
+   NEWSLETTER SUBSCRIPTION FORM
+===================================================== */
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    const form = document.getElementById("traveloraSubscriptionForm");
+
+    const emailInput = document.getElementById("subscriptionEmail");
+
+    const message = document.getElementById("subscriptionMessage");
+
+
+    if (!form || !emailInput || !message) {
+        return;
+    }
+
+
+    form.addEventListener("submit", function (event) {
+
+        event.preventDefault();
+
+
+        const email = emailInput.value.trim().toLowerCase();
+
+
+        if (!emailInput.checkValidity() || !email) {
+
+            message.textContent =
+                "Please enter a valid email address.";
+
+            message.classList.add("error");
+
+            message.style.display = "block";
+
+            emailInput.focus();
+
+            return;
+
+        }
+
+
+        let subscribers = [];
+
+
+        try {
+
+            subscribers = JSON.parse(
+                localStorage.getItem("traveloraSubscribers") || "[]"
+            );
+
+
+            if (!Array.isArray(subscribers)) {
+                subscribers = [];
+            }
+
+        } catch (error) {
+
+            subscribers = [];
+
+        }
+
+
+        const alreadySubscribed = subscribers.some(function (item) {
+
+            return String(item).toLowerCase() === email;
+
+        });
+
+
+        if (alreadySubscribed) {
+
+            message.textContent =
+                "This email is already subscribed on this browser.";
+
+            message.classList.remove("error");
+
+            message.style.display = "block";
+
+            return;
+
+        }
+
+
+        subscribers.push(email);
+
+
+        try {
+
+            localStorage.setItem(
+                "traveloraSubscribers",
+                JSON.stringify(subscribers)
+            );
+
+        } catch (error) {
+            message.textContent =
+                "Unable to save your subscription in this browser.";
+
+            message.classList.add("error");
+
+            message.style.display = "block";
+
+            return;
+
+        }
+
+
+        message.textContent =
+            "Thank you for subscribing to Travelora updates!";
+
+        message.classList.remove("error");
+
+        message.style.display = "block";
+
+
+        form.reset();
+
+    });
+
+});
+
+
+
+/* =====================================================
+   NOTIFICATION BADGE
+   READ UNREAD NOTIFICATIONS FROM LOCAL STORAGE
+===================================================== */
+
+function updateNotificationBadge() {
+
+    const badge = document.getElementById("notificationBadge");
+
+    const notificationLink = document.querySelector(".notification-link");
+
+
+    if (!badge || !notificationLink) {
+        return;
+    }
+
+
+    let notifications = [];
+
+
+    try {
+
+        notifications = JSON.parse(
+            localStorage.getItem("traveloraNotifications") || "[]"
+        );
+
+
+        if (!Array.isArray(notifications)) {
+            notifications = [];
+        }
+
+    } catch (error) {
+
+        notifications = [];
+
+    }
+
+
+    /*
+       Count unread notifications.
+
+       Notifications with read:false are unread.
+       Notifications with read:true are already read.
+    */
+
+    const unreadCount = notifications.filter(function (notification) {
+
+        return notification &&
+               notification.read !== true;
+
+    }).length;
+
+
+    if (unreadCount > 0) {
+
+        badge.textContent = unreadCount > 99 ? "99+" : unreadCount;
+
+        badge.style.display = "flex";
+
+        notificationLink.classList.add("has-notification");
+
+        notificationLink.setAttribute(
+            "aria-label",
+            "Notifications, " + unreadCount + " unread"
+        );
+
+        notificationLink.setAttribute(
+            "title",
+            unreadCount + " unread notification" +
+            (unreadCount === 1 ? "" : "s")
+        );
+
+    }
+
+    else {
+
+        badge.textContent = "";
+
+        badge.style.display = "none";
+
+        notificationLink.classList.remove("has-notification");
+
+        notificationLink.setAttribute(
+            "aria-label",
+            "Notifications"
+        );
+
+        notificationLink.setAttribute(
+            "title",
+            "Notifications"
+        );
+
+    }
+
+}
+
+
+/* =====================================================
+   HOME PAGE LOGIN STATE
+===================================================== */
+
+document.addEventListener("DOMContentLoaded", function () {
+
+
+    const loggedIn =
+        localStorage.getItem("isLoggedIn") === "true";
+
+
+    const guestNavigation =
+        document.getElementById("homeGuestNavigation");
+
+
+    const userNavigation =
+        document.getElementById("homeUserNavigation");
+
+
+    if (guestNavigation && userNavigation) {
+
+        if (loggedIn) {
+
+            /*
+             * Logged-in users see the logged-in navigation.
+             */
+
+            guestNavigation.style.display = "none";
+
+            userNavigation.style.display = "flex";
+
+        }
+
+        else {
+
+            /*
+             * Guests see the guest navigation.
+             */
+
+            guestNavigation.style.display = "flex";
+
+            userNavigation.style.display = "none";
+
+        }
+
+    }
+
+
+    /*
+       Update the notification badge when Home loads.
+    */
+
+    updateNotificationBadge();
+
+});
+
+
+/* =====================================================
+   AUTOMATIC NOTIFICATION BADGE UPDATES
+===================================================== */
+
+/*
+   Update when localStorage changes in another browser tab.
+*/
+
+window.addEventListener("storage", function (event) {
+
+    if (
+        event.key === "traveloraNotifications" ||
+        event.key === null
+    ) {
+
+        updateNotificationBadge();
+
+    }
+
+});
+
+
+/*
+   Update when the user returns to the Home page tab.
+*/
+
+window.addEventListener("focus", function () {
+
+    updateNotificationBadge();
+
+});
+
+
+/*
+   Update when the page becomes visible again.
+*/
+
+document.addEventListener("visibilitychange", function () {
+
+    if (!document.hidden) {
+
+        updateNotificationBadge();
+
+    }
+
+});
+
+
+</script>
+
+
+</body>
+
+</html>
